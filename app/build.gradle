@@ -63,8 +63,8 @@ dependencies {
     implementation 'com.jakewharton.threetenabp:threetenabp:1.4.0'
 
     //navigation
-    implementation "androidx.navigation:navigation-fragment-ktx:2.4.1"
-    implementation "androidx.navigation:navigation-ui-ktx:2.4.1"
+    implementation "androidx.navigation:navigation-fragment-ktx:2.4.2"
+    implementation "androidx.navigation:navigation-ui-ktx:2.4.2"
 
     //viewBinding
     implementation 'com.github.kirich1409:viewbindingpropertydelegate:1.4.4'
