@@ -1,4 +1,4 @@
-package uz.algorithmgateway.tezkorakfa.di
+package uz.algorithmgateway.tezkorakfa.di.module
 
 import android.content.Context
 import dagger.Module

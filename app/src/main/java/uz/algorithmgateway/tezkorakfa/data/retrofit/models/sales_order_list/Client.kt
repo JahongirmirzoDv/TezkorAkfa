@@ -1,4 +1,4 @@
-package uz.algorithmgateway.data.retrofit.models.sales_order_list
+package uz.algorithmgateway.tezkorakfa.data.retrofit.models.sales_order_list
 
 data class Client(
     val address: String,

@@ -1,4 +1,8 @@
-package uz.algorithmgateway.data.retrofit.models.sales_order_list
+package uz.algorithmgateway.tezkorakfa.data.retrofit.models.sales_order_list
+
+import uz.algorithmgateway.data.retrofit.models.sales_order_list.District
+import uz.algorithmgateway.data.retrofit.models.sales_order_list.Scaler
+import uz.algorithmgateway.data.retrofit.models.sales_order_list.ShowRoomX
 
 data class Result(
     val address: String,

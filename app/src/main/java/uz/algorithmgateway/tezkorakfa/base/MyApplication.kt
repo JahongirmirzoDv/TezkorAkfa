@@ -1,10 +1,9 @@
 package uz.algorithmgateway.tezkorakfa.base
 
 import android.app.Application
-import com.jakewharton.threetenabp.AndroidThreeTen
 import com.mocklets.pluto.Pluto
-import uz.algorithmgateway.tezkorakfa.di.AppComponent
-import uz.algorithmgateway.tezkorakfa.di.DaggerAppComponent
+import uz.algorithmgateway.tezkorakfa.di.component.AppComponent
+import uz.algorithmgateway.tezkorakfa.di.component.DaggerAppComponent
 
 
 class MyApplication : Application() {

@@ -1,4 +1,4 @@
-package uz.algorithmgateway.tezkorakfa.di
+package uz.algorithmgateway.tezkorakfa.di.module
 
 import com.mocklets.pluto.BuildConfig
 import com.mocklets.pluto.PlutoInterceptor
@@ -9,7 +9,6 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import uz.algorithmgateway.data.retrofit.ApiService
-import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
 @Module
@@ -17,7 +16,7 @@ class NetworkModule {
 
     @Provides
     @Singleton
-    fun getApi(): String = "http://157.245.62.70:8000/api/v1/"
+    fun getApi(): String = "http://164.92.242.166:1337/api/v1/"
 
     @Singleton
     @Provides
@@ -43,7 +42,7 @@ class NetworkModule {
             .addInterceptor(PlutoInterceptor())
             .addInterceptor { chain ->
                 val newRequest = chain.request().newBuilder()
-                    .addHeader("Authorization", "pref_access_token")
+                    .addHeader("Authorization", "Token 5c883bec5202c1cb2a8c7e7f5968898053f5b95c")
                     .build()
                 chain.proceed(newRequest)
             }

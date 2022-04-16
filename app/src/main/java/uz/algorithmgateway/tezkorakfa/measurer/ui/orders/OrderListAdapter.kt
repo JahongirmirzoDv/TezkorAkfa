@@ -5,18 +5,19 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import uz.algorithmgateway.core.util.layoutInflater
 import uz.algorithmgateway.data.api.models.Order
+import uz.algorithmgateway.tezkorakfa.data.retrofit.models.sales_order_list.Result
 import uz.algorithmgateway.tezkorakfa.databinding.ItemOrderBinding
 
 class OrderListAdapter(
-    private val onAcceptClick: (order: Order) -> Unit,
-    var onclick: onclick
+    private val onAcceptClick: (order: Result) -> Unit,
+    var onclick: onClick,
 ) :
     RecyclerView.Adapter<OrderListAdapter.VH>() {
 
-    private var myList: MutableList<Order> = mutableListOf()
+    private var myList: MutableList<Result> = mutableListOf()
 
     @SuppressLint("NotifyDataSetChanged")
-    fun updateList(newList: List<Order>) {
+    fun updateList(newList: List<Result>) {
         myList.clear()
         myList.addAll(newList)
         this.notifyDataSetChanged()
@@ -38,22 +39,23 @@ class OrderListAdapter(
         RecyclerView.ViewHolder(binding.root) {
 
         @SuppressLint("SetTextI18n")
-        fun onBind(item: Order) {
+        fun onBind(item: Result) {
             binding.tvOrderNumber.text = "№ ${item.id}"
-            binding.tvCustomerName.text = "${item.client.firstName} ${item.client.lastName}"
-            binding.tvPhone1.text = item.client.mainPhoneNumber
-            binding.tvPhone2.text = item.client.phoneNumber
+            binding.tvCustomerName.text = "${item.client.first_name} ${item.client.last_name}"
+            binding.tvPhone1.text = item.client.main_phone_number
+            binding.tvPhone2.text = item.client.phone_number
             binding.tvComment.text = "Izoh: ${item.comment}"
             binding.tvAddress.text = item.address
             binding.btnAccept.setOnClickListener {
                 onAcceptClick(item)
             }
             binding.btnPhone.setOnClickListener {
-                item.contractNumber?.let { it1 -> onclick.onCallClick(it1) }
+                item.contract_number?.let { it1 -> onclick.onCallClick(it1) }
             }
         }
     }
-}
-interface onclick{
-    fun onCallClick(number: String)
+
+    interface onClick {
+        fun onCallClick(number: String)
+    }
 }
