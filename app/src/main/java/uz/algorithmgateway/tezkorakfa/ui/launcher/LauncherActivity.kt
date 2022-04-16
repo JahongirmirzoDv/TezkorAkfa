@@ -29,6 +29,8 @@ class LauncherActivity : MvpAppCompatActivity(), LauncherView {
             val isResultOk: Boolean = result.resultCode == Activity.RESULT_OK
             Toast.makeText(this, "onSplashResult", Toast.LENGTH_SHORT)
             mPresenter.onSplashResult(isResultOk, result.data)
+
+       //     Toast.makeText(this, "Hello world", Toast.LENGTH_SHORT).show()
         }
 
 
