@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "745782102376",
+    "project_id": "tezkorakfa-ec97a",
+    "storage_bucket": "tezkorakfa-ec97a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:745782102376:android:571652430d1ce8847c6edd",
+        "android_client_info": {
+          "package_name": "uz.algorithmgateway.tezkorakfa"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "745782102376-s44gggshb8p7hr936c0ajljc3uclujvp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDfDgzXL0xVgMkB_EnYlEWj1HlPXABvd90"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "745782102376-s44gggshb8p7hr936c0ajljc3uclujvp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

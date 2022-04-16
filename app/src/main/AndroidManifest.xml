@@ -20,19 +20,21 @@
 
         <activity
             android:name=".ui.DesignerActivity"
-            android:exported="true" />
+            android:exported="true"/>
 
-        <activity android:name="uz.algorithmgateway.tezkorakfa.ui.splash.SplashActivity" />
-        <activity android:name="uz.algorithmgateway.tezkorakfa.ui.login.LoginActivity" />
-        <activity
-            android:name="uz.algorithmgateway.tezkorakfa.ui.launcher.LauncherActivity"
-            android:exported="true"
-            android:windowSoftInputMode="adjustResize">
+        <activity android:name="uz.algorithmgateway.tezkorakfa.ui.splash.SplashActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name="uz.algorithmgateway.tezkorakfa.ui.login.LoginActivity" />
+        <activity
+            android:name="uz.algorithmgateway.tezkorakfa.ui.launcher.LauncherActivity"
+            android:exported="true"
+            android:windowSoftInputMode="adjustResize">
         </activity>
 
     </application>
