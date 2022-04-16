@@ -7,11 +7,24 @@
         <entry key="..\:/Users/jahon/Ishchi stol/TezkorAkfaNew/app/src/main/res/layout/activity_login.xml" value="0.22447916666666667" />
         <entry key="..\:/Users/jahon/Ishchi stol/TezkorAkfaNew/measurer/src/main/res/layout/activity_measurer.xml" value="0.22447916666666667" />
         <entry key="..\:/Users/jahon/Ishchi stol/TezkorAkfaNew/measurer/src/main/res/layout/item_multi_spinner.xml" value="0.16" />
+        <entry key="..\:/Users/jahon/Ishchi stol/TezkorAkfaNew/measurer/src/main/res/layout/item_order.xml" value="0.17962962962962964" />
         <entry key="..\:/Users/jahon/Ishchi stol/TezkorAkfaNew/measurer/src/main/res/layout/screen_orders.xml" value="0.22447916666666667" />
         <entry key="..\:/Users/jahon/Ishchi stol/TezkorAkfaNew/measurer/src/main/res/layout/section_count_door.xml" value="0.22447916666666667" />
         <entry key="..\:/Users/jahon/Ishchi stol/TezkorAkfaNew/measurer/src/main/res/layout/section_profile.xml" value="0.22447916666666667" />
         <entry key="..\:/Users/jahon/Ishchi stol/TezkorAkfaNew/measurer/src/main/res/layout/section_window.xml" value="0.22447916666666667" />
         <entry key="..\:/Users/jahon/Ishchi stol/TezkorAkfaNew/windowdoordisegner/src/main/res/drawable/ic_door_left.xml" value="0.1195" />
+        <entry key="..\:/Users/jahon/Ishchi stol/abs/app/src/main/res/layout/activity_service.xml" value="0.13072916666666667" />
+        <entry key="..\:/anp/abs/app/src/main/res/drawable/bg_dialog_button.xml" value="0.117" />
+        <entry key="..\:/anp/abs/app/src/main/res/layout/activity_measurer.xml" value="0.1" />
+        <entry key="..\:/anp/abs/app/src/main/res/layout/activity_montage.xml" value="0.1" />
+        <entry key="..\:/anp/abs/app/src/main/res/layout/fragment_order.xml" value="0.1" />
+        <entry key="..\:/anp/abs/app/src/main/res/layout/fragment_order_list.xml" value="0.1" />
+        <entry key="..\:/anp/abs/app/src/main/res/layout/item_product_table.xml" value="0.8744186046511628" />
+        <entry key="..\:/anp/abs/app/src/main/res/layout/layout_change_size_dialog.xml" value="0.1" />
+        <entry key="..\:/anp/abs/app/src/main/res/layout/layout_loading_dialog.xml" value="0.1" />
+        <entry key="..\:/anp/abs/app/src/main/res/layout/screen_accept_order.xml" value="0.1" />
+        <entry key="..\:/anp/abs/app/src/main/res/layout/screen_orders.xml" value="0.1" />
+        <entry key="..\:/anp/abs/app/src/main/res/layout/screen_select_type_order.xml" value="0.22447916666666667" />
       </map>
     </option>
   </component>

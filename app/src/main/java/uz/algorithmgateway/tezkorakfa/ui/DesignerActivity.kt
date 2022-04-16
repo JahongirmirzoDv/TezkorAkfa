@@ -9,8 +9,8 @@ import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import uz.algorithmgateway.tezkorakfa.databinding.ActivityDesignerBinding
 import uz.algorithmgateway.windowdoordisegner.DragAndDropListener
-import uz.algorithmgateway.windowdoordisegner.ui.DesignerLayout
-import uz.algorithmgateway.windowdoordisegner.ui.sizeview.SizeDialog
+import uz.algorithmgateway.tezkorakfa.windowdoordisegner.ui.DesignerLayout
+import uz.algorithmgateway.tezkorakfa.windowdoordisegner.ui.sizeview.SizeDialog
 
 /**
  * Created by Abrorjon Berdiyorov on 22.02.2022

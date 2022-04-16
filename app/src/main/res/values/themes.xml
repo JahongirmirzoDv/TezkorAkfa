@@ -1,0 +1,154 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.TezkorAkfa" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/primary_color</item>
+        <item name="colorPrimaryVariant">@color/primary_color</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorSurface">@color/color_surface</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <!-- Customize your theme here. -->
+        <item name="actionBarTheme">@style/ToolBarTheme</item>
+    </style>
+
+    <style name="TextInputLayout.Login" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
+        <item name="hintTextColor">@color/color_light_text</item>
+        <item name="android:textColorHint">@color/color_light_text</item>
+        <item name="boxStrokeColor">#6E768C</item>
+
+    </style>
+
+    <style name="MaterialButton.Default" parent="Widget.MaterialComponents.Button">
+        <!--        <item name="background">@color/select_blue</item>-->
+        <item name="backgroundTint">@color/select_blue</item>
+        <item name="android:textAppearance">@style/TextButton</item>
+        <item name="cornerRadius">@dimen/normal_view_radius</item>
+    </style>
+
+    <style name="MaterialButton.Default.Light" parent="Widget.MaterialComponents.Button">
+        <!--        <item name="background">@color/select_blue</item>-->
+        <item name="backgroundTint">@color/comment_color</item>
+    </style>
+
+    <style name="MaterialButton.Login.Button" parent="Widget.MaterialComponents.Button">
+        <!--        <item name="background">@color/select_blue</item>-->
+        <item name="backgroundTint">#FF2C3342</item>
+        <item name="strokeColor">#FF5A6479</item>
+        <item name="strokeWidth">1dp</item>
+        <item name="android:textColor">@color/select_blue</item>
+    </style>
+
+
+    //toolbar
+
+    <style name="ToolBarTheme" parent="Widget.MaterialComponents.Toolbar.Primary">
+        <item name="android:tint">@color/white</item>
+        <item name="titleTextColor">@color/white</item>
+        <item name="fontFamily">@font/roboto_900</item>
+        <item name="android:textSize">24sp</item>
+    </style>
+
+    <style name="menu_item_color">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+
+    <style name="TextView.Toolbar" parent="Widget.MaterialComponents.TextView">
+        <item name="android:tint">@color/white</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="fontFamily">@font/roboto_900</item>
+        <item name="android:textSize">24sp</item>
+        <item name="actionMenuTextColor">@color/black</item>
+    </style>
+
+
+    <style name="TextView.Title" parent="Widget.MaterialComponents.TextView">
+        <item name="android:textColor">@color/white</item>
+        <item name="fontFamily">@font/roboto_500</item>
+        <item name="android:textSize">@dimen/size_text_title</item>
+    </style>
+
+
+    <style name="TextView.Text" parent="Widget.MaterialComponents.TextView">
+        <item name="android:textColor">@color/text_dark_color</item>
+        <item name="fontFamily">@font/roboto_400</item>
+        <item name="android:textSize">@dimen/size_text_primary</item>
+    </style>
+
+    //TextStyles
+
+
+
+
+    <style name="roundedImageView" parent="">
+        <item name="cornerFamilyTopRight">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+
+    //spinner
+
+    <style name="mySpinnerItemStyle" parent="@android:style/Widget.Holo.DropDownItem.Spinner">
+        <item name="android:textSize">20sp</item>
+        <item name="fontFamily">@font/roboto_500</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="RadioGroup.Custom" parent="Theme.AppCompat.Light.NoActionBar" />
+
+    <style name="TabLayout.Order.Type" parent="Widget.MaterialComponents.TabLayout">
+        <item name="tabGravity">fill</item>
+        <item name="tabIndicatorGravity">center</item>
+        <item name="tabMode">fixed</item>
+        <item name="tabTextColor">@color/white</item>
+        <item name="tabSelectedTextColor">@color/white</item>
+        <item name="tabTextAppearance">@style/TextView.TabItem</item>
+        <item name="tabIndicatorHeight">@dimen/size_fifty</item>
+        <item name="tabIndicator">@drawable/back_tab_indicator</item>
+        <item name="tabIndicatorColor">@color/select_blue</item>
+        <!--        <item name="tabBackground">@drawable/back_tab_indicator</item>-->
+        <!--        <item name="selectableItemBackground">@drawable/back_tab_indicator</item>-->
+    </style>
+
+
+    <style name="TabLayout.Order.ConfirmScreen" parent="Widget.MaterialComponents.TabLayout">
+        <item name="tabGravity">fill</item>
+        <item name="tabIndicatorGravity">center</item>
+        <item name="tabMode">fixed</item>
+        <item name="tabTextColor">@color/text_dark_color</item>
+        <item name="tabSelectedTextColor">@color/white</item>
+        <item name="tabTextAppearance">@style/TextView.TabItemConfirmScreen</item>
+        <item name="tabIndicatorHeight">@dimen/size_forty</item>
+        <item name="tabIndicator">@drawable/back_tab_indicator_confirm_screen</item>
+        <item name="tabIndicatorColor">#DC6470</item>
+
+        <!--        <item name="tabBackground">@drawable/back_tab_indicator</item>-->
+        <!--        <item name="selectableItemBackground">@drawable/back_tab_indicator</item>-->
+    </style>
+
+
+    <style name="TextView.TabItem" parent="TextAppearance.Design.Tab">
+        <item name="textAllCaps">false</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">@dimen/text_size_twenty</item>
+        <item name="fontFamily">@font/roboto_700</item>
+    </style>
+
+
+    <style name="TextView.TabItemConfirmScreen" parent="TextAppearance.Design.Tab">
+        <item name="textAllCaps">false</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">@dimen/text_size_twenty</item>
+        <item name="fontFamily">@font/roboto_700</item>
+    </style>
+
+    <style name="FloatingActionButton.Login" parent="Widget.MaterialComponents.FloatingActionButton">
+        <item name="android:layout_height">@dimen/size_sixty</item>
+        <item name="android:layout_width">@dimen/size_sixty</item>
+        <item name="backgroundTint">@color/select_blue</item>
+        <item name="android:src">@drawable/ic_next_arrow_fr</item>
+        <item name="borderWidth">@dimen/border_width</item>
+        <item name="fabCustomSize">@dimen/size_sixty</item>
+        <item name="tint">@color/white</item>
+    </style>
+</resources>
