@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/layout_back_color">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolBar"
+        style="@style/ToolBarTheme"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="56dp">
+
+            <com.google.android.material.textview.MaterialTextView
+                style="@style/TextView.Toolbar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/projects_orders"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/imageBack"
+                android:layout_width="@dimen/size_thirty"
+                android:layout_height="match_parent"
+                android:padding="8dp"
+                android:src="@drawable/ic_back_arrow_fragment"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/imageNextItem"
+                android:layout_width="@dimen/size_thirty"
+                android:layout_height="match_parent"
+                android:padding="@dimen/card_elevation_3"
+                android:src="@drawable/ic_reload"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.95"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <com.google.android.material.tabs.TabLayout
+        android:layout_marginStart="@dimen/size_thirty"
+        android:id="@+id/tabLayoutDate"
+        android:background="@drawable/back_tablayout_confirm_screeen"
+        style="@style/TabLayout.Order.ConfirmScreen"
+        android:layout_marginTop="@dimen/default_item_space"
+        android:layout_width="@dimen/border_width"
+        android:layout_height="@dimen/size_forty"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginEnd="@dimen/default_item_space"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintTop_toBottomOf="@id/toolBar"
+        app:layout_constraintWidth_percent="0.4" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/tv_place"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/size_forty"
+        android:layout_marginTop="@dimen/default_item_space"
+        android:layout_marginEnd="@dimen/size_thirty"
+        app:cardBackgroundColor="@color/layout_light"
+        app:cardCornerRadius="@dimen/item_space_min"
+        app:cardElevation="@dimen/border_width"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolBar"
+        app:layout_constraintWidth_percent="0.4">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                style="@style/mySpinnerItemStyle"
+                android:id="@+id/spinnerType"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+
+                />
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/item_normal_padding"
+                android:visibility="visible"
+                android:src="@drawable/ic_all_open"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_margin="@dimen/item_space_middle"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/border_width"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:orientation="vertical"
+        android:id="@+id/recyclerViewOrdersConfirm"
+        app:layout_constraintTop_toBottomOf="@id/tabLayoutDate"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

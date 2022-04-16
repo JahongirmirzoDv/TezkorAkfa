@@ -1,0 +1,26 @@
+<rotate xmlns:android="http://schemas.android.com/apk/res/android"
+    android:fromDegrees="180"
+    android:toDegrees="180">
+    <vector
+        android:width="36dp"
+        android:height="50dp"
+        android:viewportWidth="36"
+        android:viewportHeight="50">
+        <path
+            android:fillColor="#868383"
+            android:fillType="nonZero"
+            android:pathData="M0.2,1.8618C0.2,0.828 1.0194,-0.01 2.0302,-0.01L9.3698,-0.01L9.3698,-0.01C10.3806,-0.01 11.2,0.828 11.2,1.8618L11.2,48.1182L11.2,48.1182C11.2,49.152 10.3806,49.99 9.3698,49.99L2.0302,49.99L2.0302,49.99C1.0194,49.99 0.2,49.152 0.2,48.1182z"
+            android:strokeWidth="0"
+            android:strokeColor="#868383"
+            android:strokeLineCap="butt"
+            android:strokeLineJoin="miter" />
+        <path
+            android:fillColor="#A8A4A4"
+            android:fillType="nonZero"
+            android:pathData="M35.72,27.1526C35.72,27.6151 35.3569,27.99 34.9089,27.99L3.5311,27.99L3.5311,27.99C3.0831,27.99 2.72,27.6151 2.72,27.1526L2.72,22.8274L2.72,22.8274C2.72,22.3649 3.0831,21.99 3.5311,21.99L34.9089,21.99L34.9089,21.99C35.3569,21.99 35.72,22.3649 35.72,22.8274z"
+            android:strokeWidth="0"
+            android:strokeColor="#A8A4A4"
+            android:strokeLineCap="butt"
+            android:strokeLineJoin="miter" />
+    </vector>
+</rotate>

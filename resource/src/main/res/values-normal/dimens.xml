@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    //normal screen
+    <dimen name="screen_padding_horizontal">12dp</dimen>
+    <dimen name="screen_padding_vertical">12dp</dimen>
+
+    <dimen name="size_text_title">14sp</dimen>
+    <dimen name="size_text_primary">10sp</dimen>
+
+
+
+
+    <dimen name="item_large_padding">12dp</dimen>
+    <dimen name="item_normal_padding">8dp</dimen>
+    <dimen name="item_small_padding">6dp</dimen>
+
+    <dimen name="tableTextSize">10sp</dimen>
+</resources>

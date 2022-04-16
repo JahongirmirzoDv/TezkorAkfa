@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/size_thirty"
+    app:cardBackgroundColor="@color/layout_light"
+    app:cardCornerRadius="@dimen/item_space_middle"
+    app:cardElevation="@dimen/card_elevation_3">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="22dp">
+
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imageProfileTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_profile"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tabLayoutProfile"
+            app:layout_constraintBottom_toBottomOf="@id/tabLayoutProfile"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/textProfileTitle"
+            style="@style/TextView.Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/item_normal_padding"
+            android:fontFamily="@font/roboto_900"
+            android:text="@string/profi"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="@id/tabLayoutProfile"
+            app:layout_constraintStart_toEndOf="@id/imageProfileTitle"
+            app:layout_constraintTop_toTopOf="@id/tabLayoutProfile" />
+
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabLayoutProfile"
+            style="@style/TabLayout.Order.Type"
+            android:layout_width="@dimen/border_width"
+            android:layout_height="@dimen/size_fifty"
+            android:background="@drawable/bg_tab_layout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent="0.6" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/hintProfileType"
+            style="@style/TextView.Text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_hint_from_tv"
+            android:text="@string/text_profile_type"
+            android:textColor="@color/color_light_text"
+            android:layout_marginTop="@dimen/item_space_middle"
+            app:layout_constraintTop_toBottomOf="@id/tabLayoutProfile"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardProfileSpinner"
+            android:layout_width="@dimen/border_width"
+            android:layout_height="@dimen/size_fifty"
+            android:layout_marginTop="4dp"
+            app:cardBackgroundColor="@color/layout_back_color"
+            app:cardCornerRadius="@dimen/item_space_middle"
+            app:cardElevation="@dimen/card_elevation_3"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/hintProfileType"
+            app:layout_constraintWidth_percent="0.45">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.appcompat.widget.AppCompatSpinner
+                    android:id="@+id/spinnerTypeProfile"
+                    style="@style/mySpinnerItemStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/item_normal_padding"
+                    android:src="@drawable/ic_all_open"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/textViewTextureType"
+            style="@style/TextView.Text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_hint_from_tv"
+            android:layout_marginBottom="4dp"
+            android:text="@string/text_texture"
+            android:textColor="@color/color_light_text"
+            app:layout_constraintBottom_toTopOf="@id/cardTexture"
+            app:layout_constraintStart_toStartOf="@id/cardTexture" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardTexture"
+            android:layout_width="@dimen/border_width"
+            android:layout_height="@dimen/size_fifty"
+            app:cardBackgroundColor="@color/layout_back_color"
+            app:cardCornerRadius="@dimen/item_space_middle"
+            app:cardElevation="@dimen/card_elevation_3"
+            app:layout_constraintEnd_toEndOf="@id/tabLayoutProfile"
+            app:layout_constraintHorizontal_bias="1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/cardProfileSpinner"
+            app:layout_constraintBottom_toBottomOf="@id/cardProfileSpinner"
+            app:layout_constraintWidth_percent="0.45">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.appcompat.widget.AppCompatSpinner
+                    android:id="@+id/spinnerTypeTexture"
+                    style="@style/mySpinnerItemStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/item_normal_padding"
+                    android:src="@drawable/ic_all_open"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/containerLogin"
+    android:gravity="center">
+
+    <ImageView
+        android:scaleType="centerCrop"
+        android:background="@drawable/splash_image_new"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="@dimen/border_width"
+        android:layout_height="@dimen/border_width"
+        app:cardCornerRadius="@dimen/default_item_space"
+        app:cardElevation="2dp"
+        app:cardBackgroundColor="#99161F2E"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.6"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.35"
+        app:layout_constraintWidth_percent="0.75">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/action_image"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/border_width"
+                android:src="@drawable/akfa_logo"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight_percent="0.25"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.12"
+                app:layout_constraintWidth_percent="0.6" />
+
+            <com.google.android.material.textfield.TextInputLayout
+               android:id="@+id/textInputLayoutLogin"
+                style="@style/TextInputLayout.Login"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/size_thirty"
+                app:hintTextColor="@color/color_light_text"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/action_image"
+                app:layout_constraintVertical_bias="0.2">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:hint="@string/login"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#001E2431"
+                    android:drawableEnd="@drawable/ic_account"
+                    android:fontFamily="@font/roboto_400"
+                    android:textColor="@color/color_light_text"
+                    android:textColorHint="@color/color_light_text"
+                    android:textSize="@dimen/text_size_22sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+               android:id="@+id/textInputLayoutPassword"
+                style="@style/TextInputLayout.Login"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/size_thirty"
+                app:hintTextColor="@color/color_light_text"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textInputLayoutLogin"
+                app:layout_constraintVertical_bias="0"
+                android:layout_marginTop="@dimen/default_item_space">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:hint="@string/password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#001E2431"
+                    android:drawableEnd="@drawable/ic_lock"
+                    android:fontFamily="@font/roboto_400"
+                    android:textColor="@color/color_light_text"
+                    android:textColorHint="@color/color_light_text"
+                    android:textSize="@dimen/text_size_22sp" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnEnter"
+                style="@style/MaterialButton.Login.Button"
+                android:text="@string/login"
+                android:textSize="@dimen/text_size_sixteen"
+                android:drawableEnd="@drawable/ic_btn_draw"
+                app:cornerRadius="@dimen/item_space_middle"
+                android:layout_width="@dimen/border_width"
+                android:layout_height="@dimen/size_fifty_five"
+                app:layout_constraintWidth_percent="0.5"
+                app:layout_constraintLeft_toLeftOf="@id/textInputLayoutLogin"
+                app:layout_constraintRight_toRightOf="@id/textInputLayoutLogin"
+                app:layout_constraintTop_toBottomOf="@id/textInputLayoutPassword"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

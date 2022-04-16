@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="PrimaryTextStyle" parent="TextAppearance.AppCompat">
+        <item name="fontFamily">@font/roboto_500</item>
+        <item name="fontStyle">normal</item>
+        <item name="android:textColor">#ffffff</item>
+    </style>
+
+    <style name="DialogStyle" parent="Theme.AppCompat.Dialog">
+        <item name="windowMinWidthMajor">100%</item>
+    </style>
+
+
+</resources>

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/layout_back_color">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolBar"
+        style="@style/ToolBarTheme"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="56dp">
+
+            <com.google.android.material.textview.MaterialTextView
+                style="@style/TextView.Toolbar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Loyiha 135"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/imageBack"
+                android:layout_width="@dimen/size_thirty"
+                android:layout_height="match_parent"
+                android:padding="8dp"
+                android:src="@drawable/ic_back_arrow_fragment"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/imageBackItem"
+                android:layout_width="@dimen/size_thirty"
+                android:layout_height="match_parent"
+                android:padding="@dimen/card_elevation_3"
+                android:src="@drawable/ic_back_item"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.82"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/imageNextItem"
+                android:layout_width="@dimen/size_thirty"
+                android:layout_height="match_parent"
+                android:padding="@dimen/card_elevation_3"
+                android:src="@drawable/ic_next_item"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.95"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="223dp"
+        android:layout_marginTop="@dimen/default_item_space"
+        android:background="@color/layout_light"
+        app:layout_constraintTop_toBottomOf="@id/toolBar">
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingNext"
+        android:layout_marginEnd="@dimen/size_eighty"
+        android:layout_marginBottom="@dimen/thirty_five"
+        style="@style/FloatingActionButton.Login"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingBack"
+        android:src="@drawable/ic_back_arrow_fragment"
+        android:layout_marginStart="@dimen/size_eighty"
+        android:layout_marginBottom="@dimen/thirty_five"
+        style="@style/FloatingActionButton.Login"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

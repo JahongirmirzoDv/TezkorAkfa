@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="250dp"
+    android:layout_margin="@dimen/item_space_middle"
+    android:background="@drawable/back_item_order"
+    android:padding="@dimen/item_space_middle">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/image_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_seven"
+        android:src="@drawable/ic_red"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_customer_name"
+        style="@style/TextView.Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="13dp"
+        android:layout_marginTop="@dimen/margin_seven"
+        android:text="Bobur Abdullayev"
+        app:layout_constraintBottom_toBottomOf="@id/image_status"
+        app:layout_constraintStart_toEndOf="@id/image_status"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardShow"
+        android:layout_width="@dimen/border_width"
+        android:layout_height="@dimen/size_forty"
+        app:cardBackgroundColor="@color/layout_back_color"
+        app:cardCornerRadius="@dimen/item_space_middle"
+        app:cardElevation="@dimen/card_elevation_3"
+        app:layout_constraintEnd_toStartOf="@id/cardPdf"
+        app:layout_constraintHorizontal_bias="0.75"
+        app:layout_constraintStart_toEndOf="@id/tv_customer_name"
+        app:layout_constraintTop_toTopOf="@id/tv_customer_name"
+        app:layout_constraintWidth_percent="0.27">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/imageShow"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/item_normal_padding"
+                android:layout_marginStart="@dimen/item_normal_padding"
+                android:src="@drawable/ic_show_count"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/textViewPdf"
+                style="@style/TextView.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/item_normal_padding"
+                android:text="№ 135"
+                android:textSize="@dimen/text_size_sixteen"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.2"
+                app:layout_constraintStart_toEndOf="@id/imageShow"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardPdf"
+        android:layout_width="@dimen/border_width"
+        android:layout_height="@dimen/size_forty"
+        android:layout_marginEnd="@dimen/margin_seven"
+        app:cardBackgroundColor="@color/layout_back_color"
+        app:cardCornerRadius="@dimen/item_space_middle"
+        app:cardElevation="@dimen/card_elevation_3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tv_customer_name"
+        app:layout_constraintWidth_percent="0.27">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/imagePdf"
+                android:layout_width="@dimen/item_normal_padding"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/item_normal_padding"
+                android:src="@drawable/ic_src_pdf"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_order_number"
+                style="@style/TextView.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/item_normal_padding"
+                android:text="PDF da ochish"
+                android:textSize="@dimen/text_size_sixteen"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/imagePdf"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/tv_comment"
+        android:layout_width="@dimen/border_width"
+        android:layout_height="63dp"
+        android:layout_marginTop="13dp"
+        android:background="@drawable/bg_tab_layout"
+        android:gravity="start"
+        android:hint="@string/comment"
+        android:padding="@dimen/margin_seven"
+        android:textColor="@color/color_light_text"
+        android:textColorHint="@color/text_dark_color"
+        android:textSize="@dimen/text_size_sixteen"
+        app:layout_constraintEnd_toEndOf="@id/cardPdf"
+        app:layout_constraintHorizontal_bias="1"
+        app:layout_constraintStart_toStartOf="@id/cardShow"
+        app:layout_constraintTop_toBottomOf="@id/cardPdf" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/textViewWindowCount"
+        style="@style/TextView.Text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/size_thirty"
+        android:layout_marginTop="@dimen/thirty_five"
+        android:text="Derazalar soni: 8"
+        android:textColor="@color/white"
+        android:textSize="@dimen/default_text_size"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_customer_name" />
+
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/textViewDoorCount"
+        style="@style/TextView.Text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/size_thirty"
+        android:layout_marginTop="@dimen/item_space_middle"
+        android:text="Eshiklar soni: 10"
+        android:textColor="@color/white"
+        android:textSize="@dimen/default_text_size"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textViewWindowCount" />
+
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/textViewSummaDesc"
+        style="@style/TextView.Text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/size_18"
+        android:layout_marginTop="@dimen/size_thirty"
+        android:text="To`lov summasi:"
+        android:textColor="@color/white"
+        android:textSize="@dimen/default_text_size"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textViewDoorCount" />
+
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/textViewSumma"
+        style="@style/TextView.Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/item_space_middle"
+        android:layout_marginTop="25dp"
+        android:text="35 000 000"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toEndOf="@id/textViewSummaDesc"
+        app:layout_constraintTop_toBottomOf="@id/textViewDoorCount" />
+
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/textViewFirtSummaDesc"
+        style="@style/TextView.Text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/size_18"
+        android:layout_marginTop="25dp"
+        android:text="Oldindan to`lov:"
+        android:textColor="@color/white"
+        android:textSize="@dimen/default_text_size"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textViewSummaDesc" />
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardSumma"
+        android:layout_width="@dimen/border_width"
+        android:layout_height="@dimen/size_forty"
+        app:cardBackgroundColor="@color/layout_back_color"
+        app:cardCornerRadius="@dimen/item_space_middle"
+        app:cardElevation="@dimen/card_elevation_3"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="@id/textViewSumma"
+        app:layout_constraintTop_toTopOf="@id/textViewFirtSummaDesc"
+        app:layout_constraintBottom_toBottomOf="@id/textViewFirtSummaDesc"
+        app:layout_constraintWidth_percent="0.27">
+
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/textViewFirstSumma"
+                style="@style/TextView.Title"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="10 000 000"
+                android:paddingStart="@dimen/item_normal_padding"
+                android:gravity="center_vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/imagePdf"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnAccept"
+        style="@style/MaterialButton.Default"
+        android:layout_width="@dimen/border_width"
+        android:layout_height="48dp"
+        android:layout_marginEnd="@dimen/margin_seven"
+        android:drawableLeft="@drawable/ic_btn_src_document"
+        android:fontFamily="@font/roboto_500"
+        android:text="@string/accept"
+        android:textAllCaps="false"
+        android:textSize="@dimen/text_size_sixteen"
+        app:cornerRadius="@dimen/item_space_min"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintWidth_percent="0.35"
+        tools:ignore="RtlHardcoded" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

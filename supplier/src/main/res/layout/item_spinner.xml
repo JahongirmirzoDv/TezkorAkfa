@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/containerLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/layout_light">
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/textViewSpinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto_500"
+        android:padding="@dimen/item_space_min"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size_twenty"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/viewSpinner"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/layout_back_color"
+        app:layout_constraintTop_toBottomOf="@id/textViewSpinner" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

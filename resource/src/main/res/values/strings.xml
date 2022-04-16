@@ -1,0 +1,60 @@
+<resources>
+    <string name="app_name">TezkorAkfa</string>
+    <string name="login">Login</string>
+    <string name="password">Password</string>
+    <string name="orders">Buyurtmalar</string>
+    <string name="place">Hudud</string>
+    <string name="comment">Izoh:</string>
+    <string name="accept">Qabul qilish</string>
+    <string name="name">Ismi</string>
+    <string name="surname">Familiyasi</string>
+    <string name="address">Manzil</string>
+    <string name="next">Keyingisi</string>
+    <string name="back_btn">Ortga</string>
+    <string name="search">Izlash</string>
+    <string name="go_to_home">Bosh oynaga o`tish</string>
+    <string name="door_window">Eshik - rom</string>
+    <string name="to_out">Tashqariga</string>
+    <string name="to_in_house">Ichkariga</string>
+    <string name="profi">PROFIL</string>
+    <string name="text_profile_type">Profil turi</string>
+    <string name="text_texture">Textura</string>
+    <string name="window_large">OYNA</string>
+    <string name="window_color">Oyna rangi</string>
+
+    <string name="four">4</string>
+    <string name="six">6</string>
+    <string name="eight">8</string>
+    <string name="ten">10</string>
+
+    <string name="_15">15</string>
+    <string name="_25">25</string>
+    <string name="_45">45</string>
+    <string name="_60">60</string>
+
+    <string name="mm">mm</string>
+    <string name="shelf">PODOKONNIK</string>
+    <string name="sm">sm</string>
+    <string name="accessory">AKSESUAR</string>
+    <string name="hand">Dastak</string>
+    <string name="petla">Petla</string>
+    <string name="cage">SETKA</string>
+    <string name="text_height">Bo`yi</string>
+    <string name="text_width">Eni</string>
+    <string name="door">ESHIK</string>
+    <string name="window">OYNA</string>
+    <string name="projects_orders">Loyihalar</string>
+    <string name="phone">Qo\'ng\'iroq qilish</string>
+    <string name="text_menu_product_list">Mahsulotlar ro\'yxati</string>
+    <string name="text_menu_purchased">Ko\'chadan olinganlar</string>
+    <string name="text_found_list">To\'pilganlar</string>
+    <string name="text_menu_given_money">Berilgan pullar</string>
+    <string name="text_menu_not_found">Topilmaganlar</string>
+    <string name="text_found_button">Topildi</string>
+    <string name="text_order_history">Buyurtmalar tarixi</string>
+    <string name="text_btn_purchase">Sotib olish</string>
+    <string name="text_purchase">Sotib olish</string>
+    <string name="text_purchased">Sotib olinganlar</string>
+
+
+</resources>

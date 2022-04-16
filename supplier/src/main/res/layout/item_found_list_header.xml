@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:background="@drawable/bg_item_table_header">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_number"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="№"
+        android:textAppearance="@style/Text12Dark"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.075" />
+
+    <View
+        android:id="@+id/view1"
+        android:layout_width="1dp"
+        android:layout_height="0dp"
+        android:background="@color/color_border_table"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/tv_number"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_name"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:textAppearance="@style/Text12Dark"
+        android:text="Nomi"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/view1"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.25" />
+
+    <View
+        android:id="@+id/view2"
+        android:layout_width="1dp"
+        android:layout_height="0dp"
+        android:background="@color/color_border_table"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/tv_name"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_time"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:textAppearance="@style/Text12Dark"
+        android:text="Soni"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/view2"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.075" />
+
+    <View
+        android:id="@+id/view3"
+        android:layout_width="1dp"
+        android:layout_height="0dp"
+        android:background="@color/color_border_table"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/tv_time"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_price"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:textAppearance="@style/Text12Dark"
+        android:text="Narxi"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/view3"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.12" />
+
+    <View
+        android:id="@+id/view4"
+        android:layout_width="1dp"
+        android:layout_height="0dp"
+        android:background="@color/color_border_table"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/tv_price"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_dealer"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/view4"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.23">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_dealer"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:textAppearance="@style/Text12Dark"
+            android:text="Dilerdan"
+            android:gravity="center"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintHeight_percent="0.5"/>
+        <View
+            android:id="@+id/view6"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:background="@color/color_border_table"
+            app:layout_constraintTop_toBottomOf="@id/tv_dealer"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_dealer_number"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:textAppearance="@style/Text12Dark"
+            android:text="Soni"
+            android:gravity="center"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/view6"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintWidth_percent="0.4"/>
+        <View
+            android:id="@+id/view7"
+            android:layout_width="1dp"
+            android:layout_height="0dp"
+            android:background="@color/color_border_table"
+            app:layout_constraintStart_toEndOf="@id/tv_dealer_number"
+            app:layout_constraintTop_toBottomOf="@id/tv_dealer"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_dealer_price"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:textAppearance="@style/Text12Dark"
+            android:text="Narxi"
+            android:gravity="center"
+            app:layout_constraintStart_toEndOf="@id/tv_dealer_number"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/view6"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <View
+        android:id="@+id/view5"
+        android:layout_width="1dp"
+        android:layout_height="0dp"
+        android:background="@color/color_border_table"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/layout_dealer"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_outside"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/layout_dealer"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.23">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_outside"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:textAppearance="@style/Text12Dark"
+            android:text="Ko'chadan"
+            android:gravity="center"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintHeight_percent="0.5"/>
+        <View
+            android:id="@+id/view8"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:background="@color/color_border_table"
+            app:layout_constraintTop_toBottomOf="@id/tv_outside"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_outside_number"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:textAppearance="@style/Text12Dark"
+            android:text="Soni"
+            android:gravity="center"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/view8"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintWidth_percent="0.4"/>
+        <View
+            android:id="@+id/view9"
+            android:layout_width="1dp"
+            android:layout_height="0dp"
+            android:background="@color/color_border_table"
+            app:layout_constraintStart_toEndOf="@id/tv_outside_number"
+            app:layout_constraintTop_toBottomOf="@id/tv_outside"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_outside_price"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:textAppearance="@style/Text12Dark"
+            android:text="Narxi"
+            android:gravity="center"
+            app:layout_constraintStart_toEndOf="@id/tv_outside_number"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/view8"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

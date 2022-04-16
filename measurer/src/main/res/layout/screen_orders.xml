@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/layout_back_color"
+    android:paddingHorizontal="@dimen/screen_padding_horizontal"
+    android:paddingBottom="@dimen/screen_padding_vertical">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_title_page"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:fontFamily="@font/roboto_900"
+        android:gravity="center"
+        android:text="@string/orders"
+        android:textColor="@color/white"
+        android:textSize="@dimen/toolbar_text_size"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_place"
+        style="@style/TextView.Title"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/size_fifty"
+        android:layout_marginTop="@dimen/default_item_space"
+        android:layout_marginEnd="@dimen/margin_item_twenty_seven"
+        android:background="@drawable/bg_small_view"
+        android:gravity="center"
+        android:text="Andijon"
+        android:textColor="@color/white"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_title_page"
+        app:layout_constraintWidth_percent="0.4" />
+
+    <com.google.android.material.textview.MaterialTextView
+        style="@style/TextView.Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/place"
+        android:textColor="@color/text_dark_color"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/tv_place"
+        app:layout_constraintEnd_toStartOf="@id/tv_place"
+        app:layout_constraintHorizontal_bias="0.8"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_place" />
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tab_orders"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:layout_marginTop="@dimen/item_space_middle"
+        android:background="@color/layout_back_color"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_title_page"
+        app:tabGravity="fill"
+        app:tabIndicatorAnimationMode="elastic"
+        app:tabIndicatorColor="@color/layout_light"
+        app:tabIndicatorGravity="stretch"
+        app:tabMode="fixed"
+        app:tabSelectedTextColor="@color/select_blue"
+        app:tabTextColor="@color/white" />
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tab_orders" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

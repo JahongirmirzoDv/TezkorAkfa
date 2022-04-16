@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/layout_back_color">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolBar"
+        style="@style/ToolBarTheme"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="56dp">
+
+            <com.google.android.material.textview.MaterialTextView
+                style="@style/TextView.Toolbar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Loyiha 135"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imageBack"
+                android:layout_width="@dimen/size_thirty"
+                android:layout_height="match_parent"
+                android:padding="8dp"
+                android:src="@drawable/ic_back_arrow_fragment"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <androidx.core.widget.NestedScrollView
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:paddingHorizontal="@dimen/screen_padding_horizontal"
+        app:layout_constraintTop_toBottomOf="@id/toolBar"
+        app:layout_constraintBottom_toTopOf="@id/layout_nav_buttons">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/imageProduct"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_marginTop="@dimen/default_item_space"
+                android:background="#7E7E7E"
+                android:src="@drawable/avatar_project"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:shapeAppearanceOverlay="@style/roundedImageView" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/textViewName"
+                style="@style/TextView.Text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_hint_from_tv"
+                android:layout_marginTop="40dp"
+                android:text="@string/name"
+                android:textColor="@color/color_light_text"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/imageProduct" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/editTextName"
+                android:layout_width="@dimen/border_width"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_seven"
+                android:background="@drawable/bg_item_comment"
+                android:gravity="center_vertical"
+                android:padding="@dimen/item_normal_padding"
+                android:text="Bobur"
+                android:maxLines="1"
+                android:textColor="@color/white"
+                android:textColorHint="@color/text_dark_color"
+                android:textSize="@dimen/text_size_sixteen"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textViewName" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/textViewSurname"
+                style="@style/TextView.Text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_hint_from_tv"
+                android:layout_marginTop="@dimen/default_item_space"
+                android:text="@string/surname"
+                android:textColor="@color/color_light_text"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/editTextName" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/editTextSurname"
+                android:layout_width="@dimen/border_width"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_seven"
+                android:background="@drawable/bg_item_comment"
+                android:gravity="center_vertical"
+                android:padding="@dimen/item_normal_padding"
+                android:text="Abdullayev"
+                android:maxLines="1"
+                android:textColor="@color/white"
+                android:textColorHint="@color/text_dark_color"
+                android:textSize="@dimen/text_size_sixteen"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textViewSurname" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_address"
+                style="@style/TextView.Text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_hint_from_tv"
+                android:layout_marginTop="@dimen/size_thirty"
+                android:text="@string/address"
+                android:textColor="@color/color_light_text"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/editTextSurname" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/editTextAddress"
+                android:layout_width="@dimen/border_width"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_seven"
+                android:layout_marginEnd="@dimen/size_thirty"
+                android:background="@drawable/bg_item_comment"
+                android:enabled="false"
+                android:gravity="center_vertical"
+                android:padding="@dimen/item_normal_padding"
+                android:text="Andijon sh., Eski shahar, Masjid"
+                android:textColor="@color/white"
+                android:textColorHint="@color/text_dark_color"
+                android:textSize="@dimen/text_size_sixteen"
+                app:layout_constraintEnd_toStartOf="@+id/image_location"
+                app:layout_constraintHorizontal_bias="1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_address" />
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/image_location"
+                android:layout_width="@dimen/size_fifty"
+                android:layout_height="@dimen/size_fifty"
+                android:layout_marginTop="@dimen/margin_seven"
+                android:clickable="true"
+                android:focusable="true"
+                android:src="@drawable/ic_location_back"
+                app:layout_constraintBottom_toBottomOf="@id/editTextAddress"
+                app:layout_constraintEnd_toEndOf="@id/editTextSurname"
+                app:layout_constraintTop_toTopOf="@id/editTextAddress" />
+
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/textViewComment"
+                style="@style/TextView.Text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_hint_from_tv"
+                android:layout_marginTop="@dimen/default_item_space"
+                android:text="@string/comment"
+                android:textColor="@color/color_light_text"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/editTextAddress" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/tv_comment"
+                android:layout_width="@dimen/border_width"
+                android:layout_height="wrap_content"
+                android:minHeight="100dp"
+                android:layout_marginTop="@dimen/margin_seven"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/bg_item_comment"
+                android:gravity="start"
+                android:padding="@dimen/item_normal_padding"
+                android:text="Mijozga 10% chegirma qilinadi"
+                android:textColor="@color/white"
+                android:textColorHint="@color/text_dark_color"
+                android:textSize="@dimen/text_size_sixteen"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textViewComment" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/layout_nav_buttons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:elevation="6dp"
+        android:paddingBottom="@dimen/screen_padding_horizontal"
+        android:paddingTop="10dp"
+        android:paddingHorizontal="@dimen/screen_padding_horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnBack"
+            style="@style/MaterialButton.Default.Light"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_fifty_five"
+            android:layout_weight="1"
+            android:drawableStart="@drawable/ic_back_arrow_fragment"
+            android:fontFamily="@font/roboto_500"
+            android:text="@string/back_btn"
+            android:textAllCaps="false"
+            android:layout_marginEnd="21dp"
+            android:textSize="@dimen/text_size_sixteen"
+            app:cornerRadius="@dimen/item_space_middle" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnNext"
+            style="@style/MaterialButton.Default"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_fifty_five"
+            android:layout_weight="1"
+            android:layout_marginStart="21dp"
+            android:drawableEnd="@drawable/ic_next_arrow_fr"
+            android:fontFamily="@font/roboto_500"
+            android:text="@string/next"
+            android:textAllCaps="false"
+            android:textSize="@dimen/text_size_sixteen"
+            app:cornerRadius="@dimen/item_space_middle"/>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

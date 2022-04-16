@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="screen_padding_horizontal">24dp</dimen>
+    <dimen name="screen_padding_vertical">20dp</dimen>
+
+    <dimen name="size_text_title">20sp</dimen>
+    <dimen name="size_text_primary">14sp</dimen>
+
+
+
+    <dimen name="tableTextSize">12sp</dimen>
+</resources>

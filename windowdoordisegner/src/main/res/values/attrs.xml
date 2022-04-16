@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="WindowDoorDesigner">
+        <attr name="android:layout_scale" format="float" />
+    </declare-styleable>
+
+    <declare-styleable name="Mullion">
+        <attr name="view_orientation" format="enum">
+            <enum name="HORIZONTAL" value="0" />
+            <enum name="VERTICAL" value="1" />
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="Frame">
+        <attr name="android:layout_scale" format="float" />
+    </declare-styleable>
+
+    <declare-styleable name="Square">
+        <attr name="inside_type" format="enum">
+            <enum name="GLASS" value="0" />
+            <enum name="VERTICAL_PANEL" value="1" />
+            <enum name="HORIZONTAL_PANEL" value="2" />
+        </attr>
+        <attr name="eni" format="integer" />
+        <attr name="boyi" format="integer" />
+    </declare-styleable>
+
+</resources>

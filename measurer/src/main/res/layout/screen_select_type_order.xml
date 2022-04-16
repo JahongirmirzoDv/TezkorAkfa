@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/layout_back_color">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolBar"
+        style="@style/ToolBarTheme"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="56dp">
+
+            <com.google.android.material.textview.MaterialTextView
+                style="@style/TextView.Toolbar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Loyiha 135"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imageBack"
+                android:layout_width="@dimen/size_thirty"
+                android:layout_height="match_parent"
+                android:padding="8dp"
+                android:src="@drawable/ic_back_arrow_fragment"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="@dimen/screen_padding_horizontal"
+        android:paddingVertical="@dimen/screen_padding_vertical"
+        app:layout_constraintTop_toBottomOf="@id/toolBar">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/textViewRoom"
+                style="@style/TextView.Text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_hint_from_tv"
+                android:text="@string/door_window"
+                android:textColor="@color/color_light_text"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/layoutRoomSpinner"
+                android:layout_width="@dimen/border_width"
+                android:layout_height="@dimen/size_fifty"
+                android:layout_marginTop="@dimen/margin_seven"
+                app:cardBackgroundColor="@color/layout_light"
+                app:cardCornerRadius="@dimen/item_space_middle"
+                app:cardElevation="@dimen/card_elevation_3"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textViewRoom"
+                app:layout_constraintWidth_percent="0.4">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <androidx.appcompat.widget.AppCompatSpinner
+                        android:id="@+id/spinnerRoomOrDoor"
+                        style="@style/mySpinnerItemStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/item_normal_padding"
+                        android:src="@drawable/ic_all_open"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <RadioGroup
+                style="@style/RadioGroup.Custom"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="@id/layoutRoomSpinner"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/layoutRoomSpinner"
+                app:layout_constraintTop_toTopOf="@id/layoutRoomSpinner">
+
+                <RadioButton
+                    android:id="@+id/radioOut"
+                    style="@style/TextView.Text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/item_space_middle"
+                    android:button="@drawable/circle_radio_button"
+                    android:checked="true"
+                    android:padding="@dimen/item_space_min"
+                    android:text="@string/to_out"
+                    android:textSize="@dimen/text_size_twenty" />
+
+                <RadioButton
+                    android:id="@+id/radioIn"
+                    style="@style/TextView.Text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/item_space_middle"
+                    android:button="@drawable/circle_radio_button"
+                    android:padding="@dimen/item_space_min"
+                    android:text="@string/to_in_house"
+                    android:textSize="@dimen/text_size_twenty" />
+
+            </RadioGroup>
+
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/layoutParent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintTop_toBottomOf="@id/layoutRoomSpinner">
+
+                <include
+                    android:id="@+id/layoutProfile"
+                    layout="@layout/section_profile" />
+
+                <include
+                    android:id="@+id/layoutWindow"
+                    layout="@layout/section_window" />
+
+                <include
+                    android:id="@+id/layoutShelf"
+                    layout="@layout/section_shelf" />
+
+                <include
+                    android:id="@+id/layoutAccessory"
+                    layout="@layout/section_accessory" />
+
+                <include
+                    android:id="@+id/layoutCage"
+                    layout="@layout/section_cage" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnNext"
+                style="@style/MaterialButton.Default"
+                android:layout_width="@dimen/border_width"
+                android:layout_height="@dimen/size_fifty_five"
+                android:layout_marginTop="@dimen/size_fifty"
+                android:layout_marginEnd="@dimen/item_normal_padding"
+                android:drawableEnd="@drawable/ic_next_arrow_fr"
+                android:fontFamily="@font/roboto_500"
+                android:text="@string/next"
+                android:textAllCaps="false"
+                android:textSize="@dimen/text_size_sixteen"
+                app:cornerRadius="@dimen/item_space_middle"
+                app:layout_constraintHorizontal_bias="1"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/layoutParent"
+                app:layout_constraintWidth_percent="0.4" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnBack"
+                style="@style/MaterialButton.Default.Light"
+                android:layout_width="@dimen/border_width"
+                android:layout_height="@dimen/size_fifty_five"
+                android:layout_marginStart="@dimen/item_normal_padding"
+                android:layout_marginTop="@dimen/size_fifty"
+                android:drawableLeft="@drawable/ic_back_arrow_fragment"
+                android:fontFamily="@font/roboto_500"
+                android:text="@string/back_btn"
+                android:textAllCaps="false"
+                android:textSize="@dimen/text_size_sixteen"
+                app:cornerRadius="@dimen/item_space_middle"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/layoutParent"
+                app:layout_constraintWidth_percent="0.4" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size_hundred"
+                app:layout_constraintTop_toBottomOf="@id/btnNext" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
