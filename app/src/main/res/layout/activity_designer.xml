@@ -144,12 +144,21 @@
 
     <uz.algorithmgateway.tezkorakfa.windowdoordisegner.ui.DesignerLayout
         android:id="@+id/layout_designer"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_margin="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/clear"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/layout_item_bar" />
+    <Button
+        android:id="@+id/clear"
+        android:text="Tozalash"
+        app:layout_constraintTop_toBottomOf="@id/layout_designer"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,24 +1,37 @@
 package uz.algorithmgateway.tezkorakfa.windowdoordisegner.ui
 
+import android.content.ContentResolver
+import android.content.ContentValues
 import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.Canvas
 import android.graphics.Color
+import android.net.Uri
+import android.os.Build
+import android.os.Environment
+import android.provider.MediaStore
 import android.util.AttributeSet
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.LinearLayout
 import androidx.core.view.get
 import uz.algorithmgateway.tezkorakfa.R
-import uz.algorithmgateway.windowdoordisegner.DragAndDropListener
-import uz.algorithmgateway.windowdoordisegner.ui.Square
+import uz.algorithmgateway.tezkorakfa.windowdoordisegner.DragAndDropListener
 import uz.algorithmgateway.tezkorakfa.windowdoordisegner.ui.door.Door
 import uz.algorithmgateway.tezkorakfa.windowdoordisegner.ui.door.DoorLayout
 import uz.algorithmgateway.tezkorakfa.windowdoordisegner.ui.window.Window
 import uz.algorithmgateway.tezkorakfa.windowdoordisegner.ui.window.WindowLayout
+import uz.algorithmgateway.windowdoordisegner.ui.Square
+import java.io.File
+import java.io.FileOutputStream
+import java.io.IOException
+import java.io.OutputStream
 
 class Area @JvmOverloads constructor(
     private val ctx: Context,
     private val attrs: AttributeSet? = null,
-    private val defaultAttrs: Int = 0
+    private val defaultAttrs: Int = 0,
 ) : LinearLayout(ctx, attrs, defaultAttrs) {
 
     private var childLayout: LinearLayout? = null
@@ -76,7 +89,7 @@ class Area @JvmOverloads constructor(
     }
 
     fun addDoor(orientation: Door.Companion.DoorOrientation) {
-        if(canAddDoorOrWindow){
+        if (canAddDoorOrWindow) {
             val door = DoorLayout(ctx)
             door.setViewScale(viewScale)
             door.setH(H)
@@ -90,7 +103,7 @@ class Area @JvmOverloads constructor(
     }
 
     fun addWindow(orientation: Window.Companion.WindowOrientation) {
-        if(canAddDoorOrWindow){
+        if (canAddDoorOrWindow) {
             val window = WindowLayout(ctx)
             window.setViewScale(viewScale)
             window.setW(W)
@@ -102,6 +115,56 @@ class Area @JvmOverloads constructor(
             childLayout?.addView(window)
         }
     }
+
+    fun removeWindow() {
+        childLayout = findViewById<View>(R.id.child_layout) as LinearLayout
+        val saveImage = childLayout?.let { saveImage(it) }
+        saveImage?.let { saveBitmap(it, "rasm") }
+    }
+
+    private fun saveImage(view: View): Bitmap {
+        val specWidth =
+            View.MeasureSpec.makeMeasureSpec(1324, View.MeasureSpec.AT_MOST)
+        val specHeight =
+            View.MeasureSpec.makeMeasureSpec(521, View.MeasureSpec.AT_MOST)
+        view.measure(specWidth, specHeight)
+        val width = 1920
+        val height = 1080
+        val bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
+        val canvas = Canvas(bitmap)
+        view.layout(view.left, view.top, view.right, view.bottom)
+        view.draw(canvas)
+        return bitmap
+    }
+
+    @Throws(IOException::class)
+    private fun saveBitmap(bitmap: Bitmap, name: String) {
+        val saved: Boolean
+        val fos: OutputStream?
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            val resolver: ContentResolver = ctx.contentResolver
+            val contentValues = ContentValues()
+            contentValues.put(MediaStore.MediaColumns.DISPLAY_NAME, name)
+            contentValues.put(MediaStore.MediaColumns.MIME_TYPE, "image/png")
+            contentValues.put(MediaStore.MediaColumns.RELATIVE_PATH, "DCIM/Camera")
+            val imageUri: Uri? =
+                resolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues)
+            fos = imageUri?.let { resolver.openOutputStream(it) }
+        } else {
+            val imagesDir = Environment.getExternalStoragePublicDirectory(
+                Environment.DIRECTORY_DCIM).toString() + File.separator + "Camera"
+            val file = File(imagesDir)
+            if (!file.exists()) {
+                file.mkdir()
+            }
+            val image = File(imagesDir, "$name.png")
+            fos = FileOutputStream(image)
+        }
+        saved = bitmap.compress(Bitmap.CompressFormat.PNG, 100, fos)
+        fos?.flush()
+        fos?.close()
+    }
+
 
 
     fun divideHorizontalTwo() {

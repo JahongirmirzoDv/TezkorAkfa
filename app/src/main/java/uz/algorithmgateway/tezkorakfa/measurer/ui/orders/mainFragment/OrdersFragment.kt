@@ -1,14 +1,16 @@
 package uz.algorithmgateway.tezkorakfa.measurer.ui.orders.mainFragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import com.google.android.material.tabs.TabLayoutMediator
-import uz.algorithmgateway.measurer.ui.orders.ViewPagerAdapter
+import uz.algorithmgateway.tezkorakfa.measurer.ui.orders.ViewPagerAdapter
 import uz.algorithmgateway.tezkorakfa.databinding.ScreenOrdersBinding
+import uz.algorithmgateway.tezkorakfa.ui.login.LoginActivity
+import uz.algorithmgateway.tezkorakfa.ui.utils.SharedPref
 
 val orderTabItemsArray = arrayOf(
     "Buyurtmalar",
@@ -21,9 +23,7 @@ class OrdersFragment : Fragment() {
 
     private var _binding: ScreenOrdersBinding? = null
     private val binding get() = _binding!!
-
-    private val navController by lazy(LazyThreadSafetyMode.NONE) { findNavController() }
-
+    private val sharedPref by lazy { SharedPref(requireContext()) }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,14 +39,18 @@ class OrdersFragment : Fragment() {
 
         bindViewPagerAndTabLayout()
 
-
+        binding.logout.setOnClickListener {
+            sharedPref.isLogin = false
+            startActivity(Intent(requireActivity(), LoginActivity::class.java))
+            requireActivity().finish()
+        }
     }
 
     private fun bindViewPagerAndTabLayout() {
         val viewPager = binding.viewPager
         val tabLayout = binding.tabOrders
 
-        val adapter = ViewPagerAdapter(parentFragmentManager, lifecycle, navController)
+        val adapter = ViewPagerAdapter(this)
         viewPager.adapter = adapter
 
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->

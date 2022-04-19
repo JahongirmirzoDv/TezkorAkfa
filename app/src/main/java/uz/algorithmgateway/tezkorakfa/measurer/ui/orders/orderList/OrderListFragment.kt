@@ -7,24 +7,24 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.navigation.NavController
+import androidx.navigation.fragment.findNavController
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import uz.algorithmgateway.core.util.toast
+import uz.algorithmgateway.tezkorakfa.R
 import uz.algorithmgateway.tezkorakfa.base.MyApplication
+import uz.algorithmgateway.tezkorakfa.data.retrofit.models.sales_order_list.Result
 import uz.algorithmgateway.tezkorakfa.databinding.FragmentTabLayoutBinding
 import uz.algorithmgateway.tezkorakfa.measurer.ui.orders.OrderListAdapter
-import uz.algorithmgateway.tezkorakfa.measurer.ui.orders.mainFragment.OrdersFragmentDirections
 import uz.algorithmgateway.tezkorakfa.ui.login.viewmodel.LoginViewModel
 import uz.algorithmgateway.tezkorakfa.ui.utils.UIState
 import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
 
 class OrderListFragment(
-    private val navController: NavController,
     private val status: String,
 ) : Fragment(), CoroutineScope {
     @Inject
@@ -55,12 +55,17 @@ class OrderListFragment(
                     }
                     is UIState.Success -> {
                         adapter = OrderListAdapter(
-                            { navController.navigate(OrdersFragmentDirections.toAcceptOrder()) },
                             object : OrderListAdapter.onClick {
                                 override fun onCallClick(number: String) {
                                     val uri = Uri.parse("tel: $number")
                                     val intent = Intent(Intent.ACTION_DIAL, uri)
                                     requireActivity().startActivity(intent)
+                                }
+
+                                override fun onAcceptClick(item: Result) {
+                                    val bundle = Bundle()
+//                                    bundle.putSerializable("item",item)
+                                    findNavController().navigate(R.id.acceptOrderScreen, bundle)
                                 }
                             }
                         )

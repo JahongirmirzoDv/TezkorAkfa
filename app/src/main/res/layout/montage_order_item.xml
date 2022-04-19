@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    app:cardCornerRadius="14dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#2E3542"
+        android:orientation="horizontal"
+        android:padding="12dp"
+        android:weightSum="2">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:src="@color/color_green" />
+
+                <TextView
+                    style="@style/TextView.Title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:text="Bobur Abdullayev"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center_vertical">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_location" />
+
+                <TextView
+                    style="@style/TextView.Title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:text="Andijon sh., Eski shahar, Masjid oldida 1-uy"
+                    android:textSize="10sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center_vertical">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_phone" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/TextView.Title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:text="+998 (99) 999-99-99"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        style="@style/TextView.Title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:text="+998 (99) 999-99-99"
+                        android:textSize="12sp" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:orientation="vertical"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:paddingVertical="5dp"
+                    android:paddingHorizontal="10dp"
+                    android:gravity="center_vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#1E2431">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_show_count" />
+
+                    <TextView
+                        android:layout_marginStart="10sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/TextView.Title"
+                        android:textSize="12sp"
+                        android:text="№ 135" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_comment"
+                style="@style/TextView.Text"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bg_item_comment"
+                android:ellipsize="end"
+                android:gravity="start"
+                android:padding="@dimen/item_small_padding"
+                android:text="Izoh: Shanba kuni uyda kech kim bo`lmaydi"
+                app:layout_constraintBottom_toBottomOf="@id/tv_phone2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_planed_date"
+                app:layout_constraintWidth_percent="0.35" />
+        </LinearLayout>
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

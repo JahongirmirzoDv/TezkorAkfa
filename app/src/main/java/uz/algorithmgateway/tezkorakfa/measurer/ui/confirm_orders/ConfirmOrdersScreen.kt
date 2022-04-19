@@ -1,9 +1,12 @@
 package uz.algorithmgateway.tezkorakfa.measurer.ui.confirm_orders
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import uz.algorithmgateway.data.models.UiConfirmOrder

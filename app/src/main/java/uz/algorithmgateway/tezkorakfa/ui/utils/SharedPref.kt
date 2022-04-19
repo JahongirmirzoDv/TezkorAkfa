@@ -14,8 +14,8 @@ class SharedPref @Inject constructor(
         get() = mySharedPref.getBoolean("device_token", false)
 
 
-    var endTime: String?
-        get() = mySharedPref.getString("use1r", null)
+    var imageUri: String?
+        get() = mySharedPref.getString("use1r", "")
         set(value) = mySharedPref.edit {
             if (value != null) {
                 this.putString("use1r", value)

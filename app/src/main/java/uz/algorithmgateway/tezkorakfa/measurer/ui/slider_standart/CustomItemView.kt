@@ -1,4 +1,4 @@
-package uz.algorithmgateway.measurer.ui.slider_standart
+package uz.algorithmgateway.tezkorakfa.measurer.ui.slider_standart
 
 import android.content.Context
 import android.graphics.Paint

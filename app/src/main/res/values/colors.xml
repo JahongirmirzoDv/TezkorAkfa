@@ -13,7 +13,6 @@
     <color name="comment_color">#38404F</color>
     <color name="color_bg_supplier_view">#404757</color>
 
-
     <color name="color_border_table">#343B48</color>
     <color name="color_found_button">#364664</color>
 
@@ -27,4 +26,7 @@
     <color name="color_yellow">#F0B750</color>
     <color name="color_green">#97CC63</color>
     <color name="color_gray">#C4C4C4</color>
+    <color name="text">#82868E</color>
+    <color name="item_bg">#2C3342</color>
+    <color name="text_color">#6E768C</color>
 </resources>

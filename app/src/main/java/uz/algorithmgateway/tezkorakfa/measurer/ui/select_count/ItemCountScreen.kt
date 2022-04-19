@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import uz.algorithmgateway.tezkorakfa.R
 import uz.algorithmgateway.tezkorakfa.databinding.ScreenSelectCountBinding
 
 class ItemCountScreen : Fragment() {
@@ -33,7 +34,7 @@ class ItemCountScreen : Fragment() {
 
     private fun navigateButton() {
         binding.btnNext.setOnClickListener {
-            navController.navigate(ItemCountScreenDirections.toSliderScreen())
+            navController.navigate(R.id.sliderScreen)
         }
         binding.btnBack.setOnClickListener {
             navController.navigateUp()
@@ -62,5 +63,4 @@ class ItemCountScreen : Fragment() {
             tabLayoutDoor.addTab(tabLayoutDoor.newTab().setText("Slider"))
         }
     }
-
 }

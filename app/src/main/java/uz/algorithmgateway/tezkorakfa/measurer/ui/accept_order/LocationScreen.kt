@@ -1,12 +1,10 @@
-package uz.algorithmgateway.measurer.ui.accept_order
-
-import androidx.fragment.app.Fragment
+package uz.algorithmgateway.tezkorakfa.measurer.ui.accept_order
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
+import androidx.fragment.app.Fragment
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
@@ -18,8 +16,13 @@ class LocationScreen : Fragment() {
 
     private val callback = OnMapReadyCallback { googleMap ->
 
-        val sydney = LatLng(-34.0, 151.0)
-        googleMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
+        googleMap.moveCamera(
+            CameraUpdateFactory.newLatLngZoom(
+                LatLng(41.2995, 69.2401), 4f))
+
+        val sydney = LatLng(41.29, 69.24)
+        googleMap.addMarker(MarkerOptions().position(sydney).draggable(true)
+            .title("Marker in Tashkent"))
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
     }
 

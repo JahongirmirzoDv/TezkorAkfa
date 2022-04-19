@@ -28,7 +28,7 @@
     </fragment>
     <fragment
         android:id="@+id/locationScreen"
-        android:name="uz.algorithmgateway.measurer.ui.accept_order.LocationScreen"
+        android:name="uz.algorithmgateway.tezkorakfa.measurer.ui.accept_order.LocationScreen"
         android:label="location_screen_"
         tools:layout="@layout/location_screen_" />
     <fragment
@@ -63,5 +63,14 @@
         android:id="@+id/confirmOrdersScreen"
         android:name="uz.algorithmgateway.tezkorakfa.measurer.ui.confirm_orders.ConfirmOrdersScreen"
         android:label="ConfirmOrdersScreen" />
+    <fragment
+        android:id="@+id/orderListFragment"
+        tools:layout="@layout/fragment_tab_layout"
+        android:name="uz.algorithmgateway.tezkorakfa.measurer.ui.orders.orderList.OrderListFragment"
+        android:label="OrderListFragment" >
+        <action
+            android:id="@+id/action_orderListFragment_to_acceptOrderScreen"
+            app:destination="@id/acceptOrderScreen" />
+    </fragment>
 
 </navigation>

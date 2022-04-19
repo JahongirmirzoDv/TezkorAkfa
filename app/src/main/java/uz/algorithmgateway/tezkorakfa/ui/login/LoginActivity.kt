@@ -2,6 +2,8 @@ package uz.algorithmgateway.tezkorakfa.ui.login
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -13,6 +15,7 @@ import kotlinx.coroutines.launch
 import uz.algorithmgateway.tezkorakfa.base.MyApplication
 import uz.algorithmgateway.tezkorakfa.databinding.ActivityLoginBinding
 import uz.algorithmgateway.tezkorakfa.measurer.ui.MeasurerActivity
+import uz.algorithmgateway.tezkorakfa.ui.DesignerActivity
 import uz.algorithmgateway.tezkorakfa.ui.login.viewmodel.LoginViewModel
 import uz.algorithmgateway.tezkorakfa.ui.utils.SharedPref
 import uz.algorithmgateway.tezkorakfa.ui.utils.UIState
@@ -27,7 +30,7 @@ class LoginActivity : AppCompatActivity(), CoroutineScope {
     private lateinit var binding: ActivityLoginBinding
     private val sharedPref by lazy { SharedPref(this) }
     private val TAG = "LoginActivity"
-
+    private var back = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -68,6 +71,19 @@ class LoginActivity : AppCompatActivity(), CoroutineScope {
                 }
             }
         }
+    }
+
+    override fun onBackPressed() {
+        if (back) {
+            super.onBackPressed()
+            return
+        }
+        val handler = Handler(Looper.getMainLooper())
+        this.back = true
+        Toast.makeText(this, "Chiqish uchun ikki marta bosing", Toast.LENGTH_SHORT).show()
+        handler.postDelayed({
+            back = false
+        }, 2000)
     }
 
     override val coroutineContext: CoroutineContext

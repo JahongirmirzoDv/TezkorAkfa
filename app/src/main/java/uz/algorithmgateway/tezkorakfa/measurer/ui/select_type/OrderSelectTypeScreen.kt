@@ -61,7 +61,7 @@ class OrderSelectTypeScreen : Fragment() {
 
     private fun navigateButton() {
         binding.btnNext.setOnClickListener {
-            navController.navigate(OrderSelectTypeScreenDirections.toItemCountScreen())
+            navController.navigate(R.id.itemCountScreen)
         }
 
         binding.btnBack.setOnClickListener {

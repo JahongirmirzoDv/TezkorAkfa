@@ -1,5 +1,7 @@
 package uz.algorithmgateway.tezkorakfa.data.retrofit.models.sales_order_list
 
+import java.io.Serializable
+
 data class Client(
     val address: String,
     val comment: String,
@@ -13,4 +15,4 @@ data class Client(
     val main_phone_number: String,
     val modified_date: String,
     val phone_number: String
-)
+):Serializable

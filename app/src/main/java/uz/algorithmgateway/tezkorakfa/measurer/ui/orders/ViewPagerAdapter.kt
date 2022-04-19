@@ -1,27 +1,20 @@
-package uz.algorithmgateway.measurer.ui.orders
+package uz.algorithmgateway.tezkorakfa.measurer.ui.orders
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import androidx.lifecycle.Lifecycle
-import androidx.navigation.NavController
+import androidx.fragment.app.FragmentPagerAdapter
+import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import uz.algorithmgateway.data.const.Value
 import uz.algorithmgateway.tezkorakfa.measurer.ui.orders.orderList.OrderListFragment
 
-/**
- * Created by Abrorjon Berdiyorov on 12.03.2022
- */
-
 
 private const val NUM_TABS = 3
 
-
 class ViewPagerAdapter(
-    fragmentManager: FragmentManager,
-    lifecycle: Lifecycle,
-    private val navController: NavController
+    fragment: Fragment
 ) :
-    FragmentStateAdapter(fragmentManager, lifecycle) {
+    FragmentStateAdapter(fragment) {
 
     override fun getItemCount(): Int {
         return NUM_TABS
@@ -30,13 +23,13 @@ class ViewPagerAdapter(
     override fun createFragment(position: Int): Fragment {
         return when (position) {
             0 -> {
-                OrderListFragment(navController, Value.NEW)
+                OrderListFragment(Value.NEW)
             }
             1 -> {
-                OrderListFragment(navController, Value.ACTIVE)
+                OrderListFragment(Value.ACTIVE)
             }
             else -> {
-                OrderListFragment(navController, Value.DONE)
+                OrderListFragment(Value.DONE)
             }
         }
     }

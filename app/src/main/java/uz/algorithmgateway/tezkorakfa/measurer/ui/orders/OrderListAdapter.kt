@@ -4,12 +4,10 @@ import android.annotation.SuppressLint
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import uz.algorithmgateway.core.util.layoutInflater
-import uz.algorithmgateway.data.api.models.Order
 import uz.algorithmgateway.tezkorakfa.data.retrofit.models.sales_order_list.Result
 import uz.algorithmgateway.tezkorakfa.databinding.ItemOrderBinding
 
 class OrderListAdapter(
-    private val onAcceptClick: (order: Result) -> Unit,
     var onclick: onClick,
 ) :
     RecyclerView.Adapter<OrderListAdapter.VH>() {
@@ -47,15 +45,16 @@ class OrderListAdapter(
             binding.tvComment.text = "Izoh: ${item.comment}"
             binding.tvAddress.text = item.address
             binding.btnAccept.setOnClickListener {
-                onAcceptClick(item)
+                onclick.onAcceptClick(item)
             }
             binding.btnPhone.setOnClickListener {
-                item.contract_number?.let { it1 -> onclick.onCallClick(it1) }
+                onclick.onCallClick(item.client.main_phone_number)
             }
         }
     }
 
     interface onClick {
         fun onCallClick(number: String)
+        fun onAcceptClick(item: Result)
     }
 }

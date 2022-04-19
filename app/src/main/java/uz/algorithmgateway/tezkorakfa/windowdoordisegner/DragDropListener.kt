@@ -1,20 +1,31 @@
-package uz.algorithmgateway.windowdoordisegner
+package uz.algorithmgateway.tezkorakfa.windowdoordisegner
 
-import android.content.ClipData
-import android.content.ClipDescription
+import android.content.*
+import android.graphics.Bitmap
+import android.graphics.Canvas
+import android.net.Uri
+import android.os.Build
+import android.os.Environment
+import android.provider.MediaStore
+import android.util.Log
 import android.view.DragEvent
 import android.view.View
 import android.widget.Toast
 import uz.algorithmgateway.tezkorakfa.windowdoordisegner.ui.Area
-import uz.algorithmgateway.windowdoordisegner.ui.Square
 import uz.algorithmgateway.tezkorakfa.windowdoordisegner.ui.door.Door
 import uz.algorithmgateway.tezkorakfa.windowdoordisegner.ui.window.Window
+import uz.algorithmgateway.windowdoordisegner.ui.Square
+import java.io.File
+import java.io.FileOutputStream
+import java.io.IOException
+import java.io.OutputStream
+import javax.inject.Inject
+import javax.inject.Singleton
 
-/**
- * Created by Abrorjon Berdiyorov on 24.02.2022
- */
 class DragAndDropListener : View.OnDragListener {
 
+    @Inject
+    lateinit var context: Context
     companion object {
         const val TAG_DIV_HOR_THREE = "divide_three_horizontal"
         const val TAG_DIV_HOR_TWO = "divide_two_horizontal"
@@ -29,6 +40,7 @@ class DragAndDropListener : View.OnDragListener {
         const val TAG_WINDOW_TILT_TOP_TURN_LEFT = "window_tilt_top_turn_left"
         const val TAG_WINDOW_TILT_TOP_TURN_RIGHT = "window_tilt_top_turn_right"
         const val TAG_WINDOW_TILT_TOP = "window_tilt_top"
+        const val CLEAR = "clear"
     }
 
     override fun onDrag(view: View, event: DragEvent): Boolean {
@@ -99,8 +111,6 @@ class DragAndDropListener : View.OnDragListener {
                         destination.addWindow(Window.Companion.WindowOrientation.TURN_RIGHT)
                     }
                 }
-
-
                 view.invalidate()
                 true
             }
