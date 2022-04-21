@@ -6,9 +6,6 @@ import uz.algorithmgateway.data.const.Constants
 import javax.inject.Inject
 import javax.inject.Singleton
 
-/**
- * Created by Abrorjon Berdiyorov on 04.03.2022
- */
 
 @Singleton
 interface ConfigService   {

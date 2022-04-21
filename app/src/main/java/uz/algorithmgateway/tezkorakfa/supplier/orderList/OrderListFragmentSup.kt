@@ -1,49 +1,50 @@
 package uz.algorithmgateway.tezkorakfa.supplier.orderList
 
+import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.Toast
 import androidx.core.widget.doOnTextChanged
+import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import by.kirich1409.viewbindingdelegate.viewBinding
-import uz.algorithmgateway.core.Screen
-import uz.algorithmgateway.data.models.OrderSupplier
+import uz.algorithmgateway.tezkorakfa.data.models.OrderSupplier
 import uz.algorithmgateway.supplier.orderList.InterfaceOrderClick
 import uz.algorithmgateway.tezkorakfa.R
-import uz.algorithmgateway.tezkorakfa.databinding.FragmentOrderListBinding
+import uz.algorithmgateway.tezkorakfa.databinding.FragmentOrderListSupBinding
 import uz.algorithmgateway.tezkorakfa.supplier.adapter.AdapterTableSpinner
-import uz.algorithmgateway.tezkorakfa.supplier.orderHistory.OrderHistoryFragment
 
-class OrderListFragment : Screen(R.layout.fragment_order_list), InterfaceOrderClick {
+class OrderListFragmentSup : Fragment(), InterfaceOrderClick {
 
-    private val binding: FragmentOrderListBinding by viewBinding()
+    lateinit var binding: FragmentOrderListSupBinding
 
     private var orderStatus: Int = 0
     private val orderList: List<OrderSupplier> = createOrderList()
     private var orderListAdapter: AdapterOrderList? = null
 
-    override fun setup() {
-        super.setup()
 
-        //load list
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
+    ): View {
+        binding = FragmentOrderListSupBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         loadOrderList()
-
-        //load spinner
         loadOrderStatusSpinner()
-
-        //load search view
         loadSearchView()
-
         loadOrderHistoryButton()
     }
 
     private fun loadOrderHistoryButton() {
-        val orderHistoryFragment = OrderHistoryFragment()
         binding.btnOrderHistory.setOnClickListener {
-            activity?.supportFragmentManager!!.beginTransaction().apply {
-                add(R.id.containerFragmentSupplier, orderHistoryFragment)
-                commit()
-            }
+            findNavController().navigate(R.id.orderHistoryFragment)
         }
     }
 
@@ -80,7 +81,7 @@ class OrderListFragment : Screen(R.layout.fragment_order_list), InterfaceOrderCl
                     parent: AdapterView<*>?,
                     view: View?,
                     position: Int,
-                    id: Long
+                    id: Long,
                 ) {
                     orderStatus = position
                     filterOrderList(position)

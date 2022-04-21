@@ -143,12 +143,12 @@
     </style>
 
     <style name="FloatingActionButton.Login" parent="Widget.MaterialComponents.FloatingActionButton">
-        <item name="android:layout_height">@dimen/size_sixty</item>
-        <item name="android:layout_width">@dimen/size_sixty</item>
+        <item name="android:layout_height">40dp</item>
+        <item name="android:layout_width">40dp</item>
         <item name="backgroundTint">@color/select_blue</item>
         <item name="android:src">@drawable/ic_next_arrow_fr</item>
         <item name="borderWidth">@dimen/border_width</item>
-        <item name="fabCustomSize">@dimen/size_sixty</item>
+        <item name="fabCustomSize">40dp</item>
         <item name="tint">@color/white</item>
     </style>
 </resources>

@@ -3,11 +3,13 @@ package uz.algorithmgateway.tezkorakfa.measurer.ui.orders.orderList
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.google.gson.Gson
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -64,7 +66,8 @@ class OrderListFragment(
 
                                 override fun onAcceptClick(item: Result) {
                                     val bundle = Bundle()
-//                                    bundle.putSerializable("item",item)
+                                    val toJson = Gson().toJson(item)
+                                    bundle.putString("item", toJson)
                                     findNavController().navigate(R.id.acceptOrderScreen, bundle)
                                 }
                             }

@@ -1,10 +1,6 @@
 package uz.algorithmgateway.tezkorakfa.measurer.ui
 
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
-import android.util.Log
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import uz.algorithmgateway.tezkorakfa.databinding.ActivityMeasurerBinding
 import uz.algorithmgateway.tezkorakfa.ui.utils.SharedPref
@@ -33,10 +29,4 @@ class MeasurerActivity : AppCompatActivity() {
 //            back = false
 //        }, 2000)
 //    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        Log.e("TAG", "onDestroy: ")
-        sharedPref.imageUri = null
-    }
 }

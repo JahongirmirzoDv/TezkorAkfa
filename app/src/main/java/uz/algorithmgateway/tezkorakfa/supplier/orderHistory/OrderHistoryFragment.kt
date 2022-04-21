@@ -1,49 +1,44 @@
 package uz.algorithmgateway.tezkorakfa.supplier.orderHistory
 
 import android.annotation.SuppressLint
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
-import androidx.activity.OnBackPressedCallback
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.tabs.TabLayout
-import uz.algorithmgateway.core.Screen
-import uz.algorithmgateway.data.models.OrderSupplier
+import uz.algorithmgateway.tezkorakfa.data.models.OrderSupplier
 import uz.algorithmgateway.supplier.orderList.InterfaceOrderClick
-import uz.algorithmgateway.tezkorakfa.R
 import uz.algorithmgateway.tezkorakfa.databinding.FragmentOrderHistoryBinding
 import java.text.SimpleDateFormat
 import java.util.*
 
-class OrderHistoryFragment : Screen(R.layout.fragment_order_history), InterfaceOrderClick {
+class OrderHistoryFragment : Fragment(), InterfaceOrderClick {
 
-    private val binding: FragmentOrderHistoryBinding by viewBinding()
+    lateinit var binding: FragmentOrderHistoryBinding
 
     private val orderList: List<OrderSupplier> = createOrderList()
     private var orderListAdapter: AdapterOrderHistory? = null
 
-    override fun setup() {
-        super.setup()
 
-        loadTabDate()
-
-        loadDateRangePicker()
-
-        loadBackButton()
-
-        loadOrderList()
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
+    ): View {
+        binding = FragmentOrderHistoryBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
-    override fun initialize() {
-        super.initialize()
-        activity?.onBackPressedDispatcher?.addCallback(this, object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                activity?.supportFragmentManager!!.beginTransaction().apply {
-                    remove(this@OrderHistoryFragment)
-                    commit()
-                }
-            }
-        })
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        loadTabDate()
+        loadDateRangePicker()
+        loadBackButton()
+        loadOrderList()
     }
 
     private fun loadOrderList() {
@@ -58,10 +53,7 @@ class OrderHistoryFragment : Screen(R.layout.fragment_order_history), InterfaceO
 
     private fun loadBackButton() {
         binding.btnBack.setOnClickListener {
-            activity?.supportFragmentManager!!.beginTransaction().apply {
-                remove(this@OrderHistoryFragment)
-                commit()
-            }
+
         }
     }
 
@@ -86,7 +78,8 @@ class OrderHistoryFragment : Screen(R.layout.fragment_order_history), InterfaceO
         val dateFormat = SimpleDateFormat("dd MMM yyyy");
         dateRangePicker.addOnNegativeButtonClickListener { dateRangePicker.dismiss() }
         dateRangePicker.addOnPositiveButtonClickListener {
-            binding.tvDateRangePicker.text = dateFormat.format(it.first) + " - " + dateFormat.format(it.first)
+            binding.tvDateRangePicker.text =
+                dateFormat.format(it.first) + " - " + dateFormat.format(it.first)
         }
     }
 

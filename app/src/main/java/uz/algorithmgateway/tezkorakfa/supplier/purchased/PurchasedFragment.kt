@@ -1,43 +1,46 @@
 package uz.algorithmgateway.tezkorakfa.supplier.purchased
 
-import by.kirich1409.viewbindingdelegate.viewBinding
-import uz.algorithmgateway.core.Screen
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import uz.algorithmgateway.tezkorakfa.R
 import uz.algorithmgateway.tezkorakfa.databinding.FragmentPurchasedBinding
 
-class PurchasedFragment : Screen(R.layout.fragment_purchased) {
+class PurchasedFragment : Fragment() {
     private var tabState: Int = 0
-    private val binding: FragmentPurchasedBinding by viewBinding()
-    override fun setup() {
-        super.setup()
+    lateinit var binding: FragmentPurchasedBinding
 
-        //load tab fragment
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
+    ): View {
+        binding = FragmentPurchasedBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         loadTabFragment()
     }
 
     private fun loadTabFragment() {
-
-        val firstFragment = FirstPageFragment()
-        val secondFragment = SecondPageFragment()
         if (tabState == 0) {
-            parentFragmentManager.beginTransaction().add(
-                R.id.fragment_container_view, firstFragment
-            ).commit()
+            findNavController().navigate(R.id.firstPageFragment)
             binding.tvTabFirst.setTextColor(resources.getColor(R.color.select_blue))
             binding.tvTabFirst.setBackgroundColor(resources.getColor(R.color.layout_light))
         } else {
-            parentFragmentManager.beginTransaction().add(
-                R.id.fragment_container_view, secondFragment
-            ).commit()
+            findNavController().navigate(R.id.secondPageFragment)
             binding.tvTabSecond.setTextColor(resources.getColor(R.color.select_blue))
             binding.tvTabSecond.setBackgroundColor(resources.getColor(R.color.layout_light))
         }
 
         binding.tvTabFirst.setOnClickListener {
             if (tabState != 0) {
-                parentFragmentManager.beginTransaction().replace(
-                    R.id.fragment_container_view, firstFragment
-                ).commit()
+                findNavController().navigate(R.id.firstPageFragment)
                 binding.tvTabFirst.setTextColor(resources.getColor(R.color.select_blue))
                 binding.tvTabFirst.setBackgroundColor(resources.getColor(R.color.layout_light))
                 binding.tvTabSecond.setTextColor(resources.getColor(R.color.text_dark_color))
@@ -47,9 +50,7 @@ class PurchasedFragment : Screen(R.layout.fragment_purchased) {
         }
         binding.tvTabSecond.setOnClickListener {
             if (tabState != 1) {
-                parentFragmentManager.beginTransaction().replace(
-                    R.id.fragment_container_view, secondFragment
-                ).commit()
+                findNavController().navigate(R.id.secondPageFragment)
                 binding.tvTabFirst.setTextColor(resources.getColor(R.color.text_dark_color))
                 binding.tvTabFirst.setBackgroundColor(resources.getColor(R.color.layout_back_color))
                 binding.tvTabSecond.setTextColor(resources.getColor(R.color.select_blue))

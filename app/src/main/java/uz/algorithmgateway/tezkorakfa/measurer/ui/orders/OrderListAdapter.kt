@@ -3,7 +3,7 @@ package uz.algorithmgateway.tezkorakfa.measurer.ui.orders
 import android.annotation.SuppressLint
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import uz.algorithmgateway.core.util.layoutInflater
+import uz.algorithmgateway.tezkorakfa.core.util.layoutInflater
 import uz.algorithmgateway.tezkorakfa.data.retrofit.models.sales_order_list.Result
 import uz.algorithmgateway.tezkorakfa.databinding.ItemOrderBinding
 

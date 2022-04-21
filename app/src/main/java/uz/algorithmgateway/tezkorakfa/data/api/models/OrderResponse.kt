@@ -2,10 +2,6 @@ package uz.algorithmgateway.data.api.models
 
 import com.google.gson.annotations.SerializedName
 
-/**
- * Created by Abrorjon Berdiyorov on 15.03.2022
- */
-
 data class OrderResponse(
     @SerializedName("count")
     val count: Int,

@@ -8,10 +8,6 @@ import android.widget.LinearLayout
 import androidx.fragment.app.DialogFragment
 import uz.algorithmgateway.tezkorakfa.R
 
-/**
- * Created by Abrorjon Berdiyorov on 01.03.2022
- */
-
 
 class SizeDialog : DialogFragment() {
 
@@ -24,7 +20,7 @@ class SizeDialog : DialogFragment() {
 
             val layoutNumbers = dialogView.findViewById<LinearLayout>(R.id.ll_numbers)
             for (i in 0 until layoutNumbers.childCount) {
-                if (layoutNumbers.getChildAt(i).tag != null){
+                if (layoutNumbers.getChildAt(i).tag != null) {
                     onNumberClick(layoutNumbers.getChildAt(i).tag.toString())
                 }
             }
@@ -36,7 +32,7 @@ class SizeDialog : DialogFragment() {
         } ?: throw IllegalStateException("Activity cannot be null")
     }
 
-    private fun onNumberClick(number:String) {
+    private fun onNumberClick(number: String) {
 
     }
 

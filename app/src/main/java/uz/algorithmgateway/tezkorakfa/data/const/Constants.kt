@@ -1,8 +1,5 @@
 package uz.algorithmgateway.data.const
 
-/**
- * Created by Abrorjon Berdiyorov on 11.03.2022
- */
 
 class Constants {
     companion object {

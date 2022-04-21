@@ -165,8 +165,6 @@ class Area @JvmOverloads constructor(
         fos?.close()
     }
 
-
-
     fun divideHorizontalTwo() {
         val layout = LayoutInflater.from(ctx)
             .inflate(R.layout.item_two_square_horizontal, this, false)

@@ -6,8 +6,8 @@ import android.os.Build
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
-import uz.algorithmgateway.core.util.layoutInflater
-import uz.algorithmgateway.data.models.Product
+import uz.algorithmgateway.tezkorakfa.core.util.layoutInflater
+import uz.algorithmgateway.tezkorakfa.data.models.Product
 import uz.algorithmgateway.supplier.productList.InterfaceProductClick
 import uz.algorithmgateway.tezkorakfa.R
 import uz.algorithmgateway.tezkorakfa.databinding.ItemProductTableBinding

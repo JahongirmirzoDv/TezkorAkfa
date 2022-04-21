@@ -1,4 +1,4 @@
-package uz.algorithmgateway.core.util
+package uz.algorithmgateway.tezkorakfa.core.util
 
 import android.view.LayoutInflater
 import android.view.View

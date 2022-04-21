@@ -1,51 +1,57 @@
 package uz.algorithmgateway.tezkorakfa.supplier.purchased
 
+import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.AdapterView
 import androidx.core.widget.doOnTextChanged
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import by.kirich1409.viewbindingdelegate.viewBinding
-import uz.algorithmgateway.core.Screen
-import uz.algorithmgateway.data.models.FoundProduct
-import uz.algorithmgateway.tezkorakfa.R
+import uz.algorithmgateway.tezkorakfa.data.models.FoundProduct
 import uz.algorithmgateway.tezkorakfa.databinding.FragmentPurchaseSecondBinding
 import uz.algorithmgateway.tezkorakfa.supplier.adapter.AdapterTableSpinner
 import uz.algorithmgateway.tezkorakfa.supplier.foundList.AdapterFoundList
 
-class SecondPageFragment:Screen(R.layout.fragment_purchase_second) {
+class SecondPageFragment :
+    Fragment() {
 
 
-    private val binding: FragmentPurchaseSecondBinding by viewBinding()
+    lateinit var binding: FragmentPurchaseSecondBinding
 
     private var productType: Int = 0
     private var byWhere: Int = 0
     private val productList: List<FoundProduct> = createPurchasedProductList()
     private var foundListAdapter: AdapterFoundList? = null
 
-    override fun setup() {
-        super.setup()
 
-        //load list
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
+    ): View? {
+        binding = FragmentPurchaseSecondBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         loadProductList()
-
-        //load spinner
         loadProductTypeSpinner()
-
-        //load search view
         loadSearchView()
     }
 
     private fun loadSearchView() {
         binding.editTextSearch.doOnTextChanged { text, start, before, count ->
 
-            val filterList: List<FoundProduct> = if ( productType == 0) {
+            val filterList: List<FoundProduct> = if (productType == 0) {
                 productList
-            } else if(productType != 0){
-                productList.filter { s -> (s.type == productType)  }
-            }else if(byWhere != 0 && productType == 0){
-                productList.filter { s ->  (byWhere == 1 && s.countByDealer!=0 || byWhere==2 && s.countByOutside!=0) }
-            }else{
-                productList.filter { s ->  (s.type == productType) && (byWhere == 1 && s.countByDealer!=0 || byWhere==2 && s.countByOutside!=0) }
+            } else if (productType != 0) {
+                productList.filter { s -> (s.type == productType) }
+            } else if (byWhere != 0 && productType == 0) {
+                productList.filter { s -> (byWhere == 1 && s.countByDealer != 0 || byWhere == 2 && s.countByOutside != 0) }
+            } else {
+                productList.filter { s -> (s.type == productType) && (byWhere == 1 && s.countByDealer != 0 || byWhere == 2 && s.countByOutside != 0) }
             }
 
             val searchList = mutableListOf<FoundProduct>()
@@ -73,7 +79,7 @@ class SecondPageFragment:Screen(R.layout.fragment_purchase_second) {
                     parent: AdapterView<*>?,
                     view: View?,
                     position: Int,
-                    id: Long
+                    id: Long,
                 ) {
                     productType = position
                     filterProductList()
@@ -84,10 +90,10 @@ class SecondPageFragment:Screen(R.layout.fragment_purchase_second) {
     }
 
     private fun filterProductList() {
-        val filterList: List<FoundProduct> = if( productType == 0){
-            productList.filter { s ->  (s.countByOutside!=0) }
-        }else{
-            productList.filter { s ->  (s.type == productType) && (s.countByOutside!=0) }
+        val filterList: List<FoundProduct> = if (productType == 0) {
+            productList.filter { s -> (s.countByOutside != 0) }
+        } else {
+            productList.filter { s -> (s.type == productType) && (s.countByOutside != 0) }
         }
         filterList.let {
             foundListAdapter?.updateList(filterList)
@@ -108,16 +114,16 @@ class SecondPageFragment:Screen(R.layout.fragment_purchase_second) {
     )
 
     private fun createPurchasedProductList(): List<FoundProduct> = listOf(
-        FoundProduct(1, "Aldoks-kosa(Silver)", 1, 3, "70 000", 3, "210 000", 0, "0" ),
-        FoundProduct(1, "Aldoks-kosa(Silver)", 1, 3, "70 000", 3, "210 000", 0, "0" ),
-        FoundProduct(1, "Aldoks-kosa(Silver)", 1, 3, "70 000", 0, "0", 3, "210 000" ),
-        FoundProduct(1, "Aldoks-kosa(Silver)", 1, 3, "70 000", 0, "0", 3, "220 000" ),
-        FoundProduct(1, "Aldoks-kosa(Silver)", 1, 3, "70 000", 1, "70 000", 2, "150 000" ),
-        FoundProduct(1, "Aldoks-kosa(Silver)", 2, 3, "70 000", 3, "210 000", 0, "0" ),
-        FoundProduct(1, "Aldoks-kosa(Silver)", 2, 3, "70 000", 3, "210 000", 0, "0" ),
-        FoundProduct(1, "Aldoks-kosa(Silver)", 2, 3, "70 000", 3, "210 000", 0, "0" ),
-        FoundProduct(1, "Aldoks-kosa(Silver)", 2, 3, "70 000", 0, "0", 3, "220 000" ),
-        FoundProduct(1, "Aldoks-kosa(Silver)", 2, 3, "70 000", 1, "210 000", 2, "150 000" ),
-        FoundProduct(1, "Aldoks-kosa(Silver)", 2, 3, "70 000", 2, "210 000", 1, "80 000" )
+        FoundProduct(1, "Aldoks-kosa(Silver)", 1, 3, "70 000", 3, "210 000", 0, "0"),
+        FoundProduct(1, "Aldoks-kosa(Silver)", 1, 3, "70 000", 3, "210 000", 0, "0"),
+        FoundProduct(1, "Aldoks-kosa(Silver)", 1, 3, "70 000", 0, "0", 3, "210 000"),
+        FoundProduct(1, "Aldoks-kosa(Silver)", 1, 3, "70 000", 0, "0", 3, "220 000"),
+        FoundProduct(1, "Aldoks-kosa(Silver)", 1, 3, "70 000", 1, "70 000", 2, "150 000"),
+        FoundProduct(1, "Aldoks-kosa(Silver)", 2, 3, "70 000", 3, "210 000", 0, "0"),
+        FoundProduct(1, "Aldoks-kosa(Silver)", 2, 3, "70 000", 3, "210 000", 0, "0"),
+        FoundProduct(1, "Aldoks-kosa(Silver)", 2, 3, "70 000", 3, "210 000", 0, "0"),
+        FoundProduct(1, "Aldoks-kosa(Silver)", 2, 3, "70 000", 0, "0", 3, "220 000"),
+        FoundProduct(1, "Aldoks-kosa(Silver)", 2, 3, "70 000", 1, "210 000", 2, "150 000"),
+        FoundProduct(1, "Aldoks-kosa(Silver)", 2, 3, "70 000", 2, "210 000", 1, "80 000")
     )
 }

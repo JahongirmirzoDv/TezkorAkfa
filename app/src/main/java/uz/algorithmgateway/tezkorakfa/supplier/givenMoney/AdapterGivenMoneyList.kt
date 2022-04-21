@@ -6,8 +6,8 @@ import android.os.Build
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
-import uz.algorithmgateway.core.util.layoutInflater
-import uz.algorithmgateway.data.models.GivenMoney
+import uz.algorithmgateway.tezkorakfa.core.util.layoutInflater
+import uz.algorithmgateway.tezkorakfa.data.models.GivenMoney
 import uz.algorithmgateway.tezkorakfa.databinding.ItemGivenMoneyBinding
 
 class AdapterGivenMoneyList() : RecyclerView.Adapter<AdapterGivenMoneyList.VH>() {

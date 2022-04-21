@@ -1,7 +1,5 @@
 package uz.algorithmgateway.tezkorakfa.data.retrofit.models.sales_order_list
 
-import uz.algorithmgateway.data.retrofit.models.sales_order_list.Role
-import uz.algorithmgateway.data.retrofit.models.sales_order_list.ShowRoom
 import java.io.Serializable
 
 data class Scaler(

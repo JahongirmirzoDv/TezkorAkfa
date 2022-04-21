@@ -2,9 +2,6 @@ package uz.algorithmgateway.data.api.models
 
 import com.google.gson.annotations.SerializedName
 
-/**
- * Created by Abrorjon Berdiyorov on 11.03.2022
- */
 
 data class UserResponse(
 

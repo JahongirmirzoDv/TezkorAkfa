@@ -55,8 +55,8 @@
         android:name="uz.algorithmgateway.tezkorakfa.measurer.ui.slider_standart.SliderScreen"
         android:label="SliderScreen" >
         <action
-            android:id="@+id/to_confirmOrdersScreen"
-            app:destination="@id/confirmOrdersScreen" />
+            android:id="@+id/action_sliderScreen_to_drawingsFragment"
+            app:destination="@id/drawingsFragment" />
     </fragment>
     <fragment
         tools:layout="@layout/screen_confirm_orders"
@@ -72,5 +72,10 @@
             android:id="@+id/action_orderListFragment_to_acceptOrderScreen"
             app:destination="@id/acceptOrderScreen" />
     </fragment>
+    <fragment
+        android:id="@+id/drawingsFragment"
+        android:name="uz.algorithmgateway.tezkorakfa.measurer.ui.drawings.DrawingsFragment"
+        android:label="fragment_drawings"
+        tools:layout="@layout/fragment_drawings" />
 
 </navigation>

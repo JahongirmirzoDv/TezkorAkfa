@@ -11,9 +11,6 @@ import uz.algorithmgateway.tezkorakfa.R
 import uz.algorithmgateway.tezkorakfa.ui.login.LoginActivity
 import uz.algorithmgateway.tezkorakfa.ui.utils.SharedPref
 
-/**
- * Created by Abrorjon Berdiyorov on 04.03.2022
- */
 
 @SuppressLint("CustomSplashScreen")
 class SplashActivity : AppCompatActivity() {

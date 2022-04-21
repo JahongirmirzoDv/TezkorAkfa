@@ -1,24 +1,36 @@
 package uz.algorithmgateway.tezkorakfa.measurer.ui.slider_standart
 
+import android.Manifest
+import android.app.Activity
 import android.content.ClipData
 import android.content.ClipDescription
 import android.content.ContentResolver
 import android.content.ContentValues
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
-import android.graphics.Canvas
+import android.graphics.Rect
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.Environment
+import android.os.Handler
 import android.provider.MediaStore
 import android.view.LayoutInflater
+import android.view.PixelCopy
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.google.gson.Gson
+import uz.algorithmgateway.core.util.toast
 import uz.algorithmgateway.tezkorakfa.R
+import uz.algorithmgateway.tezkorakfa.base.MyApplication
 import uz.algorithmgateway.tezkorakfa.databinding.ScreenSliderBinding
+import uz.algorithmgateway.tezkorakfa.measurer.ui.select_type.models.Drawing
+import uz.algorithmgateway.tezkorakfa.measurer.viewmodel.DbViewmodel
 import uz.algorithmgateway.tezkorakfa.windowdoordisegner.DragAndDropListener
 import uz.algorithmgateway.tezkorakfa.windowdoordisegner.ui.Area
 import uz.algorithmgateway.tezkorakfa.windowdoordisegner.ui.DesignerLayout
@@ -27,10 +39,15 @@ import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
 import java.io.OutputStream
+import javax.inject.Inject
 
 
 class SliderScreen : Fragment() {
 
+    @Inject
+    lateinit var dbViewmodel: DbViewmodel
+    lateinit var id: String
+    lateinit var drawing: Drawing
     private var _binding: ScreenSliderBinding? = null
     private val binding get() = _binding!!
     private val navController by lazy(LazyThreadSafetyMode.NONE) { findNavController() }
@@ -39,6 +56,17 @@ class SliderScreen : Fragment() {
     var lastView: View? = null
     var H: Int = 1300
     var W: Int = 2000
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        MyApplication.appComponent.sliderScreen(this)
+        arguments.let {
+            W = it?.getInt("width")!!
+            H = it.getInt("height")
+            id = it.getString("id").toString()
+            val t = it.getString("drawing").toString()
+            drawing = Gson().fromJson(t, Drawing::class.java)
+        }
+    }
 
 
     override fun onCreateView(
@@ -50,8 +78,10 @@ class SliderScreen : Fragment() {
         return binding.root
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.projectId.text = "Loyiha $id"
         navigationButtons()
         dragAndDropListener = Area(requireContext())
 
@@ -59,13 +89,18 @@ class SliderScreen : Fragment() {
         setDragAndDropToViews()
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun navigationButtons() {
 
         binding.floatingNext.setOnClickListener {
-            navController.navigate(R.id.confirmOrdersScreen)
-            val saveImage = saveImage(binding.root)
-            saveBitmap(saveImage, "rasm")
-            dragAndDropListener.removeWindow()
+            val bundle = Bundle()
+            bundle.putString("id", id)
+            navController.navigate(R.id.drawingsFragment, bundle)
+            verifyStoragePermission(requireActivity())
+            getBitmapFromView(binding.view, requireActivity(), callback = {
+                saveBitmap(it, "new api")
+            })
+            toast("Chizma galareyaga saqlandi")
         }
 
         binding.floatingBack.setOnClickListener {
@@ -73,19 +108,44 @@ class SliderScreen : Fragment() {
         }
     }
 
-    private fun saveImage(view: View): Bitmap {
-        val specWidth =
-            View.MeasureSpec.makeMeasureSpec(view.measuredWidth, View.MeasureSpec.AT_MOST)
-        val specHeight =
-            View.MeasureSpec.makeMeasureSpec(view.measuredHeight, View.MeasureSpec.AT_MOST)
-        view.measure(specWidth, specHeight)
-        val width = view.measuredWidth
-        val height = view.measuredHeight
-        val bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
-        val canvas = Canvas(bitmap)
-        view.layout(view.left, view.top, view.right, view.bottom)
-        view.draw(canvas)
-        return bitmap
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun getBitmapFromView(view: View, activity: Activity, callback: (Bitmap) -> Unit) {
+        activity.window?.let { window ->
+            val bitmap = Bitmap.createBitmap(view.width, view.height, Bitmap.Config.ARGB_8888)
+            val locationOfViewInWindow = IntArray(2)
+            view.getLocationInWindow(locationOfViewInWindow)
+            try {
+                PixelCopy.request(window,
+                    Rect(locationOfViewInWindow[0],
+                        locationOfViewInWindow[1],
+                        locationOfViewInWindow[0] + view.width,
+                        locationOfViewInWindow[1] + view.height),
+                    bitmap,
+                    { copyResult ->
+                        if (copyResult == PixelCopy.SUCCESS) {
+                            callback(bitmap)
+                        }
+                        // possible to handle other result codes ...
+                    },
+                    Handler())
+            } catch (e: IllegalArgumentException) {
+                // PixelCopy may throw IllegalArgumentException, make sure to handle it
+                e.printStackTrace()
+            }
+        }
+    }
+
+    private val PERMISSION_STORAGE = arrayOf(
+        Manifest.permission.READ_EXTERNAL_STORAGE,
+        Manifest.permission.WRITE_EXTERNAL_STORAGE)
+
+    fun verifyStoragePermission(activity: Activity) {
+        val permission = ActivityCompat.checkSelfPermission(requireContext(),
+            Manifest.permission.WRITE_EXTERNAL_STORAGE)
+        if (permission != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(
+                activity, PERMISSION_STORAGE, 1)
+        }
     }
 
     @Throws(IOException::class)
@@ -101,6 +161,11 @@ class SliderScreen : Fragment() {
             val imageUri: Uri? =
                 resolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues)
             fos = imageUri?.let { resolver.openOutputStream(it) }
+            drawing.id = id
+            drawing.width = W
+            drawing.heigth = H
+            drawing.projet_image_path = imageUri.toString()
+            dbViewmodel.updateDrawing(drawing)
         } else {
             val imagesDir = Environment.getExternalStoragePublicDirectory(
                 Environment.DIRECTORY_DCIM).toString() + File.separator + "Camera"
@@ -110,6 +175,11 @@ class SliderScreen : Fragment() {
             }
             val image = File(imagesDir, "$name.png")
             fos = FileOutputStream(image)
+            drawing.id = id
+            drawing.width = W
+            drawing.heigth = H
+            drawing.projet_image_path = image.toString()
+            dbViewmodel.updateDrawing(drawing)
         }
         saved = bitmap.compress(Bitmap.CompressFormat.PNG, 100, fos)
         fos?.flush()

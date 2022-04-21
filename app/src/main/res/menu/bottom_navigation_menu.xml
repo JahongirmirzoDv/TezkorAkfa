@@ -2,27 +2,27 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/page_1"
+        android:id="@+id/productListFragment"
         android:enabled="true"
         android:icon="@drawable/ic_menu_product_list"
         android:title="@string/text_menu_product_list"/>
     <item
-        android:id="@+id/page_2"
+        android:id="@+id/orderListFragment"
         android:enabled="true"
         android:icon="@drawable/ic_menu_order"
         android:title="@string/orders"/>
     <item
-        android:id="@+id/page_3"
+        android:id="@+id/foundListFragment"
         android:enabled="true"
         android:icon="@drawable/ic_menu_found_list"
         android:title="@string/text_found_list"/>
     <item
-        android:id="@+id/page_4"
+        android:id="@+id/givenMoneyFragment"
         android:enabled="true"
         android:icon="@drawable/ic_give_money"
         android:title="@string/text_menu_given_money"/>
     <item
-        android:id="@+id/page_5"
+        android:id="@+id/purchasedFragment"
         android:enabled="true"
         android:icon="@drawable/ic_menu_basket"
         android:title="@string/text_menu_purchased"/>

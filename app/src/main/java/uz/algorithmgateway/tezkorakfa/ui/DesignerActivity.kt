@@ -12,9 +12,6 @@ import uz.algorithmgateway.tezkorakfa.windowdoordisegner.DragAndDropListener
 import uz.algorithmgateway.tezkorakfa.windowdoordisegner.ui.DesignerLayout
 import uz.algorithmgateway.tezkorakfa.windowdoordisegner.ui.sizeview.SizeDialog
 
-/**
- * Created by Abrorjon Berdiyorov on 22.02.2022
- */
 
 class DesignerActivity : AppCompatActivity() {
     var lastView: View? = null

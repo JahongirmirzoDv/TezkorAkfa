@@ -1,44 +1,45 @@
 package uz.algorithmgateway.tezkorakfa.supplier.productList
 
-import android.view.*
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.Toast
 import androidx.core.widget.doOnTextChanged
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import by.kirich1409.viewbindingdelegate.viewBinding
-import uz.algorithmgateway.core.Screen
-import uz.algorithmgateway.data.models.Product
+import uz.algorithmgateway.tezkorakfa.data.models.Product
 import uz.algorithmgateway.supplier.productList.InterfaceProductClick
-import uz.algorithmgateway.tezkorakfa.R
 import uz.algorithmgateway.tezkorakfa.databinding.FragmentProductListBinding
 import uz.algorithmgateway.tezkorakfa.supplier.adapter.AdapterTableSpinner
 
 
-class ProductListFragment : Screen(R.layout.fragment_product_list), InterfaceProductClick {
+class ProductListFragment : Fragment(), InterfaceProductClick {
 
-    private val binding: FragmentProductListBinding by viewBinding()
+    lateinit var binding: FragmentProductListBinding
     private var productListAdapter: AdapterProductList? = null
     private var productList: List<Product>? = null
     private var productType: Int = 0
 
-    override fun setup() {
-        super.setup()
 
-        productList = productList()
-
-        //load list
-        loadProductList()
-
-        //load spinner
-        loadProductTypeSpinner()
-
-        //load search view
-        loadSearchView()
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
+    ): View? {
+        binding = FragmentProductListBinding.inflate(inflater, container, false)
+        return binding.root
 
     }
 
-
-
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        productList = productList()
+        loadProductList()
+        loadProductTypeSpinner()
+        loadSearchView()
+    }
 
     private fun loadSearchView() {
         binding.editTextSearch.doOnTextChanged { text, start, before, count ->
@@ -73,7 +74,7 @@ class ProductListFragment : Screen(R.layout.fragment_product_list), InterfacePro
                     parent: AdapterView<*>?,
                     view: View?,
                     position: Int,
-                    id: Long
+                    id: Long,
                 ) {
                     productType = position
                     filterProductList(position)

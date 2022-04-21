@@ -9,7 +9,7 @@
         android:id="@+id/ordersFragment2"
         android:name="uz.algorithmgateway.tezkorakfa.montage.ui.OrdersFragment"
         android:label="fragment_orders"
-        tools:layout="@layout/fragment_orders" >
+        tools:layout="@layout/fragment_orders">
         <action
             android:id="@+id/action_ordersFragment2_to_parametrFragment"
             app:destination="@id/parametrFragment"
@@ -22,5 +22,7 @@
         android:id="@+id/parametrFragment"
         android:name="uz.algorithmgateway.tezkorakfa.montage.ui.ParametrFragment"
         android:label="fragment_parametr"
-        tools:layout="@layout/fragment_parametr" />
+        tools:layout="@layout/fragment_parametr">
+
+    </fragment>
 </navigation>

@@ -1,4 +1,4 @@
-package uz.algorithmgateway.data.models
+package uz.algorithmgateway.tezkorakfa.data.models
 
 data class FoundProduct(
     val id:Int,

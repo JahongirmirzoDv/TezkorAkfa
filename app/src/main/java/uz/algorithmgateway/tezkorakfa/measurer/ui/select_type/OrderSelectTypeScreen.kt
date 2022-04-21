@@ -6,23 +6,44 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import uz.algorithmgateway.data.models.UISpinner
+import com.google.gson.Gson
 import uz.algorithmgateway.tezkorakfa.R
+import uz.algorithmgateway.tezkorakfa.base.MyApplication
+import uz.algorithmgateway.tezkorakfa.data.models.UISpinner
 import uz.algorithmgateway.tezkorakfa.databinding.ScreenSelectTypeOrderBinding
 import uz.algorithmgateway.tezkorakfa.measurer.SpinnerMultiItemAdapter
 import uz.algorithmgateway.tezkorakfa.measurer.SpinnerTextAdapter
+import uz.algorithmgateway.tezkorakfa.measurer.ui.select_type.models.Drawing
+import uz.algorithmgateway.tezkorakfa.measurer.viewmodel.DbViewmodel
+import javax.inject.Inject
 
 class OrderSelectTypeScreen : Fragment() {
+    @Inject
+    lateinit var dbViewmodel: DbViewmodel
 
+    lateinit var id: String
     private var _binding: ScreenSelectTypeOrderBinding? = null
     private val binding get() = _binding!!
-
+    lateinit var drawing: Drawing
     private val navController by lazy(LazyThreadSafetyMode.NONE) { findNavController() }
+    var profile_List = arrayListOf("Aldoks", "PVH", "Exclusive")
+    var mirror_layer_List = arrayListOf("1-qavat", "2-qavat")
+    var shelf_List = arrayListOf("Universal", "Elita", "Lux")
+    var type_handle = arrayListOf("Rom", "Eshik")
+    var type_cage = arrayListOf("550- sinax", "544", "Surma")
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        MyApplication.appComponent.ordersSelect(this)
+        arguments.let {
+            id = it?.getString("id").toString()
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         _binding = ScreenSelectTypeOrderBinding.inflate(inflater, container, false)
         return binding.root
@@ -30,7 +51,7 @@ class OrderSelectTypeScreen : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        binding.projectId.text = "Loyiha $id"
         backClick()
         loadSpinnerDoorOrWindow()
 
@@ -61,7 +82,59 @@ class OrderSelectTypeScreen : Fragment() {
 
     private fun navigateButton() {
         binding.btnNext.setOnClickListener {
-            navController.navigate(R.id.itemCountScreen)
+            binding.apply {
+                val type = binding.spinnerRoomOrDoor.selectedItem.toString()
+                val external_or_Internal = when (binding.radioGroup.checkedRadioButtonId) {
+                    R.id.radioOut -> {
+                        "tashqi"
+                    }
+                    else -> {
+                        "ichki"
+                    }
+                }
+                val profile_type =
+                    profile_List[binding.layoutProfile.tabLayoutProfile.selectedTabPosition]
+                val profile_type_two =
+                    binding.layoutProfile.spinnerTypeProfile.selectedItem.toString()
+                val profile_texture =
+                    binding.layoutProfile.spinnerTypeTexture.selectedItem.toString()
+                val mirror_layer =
+                    mirror_layer_List[binding.layoutWindow.tabLayoutWindow.selectedTabPosition]
+                val mirror_color = binding.layoutWindow.spinnerWindowColor.selectedItem.toString()
+                val window_sill = shelf_List[binding.layoutShelf.tablayoutShelf.selectedTabPosition]
+                val handle = binding.layoutAccessory.spinnerDastak.selectedItem.toString()
+                val handle_petla = binding.layoutAccessory.spinnerPetla.selectedItem.toString()
+                val handle_texture =
+                    binding.layoutAccessory.spinnerTypeTexture.selectedItem.toString()
+                val handle_type =
+                    type_handle[binding.layoutAccessory.tabLayoutDastak.selectedTabPosition]
+                val handle_petla_type =
+                    type_handle[binding.layoutAccessory.tabLayoutPetla.selectedTabPosition]
+                val net = type_cage[binding.layoutCage.tablayoutCage.selectedTabPosition]
+                drawing = Drawing(
+                     id,
+                    type,
+                    external_or_Internal,
+                    profile_type,
+                    profile_type_two,
+                    profile_texture,
+                    mirror_layer,
+                    mirror_color,
+                    window_sill,
+                    handle,
+                    handle_petla,
+                    handle_texture,
+                    handle_type,
+                    handle_petla_type,
+                    net
+                )
+                dbViewmodel.addDrawing(drawing)
+            }
+            val bundle = Bundle()
+            val toJson = Gson().toJson(drawing)
+            bundle.putString("id", id)
+            bundle.putString("drawing", toJson)
+            navController.navigate(R.id.itemCountScreen, bundle)
         }
 
         binding.btnBack.setOnClickListener {
@@ -136,6 +209,7 @@ class OrderSelectTypeScreen : Fragment() {
             tablayoutShelf.addTab(tablayoutShelf.newTab().setText("Universal"))
             tablayoutShelf.addTab(tablayoutShelf.newTab().setText("Elita"))
             tablayoutShelf.addTab(tablayoutShelf.newTab().setText("Lux"))
+
         }
     }
 
@@ -148,6 +222,7 @@ class OrderSelectTypeScreen : Fragment() {
         with(binding.layoutWindow) {
             tabLayoutWindow.addTab(tabLayoutWindow.newTab().setText("1-qavat"))
             tabLayoutWindow.addTab(tabLayoutWindow.newTab().setText("2-qavat"))
+
         }
     }
 
@@ -202,7 +277,7 @@ class OrderSelectTypeScreen : Fragment() {
             tabLayoutProfile.addTab(tabLayoutProfile.newTab().setText("Aldoks"))
             tabLayoutProfile.addTab(tabLayoutProfile.newTab().setText("PVH"))
             tabLayoutProfile.addTab(tabLayoutProfile.newTab().setText("Exclusive"))
+
         }
     }
-
 }

@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.snackbar.Snackbar
+import uz.algorithmgateway.tezkorakfa.core.util.px
 
 fun <T> ArrayList<T>.cleanup(collection: Collection<T>) {
     clear()

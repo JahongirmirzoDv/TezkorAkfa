@@ -2,9 +2,6 @@ package uz.algorithmgateway.data.const
 
 import androidx.annotation.StringDef
 
-/**
- * Created by Abrorjon Berdiyorov on 11.03.2022
- */
 
 @StringDef(
     Value.SCALER,

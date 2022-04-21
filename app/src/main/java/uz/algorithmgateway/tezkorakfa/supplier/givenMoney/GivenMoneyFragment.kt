@@ -1,28 +1,35 @@
 package uz.algorithmgateway.tezkorakfa.supplier.givenMoney
 
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.core.widget.doOnTextChanged
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import by.kirich1409.viewbindingdelegate.viewBinding
-import uz.algorithmgateway.core.Screen
-import uz.algorithmgateway.data.models.GivenMoney
-import uz.algorithmgateway.tezkorakfa.R
+import uz.algorithmgateway.tezkorakfa.data.models.GivenMoney
 import uz.algorithmgateway.tezkorakfa.databinding.FragmentGivenMoneyBinding
 
-class GivenMoneyFragment : Screen(R.layout.fragment_given_money) {
+class GivenMoneyFragment : Fragment() {
 
-    private val binding: FragmentGivenMoneyBinding by viewBinding()
+    lateinit var binding: FragmentGivenMoneyBinding
 
     private val givenMoneyList: List<GivenMoney> = createGivenMoneyList()
     private var givenMoneyListAdapter: AdapterGivenMoneyList? = null
 
-    override fun setup() {
-        super.setup()
-
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
+    ): View {
+        binding = FragmentGivenMoneyBinding.inflate(inflater, container, false)
         //load list
         loadGivenMoneyList()
 
         //load search view
         loadSearchView()
+
+        return binding.root
     }
 
     private fun loadSearchView() {

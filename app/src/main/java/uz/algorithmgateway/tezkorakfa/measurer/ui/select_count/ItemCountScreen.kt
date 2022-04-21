@@ -12,50 +12,72 @@ import uz.algorithmgateway.tezkorakfa.databinding.ScreenSelectCountBinding
 class ItemCountScreen : Fragment() {
 
     private var _binding: ScreenSelectCountBinding? = null
+    lateinit var id: String
+    lateinit var drawing: String
     private val binding get() = _binding!!
+    var H: Int = 1300
+    var W: Int = 2000
 
     private val navController by lazy(LazyThreadSafetyMode.NONE) { findNavController() }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        arguments.let {
+            id = it?.getString("id").toString()
+            drawing = it?.getString("drawing").toString()
+        }
+    }
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+        savedInstanceState: Bundle?,
+    ): View {
         _binding = ScreenSelectCountBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.projectId.text = "Loyiha $id"
         loadTabData()
-        chooseCount()
+//        chooseCount()
         navigateButton()
     }
 
     private fun navigateButton() {
         binding.btnNext.setOnClickListener {
-            navController.navigate(R.id.sliderScreen)
+            val bundle = Bundle()
+            val height =
+                if (binding.editTextWidth.text.toString() == "") H else binding.editTextHeight.text.toString()
+                    .toInt()
+            val width =
+                if (binding.editTextWidth.text.toString() == "") W else binding.editTextWidth.text.toString()
+                    .toInt()
+            bundle.putInt("width", width)
+            bundle.putInt("height", height)
+            bundle.putString("id", id)
+            bundle.putString("drawing", drawing)
+            navController.navigate(R.id.sliderScreen, bundle)
         }
         binding.btnBack.setOnClickListener {
             navController.navigateUp()
         }
     }
 
-    private fun chooseCount() {
-
-        binding.cardPlus.setOnClickListener {
-            val count = binding.textViewCount.text.toString()
-            binding.textViewCount.text = (count.toInt() + 1).toString()
-        }
-
-        binding.cardMinus.setOnClickListener {
-            val count = binding.textViewCount.text.toString()
-            if (count.toInt() > 0) {
-                binding.textViewCount.text = (count.toInt() - 1).toString()
-            }
-        }
-
-    }
+//    private fun chooseCount() {
+//        binding.cardPlus.setOnClickListener {
+//            val count = binding.textViewCount.text.toString()
+//            binding.textViewCount.text = (count.toInt() + 1).toString()
+//        }
+//
+//        binding.cardMinus.setOnClickListener {
+//            val count = binding.textViewCount.text.toString()
+//            if (count.toInt() > 0) {
+//                binding.textViewCount.text = (count.toInt() - 1).toString()
+//            }
+//        }
+//
+//    }
 
     private fun loadTabData() {
         with(binding) {

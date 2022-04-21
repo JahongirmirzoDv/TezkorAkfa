@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
-import uz.algorithmgateway.data.models.UISpinner
+import uz.algorithmgateway.tezkorakfa.data.models.UISpinner
 import uz.algorithmgateway.tezkorakfa.databinding.ItemMultiSpinnerBinding
 
 class SpinnerMultiItemAdapter(private val context: Context, private val list: List<UISpinner>) :

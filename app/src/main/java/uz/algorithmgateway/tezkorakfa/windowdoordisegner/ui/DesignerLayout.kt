@@ -7,9 +7,6 @@ import uz.algorithmgateway.tezkorakfa.R
 import uz.algorithmgateway.tezkorakfa.windowdoordisegner.ui.sizeview.SizeViewHorizontal
 import uz.algorithmgateway.tezkorakfa.windowdoordisegner.ui.sizeview.SizeViewVertical
 
-/**
- * Created by Abrorjon Berdiyorov on 23.02.2022
- */
 
 class DesignerLayout @JvmOverloads constructor(
     private val ctx: Context,

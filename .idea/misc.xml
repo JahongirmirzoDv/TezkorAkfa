@@ -19,11 +19,13 @@
         <entry key="..\:/anp/abs/app/src/main/res/drawable/bg_order_found_circle.xml" value="0.182" />
         <entry key="..\:/anp/abs/app/src/main/res/drawable/bg_small_view.xml" value="0.182" />
         <entry key="..\:/anp/abs/app/src/main/res/drawable/card_item.xml" value="0.182" />
+        <entry key="..\:/anp/abs/app/src/main/res/drawable/drawing_cutting.xml" value="0.1735" />
         <entry key="..\:/anp/abs/app/src/main/res/drawable/ic_account.xml" value="0.12" />
         <entry key="..\:/anp/abs/app/src/main/res/drawable/ic_akfa_icon.xml" value="0.12" />
         <entry key="..\:/anp/abs/app/src/main/res/drawable/ic_backspace.xml" value="0.12" />
         <entry key="..\:/anp/abs/app/src/main/res/drawable/ic_btn_draw.xml" value="0.182" />
         <entry key="..\:/anp/abs/app/src/main/res/drawable/ic_card_rectangle.xml" value="0.182" />
+        <entry key="..\:/anp/abs/app/src/main/res/drawable/ic_cart.xml" value="0.1735" />
         <entry key="..\:/anp/abs/app/src/main/res/drawable/ic_cil_calendar.xml" value="0.12" />
         <entry key="..\:/anp/abs/app/src/main/res/drawable/ic_door_left.xml" value="0.12" />
         <entry key="..\:/anp/abs/app/src/main/res/drawable/ic_glass.xml" value="0.12" />
@@ -38,20 +40,24 @@
         <entry key="..\:/anp/abs/app/src/main/res/drawable/ic_panel_horizontal.xml" value="0.182" />
         <entry key="..\:/anp/abs/app/src/main/res/drawable/ic_panel_vertical.xml" value="0.12" />
         <entry key="..\:/anp/abs/app/src/main/res/drawable/ic_plus.xml" value="0.12" />
+        <entry key="..\:/anp/abs/app/src/main/res/drawable/ic_profile.xml" value="0.1735" />
         <entry key="..\:/anp/abs/app/src/main/res/drawable/ic_red.xml" value="0.1785" />
         <entry key="..\:/anp/abs/app/src/main/res/drawable/ic_selected_radiobutton.xml" value="0.12" />
         <entry key="..\:/anp/abs/app/src/main/res/drawable/ic_show_count.xml" value="0.119" />
         <entry key="..\:/anp/abs/app/src/main/res/drawable/ic_tilt_top_turn_left.xml" value="0.12" />
+        <entry key="..\:/anp/abs/app/src/main/res/drawable/ic_window.xml" value="0.1735" />
         <entry key="..\:/anp/abs/app/src/main/res/layout/activity_designer.xml" value="0.1" />
         <entry key="..\:/anp/abs/app/src/main/res/layout/activity_login.xml" value="0.17777777777777778" />
         <entry key="..\:/anp/abs/app/src/main/res/layout/activity_measurer.xml" value="0.1" />
         <entry key="..\:/anp/abs/app/src/main/res/layout/activity_montage.xml" value="0.1" />
         <entry key="..\:/anp/abs/app/src/main/res/layout/activity_splash.xml" value="0.22447916666666667" />
         <entry key="..\:/anp/abs/app/src/main/res/layout/activity_supplier.xml" value="0.22447916666666667" />
+        <entry key="..\:/anp/abs/app/src/main/res/layout/drawing_item.xml" value="0.22447916666666667" />
         <entry key="..\:/anp/abs/app/src/main/res/layout/file_disegner.xml" value="0.1" />
         <entry key="..\:/anp/abs/app/src/main/res/layout/file_doooooor.xml" value="0.22447916666666667" />
         <entry key="..\:/anp/abs/app/src/main/res/layout/file_door.xml" value="0.22447916666666667" />
         <entry key="..\:/anp/abs/app/src/main/res/layout/fragment_designer.xml" value="0.22447916666666667" />
+        <entry key="..\:/anp/abs/app/src/main/res/layout/fragment_drawings.xml" value="0.25" />
         <entry key="..\:/anp/abs/app/src/main/res/layout/fragment_found_list.xml" value="0.17777777777777778" />
         <entry key="..\:/anp/abs/app/src/main/res/layout/fragment_given_money.xml" value="0.22447916666666667" />
         <entry key="..\:/anp/abs/app/src/main/res/layout/fragment_order.xml" value="0.1" />
@@ -78,9 +84,13 @@
         <entry key="..\:/anp/abs/app/src/main/res/layout/screen_confirm_orders.xml" value="0.22083333333333333" />
         <entry key="..\:/anp/abs/app/src/main/res/layout/screen_orders.xml" value="0.22" />
         <entry key="..\:/anp/abs/app/src/main/res/layout/screen_select_count.xml" value="0.22447916666666667" />
-        <entry key="..\:/anp/abs/app/src/main/res/layout/screen_select_type_order.xml" value="0.22447916666666667" />
-        <entry key="..\:/anp/abs/app/src/main/res/layout/screen_slider.xml" value="0.16" />
+        <entry key="..\:/anp/abs/app/src/main/res/layout/screen_select_type_order.xml" value="0.25" />
+        <entry key="..\:/anp/abs/app/src/main/res/layout/screen_slider.xml" value="0.22" />
         <entry key="..\:/anp/abs/app/src/main/res/layout/section_accessory.xml" value="0.22447916666666667" />
+        <entry key="..\:/anp/abs/app/src/main/res/layout/section_cage.xml" value="0.22447916666666667" />
+        <entry key="..\:/anp/abs/app/src/main/res/layout/section_profile.xml" value="0.22447916666666667" />
+        <entry key="..\:/anp/abs/app/src/main/res/layout/section_shelf.xml" value="0.22447916666666667" />
+        <entry key="..\:/anp/abs/app/src/main/res/layout/section_window.xml" value="0.22447916666666667" />
         <entry key="..\:/anp/abs/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.22447916666666667" />
         <entry key="..\:/anp/abs/app/src/main/res/menu/montage.xml" value="0.22447916666666667" />
         <entry key="..\:/anp/abs/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.117" />
