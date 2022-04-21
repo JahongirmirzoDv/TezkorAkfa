@@ -14,7 +14,7 @@ import uz.algorithmgateway.tezkorakfa.core.util.layoutInflater
 import uz.algorithmgateway.tezkorakfa.databinding.DrawingItemBinding
 import uz.algorithmgateway.tezkorakfa.measurer.ui.select_type.models.Drawing
 
-class DrawingAdapter(var context: Context) : RecyclerView.Adapter<DrawingAdapter.Vh>() {
+class DrawingAdapter(var context: Context,var onpress: onPress) : RecyclerView.Adapter<DrawingAdapter.Vh>() {
     var list = emptyList<Drawing>()
 
     inner class Vh(val itemview: DrawingItemBinding) : RecyclerView.ViewHolder(itemview.root) {
@@ -47,6 +47,9 @@ class DrawingAdapter(var context: Context) : RecyclerView.Adapter<DrawingAdapter
                 .into(itemview.image)
             itemview.size.text = "${drawing.width}*${drawing.heigth}"
             itemview.number.text = drawing.id
+            itemview.root.setOnClickListener {
+                onpress.click(drawing.projet_image_path)
+            }
         }
     }
 
@@ -59,4 +62,8 @@ class DrawingAdapter(var context: Context) : RecyclerView.Adapter<DrawingAdapter
     }
 
     override fun getItemCount(): Int = list.size
+
+    interface onPress{
+        fun click(projetImagePath: String?)
+    }
 }

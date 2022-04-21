@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="10dp"
+    android:id="@+id/root"
     app:cardCornerRadius="15dp">
 
     <LinearLayout
@@ -14,7 +15,7 @@
 
         <ImageView
             android:id="@+id/image"
-            android:scaleType="fitEnd"
+            android:src="@drawable/rasm2"
             android:layout_width="match_parent"
             android:layout_height="100dp" />
 

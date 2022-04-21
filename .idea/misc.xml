@@ -52,7 +52,7 @@
         <entry key="..\:/anp/abs/app/src/main/res/layout/activity_montage.xml" value="0.1" />
         <entry key="..\:/anp/abs/app/src/main/res/layout/activity_splash.xml" value="0.22447916666666667" />
         <entry key="..\:/anp/abs/app/src/main/res/layout/activity_supplier.xml" value="0.22447916666666667" />
-        <entry key="..\:/anp/abs/app/src/main/res/layout/drawing_item.xml" value="0.22447916666666667" />
+        <entry key="..\:/anp/abs/app/src/main/res/layout/drawing_item.xml" value="0.5268505079825835" />
         <entry key="..\:/anp/abs/app/src/main/res/layout/file_disegner.xml" value="0.1" />
         <entry key="..\:/anp/abs/app/src/main/res/layout/file_doooooor.xml" value="0.22447916666666667" />
         <entry key="..\:/anp/abs/app/src/main/res/layout/file_door.xml" value="0.22447916666666667" />
@@ -71,6 +71,7 @@
         <entry key="..\:/anp/abs/app/src/main/res/layout/fragment_purchased.xml" value="0.22447916666666667" />
         <entry key="..\:/anp/abs/app/src/main/res/layout/fragment_supplier.xml" value="0.22447916666666667" />
         <entry key="..\:/anp/abs/app/src/main/res/layout/fragment_tab_layout.xml" value="0.22447916666666667" />
+        <entry key="..\:/anp/abs/app/src/main/res/layout/image_dialog.xml" value="0.22447916666666667" />
         <entry key="..\:/anp/abs/app/src/main/res/layout/item_confirm.xml" value="0.22447916666666667" />
         <entry key="..\:/anp/abs/app/src/main/res/layout/item_found_list_header.xml" value="0.22447916666666667" />
         <entry key="..\:/anp/abs/app/src/main/res/layout/item_order.xml" value="0.5" />
