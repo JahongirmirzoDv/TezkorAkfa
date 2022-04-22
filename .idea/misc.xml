@@ -3,6 +3,20 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Android_studio/Dager Hilt/TezkorAkfa/app/src/main/res/drawable/back_tab_indicator.xml" value="0.1885" />
+        <entry key="..\:/Android_studio/Dager Hilt/TezkorAkfa/app/src/main/res/drawable/back_tab_indicator_confirm_screen.xml" value="0.1885" />
+        <entry key="..\:/Android_studio/Dager Hilt/TezkorAkfa/app/src/main/res/drawable/bg_item_confirmed_orders_add_image.xml" value="0.193" />
+        <entry key="..\:/Android_studio/Dager Hilt/TezkorAkfa/app/src/main/res/drawable/bg_item_table_header.xml" value="0.193" />
+        <entry key="..\:/Android_studio/Dager Hilt/TezkorAkfa/app/src/main/res/drawable/ic_plus_item_conf.xml" value="0.193" />
+        <entry key="..\:/Android_studio/Dager Hilt/TezkorAkfa/app/src/main/res/layout/activity_montage.xml" value="0.25" />
+        <entry key="..\:/Android_studio/Dager Hilt/TezkorAkfa/app/src/main/res/layout/alert_dialog_montage.xml" value="0.264" />
+        <entry key="..\:/Android_studio/Dager Hilt/TezkorAkfa/app/src/main/res/layout/fragment_confirmed_orders.xml" value="0.264" />
+        <entry key="..\:/Android_studio/Dager Hilt/TezkorAkfa/app/src/main/res/layout/fragment_confirmed_orders_image_info.xml" value="0.25" />
+        <entry key="..\:/Android_studio/Dager Hilt/TezkorAkfa/app/src/main/res/layout/fragment_orders.xml" value="0.25" />
+        <entry key="..\:/Android_studio/Dager Hilt/TezkorAkfa/app/src/main/res/layout/fragment_parametr.xml" value="0.25" />
+        <entry key="..\:/Android_studio/Dager Hilt/TezkorAkfa/app/src/main/res/layout/item_confirmed_orders.xml" value="0.4" />
+        <entry key="..\:/Android_studio/Dager Hilt/TezkorAkfa/app/src/main/res/layout/montage_order_item.xml" value="0.25" />
+        <entry key="..\:/Android_studio/Dager Hilt/TezkorAkfa/app/src/main/res/layout/toolbar_montage.xml" value="0.25" />
         <entry key="..\:/Users/jahon/Ishchi stol/TezkorAkfaNew/app/src/main/res/layout/activity_designer.xml" value="0.1" />
         <entry key="..\:/Users/jahon/Ishchi stol/TezkorAkfaNew/app/src/main/res/layout/activity_login.xml" value="0.22447916666666667" />
         <entry key="..\:/Users/jahon/Ishchi stol/TezkorAkfaNew/measurer/src/main/res/layout/activity_measurer.xml" value="0.22447916666666667" />

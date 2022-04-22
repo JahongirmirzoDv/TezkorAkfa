@@ -24,5 +24,26 @@
         android:label="fragment_parametr"
         tools:layout="@layout/fragment_parametr">
 
+        <action
+            android:id="@+id/action_parametrFragment_to_confirmedOrdersFragment"
+            app:destination="@id/confirmedOrdersFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/confirmedOrdersFragment"
+        android:name="uz.algorithmgateway.tezkorakfa.montage.ui.ConfirmedOrdersFragment"
+        android:label="fragment_confirmed_orders"
+        tools:layout="@layout/fragment_confirmed_orders" >
+        <action
+            android:id="@+id/action_confirmedOrdersFragment_to_confirmedOrdersImageInfoFragment"
+            app:destination="@id/confirmedOrdersImageInfoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/confirmedOrdersImageInfoFragment"
+        android:name="uz.algorithmgateway.tezkorakfa.montage.ui.ConfirmedOrdersImageInfoFragment"
+        android:label="fragment_confirmed_orders_image_info"
+        tools:layout="@layout/fragment_confirmed_orders_image_info" >
+        <action
+            android:id="@+id/action_confirmedOrdersImageInfoFragment_to_parametrFragment"
+            app:destination="@id/parametrFragment" />
     </fragment>
 </navigation>
