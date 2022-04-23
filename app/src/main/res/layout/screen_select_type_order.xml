@@ -159,9 +159,26 @@
                     android:id="@+id/layoutAccessory"
                     layout="@layout/section_accessory" />
 
-                <include
-                    android:id="@+id/layoutCage"
-                    layout="@layout/section_cage" />
+                <androidx.cardview.widget.CardView
+                    app:cardCornerRadius="15dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp">
+                    <LinearLayout
+                        android:background="@color/item_bg"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+                        <EditText
+                            android:id="@+id/comment"
+                            android:textAlignment="textStart"
+                            android:padding="10dp"
+                            android:hint="komment"
+                            android:gravity="start"
+                            android:background="@color/pluto___transparent"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"/>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
 
             </androidx.appcompat.widget.LinearLayoutCompat>
 

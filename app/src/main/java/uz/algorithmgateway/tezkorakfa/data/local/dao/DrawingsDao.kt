@@ -13,4 +13,7 @@ interface DrawingsDao {
 
     @Query("select * from drawing")
     fun getAllDrawing(): List<Drawing>
+
+    @Query("delete from drawing")
+    fun delete()
 }

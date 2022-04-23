@@ -14,4 +14,5 @@ class DbRepositoryImpl @Inject constructor(
     override fun updateDrawing(drawing: Drawing) = drawingsDao.updateDrawing(drawing)
 
     override fun getAlldrawing(): List<Drawing> = drawingsDao.getAllDrawing()
+    override fun delete() = drawingsDao.delete()
 }

@@ -15,6 +15,7 @@ import android.os.Bundle
 import android.os.Environment
 import android.os.Handler
 import android.provider.MediaStore
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.PixelCopy
 import android.view.View
@@ -24,7 +25,16 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.gkemon.XMLtoPDF.PdfGenerator
+import com.gkemon.XMLtoPDF.PdfGeneratorListener
+import com.gkemon.XMLtoPDF.model.FailureResponse
+import com.gkemon.XMLtoPDF.model.SuccessResponse
 import com.google.gson.Gson
+import com.karumi.dexter.Dexter
+import com.karumi.dexter.MultiplePermissionsReport
+import com.karumi.dexter.PermissionToken
+import com.karumi.dexter.listener.PermissionRequest
+import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import uz.algorithmgateway.core.util.toast
 import uz.algorithmgateway.tezkorakfa.R
 import uz.algorithmgateway.tezkorakfa.base.MyApplication
@@ -39,6 +49,7 @@ import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
 import java.io.OutputStream
+import java.util.*
 import javax.inject.Inject
 
 
@@ -52,6 +63,7 @@ class SliderScreen : Fragment() {
     private val binding get() = _binding!!
     private val navController by lazy(LazyThreadSafetyMode.NONE) { findNavController() }
     lateinit var dragAndDropListener: Area
+    private val TAG = "SliderScreen"
 
     var lastView: View? = null
     var H: Int = 1300
@@ -75,6 +87,7 @@ class SliderScreen : Fragment() {
         savedInstanceState: Bundle?,
     ): View {
         _binding = ScreenSliderBinding.inflate(inflater, container, false)
+
         return binding.root
     }
 
@@ -97,6 +110,9 @@ class SliderScreen : Fragment() {
             bundle.putString("id", id)
             navController.navigate(R.id.drawingsFragment, bundle)
             verifyStoragePermission(requireActivity())
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                savePdf()
+            }
             getBitmapFromView(binding.view, requireActivity(), callback = {
                 saveBitmap(it, "new api")
             })
@@ -181,9 +197,59 @@ class SliderScreen : Fragment() {
             drawing.projet_image_path = image.toString()
             dbViewmodel.updateDrawing(drawing)
         }
-        saved = bitmap.compress(Bitmap.CompressFormat.PNG, 100, fos)
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, fos)
         fos?.flush()
         fos?.close()
+    }
+
+    @RequiresApi(Build.VERSION_CODES.Q)
+    fun savePdf() {
+        Dexter.withContext(requireContext())
+            .withPermissions(
+                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.ACCESS_NETWORK_STATE
+            ).withListener(object : MultiplePermissionsListener {
+                override fun onPermissionsChecked(report: MultiplePermissionsReport) { /* ... */
+                    PdfGenerator.getBuilder()
+                        .setContext(requireContext())
+                        .fromViewSource()
+                        .fromView(binding.view)
+                        .setFileName("Test-PDF")
+                        .setFolderNameOrPath("k")
+                        .build(object : PdfGeneratorListener() {
+                            override fun onFailure(failureResponse: FailureResponse) {
+                                super.onFailure(failureResponse)
+                                Log.e(TAG, "onFailure: $failureResponse")
+                            }
+
+                            override fun showLog(log: String) {
+                                super.showLog(log)
+                                Log.e(TAG, "log: $log")
+                            }
+
+                            override fun onStartPDFGeneration() {
+                                /*When PDF generation begins to start*/
+                            }
+
+                            override fun onFinishPDFGeneration() {
+                                Log.e(TAG, "finish: finish")
+                            }
+
+                            override fun onSuccess(response: SuccessResponse) {
+                                super.onSuccess(response)
+                                Log.e(TAG, "succes: $response")
+                            }
+                        })
+                }
+
+                override fun onPermissionRationaleShouldBeShown(
+                    permissions: List<PermissionRequest?>?,
+                    token: PermissionToken?,
+                ) { /* ... */
+                }
+            }).check()
+
     }
 
 

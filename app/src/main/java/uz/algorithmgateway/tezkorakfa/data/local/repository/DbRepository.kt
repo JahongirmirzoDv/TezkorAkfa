@@ -9,4 +9,6 @@ interface DbRepository {
     fun updateDrawing(drawing: Drawing)
 
     fun getAlldrawing(): List<Drawing>
+
+    fun delete()
 }
