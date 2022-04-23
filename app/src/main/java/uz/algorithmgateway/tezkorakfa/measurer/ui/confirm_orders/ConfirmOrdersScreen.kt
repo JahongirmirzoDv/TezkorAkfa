@@ -1,17 +1,26 @@
 package uz.algorithmgateway.tezkorakfa.measurer.ui.confirm_orders
 
+import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import uz.algorithmgateway.tezkorakfa.data.models.UiConfirmOrder
 import uz.algorithmgateway.tezkorakfa.R
+import uz.algorithmgateway.tezkorakfa.base.MyApplication
+import uz.algorithmgateway.tezkorakfa.data.models.UiConfirmOrder
 import uz.algorithmgateway.tezkorakfa.databinding.ScreenConfirmOrdersBinding
 import uz.algorithmgateway.tezkorakfa.measurer.SpinnerTextAdapter
+import uz.algorithmgateway.tezkorakfa.measurer.viewmodel.DbViewmodel
+import java.io.File
+import javax.inject.Inject
+
 
 class ConfirmOrdersScreen : Fragment() {
+    @Inject
+    lateinit var viewmodel: DbViewmodel
 
     private var _binding: ScreenConfirmOrdersBinding? = null
     private val binding get() = _binding!!
@@ -20,12 +29,16 @@ class ConfirmOrdersScreen : Fragment() {
 
     private lateinit var adapter: ConfirmOrderListAdapter
     private lateinit var list: ArrayList<UiConfirmOrder>
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        MyApplication.appComponent.confirm(this)
+    }
 
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         _binding = ScreenConfirmOrdersBinding.inflate(inflater, container, false)
         return binding.root
@@ -40,6 +53,11 @@ class ConfirmOrdersScreen : Fragment() {
         loadSpinnerType()
 
         loadConfirmOrderData()
+        createPdf()
+    }
+
+    private fun createPdf() {
+
     }
 
 
@@ -90,5 +108,10 @@ class ConfirmOrdersScreen : Fragment() {
             tabLayoutDate.addTab(tabLayoutDate.newTab().setText("Oy"))
             tabLayoutDate.addTab(tabLayoutDate.newTab().setText("Hafta"))
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        viewmodel.delete()
     }
 }

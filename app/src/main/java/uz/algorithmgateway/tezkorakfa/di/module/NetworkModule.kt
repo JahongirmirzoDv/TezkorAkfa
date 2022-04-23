@@ -8,7 +8,7 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import uz.algorithmgateway.data.retrofit.ApiService
+import uz.algorithmgateway.tezkorakfa.data.retrofit.ApiService
 import javax.inject.Singleton
 
 @Module
@@ -16,7 +16,7 @@ class NetworkModule {
 
     @Provides
     @Singleton
-    fun getApi(): String = "http://164.92.242.166:1337/api/v1/"
+    fun getApi(): String = "http://157.245.62.70:8000/api/v1/"
 
     @Singleton
     @Provides
@@ -42,7 +42,7 @@ class NetworkModule {
             .addInterceptor(PlutoInterceptor())
             .addInterceptor { chain ->
                 val newRequest = chain.request().newBuilder()
-                    .addHeader("Authorization", "Token 5c883bec5202c1cb2a8c7e7f5968898053f5b95c")
+                    .addHeader("Authorization", "Token a65edcc253fc7c0ccda1816dd39c4336a735699e")
                     .build()
                 chain.proceed(newRequest)
             }

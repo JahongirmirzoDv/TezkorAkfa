@@ -96,11 +96,12 @@ class OrderSelectTypeScreen : Fragment() {
                     profile_List[binding.layoutProfile.tabLayoutProfile.selectedTabPosition]
                 val profile_type_two =
                     binding.layoutProfile.spinnerTypeProfile.selectedItem.toString()
-                val profile_texture =
-                    binding.layoutProfile.spinnerTypeTexture.selectedItem.toString()
+                val uiSpinner1 = binding.layoutProfile.spinnerTypeTexture.selectedItem as UISpinner
+                val profile_texture = uiSpinner1.title
                 val mirror_layer =
                     mirror_layer_List[binding.layoutWindow.tabLayoutWindow.selectedTabPosition]
-                val mirror_color = binding.layoutWindow.spinnerWindowColor.selectedItem.toString()
+                val uiSpinner = binding.layoutWindow.spinnerWindowColor.selectedItem as UISpinner
+                val mirror_color = uiSpinner.title
                 val window_sill = shelf_List[binding.layoutShelf.tablayoutShelf.selectedTabPosition]
                 val handle = binding.layoutAccessory.spinnerDastak.selectedItem.toString()
                 val handle_petla = binding.layoutAccessory.spinnerPetla.selectedItem.toString()
@@ -110,9 +111,9 @@ class OrderSelectTypeScreen : Fragment() {
                     type_handle[binding.layoutAccessory.tabLayoutDastak.selectedTabPosition]
                 val handle_petla_type =
                     type_handle[binding.layoutAccessory.tabLayoutPetla.selectedTabPosition]
-                val net = type_cage[binding.layoutCage.tablayoutCage.selectedTabPosition]
+                val net = binding.comment.text.toString()
                 drawing = Drawing(
-                     id,
+                    id,
                     type,
                     external_or_Internal,
                     profile_type,
@@ -144,11 +145,11 @@ class OrderSelectTypeScreen : Fragment() {
     }
 
     private fun loadTabCage() {
-        with(binding.layoutCage) {
-            tablayoutCage.addTab(tablayoutCage.newTab().setText("550- sinax"))
-            tablayoutCage.addTab(tablayoutCage.newTab().setText("544"))
-            tablayoutCage.addTab(tablayoutCage.newTab().setText("Surma"))
-        }
+//        with(binding.layoutCage) {
+//            tablayoutCage.addTab(tablayoutCage.newTab().setText("550- sinax"))
+//            tablayoutCage.addTab(tablayoutCage.newTab().setText("544"))
+//            tablayoutCage.addTab(tablayoutCage.newTab().setText("Surma"))
+//        }
     }
 
     private fun loadTabPetla() {

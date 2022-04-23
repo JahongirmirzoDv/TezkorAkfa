@@ -76,6 +76,15 @@
         android:id="@+id/drawingsFragment"
         android:name="uz.algorithmgateway.tezkorakfa.measurer.ui.drawings.DrawingsFragment"
         android:label="fragment_drawings"
-        tools:layout="@layout/fragment_drawings" />
+        tools:layout="@layout/fragment_drawings" >
+        <action
+            android:id="@+id/action_drawingsFragment_to_savePdfFragment"
+            app:destination="@id/savePdfFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/savePdfFragment"
+        android:name="uz.algorithmgateway.tezkorakfa.measurer.ui.drawings.save_pdf.SavePdfFragment"
+        android:label="fragment_save_pdf"
+        tools:layout="@layout/fragment_save_pdf" />
 
 </navigation>

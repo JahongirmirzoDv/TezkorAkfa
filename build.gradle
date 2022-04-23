@@ -9,7 +9,7 @@ buildscript {
 
         //android
         compilesdk_version = 31
-        minsdk_version = 21
+        minsdk_version = 23
         targetsdk_version = 31
         version_code = 1
         version_name = "1.0"

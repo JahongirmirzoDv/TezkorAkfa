@@ -31,4 +31,10 @@ class DbViewmodel @Inject constructor(
         }
         return list
     }
+
+    fun delete(){
+        viewModelScope.launch {
+            db.drawingsDao.delete()
+        }
+    }
 }

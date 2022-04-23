@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import uz.algorithmgateway.data.api.models.UserRequest
 import uz.algorithmgateway.data.api.models.UserResponse
-import uz.algorithmgateway.data.retrofit.ApiService
+import uz.algorithmgateway.tezkorakfa.data.retrofit.ApiService
 import uz.algorithmgateway.tezkorakfa.data.retrofit.models.sales_order_list.OderList
 import uz.algorithmgateway.tezkorakfa.ui.utils.UIState
 import javax.inject.Inject

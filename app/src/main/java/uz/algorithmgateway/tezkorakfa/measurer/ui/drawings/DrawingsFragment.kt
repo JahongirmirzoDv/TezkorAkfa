@@ -127,7 +127,7 @@ class DrawingsFragment : Fragment(), CoroutineScope {
         }
 
         binding.btnNext.setOnClickListener {
-            findNavController().navigate(R.id.confirmOrdersScreen)
+            findNavController().navigate(R.id.savePdfFragment)
         }
 
         binding.btnBack.setOnClickListener {
