@@ -6,6 +6,7 @@ import retrofit2.http.GET
 import retrofit2.http.POST
 import uz.algorithmgateway.data.api.models.UserRequest
 import uz.algorithmgateway.data.api.models.UserResponse
+import uz.algorithmgateway.tezkorakfa.data.models.profile.Profile
 import uz.algorithmgateway.tezkorakfa.data.retrofit.models.sales_order_list.OderList
 
 interface ApiService {
@@ -15,4 +16,7 @@ interface ApiService {
     @GET("order/order")
     suspend fun salesOrderList(
     ):Response<OderList>
+
+    @GET("warehouse/profil/list")
+    suspend fun getProfile():Response<Profile>
 }

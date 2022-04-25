@@ -4,29 +4,41 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.tabs.TabLayout
 import com.google.gson.Gson
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import uz.algorithmgateway.tezkorakfa.R
 import uz.algorithmgateway.tezkorakfa.base.MyApplication
 import uz.algorithmgateway.tezkorakfa.data.models.UISpinner
+import uz.algorithmgateway.tezkorakfa.data.models.profile.Profile
 import uz.algorithmgateway.tezkorakfa.databinding.ScreenSelectTypeOrderBinding
-import uz.algorithmgateway.tezkorakfa.measurer.SpinnerMultiItemAdapter
 import uz.algorithmgateway.tezkorakfa.measurer.SpinnerTextAdapter
 import uz.algorithmgateway.tezkorakfa.measurer.ui.select_type.models.Drawing
 import uz.algorithmgateway.tezkorakfa.measurer.viewmodel.DbViewmodel
+import uz.algorithmgateway.tezkorakfa.measurer.viewmodel.NetworkViewmodel
 import javax.inject.Inject
+import kotlin.coroutines.CoroutineContext
 
-class OrderSelectTypeScreen : Fragment() {
+class OrderSelectTypeScreen : Fragment(), CoroutineScope {
     @Inject
     lateinit var dbViewmodel: DbViewmodel
+
+    @Inject
+    lateinit var viewmodel: NetworkViewmodel
 
     lateinit var id: String
     private var _binding: ScreenSelectTypeOrderBinding? = null
     private val binding get() = _binding!!
     lateinit var drawing: Drawing
     private val navController by lazy(LazyThreadSafetyMode.NONE) { findNavController() }
-    var profile_List = arrayListOf("Aldoks", "PVH", "Exclusive")
+    var profile_List: Profile? = null
     var mirror_layer_List = arrayListOf("1-qavat", "2-qavat")
     var shelf_List = arrayListOf("Universal", "Elita", "Lux")
     var type_handle = arrayListOf("Rom", "Eshik")
@@ -54,30 +66,82 @@ class OrderSelectTypeScreen : Fragment() {
         binding.projectId.text = "Loyiha $id"
         backClick()
         loadSpinnerDoorOrWindow()
-
-        //profi
-        loadTabProfilData()
-        loadSpinnerProfilType()
-        loadSpinnerTextureType()
-
-        //window
-        loadTabWindowData()
-        loadSpinnerWindowType()
-
-        //shelf
-        loadTabShelfData()
-
-        //accessory
-        loadSpinnerAccessoryTexture()
-        loadSpinnerAccessoryDastak()
-        loadSpinnerAccessoryPetla()
-        loadTabDastak()
-        loadTabPetla()
-
-        //cage
-        loadTabCage()
+        profile()
 
         navigateButton()
+    }
+
+    private fun profile() {
+        launch(Dispatchers.Main) {
+            viewmodel.order.collect {profile->
+                val profileType = ArrayList<String>()
+                val spinnerProfile = ArrayList<String>()
+                val spinnerTexture = ArrayList<String>()
+                profile?.results?.forEach { profile2 ->
+                    profileType.add(profile2.name)
+                }
+                binding.layoutProfile.apply {
+                    profileType.forEach {
+                        tabLayoutProfile.addTab(tabLayoutProfile.newTab().setText(it))
+                    }
+
+                    profile?.results?.get(0)?.type?.forEach {
+                        spinnerProfile.add(it.name)
+                    }
+                    val spinnerProfileAdapter = SpinnerTextAdapter(requireContext())
+                    spinnerProfileAdapter.list = spinnerProfile
+                    spinnerTypeProfile.adapter = spinnerProfileAdapter
+
+                    tabLayoutProfile.addOnTabSelectedListener(object :TabLayout.OnTabSelectedListener{
+                        override fun onTabSelected(tab: TabLayout.Tab?) {
+                            spinnerProfile.clear()
+                            profile?.results?.get(tab?.position ?: 0)?.type?.forEach {
+                                spinnerProfile.add(it.name)
+                            }
+                            spinnerProfileAdapter.list = spinnerProfile
+                            spinnerProfileAdapter.notifyDataSetChanged()
+
+                            profile?.results?.get(0)?.type?.forEach {
+                                spinnerProfile.add(it.raw_material[0].name)
+                            }
+                            val spinnerTextureAdapter = SpinnerTextAdapter(requireContext())
+                            spinnerTextureAdapter.list = spinnerTexture
+                            spinnerTypeTexture.adapter = spinnerTextureAdapter
+                            spinnerTypeProfile.onItemSelectedListener = object :AdapterView.OnItemSelectedListener{
+                                override fun onItemSelected(
+                                    parent: AdapterView<*>?,
+                                    view: View?,
+                                    position: Int,
+                                    id: Long,
+                                ) {
+                                    spinnerTexture.clear()
+                                    profile?.results?.get(tab?.position ?: 0)?.type?.forEach {
+                                        spinnerTexture.add(it.raw_material[position].name)
+                                    }
+                                    spinnerTextureAdapter.list = spinnerTexture
+                                    spinnerTextureAdapter.notifyDataSetChanged()
+                                }
+
+                                override fun onNothingSelected(parent: AdapterView<*>?) {
+
+                                }
+
+                            }
+                        }
+
+                        override fun onTabUnselected(tab: TabLayout.Tab?) {
+
+                        }
+
+                        override fun onTabReselected(tab: TabLayout.Tab?) {
+
+                        }
+                    })
+
+
+                }
+            }
+        }
     }
 
     private fun navigateButton() {
@@ -93,7 +157,7 @@ class OrderSelectTypeScreen : Fragment() {
                     }
                 }
                 val profile_type =
-                    profile_List[binding.layoutProfile.tabLayoutProfile.selectedTabPosition]
+                    profile_List?.results?.get(binding.layoutProfile.tabLayoutProfile.selectedTabPosition)?.name
                 val profile_type_two =
                     binding.layoutProfile.spinnerTypeProfile.selectedItem.toString()
                 val uiSpinner1 = binding.layoutProfile.spinnerTypeTexture.selectedItem as UISpinner
@@ -144,121 +208,10 @@ class OrderSelectTypeScreen : Fragment() {
 
     }
 
-    private fun loadTabCage() {
-//        with(binding.layoutCage) {
-//            tablayoutCage.addTab(tablayoutCage.newTab().setText("550- sinax"))
-//            tablayoutCage.addTab(tablayoutCage.newTab().setText("544"))
-//            tablayoutCage.addTab(tablayoutCage.newTab().setText("Surma"))
-//        }
-    }
-
-    private fun loadTabPetla() {
-        with(binding.layoutAccessory) {
-            tabLayoutPetla.addTab(tabLayoutPetla.newTab().setText("Rom"))
-            tabLayoutPetla.addTab(tabLayoutPetla.newTab().setText("Eshik"))
-        }
-    }
-
-    private fun loadTabDastak() {
-        with(binding.layoutAccessory) {
-            tabLayoutDastak.addTab(tabLayoutDastak.newTab().setText("Rom"))
-            tabLayoutDastak.addTab(tabLayoutDastak.newTab().setText("Eshik"))
-        }
-    }
-
-    private fun loadSpinnerAccessoryPetla() {
-        val adapter = SpinnerTextAdapter(requireContext(), listSpPetlaData(), true)
-        binding.layoutAccessory.spinnerPetla.adapter = adapter
-    }
-
-    private fun listSpPetlaData(): List<String> {
-        return arrayListOf<String>(
-            "Akfa 28 fornax",
-            "Akfa 28 fornax",
-            "Akfa 28 fornax"
-        )
-    }
-
-    private fun loadSpinnerAccessoryDastak() {
-        val adapter = SpinnerTextAdapter(requireContext(), listSpDastakData(), true)
-        binding.layoutAccessory.spinnerDastak.adapter = adapter
-    }
-
-    private fun listSpDastakData(): List<String> {
-        return arrayListOf<String>(
-            "Akfa 28 fornax",
-            "Akfa 28 fornax",
-            "Akfa 28 fornax"
-        )
-    }
-
-    private fun loadSpinnerAccessoryTexture() {
-        val adapter = SpinnerMultiItemAdapter(requireContext(), listAccessoryColorData())
-        binding.layoutAccessory.spinnerTypeTexture.adapter = adapter
-    }
-
-    private fun listAccessoryColorData(): List<UISpinner> {
-        return arrayListOf<UISpinner>(
-            UISpinner(R.drawable.wood, "Zolotoy dub"),
-            UISpinner(R.drawable.wood, "Zolotoy dub"),
-            UISpinner(R.drawable.wood, "Zolotoy dub")
-        )
-    }
-
-    private fun loadTabShelfData() {
-        with(binding.layoutShelf) {
-            tablayoutShelf.addTab(tablayoutShelf.newTab().setText("Universal"))
-            tablayoutShelf.addTab(tablayoutShelf.newTab().setText("Elita"))
-            tablayoutShelf.addTab(tablayoutShelf.newTab().setText("Lux"))
-
-        }
-    }
-
-    private fun loadSpinnerWindowType() {
-        val adapter = SpinnerMultiItemAdapter(requireContext(), listWindowColorData())
-        binding.layoutWindow.spinnerWindowColor.adapter = adapter
-    }
-
-    private fun loadTabWindowData() {
-        with(binding.layoutWindow) {
-            tabLayoutWindow.addTab(tabLayoutWindow.newTab().setText("1-qavat"))
-            tabLayoutWindow.addTab(tabLayoutWindow.newTab().setText("2-qavat"))
-
-        }
-    }
-
-    private fun loadSpinnerTextureType() {
-        val adapter = SpinnerMultiItemAdapter(requireContext(), listProfiTextureData())
-        binding.layoutProfile.spinnerTypeTexture.adapter = adapter
-    }
-
-    private fun listProfiTextureData() = arrayListOf<UISpinner>(
-        UISpinner(R.drawable.wood, "Zolotoy dub"),
-        UISpinner(R.drawable.wood, "Kumush dub"),
-        UISpinner(R.drawable.wood, "Bronza dub"),
-        UISpinner(R.drawable.wood, "Zolotoy dub"),
-    )
-
-    private fun listWindowColorData() = arrayListOf<UISpinner>(
-        UISpinner(R.drawable.ic_windows, "Yodoviy"),
-        UISpinner(R.drawable.ic_windows, "Yodoviy"),
-        UISpinner(R.drawable.ic_windows, "Yodoviy")
-    )
-
-
-    private fun loadSpinnerProfilType() {
-        val adapter = SpinnerTextAdapter(requireContext(), listProfiTypeData(), true)
-        binding.layoutProfile.spinnerTypeProfile.adapter = adapter
-    }
-
-    private fun listProfiTypeData() = arrayListOf<String>(
-        "7000 Engelberg",
-        "7200 Engelberg",
-        "7400 Engelberg"
-    )
 
     private fun loadSpinnerDoorOrWindow() {
-        val adapter = SpinnerTextAdapter(requireContext(), listDoorOrWindowData(), false)
+        val adapter = SpinnerTextAdapter(requireContext())
+        adapter.list = listDoorOrWindowData()
         binding.spinnerRoomOrDoor.adapter = adapter
     }
 
@@ -273,12 +226,7 @@ class OrderSelectTypeScreen : Fragment() {
         }
     }
 
-    private fun loadTabProfilData() {
-        with(binding.layoutProfile) {
-            tabLayoutProfile.addTab(tabLayoutProfile.newTab().setText("Aldoks"))
-            tabLayoutProfile.addTab(tabLayoutProfile.newTab().setText("PVH"))
-            tabLayoutProfile.addTab(tabLayoutProfile.newTab().setText("Exclusive"))
 
-        }
-    }
+    override val coroutineContext: CoroutineContext
+        get() = Job()
 }

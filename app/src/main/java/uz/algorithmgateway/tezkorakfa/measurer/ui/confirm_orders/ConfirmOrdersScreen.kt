@@ -92,7 +92,8 @@ class ConfirmOrdersScreen : Fragment() {
     }
 
     private fun loadSpinnerType() {
-        val adapter = SpinnerTextAdapter(requireContext(), listProfiTypeData(), false)
+        val adapter = SpinnerTextAdapter(requireContext())
+        adapter.list = listProfiTypeData()
         binding.spinnerType.adapter = adapter
     }
 
