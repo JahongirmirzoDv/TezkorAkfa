@@ -175,6 +175,7 @@ class SavePdfFragment : Fragment(), CoroutineScope {
         super.onDestroyView()
         viewmodel.delete()
     }
+
     override val coroutineContext: CoroutineContext
         get() = Job()
 }
