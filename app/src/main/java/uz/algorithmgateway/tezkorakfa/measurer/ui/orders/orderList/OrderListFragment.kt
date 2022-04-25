@@ -3,7 +3,6 @@ package uz.algorithmgateway.tezkorakfa.measurer.ui.orders.orderList
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,6 +22,7 @@ import uz.algorithmgateway.tezkorakfa.databinding.FragmentTabLayoutBinding
 import uz.algorithmgateway.tezkorakfa.measurer.ui.orders.OrderListAdapter
 import uz.algorithmgateway.tezkorakfa.ui.login.viewmodel.LoginViewModel
 import uz.algorithmgateway.tezkorakfa.ui.utils.UIState
+import uz.algorithmgateway.tezkorakfa.utils.NetworkConnectionLiveData
 import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
 
@@ -31,6 +31,9 @@ class OrderListFragment(
 ) : Fragment(), CoroutineScope {
     @Inject
     lateinit var loginViewModel: LoginViewModel
+
+    @Inject
+    lateinit var networkConnectionLiveData: NetworkConnectionLiveData
 
     private lateinit var adapter: OrderListAdapter
 
@@ -45,40 +48,53 @@ class OrderListFragment(
         MyApplication.appComponent.orders(this)
         _binding = FragmentTabLayoutBinding.inflate(inflater, container, false)
 
-        launch(Dispatchers.Main) {
-            loginViewModel.getOrder()
-            loginViewModel.order.collect { list ->
-                when (list) {
-                    is UIState.Loading -> {
 
-                    }
-                    is UIState.Error -> {
-                        toast(list.message)
-                    }
-                    is UIState.Success -> {
-                        adapter = OrderListAdapter(
-                            object : OrderListAdapter.onClick {
-                                override fun onCallClick(number: String) {
-                                    val uri = Uri.parse("tel: $number")
-                                    val intent = Intent(Intent.ACTION_DIAL, uri)
-                                    requireActivity().startActivity(intent)
+        networkConnectionLiveData.observe(requireActivity()) {
+            if (it) {
+                launch(Dispatchers.Main) {
+                    try {
+                        loginViewModel.getOrder()
+                        loginViewModel.order.collect { list ->
+                            when (list) {
+                                is UIState.Loading -> {
+
                                 }
+                                is UIState.Error -> {
+                                    toast(list.message)
+                                }
+                                is UIState.Success -> {
+                                    adapter = OrderListAdapter(
+                                        object : OrderListAdapter.onClick {
+                                            override fun onCallClick(number: String) {
+                                                val uri = Uri.parse("tel: $number")
+                                                val intent = Intent(Intent.ACTION_DIAL, uri)
+                                                requireActivity().startActivity(intent)
+                                            }
 
-                                override fun onAcceptClick(item: Result) {
-                                    val bundle = Bundle()
-                                    val toJson = Gson().toJson(item)
-                                    bundle.putString("item", toJson)
-                                    findNavController().navigate(R.id.acceptOrderScreen, bundle)
+                                            override fun onAcceptClick(item: Result) {
+                                                val bundle = Bundle()
+                                                val toJson = Gson().toJson(item)
+                                                bundle.putString("item", toJson)
+                                                findNavController().navigate(R.id.acceptOrderScreen,
+                                                    bundle)
+                                            }
+                                        }
+                                    )
+                                    binding.rvOrders.adapter = adapter
+                                    adapter.updateList(list.data?.results ?: emptyList())
+                                    binding.progress.visibility = View.GONE
                                 }
                             }
-                        )
-                        binding.rvOrders.adapter = adapter
-                        adapter.updateList(list.data?.results ?: emptyList())
+                        }
+                    } catch (e: Exception) {
+                        e.printStackTrace()
                     }
                 }
+
+            } else {
+                binding.progress.visibility = View.VISIBLE
             }
         }
-
         return binding.root
     }
 

@@ -18,7 +18,6 @@ class MeasurerActivity : AppCompatActivity(), CoroutineScope {
         super.onCreate(savedInstanceState)
         binding = ActivityMeasurerBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
     }
 
 
@@ -37,6 +36,4 @@ class MeasurerActivity : AppCompatActivity(), CoroutineScope {
 //            back = false
 //        }, 2000)
 //    }
-
-
 }

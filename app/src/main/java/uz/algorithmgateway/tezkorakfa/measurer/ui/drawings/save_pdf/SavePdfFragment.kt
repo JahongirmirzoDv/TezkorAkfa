@@ -3,13 +3,11 @@ package uz.algorithmgateway.tezkorakfa.measurer.ui.drawings.save_pdf
 import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Context
-import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.pdf.PdfDocument
 import android.os.Bundle
 import android.os.Environment
 import android.print.PrintAttributes
-import android.print.PrintManager
 import android.print.pdf.PrintedPdfDocument
 import android.util.Log
 import android.view.LayoutInflater
@@ -25,7 +23,6 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import uz.algorithmgateway.core.util.toast
-import uz.algorithmgateway.tezkorakfa.R
 import uz.algorithmgateway.tezkorakfa.base.MyApplication
 import uz.algorithmgateway.tezkorakfa.databinding.FragmentSavePdfBinding
 import uz.algorithmgateway.tezkorakfa.measurer.ui.drawings.adapters.PdfAdapter
@@ -74,16 +71,12 @@ class SavePdfFragment : Fragment(), CoroutineScope {
                 adapter.list = it
                 adapter.notifyDataSetChanged()
             }
-//            savePdf()
-
         }
         loadPdf()
-
         return binding.root
     }
 
     private fun loadPdf() {
-
         binding.save.setOnClickListener {
             if (booleanPermission) {
                 try {
@@ -102,13 +95,13 @@ class SavePdfFragment : Fragment(), CoroutineScope {
 //                    shareIntent.type = "application/pdf"
 //                    startActivity(Intent.createChooser(shareIntent, getString(R.string.share)))
                 } catch (e: Exception) {
+                    Log.e("eror", "loadPdf: ${e.message}")
 //                    mainListener?.showError("Please try again") {}
                 }
             } else {
                 requestPermission()
             }
         }
-
         requestPermission()
     }
 
@@ -142,18 +135,27 @@ class SavePdfFragment : Fragment(), CoroutineScope {
         val document: PdfDocument = PrintedPdfDocument(requireContext(), printAttrs)
         // crate a page description
         // crate a page description
-        val pageInfo = PdfDocument.PageInfo.Builder(binding?.rootView!!.width, 1000, 1).create()
+        val pageInfo = PdfDocument.PageInfo.Builder(binding.rootView.width, binding.rootView.height, 1).create()
         // create a new page from the PageInfo
         // create a new page from the PageInfo
         val page = document.startPage(pageInfo)
         // repaint the user's text into the page
         // repaint the user's text into the page
-        val content: ViewGroup = binding!!.rootView
+        val content: ViewGroup = binding.rootView
         content.draw(page.canvas)
         // do final processing of the page
         // do final processing of the page
         document.finishPage(page)
         // Here you could add more pages in a longer doc app, but you'd have
+        // to handle page-breaking yourself in e.g., write your own word processor...
+        // Now write the PDF document to a file; it actually needs to be a file
+        // since the Share mechanism can't accept a byte[]. though it can
+        // accept a String/CharSequence. Meh.
+        // Here you could add more pages in a longer doc app, but you'd have
+        // to handle page-breaking yourself in e.g., write your own word processor...
+        // Now write the PDF document to a file; it actually needs to be a file
+        // since the Share mechanism can't accept a byte[]. though it can
+        // accept a String/CharSequence. Meh.
         try {
             val f = File(
                 Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
@@ -166,12 +168,13 @@ class SavePdfFragment : Fragment(), CoroutineScope {
         } catch (e: IOException) {
             throw RuntimeException("Error generating file", e)
         }
+
     }
 
-
-
-
-
+    override fun onDestroyView() {
+        super.onDestroyView()
+        viewmodel.delete()
+    }
     override val coroutineContext: CoroutineContext
         get() = Job()
 }
