@@ -1,14 +1,7 @@
 package uz.algorithmgateway.tezkorakfa.measurer.ui
 
-import android.Manifest
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import com.karumi.dexter.Dexter
-import com.karumi.dexter.MultiplePermissionsReport
-import com.karumi.dexter.PermissionToken
-import com.karumi.dexter.listener.PermissionRequest
-import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import uz.algorithmgateway.tezkorakfa.databinding.ActivityMeasurerBinding
@@ -25,19 +18,6 @@ class MeasurerActivity : AppCompatActivity(), CoroutineScope {
         super.onCreate(savedInstanceState)
         binding = ActivityMeasurerBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        Dexter.withContext(this)
-            .withPermissions(
-                Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                Manifest.permission.READ_EXTERNAL_STORAGE
-            ).withListener(object : MultiplePermissionsListener {
-                override fun onPermissionsChecked(report: MultiplePermissionsReport) { /* ... */
-                }
-                override fun onPermissionRationaleShouldBeShown(
-                    permissions: List<PermissionRequest?>?,
-                    token: PermissionToken?,
-                ) { /* ... */
-                }
-            }).check()
     }
 
 
@@ -56,6 +36,4 @@ class MeasurerActivity : AppCompatActivity(), CoroutineScope {
 //            back = false
 //        }, 2000)
 //    }
-
-
 }

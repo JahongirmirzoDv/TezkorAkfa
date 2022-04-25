@@ -38,7 +38,8 @@ class NetworkModule {
     @Provides
     fun provideOkhttpClient(httpLoggingInterceptor: HttpLoggingInterceptor): OkHttpClient {
         val okHttpClient = OkHttpClient.Builder()
-        return okHttpClient
+        return okHttpClient.addInterceptor(httpLoggingInterceptor)
+            .addInterceptor(PlutoInterceptor())
             .addInterceptor { chain ->
                 val newRequest = chain.request().newBuilder()
                     .addHeader("Authorization", "Token a65edcc253fc7c0ccda1816dd39c4336a735699e")

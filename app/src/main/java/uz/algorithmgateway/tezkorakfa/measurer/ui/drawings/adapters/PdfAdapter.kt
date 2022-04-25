@@ -16,7 +16,7 @@ import uz.algorithmgateway.tezkorakfa.measurer.ui.select_type.models.Drawing
 
 class PdfAdapter(var context: Context) : RecyclerView.Adapter<PdfAdapter.Vh>() {
 
-     var list: List<Drawing> = emptyList()
+    var list: List<Drawing> = emptyList()
 
     inner class Vh(val itemview: PdfItemBinding) : RecyclerView.ViewHolder(itemview.root) {
         @SuppressLint("SetTextI18n")
@@ -53,7 +53,6 @@ class PdfAdapter(var context: Context) : RecyclerView.Adapter<PdfAdapter.Vh>() {
             itemview.podokonnikD.text = "${drawing.window_sill} "
             itemview.aksesuarD.text =
                 "${drawing.handle_type}(${drawing.handle}) ${drawing.handle_petla_type}(${drawing.handle_petla})"
-            itemview.commentD.text = drawing.net
         }
     }
 
