@@ -69,6 +69,4 @@ class Mullion @JvmOverloads constructor(
             drawRect(0f, 0f, width.toFloat(), height.toFloat(), WindowDoorDesigner.paintStroke)
         }
     }
-
-
 }
