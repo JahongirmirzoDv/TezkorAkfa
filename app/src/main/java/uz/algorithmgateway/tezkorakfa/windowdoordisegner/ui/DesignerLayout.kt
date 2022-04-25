@@ -32,8 +32,8 @@ class DesignerLayout @JvmOverloads constructor(
 
     }
 
-    fun setFunctionOnSizeViewClick(function:()->Unit) {
-        onSizeViewClick =function
+    fun setFunctionOnSizeViewClick(function: () -> Unit) {
+        onSizeViewClick = function
     }
 
     fun setW(number: Int?) {

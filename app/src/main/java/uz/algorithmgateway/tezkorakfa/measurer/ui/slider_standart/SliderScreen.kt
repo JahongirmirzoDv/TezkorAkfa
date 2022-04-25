@@ -115,8 +115,14 @@ class SliderScreen : Fragment() {
             toast("Chizma galareyaga saqlandi")
         }
 
-        binding.floatingBack.setOnClickListener {
-            navController.navigateUp()
+        binding.apply {
+            floatingBack.setOnClickListener {
+                navController.navigateUp()
+            }
+            clear.setOnClickListener {
+                dragAndDropListener.clearView()
+            }
+
         }
     }
 
@@ -127,11 +133,14 @@ class SliderScreen : Fragment() {
             val locationOfViewInWindow = IntArray(2)
             view.getLocationInWindow(locationOfViewInWindow)
             try {
-                PixelCopy.request(window,
-                    Rect(locationOfViewInWindow[0],
+                PixelCopy.request(
+                    window,
+                    Rect(
+                        locationOfViewInWindow[0],
                         locationOfViewInWindow[1],
                         locationOfViewInWindow[0] + view.width,
-                        locationOfViewInWindow[1] + view.height),
+                        locationOfViewInWindow[1] + view.height
+                    ),
                     bitmap,
                     { copyResult ->
                         if (copyResult == PixelCopy.SUCCESS) {
@@ -139,7 +148,8 @@ class SliderScreen : Fragment() {
                         }
                         // possible to handle other result codes ...
                     },
-                    Handler())
+                    Handler()
+                )
             } catch (e: IllegalArgumentException) {
                 // PixelCopy may throw IllegalArgumentException, make sure to handle it
                 e.printStackTrace()
@@ -149,14 +159,18 @@ class SliderScreen : Fragment() {
 
     private val PERMISSION_STORAGE = arrayOf(
         Manifest.permission.READ_EXTERNAL_STORAGE,
-        Manifest.permission.WRITE_EXTERNAL_STORAGE)
+        Manifest.permission.WRITE_EXTERNAL_STORAGE
+    )
 
     fun verifyStoragePermission(activity: Activity) {
-        val permission = ActivityCompat.checkSelfPermission(requireContext(),
-            Manifest.permission.WRITE_EXTERNAL_STORAGE)
+        val permission = ActivityCompat.checkSelfPermission(
+            requireContext(),
+            Manifest.permission.WRITE_EXTERNAL_STORAGE
+        )
         if (permission != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(
-                activity, PERMISSION_STORAGE, 1)
+                activity, PERMISSION_STORAGE, 1
+            )
         }
     }
 
@@ -180,7 +194,8 @@ class SliderScreen : Fragment() {
             dbViewmodel.updateDrawing(drawing)
         } else {
             val imagesDir = Environment.getExternalStoragePublicDirectory(
-                Environment.DIRECTORY_DCIM).toString() + File.separator + "Camera"
+                Environment.DIRECTORY_DCIM
+            ).toString() + File.separator + "Camera"
             val file = File(imagesDir)
             if (!file.exists()) {
                 file.mkdir()

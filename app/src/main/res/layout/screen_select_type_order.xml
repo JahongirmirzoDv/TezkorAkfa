@@ -17,10 +17,10 @@
             android:layout_height="56dp">
 
             <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/project_id"
                 style="@style/TextView.Toolbar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/project_id"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -59,6 +59,7 @@
                 android:layout_marginStart="@dimen/margin_hint_from_tv"
                 android:text="@string/door_window"
                 android:textColor="@color/color_light_text"
+                android:textSize="@dimen/default_text_size"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -66,11 +67,12 @@
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/layoutRoomSpinner"
                 android:layout_width="@dimen/border_width"
-                android:layout_height="@dimen/size_fifty"
-                android:layout_marginTop="@dimen/margin_seven"
+                android:layout_height="0dp"
+                android:layout_marginTop="0dp"
                 app:cardBackgroundColor="@color/layout_light"
                 app:cardCornerRadius="@dimen/item_space_middle"
                 app:cardElevation="@dimen/card_elevation_3"
+                app:layout_constraintHeight_percent="0.028"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/textViewRoom"
                 app:layout_constraintWidth_percent="0.4">
@@ -99,16 +101,19 @@
             </com.google.android.material.card.MaterialCardView>
 
             <RadioGroup
-                style="@style/RadioGroup.Custom"
                 android:id="@+id/radio_group"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
+                style="@style/RadioGroup.Custom"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:gravity="center"
+                android:layout_marginStart="@dimen/default_item_space"
                 android:orientation="horizontal"
                 app:layout_constraintBottom_toBottomOf="@id/layoutRoomSpinner"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHeight_percent="0.03"
                 app:layout_constraintStart_toEndOf="@id/layoutRoomSpinner"
-                app:layout_constraintTop_toTopOf="@id/layoutRoomSpinner">
+                app:layout_constraintTop_toTopOf="@id/layoutRoomSpinner"
+                app:layout_constraintWidth_percent="0.6">
 
                 <RadioButton
                     android:id="@+id/radioOut"
@@ -120,7 +125,7 @@
                     android:checked="true"
                     android:padding="@dimen/item_space_min"
                     android:text="@string/to_out"
-                    android:textSize="@dimen/text_size_twenty" />
+                    android:textSize="@dimen/default_text_size" />
 
                 <RadioButton
                     android:id="@+id/radioIn"
@@ -131,7 +136,7 @@
                     android:button="@drawable/circle_radio_button"
                     android:padding="@dimen/item_space_min"
                     android:text="@string/to_in_house"
-                    android:textSize="@dimen/text_size_twenty" />
+                    android:textSize="@dimen/default_text_size" />
 
             </RadioGroup>
 
@@ -160,23 +165,25 @@
                     layout="@layout/section_accessory" />
 
                 <androidx.cardview.widget.CardView
-                    app:cardCornerRadius="15dp"
-                    android:layout_marginTop="15dp"
                     android:layout_width="match_parent"
-                    android:layout_height="100dp">
+                    android:layout_height="100dp"
+                    android:layout_marginTop="15dp"
+                    app:cardCornerRadius="15dp">
+
                     <LinearLayout
-                        android:background="@color/item_bg"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:layout_height="match_parent"
+                        android:background="@color/item_bg">
+
                         <EditText
                             android:id="@+id/comment"
-                            android:textAlignment="textStart"
-                            android:padding="10dp"
-                            android:hint="komment"
-                            android:gravity="start"
-                            android:background="@color/pluto___transparent"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"/>
+                            android:layout_height="match_parent"
+                            android:background="@color/pluto___transparent"
+                            android:gravity="start"
+                            android:hint="komment"
+                            android:padding="10dp"
+                            android:textAlignment="textStart" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
 

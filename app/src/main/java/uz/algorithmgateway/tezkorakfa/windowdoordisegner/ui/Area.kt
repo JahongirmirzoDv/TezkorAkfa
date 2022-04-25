@@ -11,7 +11,6 @@ import android.os.Build
 import android.os.Environment
 import android.provider.MediaStore
 import android.util.AttributeSet
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.LinearLayout
@@ -122,6 +121,17 @@ class Area @JvmOverloads constructor(
         saveImage?.let { saveBitmap(it, "rasm") }
     }
 
+    fun clearView() {
+//        val layoutParams = LayoutParams(
+//            LayoutParams.MATCH_PARENT,
+//            LayoutParams.WRAP_CONTENT
+//        )
+//        childLayout?.setLayoutParams(layoutParams)
+//        childLayout?.addView(viewer)
+//        removeView(childLayout)
+//        childLayout?.addView(childLayout, childLayout?.layoutParams)
+    }
+
     private fun saveImage(view: View): Bitmap {
         val specWidth =
             View.MeasureSpec.makeMeasureSpec(1324, View.MeasureSpec.AT_MOST)
@@ -152,7 +162,8 @@ class Area @JvmOverloads constructor(
             fos = imageUri?.let { resolver.openOutputStream(it) }
         } else {
             val imagesDir = Environment.getExternalStoragePublicDirectory(
-                Environment.DIRECTORY_DCIM).toString() + File.separator + "Camera"
+                Environment.DIRECTORY_DCIM
+            ).toString() + File.separator + "Camera"
             val file = File(imagesDir)
             if (!file.exists()) {
                 file.mkdir()
