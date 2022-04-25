@@ -18,6 +18,7 @@ import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.github.drjacky.imagepicker.ImagePicker
 import com.google.gson.Gson
+import uz.algorithmgateway.core.util.toast
 import uz.algorithmgateway.tezkorakfa.R
 import uz.algorithmgateway.tezkorakfa.data.retrofit.models.sales_order_list.Result
 import uz.algorithmgateway.tezkorakfa.databinding.ScreenAcceptOrderBinding
@@ -34,8 +35,6 @@ class AcceptOrderScreen : Fragment() {
     private var mCameraUri: Uri? = null
     private var filePath: String? = null
     private val sharedPref by lazy { SharedPref(requireContext()) }
-
-    private val navController by lazy(LazyThreadSafetyMode.NONE) { findNavController() }
 
     private val cameraLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
@@ -133,17 +132,18 @@ class AcceptOrderScreen : Fragment() {
         binding.btnNext.setOnClickListener {
             val bundle = Bundle()
             bundle.putString("id",item.id.toString())
-            navController.navigate(R.id.orderSelectType,bundle)
+            findNavController().navigate(R.id.orderSelectType,bundle)
         }
 
         binding.btnBack.setOnClickListener {
-            navController.navigateUp()
+            findNavController().navigateUp()
         }
     }
 
     private fun goToLocation() {
         binding.editTextAddress.setOnClickListener {
-            navController.navigate(R.id.locationScreen)
+            toast("salom")
+            findNavController().navigate(R.id.locationScreen)
         }
 
         binding.imageLocation.setOnClickListener {
@@ -152,7 +152,7 @@ class AcceptOrderScreen : Fragment() {
 
     private fun clickBack() {
         binding.imageBack.setOnClickListener {
-            navController.navigateUp()
+            findNavController().navigateUp()
         }
     }
 }

@@ -10,7 +10,7 @@ data class Drawing(
     var id: String,
     var type: String,
     var external_or_internal: String,
-    var profile_type: String,
+    var profile_type: String?,
     var profile_type_two: String,
     var profile_texture: String,
     var mirror_layer: String,

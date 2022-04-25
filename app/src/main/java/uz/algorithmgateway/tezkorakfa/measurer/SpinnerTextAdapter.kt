@@ -11,8 +11,12 @@ import androidx.annotation.RequiresApi
 import uz.algorithmgateway.tezkorakfa.R
 import uz.algorithmgateway.tezkorakfa.databinding.ItemSpinnerBinding
 
-class SpinnerTextAdapter(private val context: Context, private val list: List<String>, private val temp:Boolean) :
+class SpinnerTextAdapter(var context: Context) :
     BaseAdapter() {
+    var list: List<String> = emptyList()
+    var temp: Boolean = false
+
+
     override fun getCount(): Int {
         return list.size
     }
@@ -33,8 +37,8 @@ class SpinnerTextAdapter(private val context: Context, private val list: List<St
         binding.textViewSpinner.text = list[position]
 
         /**
-      temp -> spinnerni card ichida joylashgan yoki joylashmaganiga qarab,
-      uni o`ziga va itemiga backround berish
+        temp -> spinnerni card ichida joylashgan yoki joylashmaganiga qarab,
+        uni o`ziga va itemiga backround berish
          */
 
         if (temp) {

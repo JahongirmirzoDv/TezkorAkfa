@@ -9,6 +9,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import uz.algorithmgateway.tezkorakfa.data.retrofit.ApiService
+import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
 @Module
@@ -46,6 +47,7 @@ class NetworkModule {
                     .build()
                 chain.proceed(newRequest)
             }
+            .connectTimeout(60,TimeUnit.SECONDS)
             .build()
     }
 

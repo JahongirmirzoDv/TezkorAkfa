@@ -104,6 +104,9 @@ dependencies {
 
 //    implementation 'com.karumi:dexter:6.2.3'
 
+    //lottie
+    implementation "com.airbnb.android:lottie:3.4.0"
+
 
 
 }
