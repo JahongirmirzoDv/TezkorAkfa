@@ -18,10 +18,6 @@ import android.view.ViewGroup
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import com.gkemon.XMLtoPDF.PdfGenerator
-import com.gkemon.XMLtoPDF.PdfGeneratorListener
-import com.gkemon.XMLtoPDF.model.FailureResponse
-import com.gkemon.XMLtoPDF.model.SuccessResponse
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -158,15 +154,6 @@ class SavePdfFragment : Fragment(), CoroutineScope {
         // do final processing of the page
         document.finishPage(page)
         // Here you could add more pages in a longer doc app, but you'd have
-        // to handle page-breaking yourself in e.g., write your own word processor...
-        // Now write the PDF document to a file; it actually needs to be a file
-        // since the Share mechanism can't accept a byte[]. though it can
-        // accept a String/CharSequence. Meh.
-        // Here you could add more pages in a longer doc app, but you'd have
-        // to handle page-breaking yourself in e.g., write your own word processor...
-        // Now write the PDF document to a file; it actually needs to be a file
-        // since the Share mechanism can't accept a byte[]. though it can
-        // accept a String/CharSequence. Meh.
         try {
             val f = File(
                 Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
@@ -182,56 +169,7 @@ class SavePdfFragment : Fragment(), CoroutineScope {
     }
 
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-//        savePdf()
 
-    }
-
-
-    private fun savePdf() {
-
-        val outputDir: File = requireActivity().cacheDir // context being the Activity pointer
-//        val outputFile: File = File.createTempFile("prefix", ".pdf", outputDir)
-
-        Log.e("TAG", "URL SAVE $outputDir")
-        PdfGenerator.getBuilder()
-            .setContext(requireContext())
-            .fromLayoutXMLSource()
-            .fromLayoutXML(R.layout.fragment_save_pdf) /* "fromLayoutXML()" takes array of layout resources.
-       * You can also invoke "fromLayoutXMLList()" method here which takes list of layout resources instead of array. */
-            .setFileName("Test-PD") /* It is file name */
-            .setFolderNameOrPath(outputDir.toString()) /* It is folder name. If you set the folder name like this pattern (FolderA/FolderB/FolderC), then
-       * FolderA creates first.Then FolderB inside FolderB and also FolderC inside the FolderB and finally
-       * the pdf file named "Test-PDF.pdf" will be store inside the FolderB. */
-            .openPDAfterGeneration(true) /* It true then the generated pdf will be shown after generated. */
-            .build(object : PdfGeneratorListener() {
-                override fun onFailure(failureResponse: FailureResponse) {
-                    super.onFailure(failureResponse)
-                    Log.e("TAG", "onFailure: $failureResponse")
-                }
-
-                override fun onStartPDFGeneration() {
-                    /*When PDF generation begins to start*/
-                }
-
-                override fun onFinishPDFGeneration() {
-                    /*When PDF generation is finished*/
-                }
-
-                override fun showLog(log: String) {
-                    super.showLog(log)
-                    Log.e("TAG", "onFailure: $log")
-                }
-
-                override fun onSuccess(response: SuccessResponse) {
-                    super.onSuccess(response)
-                    /* If PDF is generated successfully then you will find SuccessResponse
-         * which holds the PdfDocument,File and path (where generated pdf is stored)*/
-                }
-            })
-
-    }
 
 
     override val coroutineContext: CoroutineContext

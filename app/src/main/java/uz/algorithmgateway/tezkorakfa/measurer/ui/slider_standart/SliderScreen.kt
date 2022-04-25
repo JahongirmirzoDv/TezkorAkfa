@@ -25,10 +25,6 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.gkemon.XMLtoPDF.PdfGenerator
-import com.gkemon.XMLtoPDF.PdfGeneratorListener
-import com.gkemon.XMLtoPDF.model.FailureResponse
-import com.gkemon.XMLtoPDF.model.SuccessResponse
 import com.google.gson.Gson
 //import com.karumi.dexter.Dexter
 //import com.karumi.dexter.MultiplePermissionsReport
