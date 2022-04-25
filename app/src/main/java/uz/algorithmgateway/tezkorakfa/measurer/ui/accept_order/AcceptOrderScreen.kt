@@ -130,7 +130,6 @@ class AcceptOrderScreen : Fragment() {
 
     private fun navigateBackOrNext() {
 
-
         binding.btnNext.setOnClickListener {
             val bundle = Bundle()
             bundle.putString("id",item.id.toString())
