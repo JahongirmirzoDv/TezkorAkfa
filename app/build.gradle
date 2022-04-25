@@ -100,9 +100,9 @@ dependencies {
     kapt("androidx.room:room-compiler:2.4.2")
     implementation("androidx.room:room-ktx:2.4.2")
 
-    implementation 'com.github.Gkemon:Android-XML-to-PDF-Generator:2.6.1'
-
+    //dexter
     implementation 'com.karumi:dexter:6.2.3'
 
-
+    //pdf
+    implementation 'com.uttampanchasara.pdfgenerator:pdfgenerator:1.3'
 }
