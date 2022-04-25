@@ -30,11 +30,11 @@ import com.gkemon.XMLtoPDF.PdfGeneratorListener
 import com.gkemon.XMLtoPDF.model.FailureResponse
 import com.gkemon.XMLtoPDF.model.SuccessResponse
 import com.google.gson.Gson
-import com.karumi.dexter.Dexter
-import com.karumi.dexter.MultiplePermissionsReport
-import com.karumi.dexter.PermissionToken
-import com.karumi.dexter.listener.PermissionRequest
-import com.karumi.dexter.listener.multi.MultiplePermissionsListener
+//import com.karumi.dexter.Dexter
+//import com.karumi.dexter.MultiplePermissionsReport
+//import com.karumi.dexter.PermissionToken
+//import com.karumi.dexter.listener.PermissionRequest
+//import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import uz.algorithmgateway.core.util.toast
 import uz.algorithmgateway.tezkorakfa.R
 import uz.algorithmgateway.tezkorakfa.base.MyApplication
@@ -111,7 +111,7 @@ class SliderScreen : Fragment() {
             navController.navigate(R.id.drawingsFragment, bundle)
             verifyStoragePermission(requireActivity())
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                savePdf()
+//                savePdf()
             }
             getBitmapFromView(binding.view, requireActivity(), callback = {
                 saveBitmap(it, "new api")
@@ -202,55 +202,55 @@ class SliderScreen : Fragment() {
         fos?.close()
     }
 
-    @RequiresApi(Build.VERSION_CODES.Q)
-    fun savePdf() {
-        Dexter.withContext(requireContext())
-            .withPermissions(
-                Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                Manifest.permission.READ_EXTERNAL_STORAGE,
-                Manifest.permission.ACCESS_NETWORK_STATE
-            ).withListener(object : MultiplePermissionsListener {
-                override fun onPermissionsChecked(report: MultiplePermissionsReport) { /* ... */
-                    PdfGenerator.getBuilder()
-                        .setContext(requireContext())
-                        .fromViewSource()
-                        .fromView(binding.view)
-                        .setFileName("Test-PDF")
-                        .setFolderNameOrPath("k")
-                        .build(object : PdfGeneratorListener() {
-                            override fun onFailure(failureResponse: FailureResponse) {
-                                super.onFailure(failureResponse)
-                                Log.e(TAG, "onFailure: $failureResponse")
-                            }
-
-                            override fun showLog(log: String) {
-                                super.showLog(log)
-                                Log.e(TAG, "log: $log")
-                            }
-
-                            override fun onStartPDFGeneration() {
-                                /*When PDF generation begins to start*/
-                            }
-
-                            override fun onFinishPDFGeneration() {
-                                Log.e(TAG, "finish: finish")
-                            }
-
-                            override fun onSuccess(response: SuccessResponse) {
-                                super.onSuccess(response)
-                                Log.e(TAG, "succes: $response")
-                            }
-                        })
-                }
-
-                override fun onPermissionRationaleShouldBeShown(
-                    permissions: List<PermissionRequest?>?,
-                    token: PermissionToken?,
-                ) { /* ... */
-                }
-            }).check()
-
-    }
+//    @RequiresApi(Build.VERSION_CODES.Q)
+//    fun savePdf() {
+//        Dexter.withContext(requireContext())
+//            .withPermissions(
+//                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+//                Manifest.permission.READ_EXTERNAL_STORAGE,
+//                Manifest.permission.ACCESS_NETWORK_STATE
+//            ).withListener(object : MultiplePermissionsListener {
+//                override fun onPermissionsChecked(report: MultiplePermissionsReport) { /* ... */
+//                    PdfGenerator.getBuilder()
+//                        .setContext(requireContext())
+//                        .fromViewSource()
+//                        .fromView(binding.view)
+//                        .setFileName("Test-PDF")
+//                        .setFolderNameOrPath("k")
+//                        .build(object : PdfGeneratorListener() {
+//                            override fun onFailure(failureResponse: FailureResponse) {
+//                                super.onFailure(failureResponse)
+//                                Log.e(TAG, "onFailure: $failureResponse")
+//                            }
+//
+//                            override fun showLog(log: String) {
+//                                super.showLog(log)
+//                                Log.e(TAG, "log: $log")
+//                            }
+//
+//                            override fun onStartPDFGeneration() {
+//                                /*When PDF generation begins to start*/
+//                            }
+//
+//                            override fun onFinishPDFGeneration() {
+//                                Log.e(TAG, "finish: finish")
+//                            }
+//
+//                            override fun onSuccess(response: SuccessResponse) {
+//                                super.onSuccess(response)
+//                                Log.e(TAG, "succes: $response")
+//                            }
+//                        })
+//                }
+//
+//                override fun onPermissionRationaleShouldBeShown(
+//                    permissions: List<PermissionRequest?>?,
+//                    token: PermissionToken?,
+//                ) { /* ... */
+//                }
+//            }).check()
+//
+//    }
 
 
     private fun setUpDesignerLayout() {

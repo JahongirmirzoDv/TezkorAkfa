@@ -1,29 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".measurer.ui.drawings.save_pdf.SavePdfFragment">
 
     <TextView
         android:id="@+id/project_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:padding="4dp"
         android:text="Loyiha 36"
         android:textAlignment="center"
-        android:textSize="20sp"
-        android:padding="4dp"
         android:textColor="@color/black"
+        android:textSize="20sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_launcher_background" />
+
+    <Button
+        android:id="@+id/save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/save_pdf"
         android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_marginTop="10dp"
-        android:layout_height="0dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -31,4 +43,4 @@
         app:layout_constraintTop_toBottomOf="@id/project_name"
         tools:listitem="@layout/pdf_item" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.appcompat.widget.LinearLayoutCompat>

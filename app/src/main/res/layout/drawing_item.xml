@@ -15,7 +15,6 @@
 
         <ImageView
             android:id="@+id/image"
-            android:src="@drawable/rasm2"
             android:layout_width="match_parent"
             android:layout_height="100dp" />
 

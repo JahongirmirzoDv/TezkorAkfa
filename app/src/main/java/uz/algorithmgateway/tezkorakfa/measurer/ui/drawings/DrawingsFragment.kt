@@ -24,7 +24,6 @@ import kotlinx.coroutines.launch
 import uz.algorithmgateway.tezkorakfa.R
 import uz.algorithmgateway.tezkorakfa.base.MyApplication
 import uz.algorithmgateway.tezkorakfa.databinding.FragmentDrawingsBinding
-import uz.algorithmgateway.tezkorakfa.databinding.ImageDialogBinding
 import uz.algorithmgateway.tezkorakfa.measurer.ui.drawings.adapters.DrawingAdapter
 import uz.algorithmgateway.tezkorakfa.measurer.ui.select_type.models.Drawing
 import uz.algorithmgateway.tezkorakfa.measurer.viewmodel.DbViewmodel
@@ -82,40 +81,40 @@ class DrawingsFragment : Fragment(), CoroutineScope {
         }
     }
 
-    private fun showDialog(image_path: String) {
-        val root = ImageDialogBinding.inflate(layoutInflater, null, false)
-        val dialog = Dialog(requireContext())
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        dialog.setCancelable(false)
-        dialog.setContentView(root.root)
-        val yesBtn = root.imageView
-        Glide.with(requireActivity())
-            .load(image_path) // Uri of the picture
-            .listener(object : RequestListener<Drawable?> {
-                override fun onLoadFailed(
-                    e: GlideException?,
-                    model: Any?,
-                    target: Target<Drawable?>?,
-                    isFirstResource: Boolean,
-                ): Boolean {
-                    println(e.toString())
-                    return false
-                }
-
-                override fun onResourceReady(
-                    resource: Drawable?,
-                    model: Any?,
-                    target: Target<Drawable?>?,
-                    dataSource: DataSource?,
-                    isFirstResource: Boolean,
-                ): Boolean {
-                    return false
-                }
-
-            })
-            .into(yesBtn)
-        dialog.show()
-    }
+//    private fun showDialog(image_path: String) {
+//        val root = ImageDialogBinding.inflate(layoutInflater, null, false)
+//        val dialog = Dialog(requireContext())
+//        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+//        dialog.setCancelable(false)
+//        dialog.setContentView(root.root)
+//        val yesBtn = root.imageView
+//        Glide.with(requireActivity())
+//            .load(image_path) // Uri of the picture
+//            .listener(object : RequestListener<Drawable?> {
+//                override fun onLoadFailed(
+//                    e: GlideException?,
+//                    model: Any?,
+//                    target: Target<Drawable?>?,
+//                    isFirstResource: Boolean,
+//                ): Boolean {
+//                    println(e.toString())
+//                    return false
+//                }
+//
+//                override fun onResourceReady(
+//                    resource: Drawable?,
+//                    model: Any?,
+//                    target: Target<Drawable?>?,
+//                    dataSource: DataSource?,
+//                    isFirstResource: Boolean,
+//                ): Boolean {
+//                    return false
+//                }
+//
+//            })
+//            .into(yesBtn)
+//        dialog.show()
+//    }
 
     private fun setupUI() {
         binding.projectId.text = "Loyiha $id"
