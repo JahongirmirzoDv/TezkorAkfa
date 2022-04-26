@@ -40,7 +40,7 @@ class ItemCountScreen : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.projectId.text = "Loyiha $id"
         loadTabData()
-//        chooseCount()
+        chooseCount()
         navigateButton()
     }
 
@@ -64,20 +64,20 @@ class ItemCountScreen : Fragment() {
         }
     }
 
-//    private fun chooseCount() {
-//        binding.cardPlus.setOnClickListener {
-//            val count = binding.textViewCount.text.toString()
-//            binding.textViewCount.text = (count.toInt() + 1).toString()
-//        }
-//
-//        binding.cardMinus.setOnClickListener {
-//            val count = binding.textViewCount.text.toString()
-//            if (count.toInt() > 0) {
-//                binding.textViewCount.text = (count.toInt() - 1).toString()
-//            }
-//        }
-//
-//    }
+    private fun chooseCount() {
+        binding.cardPlus.setOnClickListener {
+            val count = binding.textViewCount.text.toString()
+            binding.textViewCount.text = (count.toInt() + 1).toString()
+        }
+
+        binding.cardMinus.setOnClickListener {
+            val count = binding.textViewCount.text.toString()
+            if (count.toInt() > 0) {
+                binding.textViewCount.text = (count.toInt() - 1).toString()
+            }
+        }
+
+    }
 
     private fun loadTabData() {
         with(binding) {

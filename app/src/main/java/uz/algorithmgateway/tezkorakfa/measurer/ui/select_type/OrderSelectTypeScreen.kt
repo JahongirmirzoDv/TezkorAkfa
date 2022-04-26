@@ -73,10 +73,11 @@ class OrderSelectTypeScreen : Fragment(), CoroutineScope {
 
     private fun profile() {
         launch(Dispatchers.Main) {
-            viewmodel.order.collect {profile->
+            viewmodel.order.collect { profile ->
                 val profileType = ArrayList<String>()
                 val spinnerProfile = ArrayList<String>()
                 val spinnerTexture = ArrayList<String>()
+
                 profile?.results?.forEach { profile2 ->
                     profileType.add(profile2.name)
                 }
@@ -92,7 +93,8 @@ class OrderSelectTypeScreen : Fragment(), CoroutineScope {
                     spinnerProfileAdapter.list = spinnerProfile
                     spinnerTypeProfile.adapter = spinnerProfileAdapter
 
-                    tabLayoutProfile.addOnTabSelectedListener(object :TabLayout.OnTabSelectedListener{
+                    tabLayoutProfile.addOnTabSelectedListener(object :
+                        TabLayout.OnTabSelectedListener {
                         override fun onTabSelected(tab: TabLayout.Tab?) {
                             spinnerProfile.clear()
                             profile?.results?.get(tab?.position ?: 0)?.type?.forEach {
@@ -107,26 +109,27 @@ class OrderSelectTypeScreen : Fragment(), CoroutineScope {
                             val spinnerTextureAdapter = SpinnerTextAdapter(requireContext())
                             spinnerTextureAdapter.list = spinnerTexture
                             spinnerTypeTexture.adapter = spinnerTextureAdapter
-                            spinnerTypeProfile.onItemSelectedListener = object :AdapterView.OnItemSelectedListener{
-                                override fun onItemSelected(
-                                    parent: AdapterView<*>?,
-                                    view: View?,
-                                    position: Int,
-                                    id: Long,
-                                ) {
-                                    spinnerTexture.clear()
-                                    profile?.results?.get(tab?.position ?: 0)?.type?.forEach {
-                                        spinnerTexture.add(it.raw_material[position].name)
+                            spinnerTypeProfile.onItemSelectedListener =
+                                object : AdapterView.OnItemSelectedListener {
+                                    override fun onItemSelected(
+                                        parent: AdapterView<*>?,
+                                        view: View?,
+                                        position: Int,
+                                        id: Long,
+                                    ) {
+                                        spinnerTexture.clear()
+                                        profile?.results?.get(tab?.position ?: 0)?.type?.forEach {
+                                            spinnerTexture.add(it.raw_material[position].name)
+                                        }
+                                        spinnerTextureAdapter.list = spinnerTexture
+                                        spinnerTextureAdapter.notifyDataSetChanged()
                                     }
-                                    spinnerTextureAdapter.list = spinnerTexture
-                                    spinnerTextureAdapter.notifyDataSetChanged()
+
+                                    override fun onNothingSelected(parent: AdapterView<*>?) {
+
+                                    }
+
                                 }
-
-                                override fun onNothingSelected(parent: AdapterView<*>?) {
-
-                                }
-
-                            }
                         }
 
                         override fun onTabUnselected(tab: TabLayout.Tab?) {
