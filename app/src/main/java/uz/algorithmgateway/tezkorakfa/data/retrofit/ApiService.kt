@@ -8,6 +8,7 @@ import uz.algorithmgateway.data.api.models.UserRequest
 import uz.algorithmgateway.data.api.models.UserResponse
 import uz.algorithmgateway.tezkorakfa.data.retrofit.models.profile.Profile
 import uz.algorithmgateway.tezkorakfa.data.retrofit.models.sales_order_list.OderList
+import uz.algorithmgateway.tezkorakfa.data.retrofit.models.shelf.Shelf
 import uz.algorithmgateway.tezkorakfa.data.retrofit.models.window.Windows
 
 interface ApiService {
@@ -23,4 +24,7 @@ interface ApiService {
 
     @GET("warehouse/window/list")
     suspend fun getWindow(): Response<Windows>
+
+    @GET("warehouse/podogonnik/list")
+    suspend fun getShelf(): Response<Shelf>
 }

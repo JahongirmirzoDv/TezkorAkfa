@@ -74,8 +74,25 @@ class OrderSelectTypeScreen : Fragment(), CoroutineScope {
         loadSpinnerDoorOrWindow()
         profile()
         window()
+        shelf()
 
         navigateButton()
+    }
+
+    private fun shelf() {
+        launch(Dispatchers.Main) {
+            viewmodel.shelf.collect { shelf ->
+                binding.layoutShelf.apply {
+                    if (shelf != null) {
+                        shelf.results.forEach {
+                            tablayoutShelf.addTab(tablayoutShelf.newTab().setText(it.name))
+                        }
+                    }
+
+
+                }
+            }
+        }
     }
 
     @SuppressLint("ResourceAsColor", "NotifyDataSetChanged")
