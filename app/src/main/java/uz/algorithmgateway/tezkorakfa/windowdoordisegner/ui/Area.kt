@@ -11,6 +11,7 @@ import android.os.Build
 import android.os.Environment
 import android.provider.MediaStore
 import android.util.AttributeSet
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.LinearLayout
@@ -122,14 +123,15 @@ class Area @JvmOverloads constructor(
     }
 
     fun clearView() {
-//        val layoutParams = LayoutParams(
-//            LayoutParams.MATCH_PARENT,
-//            LayoutParams.WRAP_CONTENT
-//        )
-//        childLayout?.setLayoutParams(layoutParams)
-//        childLayout?.addView(viewer)
-//        removeView(childLayout)
-//        childLayout?.addView(childLayout, childLayout?.layoutParams)
+            val window = WindowLayout(ctx)
+            window.setViewScale(viewScale)
+            window.setW(2000)
+            window.setH(1300)
+            window.layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
+
+            childLayout?.removeAllViews()
+            childLayout?.addView(window)
+
     }
 
     private fun saveImage(view: View): Bitmap {

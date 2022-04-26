@@ -17,10 +17,10 @@
             android:layout_height="56dp">
 
             <com.google.android.material.textview.MaterialTextView
+                android:id="@id/project_id"
                 style="@style/TextView.Toolbar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@id/project_id"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -44,6 +44,7 @@
     </androidx.appcompat.widget.Toolbar>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraint1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/toolBar">
@@ -195,64 +196,66 @@
         </com.google.android.material.card.MaterialCardView>
 
 
-<!--        <com.google.android.material.card.MaterialCardView-->
-<!--            android:id="@+id/cardCount"-->
-<!--            android:layout_width="@dimen/size_180"-->
-<!--            android:layout_height="@dimen/size_fifty"-->
-<!--            android:layout_marginTop="@dimen/size_thirty"-->
-<!--            app:cardBackgroundColor="@color/layout_light"-->
-<!--            app:cardCornerRadius="@dimen/item_space_middle"-->
-<!--            app:cardElevation="@dimen/card_elevation_3"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintHorizontal_bias="0.5"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toBottomOf="@id/cardDoor">-->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardCount"
+            android:layout_width="@dimen/size_180"
+            android:layout_height="@dimen/size_fifty"
+            android:layout_marginTop="@dimen/size_thirty"
+            app:cardBackgroundColor="@color/layout_light"
+            app:cardCornerRadius="@dimen/item_space_middle"
+            app:cardElevation="@dimen/card_elevation_3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cardDoor">
 
-<!--            <com.google.android.material.textview.MaterialTextView-->
-<!--                android:id="@+id/textViewCount"-->
-<!--                style="@style/TextView.Title"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="match_parent"-->
-<!--                android:gravity="center"-->
-<!--                android:text="10" />-->
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/textViewCount"
+                style="@style/TextView.Title"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="10" />
 
-<!--        </com.google.android.material.card.MaterialCardView>-->
+        </com.google.android.material.card.MaterialCardView>
 
-<!--        <com.google.android.material.card.MaterialCardView-->
-<!--            android:id="@+id/cardPlus"-->
-<!--            android:layout_width="@dimen/size_fifty"-->
-<!--            android:layout_height="@dimen/size_fifty"-->
-<!--            android:layout_marginStart="@dimen/item_space_middle"-->
-<!--            app:cardCornerRadius="@dimen/item_space_middle"-->
-<!--            app:cardElevation="@dimen/card_elevation_3"-->
-<!--            app:layout_constraintStart_toEndOf="@id/cardCount"-->
-<!--            app:layout_constraintTop_toTopOf="@id/cardCount">-->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardPlus"
+            android:layout_width="@dimen/size_fifty"
+            android:layout_height="@dimen/size_fifty"
+            android:layout_marginStart="@dimen/item_space_middle"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="@dimen/item_space_middle"
+            app:cardElevation="@dimen/card_elevation_3"
+            app:layout_constraintStart_toEndOf="@id/cardCount"
+            app:layout_constraintTop_toTopOf="@id/cardCount">
 
-<!--            <com.google.android.material.imageview.ShapeableImageView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_gravity="center"-->
-<!--                android:src="@drawable/ic_plus" />-->
+            <com.google.android.material.imageview.ShapeableImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_plus" />
 
-<!--        </com.google.android.material.card.MaterialCardView>-->
-<!--        -->
-<!--        <com.google.android.material.card.MaterialCardView-->
-<!--            android:id="@+id/cardMinus"-->
-<!--            android:layout_width="@dimen/size_fifty"-->
-<!--            android:layout_height="@dimen/size_fifty"-->
-<!--            android:layout_marginEnd="@dimen/item_space_middle"-->
-<!--            app:cardCornerRadius="@dimen/item_space_middle"-->
-<!--            app:cardElevation="@dimen/card_elevation_3"-->
-<!--            app:layout_constraintEnd_toStartOf="@id/cardCount"-->
-<!--            app:layout_constraintTop_toTopOf="@id/cardCount">-->
+        </com.google.android.material.card.MaterialCardView>
 
-<!--            <com.google.android.material.imageview.ShapeableImageView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_gravity="center"-->
-<!--                android:src="@drawable/ic_minus" />-->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardMinus"
+            android:layout_width="@dimen/size_fifty"
+            android:layout_height="@dimen/size_fifty"
+            android:layout_marginEnd="@dimen/item_space_middle"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="@dimen/item_space_middle"
+            app:cardElevation="@dimen/card_elevation_3"
+            app:layout_constraintEnd_toStartOf="@id/cardCount"
+            app:layout_constraintTop_toTopOf="@id/cardCount">
 
-<!--        </com.google.android.material.card.MaterialCardView>-->
+            <com.google.android.material.imageview.ShapeableImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_minus" />
+
+        </com.google.android.material.card.MaterialCardView>
 
 
         <View
@@ -273,8 +276,8 @@
         style="@style/MaterialButton.Default"
         android:layout_width="@dimen/border_width"
         android:layout_height="@dimen/size_fifty_five"
-        android:layout_marginBottom="@dimen/size_fifty"
         android:layout_marginEnd="@dimen/text_size_twenty"
+        android:layout_marginBottom="@dimen/size_fifty"
         android:drawableEnd="@drawable/ic_next_arrow_fr"
         android:fontFamily="@font/roboto_500"
         android:text="@string/next"

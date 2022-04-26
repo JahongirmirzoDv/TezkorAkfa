@@ -120,7 +120,9 @@ class SliderScreen : Fragment() {
                 navController.navigateUp()
             }
             clear.setOnClickListener {
-                dragAndDropListener.clearView()
+                dragAndDropListener = Area(requireContext())
+                setUpDesignerLayout()
+                setDragAndDropToViews()
             }
 
         }
