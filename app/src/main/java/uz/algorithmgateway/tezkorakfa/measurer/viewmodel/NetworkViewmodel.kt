@@ -5,10 +5,9 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import uz.algorithmgateway.tezkorakfa.data.models.profile.Profile
 import uz.algorithmgateway.tezkorakfa.data.retrofit.ApiService
-import uz.algorithmgateway.tezkorakfa.data.retrofit.models.sales_order_list.OderList
-import uz.algorithmgateway.tezkorakfa.ui.utils.UIState
+import uz.algorithmgateway.tezkorakfa.data.retrofit.models.profile.Profile
+import uz.algorithmgateway.tezkorakfa.data.retrofit.models.window.Windows
 import javax.inject.Inject
 
 class NetworkViewmodel @Inject constructor(
@@ -27,6 +26,21 @@ class NetworkViewmodel @Inject constructor(
             val responce = apiService.getProfile()
             if (responce.isSuccessful) {
                 _order.value = responce.body()
+            } else {
+
+            }
+        }
+    }
+
+    private val _window = MutableStateFlow<Windows?>(null)
+    val window: StateFlow<Windows?>
+        get() = _window
+
+    private fun getWindow() {
+        viewModelScope.launch {
+            val responce = apiService.getWindow()
+            if (responce.isSuccessful) {
+                _window.value = responce.body()
             } else {
 
             }

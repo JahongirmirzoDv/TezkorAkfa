@@ -1,4 +1,4 @@
-package uz.algorithmgateway.tezkorakfa.data.models.profile
+package uz.algorithmgateway.tezkorakfa.data.retrofit.models.profile
 
 data class Result(
     val id: Int,
