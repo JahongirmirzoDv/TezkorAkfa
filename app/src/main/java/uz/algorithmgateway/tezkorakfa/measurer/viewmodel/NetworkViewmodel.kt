@@ -7,6 +7,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import uz.algorithmgateway.tezkorakfa.data.retrofit.ApiService
 import uz.algorithmgateway.tezkorakfa.data.retrofit.models.profile.Profile
+import uz.algorithmgateway.tezkorakfa.data.retrofit.models.shelf.Shelf
 import uz.algorithmgateway.tezkorakfa.data.retrofit.models.window.Windows
 import uz.algorithmgateway.tezkorakfa.measurer.ui.accept_order.model.Locations
 import javax.inject.Inject
@@ -17,6 +18,7 @@ class NetworkViewmodel @Inject constructor(
     init {
         getProfile()
         getWindow()
+        getShelf()
     }
 
     private val _order = MutableStateFlow<Profile?>(null)
@@ -49,4 +51,19 @@ class NetworkViewmodel @Inject constructor(
         }
     }
 
+
+    private val _shelf = MutableStateFlow<Shelf?>(null)
+    val shelf: StateFlow<Shelf?>
+        get() = _shelf
+
+    private fun getShelf() {
+        viewModelScope.launch {
+            val responce = apiService.getShelf()
+            if (responce.isSuccessful) {
+                _shelf.value = responce.body()
+            } else {
+
+            }
+        }
+    }
 }

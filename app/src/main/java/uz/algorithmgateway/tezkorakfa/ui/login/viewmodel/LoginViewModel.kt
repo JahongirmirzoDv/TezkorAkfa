@@ -2,6 +2,7 @@ package uz.algorithmgateway.tezkorakfa.ui.login.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -34,10 +35,12 @@ class LoginViewModel @Inject constructor(
 
     fun getOrder() {
         viewModelScope.launch {
-            var responce = apiService.salesOrderList()
-            if (responce.isSuccessful) {
-                _order.value = UIState.Success(responce.body())
-            } else _order.value = UIState.Error(responce.message())
+            coroutineScope {
+                var responce = apiService.salesOrderList()
+                if (responce.isSuccessful) {
+                    _order.value = UIState.Success(responce.body())
+                } else _order.value = UIState.Error(responce.message())
+            }
         }
     }
 

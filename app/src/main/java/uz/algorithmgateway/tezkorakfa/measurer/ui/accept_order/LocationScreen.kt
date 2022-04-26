@@ -24,18 +24,15 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
-import com.google.gson.Gson
 import com.karumi.dexter.Dexter
+import com.karumi.dexter.MultiplePermissionsReport
 import com.karumi.dexter.PermissionToken
-import com.karumi.dexter.listener.PermissionDeniedResponse
-import com.karumi.dexter.listener.PermissionGrantedResponse
 import com.karumi.dexter.listener.PermissionRequest
-import com.karumi.dexter.listener.single.PermissionListener
+import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import uz.algorithmgateway.tezkorakfa.R
 import uz.algorithmgateway.tezkorakfa.databinding.LocationScreenBinding
-import uz.algorithmgateway.tezkorakfa.measurer.ui.accept_order.model.Locations
 import uz.algorithmgateway.tezkorakfa.measurer.ui.accept_order.service.LocationService
 import uz.algorithmgateway.tezkorakfa.ui.utils.SharedPref
 import kotlin.coroutines.CoroutineContext
@@ -66,23 +63,6 @@ class LocationScreen : Fragment(), OnMapReadyCallback, GoogleMap.OnMapClickListe
             googleApiClient.connect()
         }
 
-        Dexter.withContext(requireContext())
-            .withPermission(Manifest.permission.ACCESS_FINE_LOCATION)
-            .withListener(object : PermissionListener {
-                override fun onPermissionGranted(response: PermissionGrantedResponse) { /* ... */
-                    requestGPSSettings()
-                    startLocationService()
-                }
-
-                override fun onPermissionDenied(response: PermissionDeniedResponse) { /* ... */
-                }
-
-                override fun onPermissionRationaleShouldBeShown(
-                    permission: PermissionRequest?,
-                    token: PermissionToken?,
-                ) { /* ... */
-                }
-            }).check()
 
         val mapFragment = childFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
@@ -95,8 +75,28 @@ class LocationScreen : Fragment(), OnMapReadyCallback, GoogleMap.OnMapClickListe
 
     override fun onMapReady(p0: GoogleMap) {
         this.googleMap = p0
-        googleMap.isMyLocationEnabled = true
-        googleMap.uiSettings.isMyLocationButtonEnabled = true
+
+        Dexter.withContext(requireContext())
+            .withPermissions(
+                Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            )
+            .withListener(object : MultiplePermissionsListener {
+                override fun onPermissionsChecked(report: MultiplePermissionsReport?) { /* ... */
+                    requestGPSSettings()
+                    startLocationService()
+                    googleMap.isMyLocationEnabled = true
+                    googleMap.uiSettings.isMyLocationButtonEnabled = true
+                }
+
+                override fun onPermissionRationaleShouldBeShown(
+                    permissions: List<PermissionRequest?>?,
+                    token: PermissionToken?,
+                ) { /* ... */
+                }
+            }).check()
+
+
         googleMap.moveCamera(
             CameraUpdateFactory.newLatLngZoom(
                 LatLng(41.2995, 69.2401), 8f))

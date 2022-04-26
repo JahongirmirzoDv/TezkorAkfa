@@ -7,6 +7,7 @@ import android.location.Address
 import android.location.Geocoder
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -142,6 +143,7 @@ class AcceptOrderScreen : Fragment() {
             $add
             """.trimIndent()
             str = add
+            Log.e("TAG", "getAddress: $add")
         } catch (e: IOException) {
             // TODO Auto-generated catch block
             e.printStackTrace()
@@ -158,7 +160,6 @@ class AcceptOrderScreen : Fragment() {
     }
 
     private fun navigateBackOrNext() {
-
         binding.btnNext.setOnClickListener {
             val bundle = Bundle()
             bundle.putString("id", item.id.toString())
@@ -181,5 +182,10 @@ class AcceptOrderScreen : Fragment() {
         binding.imageBack.setOnClickListener {
             findNavController().navigateUp()
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        loadView()
     }
 }
