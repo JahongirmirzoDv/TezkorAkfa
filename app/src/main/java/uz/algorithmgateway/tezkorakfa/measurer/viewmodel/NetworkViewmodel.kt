@@ -8,6 +8,7 @@ import kotlinx.coroutines.launch
 import uz.algorithmgateway.tezkorakfa.data.retrofit.ApiService
 import uz.algorithmgateway.tezkorakfa.data.retrofit.models.profile.Profile
 import uz.algorithmgateway.tezkorakfa.data.retrofit.models.window.Windows
+import uz.algorithmgateway.tezkorakfa.measurer.ui.accept_order.model.Locations
 import javax.inject.Inject
 
 class NetworkViewmodel @Inject constructor(
@@ -15,6 +16,7 @@ class NetworkViewmodel @Inject constructor(
 ) : ViewModel() {
     init {
         getProfile()
+        getWindow()
     }
 
     private val _order = MutableStateFlow<Profile?>(null)
@@ -46,4 +48,5 @@ class NetworkViewmodel @Inject constructor(
             }
         }
     }
+
 }

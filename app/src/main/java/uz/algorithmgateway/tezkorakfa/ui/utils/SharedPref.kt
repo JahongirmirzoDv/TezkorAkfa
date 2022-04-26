@@ -14,6 +14,8 @@ class SharedPref @Inject constructor(
         get() = mySharedPref.getBoolean("device_token", false)
 
 
+
+
     var imageUri: String?
         get() = mySharedPref.getString("use1r", "")
         set(value) = mySharedPref.edit {
@@ -21,6 +23,15 @@ class SharedPref @Inject constructor(
                 this.putString("use1r", value)
             }
         }
+
+    var location: String?
+        get() = mySharedPref.getString("use1r", "")
+        set(value) = mySharedPref.edit {
+            if (value != null) {
+                this.putString("use1r", value)
+            }
+        }
+
 
     private var mySharedPref: SharedPreferences =
         context.getSharedPreferences("preferences", Context.MODE_PRIVATE)

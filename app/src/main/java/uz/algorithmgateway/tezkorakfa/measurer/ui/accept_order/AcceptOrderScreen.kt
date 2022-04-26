@@ -3,6 +3,8 @@ package uz.algorithmgateway.tezkorakfa.measurer.ui.accept_order
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.graphics.drawable.Drawable
+import android.location.Address
+import android.location.Geocoder
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -18,13 +20,15 @@ import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.github.drjacky.imagepicker.ImagePicker
 import com.google.gson.Gson
-import uz.algorithmgateway.core.util.toast
 import uz.algorithmgateway.tezkorakfa.R
 import uz.algorithmgateway.tezkorakfa.data.retrofit.models.sales_order_list.Result
 import uz.algorithmgateway.tezkorakfa.databinding.ScreenAcceptOrderBinding
+import uz.algorithmgateway.tezkorakfa.measurer.ui.accept_order.model.Locations
 import uz.algorithmgateway.tezkorakfa.measurer.utils.FileUriUtils
 import uz.algorithmgateway.tezkorakfa.ui.utils.SharedPref
 import java.io.File
+import java.io.IOException
+import java.util.*
 
 
 class AcceptOrderScreen : Fragment() {
@@ -99,6 +103,8 @@ class AcceptOrderScreen : Fragment() {
                 .into(binding.imageProduct)
         }
 
+
+
         loadView()
         clickBack()
         goToLocation()
@@ -113,10 +119,34 @@ class AcceptOrderScreen : Fragment() {
             editTextSurname.setText(item.client.last_name)
             editTextAddress.setText(item.client.address)
             tvComment.setText(item.comment)
+            val location = sharedPref.location
+            if (location != "") {
+                val fromJson = Gson().fromJson(location, Locations::class.java)
+                val address = getAddress(fromJson.latitude!!, fromJson.longitude!!)
+                editTextAddress.setText(address)
+            }
         }
         binding.imageProduct.setOnClickListener {
             pickCameraImage()
         }
+    }
+
+    fun getAddress(lat: Double, lng: Double): String {
+        var str = ""
+        val geocoder = Geocoder(requireContext(), Locale.getDefault())
+        try {
+            val addresses: List<Address> = geocoder.getFromLocation(lat, lng, 1)
+            val obj: Address = addresses[0]
+            var add: String = obj.getAddressLine(0)
+            add = """
+            $add
+            """.trimIndent()
+            str = add
+        } catch (e: IOException) {
+            // TODO Auto-generated catch block
+            e.printStackTrace()
+        }
+        return str
     }
 
     private fun pickCameraImage() {
@@ -131,8 +161,9 @@ class AcceptOrderScreen : Fragment() {
 
         binding.btnNext.setOnClickListener {
             val bundle = Bundle()
-            bundle.putString("id",item.id.toString())
-            findNavController().navigate(R.id.orderSelectType,bundle)
+            bundle.putString("id", item.id.toString())
+            findNavController().navigate(R.id.orderSelectType, bundle)
+            sharedPref.location = ""
         }
 
         binding.btnBack.setOnClickListener {
@@ -141,12 +172,8 @@ class AcceptOrderScreen : Fragment() {
     }
 
     private fun goToLocation() {
-        binding.editTextAddress.setOnClickListener {
-            toast("salom")
-            findNavController().navigate(R.id.locationScreen)
-        }
-
         binding.imageLocation.setOnClickListener {
+            findNavController().navigate(R.id.locationScreen)
         }
     }
 

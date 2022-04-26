@@ -1,5 +1,6 @@
 package uz.algorithmgateway.tezkorakfa.measurer.ui.select_type
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -18,13 +19,16 @@ import uz.algorithmgateway.tezkorakfa.R
 import uz.algorithmgateway.tezkorakfa.base.MyApplication
 import uz.algorithmgateway.tezkorakfa.data.models.UISpinner
 import uz.algorithmgateway.tezkorakfa.data.retrofit.models.profile.Profile
+import uz.algorithmgateway.tezkorakfa.data.retrofit.models.window.Width
 import uz.algorithmgateway.tezkorakfa.databinding.ScreenSelectTypeOrderBinding
 import uz.algorithmgateway.tezkorakfa.measurer.SpinnerTextAdapter
+import uz.algorithmgateway.tezkorakfa.measurer.ui.select_type.adapters.CardsAdapter
 import uz.algorithmgateway.tezkorakfa.measurer.ui.select_type.models.Drawing
 import uz.algorithmgateway.tezkorakfa.measurer.viewmodel.DbViewmodel
 import uz.algorithmgateway.tezkorakfa.measurer.viewmodel.NetworkViewmodel
 import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
+
 
 class OrderSelectTypeScreen : Fragment(), CoroutineScope {
     @Inject
@@ -38,6 +42,8 @@ class OrderSelectTypeScreen : Fragment(), CoroutineScope {
     private val binding get() = _binding!!
     lateinit var drawing: Drawing
     private val navController by lazy(LazyThreadSafetyMode.NONE) { findNavController() }
+    lateinit var cardsAdapter: CardsAdapter
+
     var profile_List: Profile? = null
     var mirror_layer_List = arrayListOf("1-qavat", "2-qavat")
     var shelf_List = arrayListOf("Universal", "Elita", "Lux")
@@ -72,10 +78,80 @@ class OrderSelectTypeScreen : Fragment(), CoroutineScope {
         navigateButton()
     }
 
+    @SuppressLint("ResourceAsColor", "NotifyDataSetChanged")
     private fun window() {
         launch(Dispatchers.Main) {
             viewmodel.window.collect { window ->
+                binding.layoutWindow.apply {
+                    val tabs = ArrayList<String>()
+                    window?.results?.forEach {
+                        tabs.add(it.name)
+                        tabLayoutWindow.addTab(tabLayoutWindow.newTab().setText(it.name))
+                    }
+                    val spinnerColor = SpinnerTextAdapter(requireContext())
+                    cardsAdapter = CardsAdapter(object : CardsAdapter.onPress {
+                        override fun click(width: Width, position: Int) {
+                            val color = ArrayList<String>()
+                            if (window?.results?.get(tabLayoutWindow.selectedTabPosition)?.width?.isNotEmpty() == true
+                            ) {
+                                window.results[tabLayoutWindow.selectedTabPosition].width[position].color.forEach {
+                                    color.add(it.name)
+                                }
+                            }
+                            spinnerColor.list = color
+                            spinnerWindowColor.adapter = spinnerColor
+                        }
+                    }, requireContext())
+                    cardsRv.adapter = cardsAdapter
 
+                    val tabPosition = tabLayoutWindow.selectedTabPosition
+                    if (tabPosition == 0) {
+                        val list = window?.results?.get(tabPosition)?.width ?: emptyList()
+                        cardsAdapter.list = list
+                        cardsAdapter.notifyDataSetChanged()
+
+                        val color = ArrayList<String>()
+                        if (window?.results?.get(0)?.width?.isNotEmpty() == true
+                        ) {
+                            window.results[0].width[0].color.forEach {
+                                color.add(it.name)
+                            }
+                        }
+                        spinnerColor.list = color
+                        spinnerWindowColor.adapter = spinnerColor
+                    }
+
+                    tabLayoutWindow.addOnTabSelectedListener(object :
+                        TabLayout.OnTabSelectedListener {
+                        override fun onTabSelected(tab: TabLayout.Tab?) {
+                            val list =
+                                window?.results?.get(tab?.position ?: 0)?.width
+                            if (list != null) {
+                                cardsAdapter.list = list
+                                cardsAdapter.notifyDataSetChanged()
+                            }
+
+                            val color = ArrayList<String>()
+                            if (window?.results?.get(tab?.position
+                                    ?: 0)?.width?.isNotEmpty() == true
+                            ) {
+                                window.results[tab?.position ?: 0].width[0].color.forEach {
+                                    color.add(it.name)
+                                }
+                            }
+                            spinnerColor.list = color
+                            spinnerColor.notifyDataSetChanged()
+                        }
+
+                        override fun onTabUnselected(tab: TabLayout.Tab?) {
+
+                        }
+
+                        override fun onTabReselected(tab: TabLayout.Tab?) {
+
+                        }
+                    })
+                }
             }
         }
     }
@@ -244,7 +320,6 @@ class OrderSelectTypeScreen : Fragment(), CoroutineScope {
         }
 
     }
-
 
     private fun loadSpinnerDoorOrWindow() {
         val adapter = SpinnerTextAdapter(requireContext())

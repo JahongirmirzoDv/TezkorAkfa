@@ -21,6 +21,6 @@ interface ApiService {
     @GET("warehouse/profil/list")
     suspend fun getProfile(): Response<Profile>
 
-    @GET("warehouse/profil/list")
+    @GET("warehouse/window/list")
     suspend fun getWindow(): Response<Windows>
 }
