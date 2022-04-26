@@ -2,7 +2,7 @@
 <resources>
     // default
     <dimen name="item_space_min">5dp</dimen>
-    <dimen name="item_space_middle">10dp</dimen>
+        <dimen name="item_space_middle">10dp</dimen>
 
     <dimen name="screen_padding_horizontal">24dp</dimen>
     <dimen name="screen_padding_vertical">20dp</dimen>
