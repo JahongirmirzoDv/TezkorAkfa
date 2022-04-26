@@ -54,4 +54,8 @@ class DesignerLayout @JvmOverloads constructor(
         }
     }
 
+    fun clearViews() {
+        viewDesigner.clearView()
+    }
+
 }

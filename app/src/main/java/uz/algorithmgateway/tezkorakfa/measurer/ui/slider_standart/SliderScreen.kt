@@ -120,9 +120,7 @@ class SliderScreen : Fragment() {
                 navController.navigateUp()
             }
             clear.setOnClickListener {
-                dragAndDropListener = Area(requireContext())
-                setUpDesignerLayout()
-                setDragAndDropToViews()
+                clearView()
             }
 
         }
@@ -265,6 +263,10 @@ class SliderScreen : Fragment() {
 //
 //    }
 
+    fun clearView() {
+        val designer: DesignerLayout = binding.layoutDesigner
+        designer.clearViews()
+    }
 
     private fun setUpDesignerLayout() {
         val designer: DesignerLayout = binding.layoutDesigner

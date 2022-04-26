@@ -133,5 +133,10 @@ class WindowDoorDesigner @JvmOverloads constructor(
         childLayoutDesigner.addView(area)
     }
 
+    fun clearView() {
+        childLayoutDesigner.removeAllViews()
+        childLayoutDesigner.removeAllViewsInLayout()
+    }
+
 
 }
