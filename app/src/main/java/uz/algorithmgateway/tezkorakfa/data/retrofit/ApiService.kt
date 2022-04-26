@@ -6,8 +6,9 @@ import retrofit2.http.GET
 import retrofit2.http.POST
 import uz.algorithmgateway.data.api.models.UserRequest
 import uz.algorithmgateway.data.api.models.UserResponse
-import uz.algorithmgateway.tezkorakfa.data.models.profile.Profile
+import uz.algorithmgateway.tezkorakfa.data.retrofit.models.profile.Profile
 import uz.algorithmgateway.tezkorakfa.data.retrofit.models.sales_order_list.OderList
+import uz.algorithmgateway.tezkorakfa.data.retrofit.models.window.Windows
 
 interface ApiService {
     @POST("user/login/")
@@ -15,8 +16,11 @@ interface ApiService {
 
     @GET("order/order")
     suspend fun salesOrderList(
-    ):Response<OderList>
+    ): Response<OderList>
 
     @GET("warehouse/profil/list")
-    suspend fun getProfile():Response<Profile>
+    suspend fun getProfile(): Response<Profile>
+
+    @GET("warehouse/profil/list")
+    suspend fun getWindow(): Response<Windows>
 }

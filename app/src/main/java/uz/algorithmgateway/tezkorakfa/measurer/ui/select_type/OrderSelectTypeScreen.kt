@@ -1,7 +1,6 @@
 package uz.algorithmgateway.tezkorakfa.measurer.ui.select_type
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,7 +17,7 @@ import kotlinx.coroutines.launch
 import uz.algorithmgateway.tezkorakfa.R
 import uz.algorithmgateway.tezkorakfa.base.MyApplication
 import uz.algorithmgateway.tezkorakfa.data.models.UISpinner
-import uz.algorithmgateway.tezkorakfa.data.models.profile.Profile
+import uz.algorithmgateway.tezkorakfa.data.retrofit.models.profile.Profile
 import uz.algorithmgateway.tezkorakfa.databinding.ScreenSelectTypeOrderBinding
 import uz.algorithmgateway.tezkorakfa.measurer.SpinnerTextAdapter
 import uz.algorithmgateway.tezkorakfa.measurer.ui.select_type.models.Drawing
@@ -68,8 +67,17 @@ class OrderSelectTypeScreen : Fragment(), CoroutineScope {
         backClick()
         loadSpinnerDoorOrWindow()
         profile()
+        window()
 
         navigateButton()
+    }
+
+    private fun window() {
+        launch(Dispatchers.Main) {
+            viewmodel.window.collect { window ->
+
+            }
+        }
     }
 
     private fun profile() {
