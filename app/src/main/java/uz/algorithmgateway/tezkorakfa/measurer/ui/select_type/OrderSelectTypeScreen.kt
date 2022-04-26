@@ -79,6 +79,7 @@ class OrderSelectTypeScreen : Fragment(), CoroutineScope {
         navigateButton()
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private fun shelf() {
         launch(Dispatchers.Main) {
             viewmodel.shelf.collect { shelf ->
@@ -88,8 +89,37 @@ class OrderSelectTypeScreen : Fragment(), CoroutineScope {
                             tablayoutShelf.addTab(tablayoutShelf.newTab().setText(it.name))
                         }
                     }
+                    val adapter = CardsAdapter(object : CardsAdapter.onPress {
+                        override fun click(width: Width, position: Int) {
 
+                        }
+                    }, requireContext())
+                    cardsRv.adapter = adapter
 
+                    val cards = ArrayList<Width>()
+                    shelf?.results?.get(0)?.width?.forEach {
+                        cards.add(Width(id = it.id, name = it.name))
+                    }
+                    adapter.list = cards
+                    adapter.notifyDataSetChanged()
+                    tablayoutShelf.addOnTabSelectedListener(object :TabLayout.OnTabSelectedListener{
+                        override fun onTabSelected(tab: TabLayout.Tab?) {
+                            cards.clear()
+                            shelf?.results?.get(tab?.position ?: 0)?.width?.forEach {
+                                cards.add(Width(id = it.id, name = it.name))
+                            }
+                            adapter.list = cards
+                            adapter.notifyDataSetChanged()
+                        }
+
+                        override fun onTabUnselected(tab: TabLayout.Tab?) {
+
+                        }
+
+                        override fun onTabReselected(tab: TabLayout.Tab?) {
+
+                        }
+                    })
                 }
             }
         }
@@ -111,7 +141,7 @@ class OrderSelectTypeScreen : Fragment(), CoroutineScope {
                             val color = ArrayList<String>()
                             if (window?.results?.get(tabLayoutWindow.selectedTabPosition)?.width?.isNotEmpty() == true
                             ) {
-                                window.results[tabLayoutWindow.selectedTabPosition].width[position].color.forEach {
+                                window.results[tabLayoutWindow.selectedTabPosition].width[position].color?.forEach {
                                     color.add(it.name)
                                 }
                             }
@@ -130,7 +160,7 @@ class OrderSelectTypeScreen : Fragment(), CoroutineScope {
                         val color = ArrayList<String>()
                         if (window?.results?.get(0)?.width?.isNotEmpty() == true
                         ) {
-                            window.results[0].width[0].color.forEach {
+                            window.results[0].width[0].color?.forEach {
                                 color.add(it.name)
                             }
                         }
@@ -152,7 +182,7 @@ class OrderSelectTypeScreen : Fragment(), CoroutineScope {
                             if (window?.results?.get(tab?.position
                                     ?: 0)?.width?.isNotEmpty() == true
                             ) {
-                                window.results[tab?.position ?: 0].width[0].color.forEach {
+                                window.results[tab?.position ?: 0].width[0].color?.forEach {
                                     color.add(it.name)
                                 }
                             }
