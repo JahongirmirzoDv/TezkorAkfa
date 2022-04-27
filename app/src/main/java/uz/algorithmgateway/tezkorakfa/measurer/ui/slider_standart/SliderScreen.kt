@@ -1,5 +1,10 @@
 package uz.algorithmgateway.tezkorakfa.measurer.ui.slider_standart
 
+//import com.karumi.dexter.Dexter
+//import com.karumi.dexter.MultiplePermissionsReport
+//import com.karumi.dexter.PermissionToken
+//import com.karumi.dexter.listener.PermissionRequest
+//import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import android.Manifest
 import android.app.Activity
 import android.content.ClipData
@@ -21,25 +26,23 @@ import android.view.PixelCopy
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AlertDialog
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.google.gson.Gson
-//import com.karumi.dexter.Dexter
-//import com.karumi.dexter.MultiplePermissionsReport
-//import com.karumi.dexter.PermissionToken
-//import com.karumi.dexter.listener.PermissionRequest
-//import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import uz.algorithmgateway.core.util.toast
 import uz.algorithmgateway.tezkorakfa.R
 import uz.algorithmgateway.tezkorakfa.base.MyApplication
+import uz.algorithmgateway.tezkorakfa.base.MyApplication.Companion.instance
+import uz.algorithmgateway.tezkorakfa.databinding.LayoutChangeSizeDialogBinding
 import uz.algorithmgateway.tezkorakfa.databinding.ScreenSliderBinding
 import uz.algorithmgateway.tezkorakfa.measurer.ui.select_type.models.Drawing
 import uz.algorithmgateway.tezkorakfa.measurer.viewmodel.DbViewmodel
 import uz.algorithmgateway.tezkorakfa.windowdoordisegner.DragAndDropListener
 import uz.algorithmgateway.tezkorakfa.windowdoordisegner.ui.Area
 import uz.algorithmgateway.tezkorakfa.windowdoordisegner.ui.DesignerLayout
+import uz.algorithmgateway.tezkorakfa.windowdoordisegner.ui.sizeview.DialogSize
 import uz.algorithmgateway.tezkorakfa.windowdoordisegner.ui.sizeview.SizeDialog
 import java.io.File
 import java.io.FileOutputStream
@@ -60,6 +63,8 @@ class SliderScreen : Fragment() {
     private val navController by lazy(LazyThreadSafetyMode.NONE) { findNavController() }
     lateinit var dragAndDropListener: Area
     private val TAG = "SliderScreen"
+    var sliderObj = SliderScreen()
+    lateinit var dialogBinding: LayoutChangeSizeDialogBinding
 
     var lastView: View? = null
     var H: Int = 1300
@@ -67,12 +72,13 @@ class SliderScreen : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         MyApplication.appComponent.sliderScreen(this)
+//        DialogSize(this)
         arguments.let {
             W = it?.getInt("width")!!
             H = it.getInt("height")
             id = it.getString("id").toString()
             val t = it.getString("drawing").toString()
-            drawing = Gson().fromJson(t, Drawing::class.java)
+//            drawing = Gson().fromJson(t, Drawing::class.java)
         }
     }
 
@@ -285,8 +291,59 @@ class SliderScreen : Fragment() {
     }
 
     private fun showSizeDialog() {
-        SizeDialog().show(childFragmentManager, "SizeDialog")
+//        SizeDialog().show(childFragmentManager, "SizeDialog")
+
+        val builder = AlertDialog.Builder(requireContext())
+        dialogBinding = LayoutChangeSizeDialogBinding.inflate(layoutInflater)
+        builder.setView(dialogBinding.root)
+        val alertDialog: AlertDialog = builder.create()
+
+        dialogBinding.apply {
+            btn0.setOnClickListener { setview(0) }
+            btn1.setOnClickListener { setview(1) }
+            btn2.setOnClickListener { setview(2) }
+            btn3.setOnClickListener { setview(3) }
+            btn4.setOnClickListener { setview(4) }
+            btn5.setOnClickListener { setview(5) }
+            btn6.setOnClickListener { setview(6) }
+            btn7.setOnClickListener { setview(7) }
+            btn8.setOnClickListener { setview(8) }
+            btn9.setOnClickListener { setview(9) }
+//
+            ivBackspace.setOnClickListener { backspace() }
+
+            btnOk.setOnClickListener { okBtnClick() }
+            btnCancel.setOnClickListener { alertDialog.dismiss() }
+        }
+
+
+        alertDialog.show()
+
     }
+
+    private fun okBtnClick() {
+        dialogBinding.apply {
+            H = etSize.text.toString().toInt()
+            setUpDesignerLayout()
+        }
+    }
+
+    private fun setview(number: Int) {
+        val text = dialogBinding.etSize.text.toString()
+        dialogBinding.etSize.setText(text.plus(number.toString()))
+    }
+
+    private fun backspace() {
+        dialogBinding.apply {
+            val text = etSize.text
+            if (text != null) {
+                if (text.length > 0) {
+                    etSize.setText(text?.substring(0, text.length.minus(1)))
+                }
+            }
+        }
+    }
+
 
     private fun setDragAndDropToViews() {
         binding.viewDivideThreeHorizontal.setOnLongClickListener { v ->
@@ -396,4 +453,10 @@ class SliderScreen : Fragment() {
             return true
         } ?: return false
     }
+
+    open fun SliderScreen(): SliderScreen {
+        return sliderObj
+    }
+
+
 }

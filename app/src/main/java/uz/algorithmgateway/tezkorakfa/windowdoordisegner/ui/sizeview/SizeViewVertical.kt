@@ -27,6 +27,6 @@ class SizeViewVertical @JvmOverloads constructor(
 
     init {
         inflate(ctx, R.layout.layout_vertical_size_view, this)
-        textView = findViewById(R.id.tv_size)
+        textView = findViewById(R.id.tv_size2)
     }
 }

@@ -8,6 +8,8 @@ import android.util.AttributeSet
 import android.widget.LinearLayout
 import androidx.core.view.setPadding
 import uz.algorithmgateway.tezkorakfa.R
+import uz.algorithmgateway.tezkorakfa.core.util.layoutInflater
+import uz.algorithmgateway.tezkorakfa.databinding.ActivityDesignerBinding
 
 
 class WindowDoorDesigner @JvmOverloads constructor(
@@ -20,6 +22,8 @@ class WindowDoorDesigner @JvmOverloads constructor(
     private var H: Int = 0
     private var viewScale: Float = 0.0f
     private var childLayoutDesigner: LinearLayout
+//    private lateinit var binding: ActivityDesignerBinding
+//    val designer: DesignerLayout = binding.layoutDesigner
 
     companion object {
         val paintStroke = Paint().apply {
@@ -42,6 +46,7 @@ class WindowDoorDesigner @JvmOverloads constructor(
     }
 
     init {
+//        binding = ActivityDesignerBinding.inflate(layoutInflater)
         inflate(ctx, R.layout.file_disegner, this)
 
         setBackgroundColor(Color.WHITE)

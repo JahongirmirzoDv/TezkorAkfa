@@ -17,8 +17,8 @@ class DesignerActivity : AppCompatActivity() {
     var lastView: View? = null
 
     private lateinit var binding: ActivityDesignerBinding
-    var H: Int = 1300
-    var W: Int = 2000
+    var H: Int = 1400
+    var W: Int = 2020
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,15 +31,15 @@ class DesignerActivity : AppCompatActivity() {
         setDragAndDropToViews()
     }
 
-    private fun setUpDesignerLayout() {
+     fun setUpDesignerLayout() {
         val designer: DesignerLayout = binding.layoutDesigner
 
         designer.apply {
             setH(H)
             setW(W)
-            setFunctionOnSizeViewClick {
-                showSizeDialog()
-            }
+//            setFunctionOnSizeViewClick {
+//                showSizeDialog()
+//            }
         }
 
         val myLayoutParams = designer.layoutParams as ConstraintLayout.LayoutParams
@@ -50,6 +50,12 @@ class DesignerActivity : AppCompatActivity() {
     private fun showSizeDialog() {
         SizeDialog().show(supportFragmentManager, "SizeDialog")
     }
+
+    private fun sizeH(H: Int) {
+        val designer: DesignerLayout = binding.layoutDesigner
+        designer.setH(H)
+    }
+
 
     private fun setDragAndDropToViews() {
         binding.viewDivideThreeHorizontal.setOnLongClickListener { v ->
