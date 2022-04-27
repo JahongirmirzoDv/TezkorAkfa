@@ -75,8 +75,81 @@ class OrderSelectTypeScreen : Fragment(), CoroutineScope {
         profile()
         window()
         shelf()
+        accessories()
 
         navigateButton()
+    }
+
+    private fun accessories() {
+        launch(Dispatchers.Main) {
+            viewmodel.accessory.collect { access ->
+                binding.layoutAccessory.apply {
+                    if (access != null) {
+                        access.results.forEach {
+                            tabLayoutDastak.addTab(tabLayoutDastak.newTab().setText(it.name))
+                            tabLayoutPetla.addTab(tabLayoutPetla.newTab().setText(it.name))
+                        }
+                    }
+
+                    if (access != null) {
+                        val dastak = ArrayList<String>()
+                        val petla = ArrayList<String>()
+                        val dastakAdapter = SpinnerTextAdapter(requireContext())
+                        val petlaAdapter = SpinnerTextAdapter(requireContext())
+                        spinnerDastak.adapter = dastakAdapter
+                        spinnerPetla.adapter = petlaAdapter
+                        access.results.forEach {
+                            when (it.name) {
+                                "Eshik" -> {
+                                    it.type.forEach {
+                                        when (it.accessory_type) {
+                                            "dastak" -> {
+                                                dastak.clear()
+                                                it.raw_material.forEach {
+                                                    dastak.add(it.name)
+                                                }
+                                                dastakAdapter.list = dastak
+                                                dastakAdapter.notifyDataSetChanged()
+                                            }
+                                            "petla" -> {
+                                                petla.clear()
+                                                it.raw_material.forEach {
+                                                    petla.add(it.name)
+                                                }
+                                                petlaAdapter.list = petla
+                                                petlaAdapter.notifyDataSetChanged()
+                                            }
+                                        }
+                                    }
+                                }
+                                "Rom" -> {
+                                    it.type.forEach {
+                                        when (it.accessory_type) {
+                                            "dastak" -> {
+                                                dastak.clear()
+                                                it.raw_material.forEach {
+                                                    dastak.add(it.name)
+                                                }
+                                                dastakAdapter.list = dastak
+                                                dastakAdapter.notifyDataSetChanged()
+                                            }
+                                            "petla" -> {
+                                                petla.clear()
+                                                it.raw_material.forEach {
+                                                    petla.add(it.name)
+                                                }
+                                                petlaAdapter.list = petla
+                                                petlaAdapter.notifyDataSetChanged()
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -102,7 +175,8 @@ class OrderSelectTypeScreen : Fragment(), CoroutineScope {
                     }
                     adapter.list = cards
                     adapter.notifyDataSetChanged()
-                    tablayoutShelf.addOnTabSelectedListener(object :TabLayout.OnTabSelectedListener{
+                    tablayoutShelf.addOnTabSelectedListener(object :
+                        TabLayout.OnTabSelectedListener {
                         override fun onTabSelected(tab: TabLayout.Tab?) {
                             cards.clear()
                             shelf?.results?.get(tab?.position ?: 0)?.width?.forEach {

@@ -4,21 +4,26 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import uz.algorithmgateway.tezkorakfa.data.retrofit.ApiService
+import uz.algorithmgateway.tezkorakfa.data.retrofit.models.accessory.Accessory
 import uz.algorithmgateway.tezkorakfa.data.retrofit.models.profile.Profile
 import uz.algorithmgateway.tezkorakfa.data.retrofit.models.shelf.Shelf
 import uz.algorithmgateway.tezkorakfa.data.retrofit.models.window.Windows
-import uz.algorithmgateway.tezkorakfa.measurer.ui.accept_order.model.Locations
+import uz.algorithmgateway.tezkorakfa.data.retrofit.repository.NetworkRepository
 import javax.inject.Inject
 
 class NetworkViewmodel @Inject constructor(
     val apiService: ApiService,
+    var networkRepository: NetworkRepository,
 ) : ViewModel() {
     init {
         getProfile()
         getWindow()
         getShelf()
+        getAccessory()
     }
 
     private val _order = MutableStateFlow<Profile?>(null)
@@ -27,11 +32,12 @@ class NetworkViewmodel @Inject constructor(
 
     private fun getProfile() {
         viewModelScope.launch {
-            val responce = apiService.getProfile()
-            if (responce.isSuccessful) {
-                _order.value = responce.body()
-            } else {
+            networkRepository.getProfile().catch {
 
+            }.collect {
+                if (it.isSuccess) {
+                    _order.emit(it.getOrNull())
+                } else if (it.isFailure) _order.emit(null)
             }
         }
     }
@@ -42,11 +48,12 @@ class NetworkViewmodel @Inject constructor(
 
     private fun getWindow() {
         viewModelScope.launch {
-            val responce = apiService.getWindow()
-            if (responce.isSuccessful) {
-                _window.value = responce.body()
-            } else {
+            networkRepository.getWindow().catch {
 
+            }.collect {
+                if (it.isSuccess) {
+                    _window.emit(it.getOrNull())
+                } else if (it.isFailure) _window.emit(null)
             }
         }
     }
@@ -58,11 +65,30 @@ class NetworkViewmodel @Inject constructor(
 
     private fun getShelf() {
         viewModelScope.launch {
-            val responce = apiService.getShelf()
-            if (responce.isSuccessful) {
-                _shelf.value = responce.body()
-            } else {
+            networkRepository.getShelf().catch {
 
+            }.collect {
+                if (it.isSuccess) {
+                    _shelf.emit(it.getOrNull())
+                } else if (it.isFailure) _shelf.emit(null)
+            }
+        }
+    }
+
+
+    private val _accessory = MutableStateFlow<Accessory?>(null)
+    val accessory: StateFlow<Accessory?>
+        get() = _accessory
+
+
+    private fun getAccessory() {
+        viewModelScope.launch {
+            networkRepository.getAccsessory().catch {
+
+            }.collect {
+                if (it.isSuccess) {
+                    _accessory.emit(it.getOrNull())
+                } else if (it.isFailure) _accessory.emit(null)
             }
         }
     }

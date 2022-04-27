@@ -8,14 +8,14 @@ plugins {
 }
 
 android {
-    compileSdk compilesdk_version
+    compileSdk 31
 
     defaultConfig {
         applicationId "uz.algorithmgateway.tezkorakfa"
-        minSdk minsdk_version
-        targetSdk targetsdk_version
-        versionCode version_code
-        versionName version_name
+        minSdk 23
+        targetSdk 31
+        versionCode 1
+        versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -101,13 +101,11 @@ dependencies {
     kapt("androidx.room:room-compiler:2.4.2")
     implementation("androidx.room:room-ktx:2.4.2")
 
-//    implementation 'com.github.Gkemon:Android-XML-to-PDF-Generator:2.6.1'
-
     implementation 'com.karumi:dexter:6.2.3'
 
     //lottie
     implementation "com.airbnb.android:lottie:4.2.2"
 
-
+    implementation 'com.github.MohammadSianaki:Retrofit2-Flow-Call-Adapter:0.2.0'
 
 }

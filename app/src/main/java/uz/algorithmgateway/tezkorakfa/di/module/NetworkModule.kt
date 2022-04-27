@@ -4,6 +4,7 @@ import com.mocklets.pluto.BuildConfig
 import com.mocklets.pluto.PlutoInterceptor
 import dagger.Module
 import dagger.Provides
+import me.sianaki.flowretrofitadapter.FlowCallAdapterFactory
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -47,7 +48,7 @@ class NetworkModule {
                     .build()
                 chain.proceed(newRequest)
             }
-            .connectTimeout(60,TimeUnit.SECONDS)
+            .connectTimeout(5,TimeUnit.MINUTES)
             .build()
     }
 
@@ -61,6 +62,7 @@ class NetworkModule {
     ): Retrofit {
         return Retrofit.Builder()
             .addConverterFactory(gsonConverterFactory)
+            .addCallAdapterFactory(FlowCallAdapterFactory.create())
             .baseUrl(baseUrl)
             .client(okHttpClient)
             .build()
