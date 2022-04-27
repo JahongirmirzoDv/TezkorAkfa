@@ -18,7 +18,7 @@ class NetworkModule {
 
     @Provides
     @Singleton
-    fun getApi(): String = "http://157.245.62.70:8004/api/v1/"
+    fun getApi(): String = "http://157.245.62.70/api/v1/"
 
     @Singleton
     @Provides
