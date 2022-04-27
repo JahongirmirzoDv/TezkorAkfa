@@ -31,6 +31,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.google.gson.Gson
 import uz.algorithmgateway.core.util.toast
 import uz.algorithmgateway.tezkorakfa.R
 import uz.algorithmgateway.tezkorakfa.base.MyApplication
@@ -64,7 +65,8 @@ class SliderScreen : Fragment() {
     lateinit var dragAndDropListener: Area
     private val TAG = "SliderScreen"
     var sliderObj = SliderScreen()
-    lateinit var dialogBinding: LayoutChangeSizeDialogBinding
+    private lateinit var dialogBinding: LayoutChangeSizeDialogBinding
+    private var customHorVer: Boolean? = null
 
     var lastView: View? = null
     var H: Int = 1300
@@ -78,7 +80,9 @@ class SliderScreen : Fragment() {
             H = it.getInt("height")
             id = it.getString("id").toString()
             val t = it.getString("drawing").toString()
-//            drawing = Gson().fromJson(t, Drawing::class.java)
+            if (drawing != null) {
+                drawing = Gson().fromJson(t, Drawing::class.java)
+            }
         }
     }
 
@@ -280,8 +284,13 @@ class SliderScreen : Fragment() {
         designer.apply {
             setH(H)
             setW(W)
-            setFunctionOnSizeViewClick {
+            setFunctionOnSizeViewClickV {
                 showSizeDialog()
+                customHorVer = true
+            }
+            setFunctionOnSizeViewClickH {
+                showSizeDialog()
+                customHorVer = false
             }
         }
 
@@ -312,7 +321,10 @@ class SliderScreen : Fragment() {
 //
             ivBackspace.setOnClickListener { backspace() }
 
-            btnOk.setOnClickListener { okBtnClick() }
+            btnOk.setOnClickListener {
+                okBtnClick()
+                alertDialog.dismiss()
+            }
             btnCancel.setOnClickListener { alertDialog.dismiss() }
         }
 
@@ -323,8 +335,16 @@ class SliderScreen : Fragment() {
 
     private fun okBtnClick() {
         dialogBinding.apply {
-            H = etSize.text.toString().toInt()
-            setUpDesignerLayout()
+            if (customHorVer != null) {
+                if (customHorVer as Boolean) {
+                    H = etSize.text.toString().toInt()
+                    setUpDesignerLayout()
+                } else {
+                    W = etSize.text.toString().toInt()
+                    setUpDesignerLayout()
+                }
+
+            }
         }
     }
 

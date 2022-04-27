@@ -19,21 +19,27 @@ class DesignerLayout @JvmOverloads constructor(
     private var viewSizeVertical: SizeViewVertical
     private var viewDesigner: WindowDoorDesigner
     private lateinit var onSizeViewClick: () -> Unit
+    private lateinit var onSizeViewClick2: () -> Unit
 
 
     init {
         inflate(ctx, R.layout.layout_designer, this)
 
         viewSizeHorizontal = findViewById(R.id.view_size_horizontal)
-        viewSizeHorizontal.textView.setOnClickListener { onSizeViewClick.invoke() }
+        viewSizeHorizontal.textView.setOnClickListener {
+            onSizeViewClick.invoke() }
         viewSizeVertical = findViewById(R.id.view_size_vertical)
-        viewSizeVertical.textView.setOnClickListener { onSizeViewClick.invoke() }
+        viewSizeVertical.textView.setOnClickListener {
+            onSizeViewClick2.invoke() }
         viewDesigner = findViewById(R.id.view_designer)
 
     }
 
-    fun setFunctionOnSizeViewClick(function: () -> Unit) {
+    fun setFunctionOnSizeViewClickH(function: () -> Unit) {
         onSizeViewClick = function
+    }
+    fun setFunctionOnSizeViewClickV(function: () -> Unit) {
+        onSizeViewClick2 = function
     }
 
     fun setW(number: Int?) {
