@@ -75,10 +75,84 @@ class OrderSelectTypeScreen : Fragment(), CoroutineScope {
         profile()
         window()
         shelf()
+        accessories()
 
         navigateButton()
     }
 
+    private fun accessories() {
+        launch(Dispatchers.Main) {
+            viewmodel.accessory.collect { access ->
+                binding.layoutAccessory.apply {
+                    if (access != null) {
+                        access.results.forEach {
+                            tabLayoutDastak.addTab(tabLayoutDastak.newTab().setText(it.name))
+                            tabLayoutPetla.addTab(tabLayoutPetla.newTab().setText(it.name))
+                        }
+                    }
+
+                    if (access != null) {
+                        val dastak = ArrayList<String>()
+                        val petla = ArrayList<String>()
+                        val dastakAdapter = SpinnerTextAdapter(requireContext())
+                        val petlaAdapter = SpinnerTextAdapter(requireContext())
+                        spinnerDastak.adapter = dastakAdapter
+                        spinnerPetla.adapter = petlaAdapter
+                        access.results.forEach {
+                            when (it.name) {
+                                "Eshik" -> {
+                                    it.type.forEach {
+                                        when (it.accessory_type) {
+                                            "dastak" -> {
+                                                dastak.clear()
+                                                it.raw_material.forEach {
+                                                    dastak.add(it.name)
+                                                }
+                                                dastakAdapter.list = dastak
+                                                dastakAdapter.notifyDataSetChanged()
+                                            }
+                                            "petla" -> {
+                                                petla.clear()
+                                                it.raw_material.forEach {
+                                                    petla.add(it.name)
+                                                }
+                                                petlaAdapter.list = petla
+                                                petlaAdapter.notifyDataSetChanged()
+                                            }
+                                        }
+                                    }
+                                }
+                                "Rom" -> {
+                                    it.type.forEach {
+                                        when (it.accessory_type) {
+                                            "dastak" -> {
+                                                dastak.clear()
+                                                it.raw_material.forEach {
+                                                    dastak.add(it.name)
+                                                }
+                                                dastakAdapter.list = dastak
+                                                dastakAdapter.notifyDataSetChanged()
+                                            }
+                                            "petla" -> {
+                                                petla.clear()
+                                                it.raw_material.forEach {
+                                                    petla.add(it.name)
+                                                }
+                                                petlaAdapter.list = petla
+                                                petlaAdapter.notifyDataSetChanged()
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
     private fun shelf() {
         launch(Dispatchers.Main) {
             viewmodel.shelf.collect { shelf ->
@@ -88,8 +162,38 @@ class OrderSelectTypeScreen : Fragment(), CoroutineScope {
                             tablayoutShelf.addTab(tablayoutShelf.newTab().setText(it.name))
                         }
                     }
+                    val adapter = CardsAdapter(object : CardsAdapter.onPress {
+                        override fun click(width: Width, position: Int) {
 
+                        }
+                    }, requireContext())
+                    cardsRv.adapter = adapter
 
+                    val cards = ArrayList<Width>()
+                    shelf?.results?.get(0)?.width?.forEach {
+                        cards.add(Width(id = it.id, name = it.name))
+                    }
+                    adapter.list = cards
+                    adapter.notifyDataSetChanged()
+                    tablayoutShelf.addOnTabSelectedListener(object :
+                        TabLayout.OnTabSelectedListener {
+                        override fun onTabSelected(tab: TabLayout.Tab?) {
+                            cards.clear()
+                            shelf?.results?.get(tab?.position ?: 0)?.width?.forEach {
+                                cards.add(Width(id = it.id, name = it.name))
+                            }
+                            adapter.list = cards
+                            adapter.notifyDataSetChanged()
+                        }
+
+                        override fun onTabUnselected(tab: TabLayout.Tab?) {
+
+                        }
+
+                        override fun onTabReselected(tab: TabLayout.Tab?) {
+
+                        }
+                    })
                 }
             }
         }
@@ -111,7 +215,7 @@ class OrderSelectTypeScreen : Fragment(), CoroutineScope {
                             val color = ArrayList<String>()
                             if (window?.results?.get(tabLayoutWindow.selectedTabPosition)?.width?.isNotEmpty() == true
                             ) {
-                                window.results[tabLayoutWindow.selectedTabPosition].width[position].color.forEach {
+                                window.results[tabLayoutWindow.selectedTabPosition].width[position].color?.forEach {
                                     color.add(it.name)
                                 }
                             }
@@ -130,7 +234,7 @@ class OrderSelectTypeScreen : Fragment(), CoroutineScope {
                         val color = ArrayList<String>()
                         if (window?.results?.get(0)?.width?.isNotEmpty() == true
                         ) {
-                            window.results[0].width[0].color.forEach {
+                            window.results[0].width[0].color?.forEach {
                                 color.add(it.name)
                             }
                         }
@@ -154,7 +258,7 @@ class OrderSelectTypeScreen : Fragment(), CoroutineScope {
                                         ?: 0
                                 )?.width?.isNotEmpty() == true
                             ) {
-                                window.results[tab?.position ?: 0].width[0].color.forEach {
+                                window.results[tab?.position ?: 0].width[0].color?.forEach {
                                     color.add(it.name)
                                 }
                             }

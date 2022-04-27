@@ -2,19 +2,22 @@ package uz.algorithmgateway.tezkorakfa.ui.login.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import uz.algorithmgateway.data.api.models.UserRequest
 import uz.algorithmgateway.data.api.models.UserResponse
 import uz.algorithmgateway.tezkorakfa.data.retrofit.ApiService
 import uz.algorithmgateway.tezkorakfa.data.retrofit.models.sales_order_list.OderList
+import uz.algorithmgateway.tezkorakfa.data.retrofit.repository.NetworkRepository
 import uz.algorithmgateway.tezkorakfa.ui.utils.UIState
 import javax.inject.Inject
 
 class LoginViewModel @Inject constructor(
     var apiService: ApiService,
+    var networkRepository: NetworkRepository,
 ) : ViewModel() {
     private val _state = MutableStateFlow<UIState<UserResponse?>>(UIState.Loading)
     val state: StateFlow<UIState<UserResponse?>>
@@ -35,13 +38,16 @@ class LoginViewModel @Inject constructor(
 
     fun getOrder() {
         viewModelScope.launch {
-            coroutineScope {
-                var responce = apiService.salesOrderList()
-                if (responce.isSuccessful) {
-                    _order.value = UIState.Success(responce.body())
-                } else _order.value = UIState.Error(responce.message())
-            }
+            networkRepository.salesOrderList()
+                .catch {
+                    _order.emit(UIState.Error(it.message.toString()))
+                }.collect {
+                    if (it.isSuccess) {
+                        _order.emit(UIState.Success(it.getOrNull()))
+                    } else if (it.isFailure) {
+                        _order.emit(UIState.Error(it.exceptionOrNull()?.message.toString()))
+                    }
+                }
         }
     }
-
 }
