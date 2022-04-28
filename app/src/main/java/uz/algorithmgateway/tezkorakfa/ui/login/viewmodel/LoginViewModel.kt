@@ -25,7 +25,7 @@ class LoginViewModel @Inject constructor(
 
     fun loginUser(phone: String, password: String) {
         viewModelScope.launch {
-            var responce = apiService.loginUser(UserRequest(phone, password))
+            val responce = apiService.loginUser(UserRequest(phone, password))
             if (responce.isSuccessful) {
                 _state.value = UIState.Success(responce.body())
             } else _state.value = UIState.Error(responce.message())
@@ -40,12 +40,12 @@ class LoginViewModel @Inject constructor(
         viewModelScope.launch {
             networkRepository.salesOrderList()
                 .catch {
-                    _order.emit(UIState.Error(it.message.toString()))
+                    _order.emit(UIState.Error("Internet bilan muammo, Qayta urining"))
                 }.collect {
                     if (it.isSuccess) {
                         _order.emit(UIState.Success(it.getOrNull()))
                     } else if (it.isFailure) {
-                        _order.emit(UIState.Error(it.exceptionOrNull()?.message.toString()))
+                        _order.emit(UIState.Error("Server bilan muammo"))
                     }
                 }
         }

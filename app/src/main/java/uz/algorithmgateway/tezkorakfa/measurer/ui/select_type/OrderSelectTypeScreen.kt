@@ -98,54 +98,7 @@ class OrderSelectTypeScreen : Fragment(), CoroutineScope {
                         val petlaAdapter = SpinnerTextAdapter(requireContext())
                         spinnerDastak.adapter = dastakAdapter
                         spinnerPetla.adapter = petlaAdapter
-                        access.results.forEach {
-                            when (it.name) {
-                                "Eshik" -> {
-                                    it.type.forEach {
-                                        when (it.accessory_type) {
-                                            "dastak" -> {
-                                                dastak.clear()
-                                                it.raw_material.forEach {
-                                                    dastak.add(it.name)
-                                                }
-                                                dastakAdapter.list = dastak
-                                                dastakAdapter.notifyDataSetChanged()
-                                            }
-                                            "petla" -> {
-                                                petla.clear()
-                                                it.raw_material.forEach {
-                                                    petla.add(it.name)
-                                                }
-                                                petlaAdapter.list = petla
-                                                petlaAdapter.notifyDataSetChanged()
-                                            }
-                                        }
-                                    }
-                                }
-                                "Rom" -> {
-                                    it.type.forEach {
-                                        when (it.accessory_type) {
-                                            "dastak" -> {
-                                                dastak.clear()
-                                                it.raw_material.forEach {
-                                                    dastak.add(it.name)
-                                                }
-                                                dastakAdapter.list = dastak
-                                                dastakAdapter.notifyDataSetChanged()
-                                            }
-                                            "petla" -> {
-                                                petla.clear()
-                                                it.raw_material.forEach {
-                                                    petla.add(it.name)
-                                                }
-                                                petlaAdapter.list = petla
-                                                petlaAdapter.notifyDataSetChanged()
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
+
                     }
                 }
             }

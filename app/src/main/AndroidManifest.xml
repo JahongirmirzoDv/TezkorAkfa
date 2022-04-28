@@ -33,6 +33,13 @@
             android:name="uz.algorithmgateway.tezkorakfa.ui.splash.SplashActivity"
             android:exported="true"
             android:windowSoftInputMode="adjustResize">
+
+        </activity>
+        <activity
+            android:name="uz.algorithmgateway.tezkorakfa.ui.login.LoginActivity"
+            android:exported="true" />
+        <activity android:name=".measurer.ui.MeasurerActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -40,12 +47,8 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="uz.algorithmgateway.tezkorakfa.ui.login.LoginActivity"
-            android:exported="true" />
-        <activity android:name=".measurer.ui.MeasurerActivity" />
-        <activity
             android:name=".supplier.SupplierActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name=".montage.MontageActivity"
             android:exported="true">

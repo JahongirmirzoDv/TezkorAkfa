@@ -50,52 +50,64 @@ class OrderListFragment(
 
 
         networkConnectionLiveData.observe(requireActivity()) {
-            if (it) {
-                launch(Dispatchers.Main) {
-                    try {
-                        loginViewModel.getOrder()
-                        loginViewModel.order.collect { list ->
-                            when (list) {
-                                is UIState.Loading -> {
+            loadData(it)
+        }
 
-                                }
-                                is UIState.Error -> {
-                                    toast(list.message)
-                                }
-                                is UIState.Success -> {
-                                    adapter = OrderListAdapter(
-                                        object : OrderListAdapter.onClick {
-                                            override fun onCallClick(number: String) {
-                                                val uri = Uri.parse("tel: $number")
-                                                val intent = Intent(Intent.ACTION_DIAL, uri)
-                                                requireActivity().startActivity(intent)
-                                            }
+        return binding.root
+    }
 
-                                            override fun onAcceptClick(item: Result) {
-                                                val bundle = Bundle()
-                                                val toJson = Gson().toJson(item)
-                                                bundle.putString("item", toJson)
-                                                findNavController().navigate(R.id.acceptOrderScreen,
-                                                    bundle)
-                                            }
-                                        }
-                                    )
-                                    binding.rvOrders.adapter = adapter
-                                    adapter.updateList(list.data?.results ?: emptyList())
-                                    binding.progress.visibility = View.GONE
+    private fun loadData(it: Boolean) {
+        if (it) {
+            launch(Dispatchers.Main) {
+                try {
+                    loginViewModel.getOrder()
+                    loginViewModel.order.collect { list ->
+                        when (list) {
+                            is UIState.Loading -> {
+                                binding.progress.visibility = View.VISIBLE
+                                binding.retry.visibility = View.GONE
+                            }
+                            is UIState.Error -> {
+                                toast(list.message)
+                                binding.progress.visibility = View.GONE
+                                binding.retry.visibility = View.VISIBLE
+                                binding.retry.setOnClickListener {
+                                    loadData(true)
                                 }
                             }
-                        }
-                    } catch (e: Exception) {
-                        e.printStackTrace()
-                    }
-                }
+                            is UIState.Success -> {
+                                adapter = OrderListAdapter(
+                                    object : OrderListAdapter.onClick {
+                                        override fun onCallClick(number: String) {
+                                            val uri = Uri.parse("tel: $number")
+                                            val intent = Intent(Intent.ACTION_DIAL, uri)
+                                            requireActivity().startActivity(intent)
+                                        }
 
-            } else {
-                binding.progress.visibility = View.VISIBLE
+                                        override fun onAcceptClick(item: Result) {
+                                            val bundle = Bundle()
+                                            val toJson = Gson().toJson(item)
+                                            bundle.putString("item", toJson)
+                                            findNavController().navigate(R.id.acceptOrderScreen,
+                                                bundle)
+                                        }
+                                    }
+                                )
+                                binding.rvOrders.adapter = adapter
+                                adapter.updateList(list.data?.results ?: emptyList())
+                                binding.progress.visibility = View.GONE
+                                binding.retry.visibility = View.GONE
+                            }
+                        }
+                    }
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
             }
+
+        } else {
+            binding.progress.visibility = View.VISIBLE
         }
-        return binding.root
     }
 
     override val coroutineContext: CoroutineContext

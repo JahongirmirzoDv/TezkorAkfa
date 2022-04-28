@@ -1,6 +1,5 @@
 package uz.algorithmgateway.tezkorakfa.di.module
 
-import com.mocklets.pluto.BuildConfig
 import com.mocklets.pluto.PlutoInterceptor
 import dagger.Module
 import dagger.Provides
@@ -9,6 +8,7 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import uz.algorithmgateway.tezkorakfa.BuildConfig
 import uz.algorithmgateway.tezkorakfa.data.retrofit.ApiService
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
@@ -18,7 +18,7 @@ class NetworkModule {
 
     @Provides
     @Singleton
-    fun getApi(): String = "http://157.245.62.70/api/v1/"
+    fun getApi(): String = BuildConfig.BASE_URL
 
     @Singleton
     @Provides
@@ -48,7 +48,7 @@ class NetworkModule {
                     .build()
                 chain.proceed(newRequest)
             }
-            .connectTimeout(5,TimeUnit.MINUTES)
+            .connectTimeout(5, TimeUnit.MINUTES)
             .build()
     }
 
@@ -58,7 +58,7 @@ class NetworkModule {
     fun provideRetforit(
         baseUrl: String,
         gsonConverterFactory: GsonConverterFactory,
-        okHttpClient: OkHttpClient
+        okHttpClient: OkHttpClient,
     ): Retrofit {
         return Retrofit.Builder()
             .addConverterFactory(gsonConverterFactory)
@@ -71,6 +71,4 @@ class NetworkModule {
     @Singleton
     @Provides
     fun provideApiService(retrofit: Retrofit): ApiService = retrofit.create(ApiService::class.java)
-
-
 }
