@@ -8,14 +8,35 @@
         <entry key="..\:/Android_studio/Dager Hilt/TezkorAkfa/app/src/main/res/drawable/bg_item_confirmed_orders_add_image.xml" value="0.193" />
         <entry key="..\:/Android_studio/Dager Hilt/TezkorAkfa/app/src/main/res/drawable/bg_item_table_header.xml" value="0.193" />
         <entry key="..\:/Android_studio/Dager Hilt/TezkorAkfa/app/src/main/res/drawable/ic_plus_item_conf.xml" value="0.193" />
+        <entry key="..\:/Android_studio/Dager Hilt/TezkorAkfa/app/src/main/res/layout/activity_designer.xml" value="0.25" />
+        <entry key="..\:/Android_studio/Dager Hilt/TezkorAkfa/app/src/main/res/layout/activity_measurer.xml" value="0.24895833333333334" />
         <entry key="..\:/Android_studio/Dager Hilt/TezkorAkfa/app/src/main/res/layout/activity_montage.xml" value="0.25" />
         <entry key="..\:/Android_studio/Dager Hilt/TezkorAkfa/app/src/main/res/layout/alert_dialog_montage.xml" value="0.264" />
+        <entry key="..\:/Android_studio/Dager Hilt/TezkorAkfa/app/src/main/res/layout/drawing_item.xml" value="0.24583333333333332" />
+        <entry key="..\:/Android_studio/Dager Hilt/TezkorAkfa/app/src/main/res/layout/file_disegner.xml" value="0.24583333333333332" />
         <entry key="..\:/Android_studio/Dager Hilt/TezkorAkfa/app/src/main/res/layout/fragment_confirmed_orders.xml" value="0.264" />
         <entry key="..\:/Android_studio/Dager Hilt/TezkorAkfa/app/src/main/res/layout/fragment_confirmed_orders_image_info.xml" value="0.25" />
+        <entry key="..\:/Android_studio/Dager Hilt/TezkorAkfa/app/src/main/res/layout/fragment_designer.xml" value="0.25" />
+        <entry key="..\:/Android_studio/Dager Hilt/TezkorAkfa/app/src/main/res/layout/fragment_drawings.xml" value="0.25" />
         <entry key="..\:/Android_studio/Dager Hilt/TezkorAkfa/app/src/main/res/layout/fragment_orders.xml" value="0.25" />
         <entry key="..\:/Android_studio/Dager Hilt/TezkorAkfa/app/src/main/res/layout/fragment_parametr.xml" value="0.25" />
+        <entry key="..\:/Android_studio/Dager Hilt/TezkorAkfa/app/src/main/res/layout/fragment_purchase_second.xml" value="0.264" />
+        <entry key="..\:/Android_studio/Dager Hilt/TezkorAkfa/app/src/main/res/layout/fragment_save_pdf.xml" value="0.24583333333333332" />
         <entry key="..\:/Android_studio/Dager Hilt/TezkorAkfa/app/src/main/res/layout/item_confirmed_orders.xml" value="0.4" />
+        <entry key="..\:/Android_studio/Dager Hilt/TezkorAkfa/app/src/main/res/layout/item_found_list_header.xml" value="0.536" />
+        <entry key="..\:/Android_studio/Dager Hilt/TezkorAkfa/app/src/main/res/layout/item_spinner.xml" value="0.25" />
+        <entry key="..\:/Android_studio/Dager Hilt/TezkorAkfa/app/src/main/res/layout/layout_change_size_dialog.xml" value="0.25" />
+        <entry key="..\:/Android_studio/Dager Hilt/TezkorAkfa/app/src/main/res/layout/layout_designer.xml" value="0.25" />
+        <entry key="..\:/Android_studio/Dager Hilt/TezkorAkfa/app/src/main/res/layout/layout_horizontal_size_view.xml" value="0.25" />
+        <entry key="..\:/Android_studio/Dager Hilt/TezkorAkfa/app/src/main/res/layout/layout_vertical_size_view.xml" value="0.25" />
         <entry key="..\:/Android_studio/Dager Hilt/TezkorAkfa/app/src/main/res/layout/montage_order_item.xml" value="0.25" />
+        <entry key="..\:/Android_studio/Dager Hilt/TezkorAkfa/app/src/main/res/layout/screen_accept_order.xml" value="0.25" />
+        <entry key="..\:/Android_studio/Dager Hilt/TezkorAkfa/app/src/main/res/layout/screen_select_count.xml" value="0.264" />
+        <entry key="..\:/Android_studio/Dager Hilt/TezkorAkfa/app/src/main/res/layout/screen_select_type_order.xml" value="0.264" />
+        <entry key="..\:/Android_studio/Dager Hilt/TezkorAkfa/app/src/main/res/layout/screen_slider.xml" value="0.25" />
+        <entry key="..\:/Android_studio/Dager Hilt/TezkorAkfa/app/src/main/res/layout/section_profile.xml" value="0.24583333333333332" />
+        <entry key="..\:/Android_studio/Dager Hilt/TezkorAkfa/app/src/main/res/layout/section_shelf.xml" value="0.4" />
+        <entry key="..\:/Android_studio/Dager Hilt/TezkorAkfa/app/src/main/res/layout/section_window.xml" value="0.4" />
         <entry key="..\:/Android_studio/Dager Hilt/TezkorAkfa/app/src/main/res/layout/toolbar_montage.xml" value="0.25" />
         <entry key="..\:/Users/jahon/Ishchi stol/TezkorAkfaNew/app/src/main/res/layout/activity_designer.xml" value="0.1" />
         <entry key="..\:/Users/jahon/Ishchi stol/TezkorAkfaNew/app/src/main/res/layout/activity_login.xml" value="0.22447916666666667" />
@@ -32,7 +53,6 @@
         <entry key="..\:/anp/abs/app/src/main/res/drawable/bg_login_box.xml" value="0.182" />
         <entry key="..\:/anp/abs/app/src/main/res/drawable/bg_order_found_circle.xml" value="0.182" />
         <entry key="..\:/anp/abs/app/src/main/res/drawable/bg_small_view.xml" value="0.182" />
-        <entry key="..\:/anp/abs/app/src/main/res/drawable/border.xml" value="0.1395" />
         <entry key="..\:/anp/abs/app/src/main/res/drawable/card_item.xml" value="0.182" />
         <entry key="..\:/anp/abs/app/src/main/res/drawable/drawing_cutting.xml" value="0.1735" />
         <entry key="..\:/anp/abs/app/src/main/res/drawable/ic_account.xml" value="0.12" />
@@ -67,8 +87,7 @@
         <entry key="..\:/anp/abs/app/src/main/res/layout/activity_montage.xml" value="0.1" />
         <entry key="..\:/anp/abs/app/src/main/res/layout/activity_splash.xml" value="0.22447916666666667" />
         <entry key="..\:/anp/abs/app/src/main/res/layout/activity_supplier.xml" value="0.22447916666666667" />
-        <entry key="..\:/anp/abs/app/src/main/res/layout/cards_item.xml" value="0.33" />
-        <entry key="..\:/anp/abs/app/src/main/res/layout/drawing_item.xml" value="0.5268505079825835" />
+        <entry key="..\:/anp/abs/app/src/main/res/layout/drawing_item.xml" value="0.22447916666666667" />
         <entry key="..\:/anp/abs/app/src/main/res/layout/file_disegner.xml" value="0.1" />
         <entry key="..\:/anp/abs/app/src/main/res/layout/file_doooooor.xml" value="0.22447916666666667" />
         <entry key="..\:/anp/abs/app/src/main/res/layout/file_door.xml" value="0.22447916666666667" />
@@ -85,10 +104,8 @@
         <entry key="..\:/anp/abs/app/src/main/res/layout/fragment_purchase_first.xml" value="0.22447916666666667" />
         <entry key="..\:/anp/abs/app/src/main/res/layout/fragment_purchase_second.xml" value="0.22447916666666667" />
         <entry key="..\:/anp/abs/app/src/main/res/layout/fragment_purchased.xml" value="0.22447916666666667" />
-        <entry key="..\:/anp/abs/app/src/main/res/layout/fragment_save_pdf.xml" value="0.14958448753462603" />
         <entry key="..\:/anp/abs/app/src/main/res/layout/fragment_supplier.xml" value="0.22447916666666667" />
         <entry key="..\:/anp/abs/app/src/main/res/layout/fragment_tab_layout.xml" value="0.22447916666666667" />
-        <entry key="..\:/anp/abs/app/src/main/res/layout/image_dialog.xml" value="0.22447916666666667" />
         <entry key="..\:/anp/abs/app/src/main/res/layout/item_confirm.xml" value="0.22447916666666667" />
         <entry key="..\:/anp/abs/app/src/main/res/layout/item_found_list_header.xml" value="0.22447916666666667" />
         <entry key="..\:/anp/abs/app/src/main/res/layout/item_order.xml" value="0.5" />
@@ -96,10 +113,8 @@
         <entry key="..\:/anp/abs/app/src/main/res/layout/layout_change_size_dialog.xml" value="0.1" />
         <entry key="..\:/anp/abs/app/src/main/res/layout/layout_designer.xml" value="0.1" />
         <entry key="..\:/anp/abs/app/src/main/res/layout/layout_loading_dialog.xml" value="0.1" />
-        <entry key="..\:/anp/abs/app/src/main/res/layout/location_screen_.xml" value="0.22447916666666667" />
         <entry key="..\:/anp/abs/app/src/main/res/layout/meter_item.xml" value="0.5" />
         <entry key="..\:/anp/abs/app/src/main/res/layout/montage_order_item.xml" value="0.33" />
-        <entry key="..\:/anp/abs/app/src/main/res/layout/pdf_item.xml" value="0.43796992481203006" />
         <entry key="..\:/anp/abs/app/src/main/res/layout/screen_accept_order.xml" value="0.1" />
         <entry key="..\:/anp/abs/app/src/main/res/layout/screen_confirm_orders.xml" value="0.22083333333333333" />
         <entry key="..\:/anp/abs/app/src/main/res/layout/screen_orders.xml" value="0.22" />
@@ -109,8 +124,8 @@
         <entry key="..\:/anp/abs/app/src/main/res/layout/section_accessory.xml" value="0.22447916666666667" />
         <entry key="..\:/anp/abs/app/src/main/res/layout/section_cage.xml" value="0.22447916666666667" />
         <entry key="..\:/anp/abs/app/src/main/res/layout/section_profile.xml" value="0.22447916666666667" />
-        <entry key="..\:/anp/abs/app/src/main/res/layout/section_shelf.xml" value="0.2" />
-        <entry key="..\:/anp/abs/app/src/main/res/layout/section_window.xml" value="0.33" />
+        <entry key="..\:/anp/abs/app/src/main/res/layout/section_shelf.xml" value="0.22447916666666667" />
+        <entry key="..\:/anp/abs/app/src/main/res/layout/section_window.xml" value="0.22447916666666667" />
         <entry key="..\:/anp/abs/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.22447916666666667" />
         <entry key="..\:/anp/abs/app/src/main/res/menu/montage.xml" value="0.22447916666666667" />
         <entry key="..\:/anp/abs/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.117" />

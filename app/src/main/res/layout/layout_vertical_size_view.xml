@@ -9,8 +9,8 @@
         android:layout_width="25dp"
         android:layout_height="2dp"
         android:background="@color/blue"
-        app:layout_constraintStart_toStartOf="@id/tv_size"
-        app:layout_constraintEnd_toEndOf="@id/tv_size"
+        app:layout_constraintStart_toStartOf="@id/tv_size2"
+        app:layout_constraintEnd_toEndOf="@id/tv_size2"
         app:layout_constraintTop_toTopOf="parent" />
 
     <View
@@ -21,10 +21,10 @@
         app:layout_constraintTop_toBottomOf="@id/view1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/tv_size" />
+        app:layout_constraintBottom_toTopOf="@id/tv_size2" />
 
     <TextView
-        android:id="@+id/tv_size"
+        android:id="@+id/tv_size2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="1500"
@@ -47,7 +47,7 @@
         android:background="@color/blue"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_size"
+        app:layout_constraintTop_toBottomOf="@id/tv_size2"
         app:layout_constraintBottom_toTopOf="@id/view4" />
 
     <View
@@ -55,8 +55,8 @@
         android:layout_width="25dp"
         android:layout_height="2dp"
         android:background="@color/blue"
-        app:layout_constraintStart_toStartOf="@id/tv_size"
-        app:layout_constraintEnd_toEndOf="@id/tv_size"
+        app:layout_constraintStart_toStartOf="@id/tv_size2"
+        app:layout_constraintEnd_toEndOf="@id/tv_size2"
         app:layout_constraintTop_toBottomOf="@id/view3"
         app:layout_constraintBottom_toBottomOf="parent" />
 

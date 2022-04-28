@@ -71,7 +71,7 @@ class OrderSelectTypeScreen : Fragment(), CoroutineScope {
         super.onViewCreated(view, savedInstanceState)
         binding.projectId.text = "Loyiha $id"
         backClick()
-        loadSpinnerDoorOrWindow()
+//        loadSpinnerDoorOrWindow()
         profile()
         window()
         shelf()
@@ -206,8 +206,10 @@ class OrderSelectTypeScreen : Fragment(), CoroutineScope {
                             }
 
                             val color = ArrayList<String>()
-                            if (window?.results?.get(tab?.position
-                                    ?: 0)?.width?.isNotEmpty() == true
+                            if (window?.results?.get(
+                                    tab?.position
+                                        ?: 0
+                                )?.width?.isNotEmpty() == true
                             ) {
                                 window.results[tab?.position ?: 0].width[0].color?.forEach {
                                     color.add(it.name)
@@ -334,72 +336,73 @@ class OrderSelectTypeScreen : Fragment(), CoroutineScope {
     private fun navigateButton() {
         binding.btnNext.setOnClickListener {
             binding.apply {
-                val type = binding.spinnerRoomOrDoor.selectedItem.toString()
-                val external_or_Internal = when (binding.radioGroup.checkedRadioButtonId) {
-                    R.id.radioOut -> {
-                        "tashqi"
-                    }
-                    else -> {
-                        "ichki"
-                    }
-                }
-                val profile_type =
-                    profile_List?.results?.get(binding.layoutProfile.tabLayoutProfile.selectedTabPosition)?.name
-                val profile_type_two =
-                    binding.layoutProfile.spinnerTypeProfile.selectedItem.toString()
-                val uiSpinner1 = binding.layoutProfile.spinnerTypeTexture.selectedItem as UISpinner
-                val profile_texture = uiSpinner1.title
-                val mirror_layer =
-                    mirror_layer_List[binding.layoutWindow.tabLayoutWindow.selectedTabPosition]
-                val uiSpinner = binding.layoutWindow.spinnerWindowColor.selectedItem as UISpinner
-                val mirror_color = uiSpinner.title
-                val window_sill = shelf_List[binding.layoutShelf.tablayoutShelf.selectedTabPosition]
-                val handle = binding.layoutAccessory.spinnerDastak.selectedItem.toString()
-                val handle_petla = binding.layoutAccessory.spinnerPetla.selectedItem.toString()
-                val handle_texture =
-                    binding.layoutAccessory.spinnerTypeTexture.selectedItem.toString()
-                val handle_type =
-                    type_handle[binding.layoutAccessory.tabLayoutDastak.selectedTabPosition]
-                val handle_petla_type =
-                    type_handle[binding.layoutAccessory.tabLayoutPetla.selectedTabPosition]
-                val net = binding.comment.text.toString()
-                drawing = Drawing(
-                    id,
-                    type,
-                    external_or_Internal,
-                    profile_type,
-                    profile_type_two,
-                    profile_texture,
-                    mirror_layer,
-                    mirror_color,
-                    window_sill,
-                    handle,
-                    handle_petla,
-                    handle_texture,
-                    handle_type,
-                    handle_petla_type,
-                    net
-                )
-                dbViewmodel.addDrawing(drawing)
+//                val type = binding.spinnerRoomOrDoor.selectedItem.toString()
+//                val external_or_Internal = when (binding.radioGroup.checkedRadioButtonId) {
+//                    R.id.radioOut -> {
+//                        "tashqi"
+//                    }
+//                    else -> {
+//                        "ichki"
+//                    }
+//                }
+//                val profile_type =
+//                    profile_List?.results?.get(binding.layoutProfile.tabLayoutProfile.selectedTabPosition)?.name
+//                val profile_type_two =
+//                    binding.layoutProfile.spinnerTypeProfile.selectedItem.toString()
+////                val uiSpinner1 = binding.layoutProfile.spinnerTypeTexture.selectedItem as UISpinner
+////                val profile_texture = uiSpinner1.title
+//                val mirror_layer =
+//                    mirror_layer_List[binding.layoutWindow.tabLayoutWindow.selectedTabPosition]
+////                val uiSpinner = binding.layoutWindow.spinnerWindowColor.selectedItem as UISpinner
+////                val mirror_color = uiSpinner.title
+//                val window_sill = shelf_List[binding.layoutShelf.tablayoutShelf.selectedTabPosition]
+//                val handle = binding.layoutAccessory.spinnerDastak.selectedItem.toString()
+//                val handle_petla = binding.layoutAccessory.spinnerPetla.selectedItem.toString()
+//                val handle_texture =
+//                    binding.layoutAccessory.spinnerTypeTexture.selectedItem.toString()
+//                val handle_type =
+//                    type_handle[binding.layoutAccessory.tabLayoutDastak.selectedTabPosition]
+//                val handle_petla_type =
+//                    type_handle[binding.layoutAccessory.tabLayoutPetla.selectedTabPosition]
+//                val net = binding.comment.text.toString()
+//                drawing = Drawing(
+//                    id,
+//                    type,
+//                    external_or_Internal,
+//                    profile_type,
+//                    profile_type_two,
+//                    "profile_texture",
+//                    mirror_layer,
+//                    "mirror_color",
+//                    window_sill,
+//                    handle,
+//                    handle_petla,
+//                    handle_texture,
+//                    handle_type,
+//                    handle_petla_type,
+//                    net
+//                )
+//                dbViewmodel.addDrawing(drawing)
+//            }
+//            val bundle = Bundle()
+//            val toJson = Gson().toJson(drawing)
+//            bundle.putString("id", id)
+//            bundle.putString("drawing", toJson)
+                navController.navigate(R.id.itemCountScreen)
             }
-            val bundle = Bundle()
-            val toJson = Gson().toJson(drawing)
-            bundle.putString("id", id)
-            bundle.putString("drawing", toJson)
-            navController.navigate(R.id.itemCountScreen, bundle)
-        }
 
-        binding.btnBack.setOnClickListener {
-            navController.navigateUp()
-        }
+            binding.btnBack.setOnClickListener {
+                navController.navigateUp()
+            }
 
+        }
     }
 
-    private fun loadSpinnerDoorOrWindow() {
-        val adapter = SpinnerTextAdapter(requireContext())
-        adapter.list = listDoorOrWindowData()
-        binding.spinnerRoomOrDoor.adapter = adapter
-    }
+    /* private fun loadSpinnerDoorOrWindow() {
+         val adapter = SpinnerTextAdapter(requireContext())
+ //        adapter.list = listDoorOrWindowData()
+         binding.spinnerRoomOrDoor.adapter = adapter
+     }*/
 
     private fun listDoorOrWindowData() = arrayListOf<String>(
         "Eshik",

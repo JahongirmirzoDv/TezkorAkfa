@@ -27,7 +27,7 @@
         android:id="@+id/tv_size"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="1500"
+        android:text="100"
         android:padding="2dp"
         android:textColor="@color/blue"
         android:textSize="20sp"

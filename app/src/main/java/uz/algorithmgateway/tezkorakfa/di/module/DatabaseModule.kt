@@ -6,6 +6,7 @@ import dagger.Module
 import dagger.Provides
 import uz.algorithmgateway.tezkorakfa.data.local.dao.DrawingsDao
 import uz.algorithmgateway.tezkorakfa.data.local.db.AppDatabase
+import uz.algorithmgateway.tezkorakfa.measurer.ui.MeasurerActivity
 import javax.inject.Singleton
 
 @Module
@@ -22,6 +23,12 @@ class DatabaseModule {
     @Singleton
     @Provides
     fun provideLeagueDao(appDatabase: AppDatabase): DrawingsDao = appDatabase.drawingsDao()
+
+    @Singleton
+    @Provides
+    fun provideActivity(): MeasurerActivity {
+        return MeasurerActivity()
+    }
 
 
 }
