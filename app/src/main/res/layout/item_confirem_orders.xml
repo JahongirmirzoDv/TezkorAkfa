@@ -241,6 +241,7 @@
                     android:orientation="horizontal">
 
                     <androidx.cardview.widget.CardView
+                        android:id="@+id/config_order"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/save_button_space"
                         android:layout_gravity="bottom"

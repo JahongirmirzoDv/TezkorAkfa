@@ -16,6 +16,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:id="@+id/title_tolbar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Qabul qilingan buyurtmalar"
@@ -26,12 +27,12 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <SearchView
-        android:searchIcon="@drawable/ic_search_menu"
         android:id="@+id/search_toolbar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginRight="10dp"
         android:searchHintIcon="@color/white"
+        android:searchIcon="@drawable/ic_search_menu"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toLeftOf="@+id/other_toolbar"
         app:layout_constraintTop_toTopOf="parent" />

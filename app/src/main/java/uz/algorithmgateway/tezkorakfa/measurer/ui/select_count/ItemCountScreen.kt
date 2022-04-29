@@ -27,6 +27,7 @@ class ItemCountScreen : Fragment() {
             drawing = it?.getString("drawing").toString()
         }
     }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -38,10 +39,14 @@ class ItemCountScreen : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         binding.projectId.text = "Loyiha $id"
         loadTabData()
         chooseCount()
         navigateButton()
+
+//        val recStr: String = arguments.get("This is just for testing purpose")
+//        bundle.clear()
     }
 
     private fun navigateButton() {
@@ -84,5 +89,10 @@ class ItemCountScreen : Fragment() {
             tabLayoutDoor.addTab(tabLayoutDoor.newTab().setText("Standart"))
             tabLayoutDoor.addTab(tabLayoutDoor.newTab().setText("Slider"))
         }
+    }
+
+    override fun onSaveInstanceState(oldInstanceState: Bundle) {
+        super.onSaveInstanceState(oldInstanceState)
+        oldInstanceState.clear()
     }
 }

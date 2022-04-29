@@ -16,6 +16,7 @@ import android.view.ViewGroup
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -23,6 +24,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import uz.algorithmgateway.core.util.toast
+import uz.algorithmgateway.tezkorakfa.R
 import uz.algorithmgateway.tezkorakfa.base.MyApplication
 import uz.algorithmgateway.tezkorakfa.databinding.FragmentSavePdfBinding
 import uz.algorithmgateway.tezkorakfa.measurer.ui.drawings.adapters.PdfAdapter
@@ -79,6 +81,7 @@ class SavePdfFragment : Fragment(), CoroutineScope {
     private fun loadPdf() {
         binding.save.setOnClickListener {
             if (booleanPermission) {
+
                 try {
                     createPdf()
                     val f = File(
@@ -98,9 +101,12 @@ class SavePdfFragment : Fragment(), CoroutineScope {
                     Log.e("eror", "loadPdf: ${e.message}")
 //                    mainListener?.showError("Please try again") {}
                 }
+                findNavController().navigate(R.id.confirmOrdersScreen)
+
             } else {
                 requestPermission()
             }
+
         }
         requestPermission()
     }
@@ -135,7 +141,9 @@ class SavePdfFragment : Fragment(), CoroutineScope {
         val document: PdfDocument = PrintedPdfDocument(requireContext(), printAttrs)
         // crate a page description
         // crate a page description
-        val pageInfo = PdfDocument.PageInfo.Builder(binding.rootView.width, binding.rootView.height, 1).create()
+        val pageInfo =
+            PdfDocument.PageInfo.Builder(binding.rootView.width, binding.rootView.height, 1)
+                .create()
         // create a new page from the PageInfo
         // create a new page from the PageInfo
         val page = document.startPage(pageInfo)

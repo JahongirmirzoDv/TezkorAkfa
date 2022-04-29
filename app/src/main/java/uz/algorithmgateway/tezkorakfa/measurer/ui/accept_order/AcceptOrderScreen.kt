@@ -188,4 +188,9 @@ class AcceptOrderScreen : Fragment() {
         super.onResume()
         loadView()
     }
+
+    override fun onSaveInstanceState(oldInstanceState: Bundle) {
+        super.onSaveInstanceState(oldInstanceState)
+        oldInstanceState.clear()
+    }
 }

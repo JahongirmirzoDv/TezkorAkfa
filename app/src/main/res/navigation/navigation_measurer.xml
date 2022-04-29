@@ -62,7 +62,11 @@
         tools:layout="@layout/screen_confirm_orders"
         android:id="@+id/confirmOrdersScreen"
         android:name="uz.algorithmgateway.tezkorakfa.measurer.ui.confirm_orders.ConfirmOrdersScreen"
-        android:label="ConfirmOrdersScreen" />
+        android:label="ConfirmOrdersScreen" >
+        <action
+            android:id="@+id/action_confirmOrdersScreen_to_signatureFragment"
+            app:destination="@id/signatureFragment" />
+    </fragment>
     <fragment
         android:id="@+id/orderListFragment"
         tools:layout="@layout/fragment_tab_layout"
@@ -90,5 +94,19 @@
             android:id="@+id/action_savePdfFragment_to_confirmOrdersScreen"
             app:destination="@id/confirmOrdersScreen" />
     </fragment>
+    <fragment
+        android:id="@+id/signatureFragment"
+        android:name="uz.algorithmgateway.tezkorakfa.measurer.ui.signature.SignatureFragment"
+        android:label="fragment_signature"
+        tools:layout="@layout/fragment_signature" >
+        <action
+            android:id="@+id/action_signatureFragment_to_customerTakePhotoFragment"
+            app:destination="@id/customerTakePhotoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/customerTakePhotoFragment"
+        android:name="uz.algorithmgateway.tezkorakfa.measurer.ui.customer_photo.CustomerTakePhotoFragment"
+        android:label="fragment_customer_take_photo"
+        tools:layout="@layout/fragment_customer_take_photo" />
 
 </navigation>
