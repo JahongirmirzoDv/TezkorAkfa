@@ -4,6 +4,7 @@ import dagger.Component
 import uz.algorithmgateway.tezkorakfa.di.module.ApplicationModule
 import uz.algorithmgateway.tezkorakfa.di.module.DatabaseModule
 import uz.algorithmgateway.tezkorakfa.di.module.NetworkModule
+import uz.algorithmgateway.tezkorakfa.measurer.ui.accept_order.AcceptOrderScreen
 import uz.algorithmgateway.tezkorakfa.measurer.ui.confirm_orders.ConfirmOrdersScreen
 import uz.algorithmgateway.tezkorakfa.measurer.ui.drawings.DrawingsFragment
 import uz.algorithmgateway.tezkorakfa.measurer.ui.drawings.save_pdf.SavePdfFragment
@@ -24,4 +25,5 @@ interface AppComponent {
     fun drawing(drawingsFragment: DrawingsFragment)
     fun confirm(confirmOrdersScreen: ConfirmOrdersScreen)
     fun savePdf(savePdfFragment: SavePdfFragment)
+    fun accept(acceptOrderScreen: AcceptOrderScreen)
 }

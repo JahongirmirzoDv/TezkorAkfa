@@ -22,14 +22,18 @@ import com.bumptech.glide.request.target.Target
 import com.github.drjacky.imagepicker.ImagePicker
 import com.google.gson.Gson
 import uz.algorithmgateway.tezkorakfa.R
+import uz.algorithmgateway.tezkorakfa.base.MyApplication
 import uz.algorithmgateway.tezkorakfa.data.retrofit.models.sales_order_list.Result
 import uz.algorithmgateway.tezkorakfa.databinding.ScreenAcceptOrderBinding
 import uz.algorithmgateway.tezkorakfa.measurer.ui.accept_order.model.Locations
+import uz.algorithmgateway.tezkorakfa.measurer.ui.select_type.models.Drawing
 import uz.algorithmgateway.tezkorakfa.measurer.utils.FileUriUtils
+import uz.algorithmgateway.tezkorakfa.measurer.viewmodel.DbViewmodel
 import uz.algorithmgateway.tezkorakfa.ui.utils.SharedPref
 import java.io.File
 import java.io.IOException
 import java.util.*
+import javax.inject.Inject
 
 
 class AcceptOrderScreen : Fragment() {
@@ -40,6 +44,9 @@ class AcceptOrderScreen : Fragment() {
     private var mCameraUri: Uri? = null
     private var filePath: String? = null
     private val sharedPref by lazy { SharedPref(requireContext()) }
+
+    @Inject
+    lateinit var dbViewmodel: DbViewmodel
 
     private val cameraLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
@@ -57,6 +64,7 @@ class AcceptOrderScreen : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        MyApplication.appComponent.accept(this)
         arguments?.let {
             val string = it.getString("item")
             item = Gson().fromJson(string, Result::class.java)
@@ -103,8 +111,6 @@ class AcceptOrderScreen : Fragment() {
                 })
                 .into(binding.imageProduct)
         }
-
-
 
         loadView()
         clickBack()
@@ -161,9 +167,8 @@ class AcceptOrderScreen : Fragment() {
 
     private fun navigateBackOrNext() {
         binding.btnNext.setOnClickListener {
-            val bundle = Bundle()
-            bundle.putString("id", item.id.toString())
-            findNavController().navigate(R.id.orderSelectType, bundle)
+            dbViewmodel.addDrawing(Drawing(id = item.id.toString()))
+            findNavController().navigate(R.id.orderSelectType)
             sharedPref.location = ""
         }
 
@@ -182,6 +187,11 @@ class AcceptOrderScreen : Fragment() {
         binding.imageBack.setOnClickListener {
             findNavController().navigateUp()
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        dbViewmodel.delete()
     }
 
     override fun onResume() {

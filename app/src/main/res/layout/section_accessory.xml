@@ -38,36 +38,18 @@
             app:layout_constraintTop_toTopOf="@id/imageProfileTitle" />
 
         <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabLayoutType"
             style="@style/TabLayout.Order.Type"
-            android:id="@+id/tabLayoutDastak"
+            android:layout_width="@dimen/border_width"
+            android:layout_height="@dimen/size_fifty"
+            android:layout_marginEnd="@dimen/default_item_space"
             android:background="@drawable/bg_tab_layout"
+            app:layout_constraintBottom_toBottomOf="@+id/cardPetla"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1"
+            app:layout_constraintStart_toEndOf="@id/textViewAccessory"
             app:layout_constraintTop_toTopOf="@id/cardDastak"
-            app:layout_constraintBottom_toBottomOf="@id/cardDastak"
-            app:layout_constraintStart_toEndOf="@id/textViewAccessory"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="@dimen/default_item_space"
-            app:layout_constraintHorizontal_bias="1"
-            android:layout_width="@dimen/border_width"
-            app:layout_constraintWidth_percent="0.44"
-            android:layout_height="@dimen/size_fifty"/>
-
-
-        <com.google.android.material.tabs.TabLayout
-            style="@style/TabLayout.Order.Type"
-            android:id="@+id/tabLayoutPetla"
-            android:background="@drawable/bg_tab_layout"
-            app:layout_constraintTop_toTopOf="@id/cardPetla"
-            app:layout_constraintBottom_toBottomOf="@id/cardPetla"
-            app:layout_constraintStart_toEndOf="@id/textViewAccessory"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="@dimen/default_item_space"
-            app:layout_constraintHorizontal_bias="1"
-            android:layout_width="@dimen/border_width"
-            app:layout_constraintWidth_percent="0.44"
-            android:layout_height="@dimen/size_fifty"/>
-
-
-
+            app:layout_constraintWidth_percent="0.44" />
 
 
         <com.google.android.material.textview.MaterialTextView
@@ -101,7 +83,7 @@
                 android:layout_height="match_parent">
 
                 <androidx.appcompat.widget.AppCompatSpinner
-                    android:id="@+id/spinnerDastak"
+                    android:id="@+id/spinnerRaw"
                     style="@style/mySpinnerItemStyle"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -155,7 +137,7 @@
                 android:layout_height="match_parent">
 
                 <androidx.appcompat.widget.AppCompatSpinner
-                    android:id="@+id/spinnerPetla"
+                    android:id="@+id/spinnerAccType"
                     style="@style/mySpinnerItemStyle"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -201,7 +183,7 @@
             android:layout_width="@dimen/border_width"
             android:layout_height="@dimen/size_fifty"
             app:layout_constraintHorizontal_bias="1"
-            app:layout_constraintEnd_toEndOf="@id/tabLayoutDastak"
+            app:layout_constraintEnd_toEndOf="@id/tabLayoutType"
             app:cardBackgroundColor="@color/layout_back_color"
             app:cardCornerRadius="@dimen/item_space_middle"
             app:cardElevation="@dimen/card_elevation_3"

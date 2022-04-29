@@ -52,7 +52,7 @@ class PdfAdapter(var context: Context) : RecyclerView.Adapter<PdfAdapter.Vh>() {
             itemview.oynaD.text = "${drawing.mirror_color} ${drawing.mirror_layer}"
             itemview.podokonnikD.text = "${drawing.window_sill} "
             itemview.aksesuarD.text =
-                "${drawing.handle_type}(${drawing.handle}) ${drawing.handle_petla_type}(${drawing.handle_petla})"
+                "${drawing.handle}(${drawing.handle_petla}) ${drawing.handle_texture}"
         }
     }
 
