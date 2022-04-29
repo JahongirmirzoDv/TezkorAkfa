@@ -36,9 +36,9 @@ class DrawingsFragment : Fragment(), CoroutineScope {
     lateinit var dbViewmodel: DbViewmodel
 
     lateinit var binding: FragmentDrawingsBinding
-    lateinit var id: String
     lateinit var list: MutableStateFlow<List<Drawing>>
     lateinit var drawingAdapter: DrawingAdapter
+    lateinit var drawing: Drawing
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,9 +49,8 @@ class DrawingsFragment : Fragment(), CoroutineScope {
 //                projetImagePath?.let { showDialog(it) }
             }
         })
-        arguments?.let {
-            id = it.getString("id").toString()
-        }
+        drawing = dbViewmodel.getAllDrawing().last()
+
     }
 
     @SuppressLint("SetTextI18n")
@@ -117,11 +116,12 @@ class DrawingsFragment : Fragment(), CoroutineScope {
 //    }
 
     private fun setupUI() {
-        binding.projectId.text = "Loyiha $id"
+        binding.projectId.text = "Loyiha ${drawing.id}"
 
         binding.add.setOnClickListener {
             val bundle = Bundle()
-            bundle.putString("id","${id}_${id+1}")
+            val plus = drawing.id.toInt().plus(1)
+            bundle.putString("id","$plus")
             findNavController().navigate(R.id.orderSelectType,bundle)
         }
 

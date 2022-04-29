@@ -13,7 +13,6 @@ import android.content.ContentResolver
 import android.content.ContentValues
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
-import android.graphics.Point
 import android.graphics.Rect
 import android.net.Uri
 import android.os.Build
@@ -21,8 +20,10 @@ import android.os.Bundle
 import android.os.Environment
 import android.os.Handler
 import android.provider.MediaStore
-import android.util.DisplayMetrics
-import android.view.*
+import android.view.LayoutInflater
+import android.view.PixelCopy
+import android.view.View
+import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -34,6 +35,7 @@ import uz.algorithmgateway.tezkorakfa.R
 import uz.algorithmgateway.tezkorakfa.base.MyApplication
 import uz.algorithmgateway.tezkorakfa.databinding.LayoutChangeSizeDialogBinding
 import uz.algorithmgateway.tezkorakfa.databinding.ScreenSliderBinding
+import uz.algorithmgateway.tezkorakfa.measurer.ui.select_type.models.Drawing
 import uz.algorithmgateway.tezkorakfa.measurer.viewmodel.DbViewmodel
 import uz.algorithmgateway.tezkorakfa.windowdoordisegner.DragAndDropListener
 import uz.algorithmgateway.tezkorakfa.windowdoordisegner.ui.Area
@@ -42,7 +44,6 @@ import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
 import java.io.OutputStream
-import java.util.*
 import javax.inject.Inject
 
 
@@ -51,8 +52,7 @@ class SliderScreen : Fragment() {
     @Inject
     lateinit var dbViewmodel: DbViewmodel
     lateinit var id: String
-
-    //    lateinit var drawing: Drawing
+    lateinit var dr_id: String
     private var _binding: ScreenSliderBinding? = null
     private val binding get() = _binding!!
     private val navController by lazy(LazyThreadSafetyMode.NONE) { findNavController() }
@@ -61,6 +61,7 @@ class SliderScreen : Fragment() {
     var sliderObj = SliderScreen()
     private lateinit var dialogBinding: LayoutChangeSizeDialogBinding
     private var customHorVer: Boolean? = null
+    lateinit var drawing: Drawing
 
     var lastView: View? = null
     var H: Int = 1300
@@ -69,15 +70,6 @@ class SliderScreen : Fragment() {
         super.onCreate(savedInstanceState)
         MyApplication.appComponent.sliderScreen(this)
 //        DialogSize(this)
-        arguments.let {
-            W = it?.getInt("width")!!
-            H = it.getInt("height")
-            id = it.getString("id").toString()
-            val t = it.getString("drawing").toString()
-//            if (drawing != null) {
-//                drawing = Gson().fromJson(t, Drawing::class.java)
-//            }
-        }
     }
 
 
@@ -87,14 +79,14 @@ class SliderScreen : Fragment() {
         savedInstanceState: Bundle?,
     ): View {
         _binding = ScreenSliderBinding.inflate(inflater, container, false)
-
+        drawing = dbViewmodel.getAllDrawing().last()
         return binding.root
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.projectId.text = "Loyiha $id"
+        binding.projectId.text = "Loyiha ${drawing.id}"
         navigationButtons()
         dragAndDropListener = Area(requireContext())
 
@@ -106,20 +98,14 @@ class SliderScreen : Fragment() {
     private fun navigationButtons() {
 
         binding.floatingNext.setOnClickListener {
-            val bundle = Bundle()
-            bundle.putString("id", id)
-            navController.navigate(R.id.drawingsFragment, bundle)
+            navController.navigate(R.id.drawingsFragment)
             verifyStoragePermission(requireActivity())
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-//                savePdf()
-            }
             getBitmapFromView(binding.view, requireActivity(), callback = {
-                saveBitmap(it, "new api")
+                saveBitmap(it, "new api", drawing)
             })
             toast("Chizma galareyaga saqlandi")
         }
-
-        binding.apply {
+        binding.apply{
             floatingBack.setOnClickListener {
                 navController.navigateUp()
             }
@@ -179,7 +165,7 @@ class SliderScreen : Fragment() {
     }
 
     @Throws(IOException::class)
-    private fun saveBitmap(bitmap: Bitmap, name: String) {
+    private fun saveBitmap(bitmap: Bitmap, name: String, drawing: Drawing) {
         val saved: Boolean
         val fos: OutputStream?
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
@@ -191,11 +177,10 @@ class SliderScreen : Fragment() {
             val imageUri: Uri? =
                 resolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues)
             fos = imageUri?.let { resolver.openOutputStream(it) }
-//            drawing.id = id
-//            drawing.width = W
-//            drawing.heigth = H
-//            drawing.projet_image_path = imageUri.toString()
-//            dbViewmodel.updateDrawing(drawing)
+            drawing.width = W
+            drawing.heigth = H
+            drawing.projet_image_path = imageUri.toString()
+            dbViewmodel.updateDrawing(drawing)
         } else {
             val imagesDir = Environment.getExternalStoragePublicDirectory(
                 Environment.DIRECTORY_DCIM
@@ -206,11 +191,10 @@ class SliderScreen : Fragment() {
             }
             val image = File(imagesDir, "$name.png")
             fos = FileOutputStream(image)
-//            drawing.id = id
-//            drawing.width = W
-//            drawing.heigth = H
-//            drawing.projet_image_path = image.toString()
-//            dbViewmodel.updateDrawing(drawing)
+            drawing.width = W
+            drawing.heigth = H
+            drawing.projet_image_path = image.toString()
+            dbViewmodel.updateDrawing(drawing)
         }
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, fos)
         fos?.flush()
@@ -328,28 +312,14 @@ class SliderScreen : Fragment() {
     }
 
     private fun okBtnClick() {
-        val displayMetrics = DisplayMetrics()
-        activity?.windowManager?.defaultDisplay?.getMetrics(displayMetrics)
-
-        var width = displayMetrics.widthPixels
-        var height = displayMetrics.heightPixels
-
         dialogBinding.apply {
             if (customHorVer != null) {
                 if (customHorVer as Boolean) {
                     H = etSize.text.toString().toInt()
-                    if (height >= H) {
-                        setUpDesignerLayout()
-                    } else {
-                        toast("bu o'lcham sizning qurilmangiz uchun to'g'ri kelmaydi !")
-                    }
+                    setUpDesignerLayout()
                 } else {
                     W = etSize.text.toString().toInt()
-                    if (width >= W) {
-                        setUpDesignerLayout()
-                    } else {
-                        toast("bu o'lcham sizning qurilmangiz uchun to'g'ri kelmaydi !")
-                    }
+                    setUpDesignerLayout()
                 }
 
             }
