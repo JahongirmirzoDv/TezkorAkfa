@@ -13,6 +13,7 @@ import android.content.ContentResolver
 import android.content.ContentValues
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
+import android.graphics.Point
 import android.graphics.Rect
 import android.net.Uri
 import android.os.Build
@@ -20,31 +21,23 @@ import android.os.Bundle
 import android.os.Environment
 import android.os.Handler
 import android.provider.MediaStore
-import android.util.Log
-import android.view.LayoutInflater
-import android.view.PixelCopy
-import android.view.View
-import android.view.ViewGroup
+import android.util.DisplayMetrics
+import android.view.*
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.google.gson.Gson
 import uz.algorithmgateway.core.util.toast
 import uz.algorithmgateway.tezkorakfa.R
 import uz.algorithmgateway.tezkorakfa.base.MyApplication
-import uz.algorithmgateway.tezkorakfa.base.MyApplication.Companion.instance
 import uz.algorithmgateway.tezkorakfa.databinding.LayoutChangeSizeDialogBinding
 import uz.algorithmgateway.tezkorakfa.databinding.ScreenSliderBinding
-import uz.algorithmgateway.tezkorakfa.measurer.ui.select_type.models.Drawing
 import uz.algorithmgateway.tezkorakfa.measurer.viewmodel.DbViewmodel
 import uz.algorithmgateway.tezkorakfa.windowdoordisegner.DragAndDropListener
 import uz.algorithmgateway.tezkorakfa.windowdoordisegner.ui.Area
 import uz.algorithmgateway.tezkorakfa.windowdoordisegner.ui.DesignerLayout
-import uz.algorithmgateway.tezkorakfa.windowdoordisegner.ui.sizeview.DialogSize
-import uz.algorithmgateway.tezkorakfa.windowdoordisegner.ui.sizeview.SizeDialog
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
@@ -58,7 +51,8 @@ class SliderScreen : Fragment() {
     @Inject
     lateinit var dbViewmodel: DbViewmodel
     lateinit var id: String
-    lateinit var drawing: Drawing
+
+    //    lateinit var drawing: Drawing
     private var _binding: ScreenSliderBinding? = null
     private val binding get() = _binding!!
     private val navController by lazy(LazyThreadSafetyMode.NONE) { findNavController() }
@@ -80,9 +74,9 @@ class SliderScreen : Fragment() {
             H = it.getInt("height")
             id = it.getString("id").toString()
             val t = it.getString("drawing").toString()
-            if (drawing != null) {
-                drawing = Gson().fromJson(t, Drawing::class.java)
-            }
+//            if (drawing != null) {
+//                drawing = Gson().fromJson(t, Drawing::class.java)
+//            }
         }
     }
 
@@ -197,11 +191,11 @@ class SliderScreen : Fragment() {
             val imageUri: Uri? =
                 resolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues)
             fos = imageUri?.let { resolver.openOutputStream(it) }
-            drawing.id = id
-            drawing.width = W
-            drawing.heigth = H
-            drawing.projet_image_path = imageUri.toString()
-            dbViewmodel.updateDrawing(drawing)
+//            drawing.id = id
+//            drawing.width = W
+//            drawing.heigth = H
+//            drawing.projet_image_path = imageUri.toString()
+//            dbViewmodel.updateDrawing(drawing)
         } else {
             val imagesDir = Environment.getExternalStoragePublicDirectory(
                 Environment.DIRECTORY_DCIM
@@ -212,11 +206,11 @@ class SliderScreen : Fragment() {
             }
             val image = File(imagesDir, "$name.png")
             fos = FileOutputStream(image)
-            drawing.id = id
-            drawing.width = W
-            drawing.heigth = H
-            drawing.projet_image_path = image.toString()
-            dbViewmodel.updateDrawing(drawing)
+//            drawing.id = id
+//            drawing.width = W
+//            drawing.heigth = H
+//            drawing.projet_image_path = image.toString()
+//            dbViewmodel.updateDrawing(drawing)
         }
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, fos)
         fos?.flush()
@@ -334,14 +328,28 @@ class SliderScreen : Fragment() {
     }
 
     private fun okBtnClick() {
+        val displayMetrics = DisplayMetrics()
+        activity?.windowManager?.defaultDisplay?.getMetrics(displayMetrics)
+
+        var width = displayMetrics.widthPixels
+        var height = displayMetrics.heightPixels
+
         dialogBinding.apply {
             if (customHorVer != null) {
                 if (customHorVer as Boolean) {
                     H = etSize.text.toString().toInt()
-                    setUpDesignerLayout()
+                    if (height >= H) {
+                        setUpDesignerLayout()
+                    } else {
+                        toast("bu o'lcham sizning qurilmangiz uchun to'g'ri kelmaydi !")
+                    }
                 } else {
                     W = etSize.text.toString().toInt()
-                    setUpDesignerLayout()
+                    if (width >= W) {
+                        setUpDesignerLayout()
+                    } else {
+                        toast("bu o'lcham sizning qurilmangiz uchun to'g'ri kelmaydi !")
+                    }
                 }
 
             }

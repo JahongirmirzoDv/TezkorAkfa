@@ -8,6 +8,7 @@
         <entry key="..\:/Android_studio/Dager Hilt/TezkorAkfa/app/src/main/res/drawable/bg_item_confirmed_orders_add_image.xml" value="0.193" />
         <entry key="..\:/Android_studio/Dager Hilt/TezkorAkfa/app/src/main/res/drawable/bg_item_table_header.xml" value="0.193" />
         <entry key="..\:/Android_studio/Dager Hilt/TezkorAkfa/app/src/main/res/drawable/ic_plus_item_conf.xml" value="0.193" />
+        <entry key="..\:/Android_studio/Dager Hilt/TezkorAkfa/app/src/main/res/drawable/ic_show_count.xml" value="0.2555" />
         <entry key="..\:/Android_studio/Dager Hilt/TezkorAkfa/app/src/main/res/layout/activity_designer.xml" value="0.25" />
         <entry key="..\:/Android_studio/Dager Hilt/TezkorAkfa/app/src/main/res/layout/activity_measurer.xml" value="0.24895833333333334" />
         <entry key="..\:/Android_studio/Dager Hilt/TezkorAkfa/app/src/main/res/layout/activity_montage.xml" value="0.25" />
@@ -22,8 +23,11 @@
         <entry key="..\:/Android_studio/Dager Hilt/TezkorAkfa/app/src/main/res/layout/fragment_parametr.xml" value="0.25" />
         <entry key="..\:/Android_studio/Dager Hilt/TezkorAkfa/app/src/main/res/layout/fragment_purchase_second.xml" value="0.264" />
         <entry key="..\:/Android_studio/Dager Hilt/TezkorAkfa/app/src/main/res/layout/fragment_save_pdf.xml" value="0.24583333333333332" />
+        <entry key="..\:/Android_studio/Dager Hilt/TezkorAkfa/app/src/main/res/layout/fragment_tab_layout.xml" value="0.25" />
+        <entry key="..\:/Android_studio/Dager Hilt/TezkorAkfa/app/src/main/res/layout/item_confirem_orders.xml" value="0.2" />
         <entry key="..\:/Android_studio/Dager Hilt/TezkorAkfa/app/src/main/res/layout/item_confirmed_orders.xml" value="0.4" />
         <entry key="..\:/Android_studio/Dager Hilt/TezkorAkfa/app/src/main/res/layout/item_found_list_header.xml" value="0.536" />
+        <entry key="..\:/Android_studio/Dager Hilt/TezkorAkfa/app/src/main/res/layout/item_order.xml" value="0.2" />
         <entry key="..\:/Android_studio/Dager Hilt/TezkorAkfa/app/src/main/res/layout/item_spinner.xml" value="0.25" />
         <entry key="..\:/Android_studio/Dager Hilt/TezkorAkfa/app/src/main/res/layout/layout_change_size_dialog.xml" value="0.25" />
         <entry key="..\:/Android_studio/Dager Hilt/TezkorAkfa/app/src/main/res/layout/layout_designer.xml" value="0.25" />
@@ -31,6 +35,8 @@
         <entry key="..\:/Android_studio/Dager Hilt/TezkorAkfa/app/src/main/res/layout/layout_vertical_size_view.xml" value="0.25" />
         <entry key="..\:/Android_studio/Dager Hilt/TezkorAkfa/app/src/main/res/layout/montage_order_item.xml" value="0.25" />
         <entry key="..\:/Android_studio/Dager Hilt/TezkorAkfa/app/src/main/res/layout/screen_accept_order.xml" value="0.25" />
+        <entry key="..\:/Android_studio/Dager Hilt/TezkorAkfa/app/src/main/res/layout/screen_confirm_orders.xml" value="0.25" />
+        <entry key="..\:/Android_studio/Dager Hilt/TezkorAkfa/app/src/main/res/layout/screen_orders.xml" value="0.25" />
         <entry key="..\:/Android_studio/Dager Hilt/TezkorAkfa/app/src/main/res/layout/screen_select_count.xml" value="0.264" />
         <entry key="..\:/Android_studio/Dager Hilt/TezkorAkfa/app/src/main/res/layout/screen_select_type_order.xml" value="0.264" />
         <entry key="..\:/Android_studio/Dager Hilt/TezkorAkfa/app/src/main/res/layout/screen_slider.xml" value="0.25" />

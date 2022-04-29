@@ -85,6 +85,10 @@
         android:id="@+id/savePdfFragment"
         android:name="uz.algorithmgateway.tezkorakfa.measurer.ui.drawings.save_pdf.SavePdfFragment"
         android:label="fragment_save_pdf"
-        tools:layout="@layout/fragment_save_pdf" />
+        tools:layout="@layout/fragment_save_pdf" >
+        <action
+            android:id="@+id/action_savePdfFragment_to_confirmOrdersScreen"
+            app:destination="@id/confirmOrdersScreen" />
+    </fragment>
 
 </navigation>
