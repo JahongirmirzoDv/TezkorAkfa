@@ -44,200 +44,205 @@
 
     </androidx.appcompat.widget.Toolbar>
 
-    <androidx.core.widget.NestedScrollView
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/clear"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolBar">
+        android:background="@color/layout_light"
+        app:layout_constraintBottom_toTopOf="@+id/b"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolBar">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/view"
+        <LinearLayout
+            android:id="@+id/layout_item_bar"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:background="@color/layout_light"
-            app:layout_constraintBottom_toTopOf="@+id/floatingNext"
+            android:orientation="vertical"
+            android:padding="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/toolBar">
+            app:layout_constraintTop_toTopOf="parent">
 
             <LinearLayout
-                android:id="@+id/layout_item_bar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/layout_light"
-                android:orientation="vertical"
-                android:padding="10dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                android:layout_weight="1"
+                android:orientation="horizontal">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/view_divide_three_horizontal"
+                    android:layout_width="@dimen/size_icon_designer_view"
+                    android:layout_height="@dimen/size_icon_designer_view"
                     android:layout_weight="1"
-                    android:orientation="horizontal">
+                    android:src="@drawable/ic_line_vertical_two" />
 
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/view_divide_three_horizontal"
-                        android:layout_width="@dimen/size_icon_designer_view"
-                        android:layout_height="@dimen/size_icon_designer_view"
-                        android:layout_weight="1"
-                        android:src="@drawable/ic_line_vertical_two" />
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/view_window_tilt_top"
+                    android:layout_width="@dimen/size_icon_designer_view"
+                    android:layout_height="@dimen/size_icon_designer_view"
+                    android:layout_weight="1"
+                    android:src="@drawable/ic_tilt_top" />
 
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/view_window_tilt_top"
-                        android:layout_width="@dimen/size_icon_designer_view"
-                        android:layout_height="@dimen/size_icon_designer_view"
-                        android:layout_weight="1"
-                        android:src="@drawable/ic_tilt_top" />
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/view_window_turn_right"
+                    android:layout_width="@dimen/size_icon_designer_view"
+                    android:layout_height="@dimen/size_icon_designer_view"
+                    android:layout_weight="1"
+                    android:src="@drawable/ic_turn_right" />
 
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/view_window_turn_right"
-                        android:layout_width="@dimen/size_icon_designer_view"
-                        android:layout_height="@dimen/size_icon_designer_view"
-                        android:layout_weight="1"
-                        android:src="@drawable/ic_turn_right" />
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/view_window_tilt_top_turn_right"
+                    android:layout_width="@dimen/size_icon_designer_view"
+                    android:layout_height="@dimen/size_icon_designer_view"
+                    android:layout_weight="1"
+                    android:src="@drawable/ic_tilt_top_turn_right" />
 
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/view_window_tilt_top_turn_right"
-                        android:layout_width="@dimen/size_icon_designer_view"
-                        android:layout_height="@dimen/size_icon_designer_view"
-                        android:layout_weight="1"
-                        android:src="@drawable/ic_tilt_top_turn_right" />
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/view_door_turn_right"
+                    android:layout_width="@dimen/size_icon_designer_view"
+                    android:layout_height="@dimen/size_icon_designer_view"
+                    android:layout_weight="1"
+                    android:src="@drawable/ic_door_right" />
 
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/view_door_turn_right"
-                        android:layout_width="@dimen/size_icon_designer_view"
-                        android:layout_height="@dimen/size_icon_designer_view"
-                        android:layout_weight="1"
-                        android:src="@drawable/ic_door_right" />
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/view_panel_horizontal"
+                    android:layout_width="@dimen/size_icon_designer_view"
+                    android:layout_height="@dimen/size_icon_designer_view"
+                    android:layout_weight="1"
+                    android:src="@drawable/ic_panel_horizontal" />
 
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/view_panel_horizontal"
-                        android:layout_width="@dimen/size_icon_designer_view"
-                        android:layout_height="@dimen/size_icon_designer_view"
-                        android:layout_weight="1"
-                        android:src="@drawable/ic_panel_horizontal" />
-
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/view_glass"
-                        android:layout_width="@dimen/size_icon_designer_view"
-                        android:layout_height="@dimen/size_icon_designer_view"
-                        android:layout_weight="1"
-                        android:src="@drawable/ic_glass" />
-                </LinearLayout>
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:orientation="horizontal">
-
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/view_divide_two_horizontal"
-                        android:layout_width="@dimen/size_icon_designer_view"
-                        android:layout_height="@dimen/size_icon_designer_view"
-                        android:src="@drawable/ic_line_vertical"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@id/view_divide_two_vertical"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/view_divide_two_vertical"
-                        android:layout_width="@dimen/size_icon_designer_view"
-                        android:layout_height="@dimen/size_icon_designer_view"
-                        android:src="@drawable/ic_line_horizontal"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@id/view_window_turn_left"
-                        app:layout_constraintStart_toEndOf="@id/view_divide_two_horizontal"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/view_window_turn_left"
-                        android:layout_width="@dimen/size_icon_designer_view"
-                        android:layout_height="@dimen/size_icon_designer_view"
-                        android:src="@drawable/ic_turn_left"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@id/view_window_tilt_top_turn_left"
-                        app:layout_constraintStart_toEndOf="@id/view_divide_two_vertical"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/view_window_tilt_top_turn_left"
-                        android:layout_width="@dimen/size_icon_designer_view"
-                        android:layout_height="@dimen/size_icon_designer_view"
-                        android:src="@drawable/ic_tilt_top_turn_left"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@id/view_door_turn_left"
-                        app:layout_constraintStart_toEndOf="@id/view_window_turn_left"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/view_door_turn_left"
-                        android:layout_width="@dimen/size_icon_designer_view"
-                        android:layout_height="@dimen/size_icon_designer_view"
-                        android:src="@drawable/ic_door_left"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@id/view_panel_vertical"
-                        app:layout_constraintStart_toEndOf="@id/view_window_tilt_top_turn_left"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/view_panel_vertical"
-                        android:layout_width="@dimen/size_icon_designer_view"
-                        android:layout_height="@dimen/size_icon_designer_view"
-                        android:src="@drawable/ic_panel_vertical"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/view_door_turn_left"
-                        app:layout_constraintTop_toTopOf="parent" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/view_glass"
+                    android:layout_width="@dimen/size_icon_designer_view"
+                    android:layout_height="@dimen/size_icon_designer_view"
+                    android:layout_weight="1"
+                    android:src="@drawable/ic_glass" />
             </LinearLayout>
 
-            <uz.algorithmgateway.tezkorakfa.windowdoordisegner.ui.DesignerLayout
-                android:id="@+id/layout_designer"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_margin="10dp"
-                app:layout_constraintBottom_toTopOf="@id/clear"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/layout_item_bar" />
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal">
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.core.widget.NestedScrollView>
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/view_divide_two_horizontal"
+                    android:layout_width="@dimen/size_icon_designer_view"
+                    android:layout_height="@dimen/size_icon_designer_view"
+                    android:src="@drawable/ic_line_vertical"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/view_divide_two_vertical"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/view_divide_two_vertical"
+                    android:layout_width="@dimen/size_icon_designer_view"
+                    android:layout_height="@dimen/size_icon_designer_view"
+                    android:src="@drawable/ic_line_horizontal"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/view_window_turn_left"
+                    app:layout_constraintStart_toEndOf="@id/view_divide_two_horizontal"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/view_window_turn_left"
+                    android:layout_width="@dimen/size_icon_designer_view"
+                    android:layout_height="@dimen/size_icon_designer_view"
+                    android:src="@drawable/ic_turn_left"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/view_window_tilt_top_turn_left"
+                    app:layout_constraintStart_toEndOf="@id/view_divide_two_vertical"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/view_window_tilt_top_turn_left"
+                    android:layout_width="@dimen/size_icon_designer_view"
+                    android:layout_height="@dimen/size_icon_designer_view"
+                    android:src="@drawable/ic_tilt_top_turn_left"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/view_door_turn_left"
+                    app:layout_constraintStart_toEndOf="@id/view_window_turn_left"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/view_door_turn_left"
+                    android:layout_width="@dimen/size_icon_designer_view"
+                    android:layout_height="@dimen/size_icon_designer_view"
+                    android:src="@drawable/ic_door_left"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/view_panel_vertical"
+                    app:layout_constraintStart_toEndOf="@id/view_window_tilt_top_turn_left"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/view_panel_vertical"
+                    android:layout_width="@dimen/size_icon_designer_view"
+                    android:layout_height="@dimen/size_icon_designer_view"
+                    android:src="@drawable/ic_panel_vertical"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/view_door_turn_left"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
+
+        <uz.algorithmgateway.tezkorakfa.windowdoordisegner.ui.DesignerLayout
+            android:id="@+id/layout_designer"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_margin="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/layout_item_bar" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatingNext"
-        style="@style/FloatingActionButton.Login"
-        android:layout_marginBottom="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toRightOf="@id/clear"
-        app:layout_constraintRight_toRightOf="parent" />
-
-    <Button
-        android:id="@+id/clear"
-        android:layout_width="200dp"
+    <LinearLayout
+        android:id="@+id/b"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Tozalash"
+        android:gravity="center"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view" />
+        app:layout_constraintRight_toRightOf="parent">
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatingBack"
-        style="@style/FloatingActionButton.Login"
-        android:layout_marginBottom="10dp"
-        android:src="@drawable/ic_back_arrow_fragment"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/clear"
-        app:layout_constraintStart_toStartOf="parent" />
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/floatingBack"
+            style="@style/FloatingActionButton.Login"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="10dp"
+            android:src="@drawable/ic_back_arrow_fragment" />
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/clear"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text="Tozalash" />
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/floatingNext"
+            style="@style/FloatingActionButton.Login"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="10dp" />
+
+
+    </LinearLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

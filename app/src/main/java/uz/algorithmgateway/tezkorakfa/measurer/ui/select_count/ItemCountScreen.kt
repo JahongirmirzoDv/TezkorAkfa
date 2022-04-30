@@ -7,13 +7,20 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import uz.algorithmgateway.tezkorakfa.R
+import uz.algorithmgateway.tezkorakfa.base.MyApplication
 import uz.algorithmgateway.tezkorakfa.databinding.ScreenSelectCountBinding
+import uz.algorithmgateway.tezkorakfa.measurer.ui.select_type.models.Drawing
+import uz.algorithmgateway.tezkorakfa.measurer.viewmodel.DbViewmodel
+import javax.inject.Inject
 
 class ItemCountScreen : Fragment() {
 
+
+    @Inject
+    lateinit var dbViewmodel: DbViewmodel
+
     private var _binding: ScreenSelectCountBinding? = null
-    lateinit var id: String
-    lateinit var drawing: String
+    lateinit var drawing: Drawing
     private val binding get() = _binding!!
     var H: Int = 1300
     var W: Int = 2000
@@ -22,10 +29,7 @@ class ItemCountScreen : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments.let {
-            id = it?.getString("id").toString()
-            drawing = it?.getString("drawing").toString()
-        }
+        MyApplication.appComponent.counter(this)
     }
 
     override fun onCreateView(
@@ -34,13 +38,14 @@ class ItemCountScreen : Fragment() {
         savedInstanceState: Bundle?,
     ): View {
         _binding = ScreenSelectCountBinding.inflate(inflater, container, false)
+        drawing = dbViewmodel.getAllDrawing().last()
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.projectId.text = "Loyiha $id"
+        binding.projectId.text = "Loyiha ${drawing.id}"
         loadTabData()
         chooseCount()
         navigateButton()
@@ -51,18 +56,17 @@ class ItemCountScreen : Fragment() {
 
     private fun navigateButton() {
         binding.btnNext.setOnClickListener {
-            val bundle = Bundle()
-            val height =
-                if (binding.editTextWidth.text.toString() == "") H else binding.editTextHeight.text.toString()
-                    .toInt()
-            val width =
-                if (binding.editTextWidth.text.toString() == "") W else binding.editTextWidth.text.toString()
-                    .toInt()
-            bundle.putInt("width", width)
-            bundle.putInt("height", height)
-            bundle.putString("id", id)
-            bundle.putString("drawing", drawing)
-            navController.navigate(R.id.sliderScreen, bundle)
+            var tab = ""
+            when (binding.tabLayoutDoor.selectedTabPosition) {
+                0 -> tab = "Standart"
+                1 -> tab = "Slider"
+            }
+            drawing.count = binding.textViewCount.text.toString().toInt()
+            drawing.type_type = tab
+
+            dbViewmodel.updateDrawing(
+                drawing)
+            navController.navigate(R.id.sliderScreen)
         }
         binding.btnBack.setOnClickListener {
             navController.navigateUp()

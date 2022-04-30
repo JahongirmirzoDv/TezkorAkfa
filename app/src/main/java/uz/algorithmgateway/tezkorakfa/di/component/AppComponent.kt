@@ -9,6 +9,7 @@ import uz.algorithmgateway.tezkorakfa.measurer.ui.confirm_orders.ConfirmOrdersSc
 import uz.algorithmgateway.tezkorakfa.measurer.ui.drawings.DrawingsFragment
 import uz.algorithmgateway.tezkorakfa.measurer.ui.drawings.save_pdf.SavePdfFragment
 import uz.algorithmgateway.tezkorakfa.measurer.ui.orders.orderList.OrderListFragment
+import uz.algorithmgateway.tezkorakfa.measurer.ui.select_count.ItemCountScreen
 import uz.algorithmgateway.tezkorakfa.measurer.ui.select_type.OrderSelectTypeScreen
 import uz.algorithmgateway.tezkorakfa.measurer.ui.select_type.models.Drawing
 import uz.algorithmgateway.tezkorakfa.measurer.ui.slider_standart.SliderScreen
@@ -26,4 +27,5 @@ interface AppComponent {
     fun confirm(confirmOrdersScreen: ConfirmOrdersScreen)
     fun savePdf(savePdfFragment: SavePdfFragment)
     fun accept(acceptOrderScreen: AcceptOrderScreen)
+    fun counter(itemCountScreen: ItemCountScreen)
 }

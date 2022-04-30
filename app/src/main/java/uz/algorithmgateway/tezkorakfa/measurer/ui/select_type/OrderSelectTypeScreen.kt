@@ -479,6 +479,8 @@ class OrderSelectTypeScreen : Fragment(), CoroutineScope {
                 drawing = Drawing(
                     id = if (id != null) "${drawing.id}_$id" else drawing.id,
                     type,
+                    drawing.count,
+                    drawing.type_type,
                     external_or_Internal,
                     profile_type,
                     profile_type_two,

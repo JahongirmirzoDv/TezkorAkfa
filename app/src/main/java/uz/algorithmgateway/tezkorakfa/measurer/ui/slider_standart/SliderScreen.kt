@@ -1,10 +1,5 @@
 package uz.algorithmgateway.tezkorakfa.measurer.ui.slider_standart
 
-//import com.karumi.dexter.Dexter
-//import com.karumi.dexter.MultiplePermissionsReport
-//import com.karumi.dexter.PermissionToken
-//import com.karumi.dexter.listener.PermissionRequest
-//import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import android.Manifest
 import android.app.Activity
 import android.content.ClipData
@@ -12,6 +7,7 @@ import android.content.ClipDescription
 import android.content.ContentResolver
 import android.content.ContentValues
 import android.content.pm.PackageManager
+import android.content.res.Resources
 import android.graphics.Bitmap
 import android.graphics.Rect
 import android.net.Uri
@@ -66,6 +62,8 @@ class SliderScreen : Fragment() {
     var lastView: View? = null
     var H: Int = 1300
     var W: Int = 2000
+    var H_T: Int = 1300
+    var W_T: Int = 2000
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         MyApplication.appComponent.sliderScreen(this)
@@ -100,12 +98,12 @@ class SliderScreen : Fragment() {
         binding.floatingNext.setOnClickListener {
             navController.navigate(R.id.drawingsFragment)
             verifyStoragePermission(requireActivity())
-            getBitmapFromView(binding.view, requireActivity(), callback = {
+            getBitmapFromView(binding.layoutDesigner, requireActivity(), callback = {
                 saveBitmap(it, "new api", drawing)
             })
             toast("Chizma galareyaga saqlandi")
         }
-        binding.apply{
+        binding.apply {
             floatingBack.setOnClickListener {
                 navController.navigateUp()
             }
@@ -177,8 +175,8 @@ class SliderScreen : Fragment() {
             val imageUri: Uri? =
                 resolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues)
             fos = imageUri?.let { resolver.openOutputStream(it) }
-            drawing.width = W
-            drawing.heigth = H
+            drawing.width = W_T
+            drawing.heigth = H_T
             drawing.projet_image_path = imageUri.toString()
             dbViewmodel.updateDrawing(drawing)
         } else {
@@ -191,8 +189,8 @@ class SliderScreen : Fragment() {
             }
             val image = File(imagesDir, "$name.png")
             fos = FileOutputStream(image)
-            drawing.width = W
-            drawing.heigth = H
+            drawing.width = W_T
+            drawing.heigth = H_T
             drawing.projet_image_path = image.toString()
             dbViewmodel.updateDrawing(drawing)
         }
@@ -201,55 +199,6 @@ class SliderScreen : Fragment() {
         fos?.close()
     }
 
-//    @RequiresApi(Build.VERSION_CODES.Q)
-//    fun savePdf() {
-//        Dexter.withContext(requireContext())
-//            .withPermissions(
-//                Manifest.permission.WRITE_EXTERNAL_STORAGE,
-//                Manifest.permission.READ_EXTERNAL_STORAGE,
-//                Manifest.permission.ACCESS_NETWORK_STATE
-//            ).withListener(object : MultiplePermissionsListener {
-//                override fun onPermissionsChecked(report: MultiplePermissionsReport) { /* ... */
-//                    PdfGenerator.getBuilder()
-//                        .setContext(requireContext())
-//                        .fromViewSource()
-//                        .fromView(binding.view)
-//                        .setFileName("Test-PDF")
-//                        .setFolderNameOrPath("k")
-//                        .build(object : PdfGeneratorListener() {
-//                            override fun onFailure(failureResponse: FailureResponse) {
-//                                super.onFailure(failureResponse)
-//                                Log.e(TAG, "onFailure: $failureResponse")
-//                            }
-//
-//                            override fun showLog(log: String) {
-//                                super.showLog(log)
-//                                Log.e(TAG, "log: $log")
-//                            }
-//
-//                            override fun onStartPDFGeneration() {
-//                                /*When PDF generation begins to start*/
-//                            }
-//
-//                            override fun onFinishPDFGeneration() {
-//                                Log.e(TAG, "finish: finish")
-//                            }
-//
-//                            override fun onSuccess(response: SuccessResponse) {
-//                                super.onSuccess(response)
-//                                Log.e(TAG, "succes: $response")
-//                            }
-//                        })
-//                }
-//
-//                override fun onPermissionRationaleShouldBeShown(
-//                    permissions: List<PermissionRequest?>?,
-//                    token: PermissionToken?,
-//                ) { /* ... */
-//                }
-//            }).check()
-//
-//    }
 
     fun clearView() {
         val designer: DesignerLayout = binding.layoutDesigner
@@ -260,8 +209,8 @@ class SliderScreen : Fragment() {
         val designer: DesignerLayout = binding.layoutDesigner
 
         designer.apply {
-            setH(H)
-            setW(W)
+            setH(H, H_T)
+            setW(W, W_T)
             setFunctionOnSizeViewClickV {
                 showSizeDialog()
                 customHorVer = true
@@ -315,10 +264,24 @@ class SliderScreen : Fragment() {
         dialogBinding.apply {
             if (customHorVer != null) {
                 if (customHorVer as Boolean) {
-                    H = etSize.text.toString().toInt()
+                    val height = Resources.getSystem().displayMetrics.heightPixels
+                    if (etSize.text.toString().toInt() > height) {
+                        H = height.plus(700)
+                        H_T = etSize.text.toString().toInt()
+                    } else {
+                        H = etSize.text.toString().toInt()
+                        H_T = etSize.text.toString().toInt()
+                    }
                     setUpDesignerLayout()
                 } else {
-                    W = etSize.text.toString().toInt()
+                    val width = Resources.getSystem().displayMetrics.heightPixels
+                    if (etSize.text.toString().toInt() > width) {
+                        W = width.minus(50)
+                        W_T = etSize.text.toString().toInt()
+                    } else {
+                        W = etSize.text.toString().toInt()
+                        W_T = etSize.text.toString().toInt()
+                    }
                     setUpDesignerLayout()
                 }
 
@@ -336,7 +299,7 @@ class SliderScreen : Fragment() {
             val text = etSize.text
             if (text != null) {
                 if (text.length > 0) {
-                    etSize.setText(text?.substring(0, text.length.minus(1)))
+                    etSize.setText(text.substring(0, text.length.minus(1)))
                 }
             }
         }

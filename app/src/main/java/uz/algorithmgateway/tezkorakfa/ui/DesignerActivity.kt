@@ -20,6 +20,9 @@ class DesignerActivity : AppCompatActivity() {
     var H: Int = 1400
     var W: Int = 2020
 
+    var H_T: Int = 1400
+    var W_T: Int = 2020
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDesignerBinding.inflate(layoutInflater)
@@ -35,8 +38,8 @@ class DesignerActivity : AppCompatActivity() {
         val designer: DesignerLayout = binding.layoutDesigner
 
         designer.apply {
-            setH(H)
-            setW(W)
+            setH(H,H_T)
+            setW(W,W_T)
 //            setFunctionOnSizeViewClick {
 //                showSizeDialog()
 //            }
@@ -51,9 +54,9 @@ class DesignerActivity : AppCompatActivity() {
         SizeDialog().show(supportFragmentManager, "SizeDialog")
     }
 
-    private fun sizeH(H: Int) {
+    private fun sizeH(H: Int,text:Int) {
         val designer: DesignerLayout = binding.layoutDesigner
-        designer.setH(H)
+        designer.setH(H,text)
     }
 
 

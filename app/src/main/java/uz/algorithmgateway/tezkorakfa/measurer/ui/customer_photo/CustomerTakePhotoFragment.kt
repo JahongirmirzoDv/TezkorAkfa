@@ -1,9 +1,22 @@
 package uz.algorithmgateway.tezkorakfa.measurer.ui.customer_photo
 
 import android.app.Activity
+import android.content.ContentResolver
+import android.content.ContentValues
+import android.content.Context
+import android.content.pm.PackageManager
+import android.hardware.Camera
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.os.Environment
+import android.provider.MediaStore
+import android.provider.MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE
+import android.util.Log
+import android.view.SurfaceHolder
+import android.view.SurfaceView
 import android.view.View
+import android.widget.FrameLayout
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
@@ -13,9 +26,11 @@ import com.github.drjacky.imagepicker.ImagePicker
 import uz.algorithmgateway.tezkorakfa.R
 import uz.algorithmgateway.tezkorakfa.databinding.FragmentCustomerTakePhotoBinding
 import uz.algorithmgateway.tezkorakfa.measurer.utils.FileUriUtils
-import java.io.File
+import java.io.*
 
 class CustomerTakePhotoFragment : Fragment(R.layout.fragment_customer_take_photo) {
+
+
 
     private val binding: FragmentCustomerTakePhotoBinding by viewBinding(
         FragmentCustomerTakePhotoBinding::bind
@@ -23,6 +38,7 @@ class CustomerTakePhotoFragment : Fragment(R.layout.fragment_customer_take_photo
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
 
     }
 
@@ -63,6 +79,7 @@ class CustomerTakePhotoFragment : Fragment(R.layout.fragment_customer_take_photo
         cameraLauncher.launch(
             ImagePicker.with(requireActivity())
                 .cameraOnly()
+                .maxResultSize(1080,1920)
                 .createIntent()
         )
     }

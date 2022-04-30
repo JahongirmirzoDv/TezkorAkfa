@@ -42,19 +42,19 @@ class DesignerLayout @JvmOverloads constructor(
         onSizeViewClick2 = function
     }
 
-    fun setW(number: Int?) {
-        if (number != null && number >= 0) {
+    fun setW(number: Int?,text:Int?) {
+        if (number != null && number >= 0 && text != null && text >= 0) {
             W = number
-            viewSizeHorizontal.setNumber(W)
+            viewSizeHorizontal.setNumber(text)
             viewDesigner.setW(W)
             invalidate()
         }
     }
 
-    fun setH(number: Int?) {
-        if (number != null && number >= 0) {
+    fun setH(number: Int?,text:Int?) {
+        if (number != null && number >= 0 && text != null && text >= 0) {
             H = number
-            viewSizeVertical.setNumber(H)
+            viewSizeVertical.setNumber(text)
             viewDesigner.setH(H)
             invalidate()
         }

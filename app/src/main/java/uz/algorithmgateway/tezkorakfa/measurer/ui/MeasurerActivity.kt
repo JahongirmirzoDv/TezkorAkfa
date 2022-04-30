@@ -21,6 +21,7 @@ class MeasurerActivity : AppCompatActivity(), CoroutineScope {
     }
 
 
+
     override val coroutineContext: CoroutineContext
         get() = Job()
 
