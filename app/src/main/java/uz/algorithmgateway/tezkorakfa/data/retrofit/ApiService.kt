@@ -35,11 +35,8 @@ interface ApiService {
     @GET("warehouse/accessory/list")
     fun getAccsessory(): Flow<Accessory>
 
-    @Multipart
-    @Update
+    @POST
     fun updateUserData(
-        @Header("Authorization") token: String,
-        @Part file: MultipartBody.Part,
         @Body image: RequestBody
     ): Response<ResponseBody>
 

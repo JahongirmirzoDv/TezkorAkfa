@@ -44,7 +44,7 @@ class NetworkModule {
             .addInterceptor(PlutoInterceptor())
             .addInterceptor { chain ->
                 val newRequest = chain.request().newBuilder()
-                    .addHeader("Authorization", "Token a65edcc253fc7c0ccda1816dd39c4336a735699e")
+                    .addHeader("Authorization", "Token be248ee5e3e9227150e2ff0d00465b79722296a3")
                     .build()
                 chain.proceed(newRequest)
             }

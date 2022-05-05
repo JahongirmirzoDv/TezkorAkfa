@@ -87,6 +87,7 @@ class SliderScreen : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.projectId.text = "Loyiha ${drawing.id}"
+        verifyStoragePermission(requireActivity())
         navigationButtons()
         dragAndDropListener = Area(requireContext())
 
@@ -99,7 +100,6 @@ class SliderScreen : Fragment() {
 
         binding.floatingNext.setOnClickListener {
             navController.navigate(R.id.drawingsFragment)
-            verifyStoragePermission(requireActivity())
 
             saveCustomview()
 //            getBitmapFromView(binding.layoutDesigner, requireActivity(), callback = {
