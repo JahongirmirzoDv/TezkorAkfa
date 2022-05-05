@@ -419,5 +419,10 @@ class SliderScreen : Fragment() {
         return sliderObj
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
 
 }
