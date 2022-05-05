@@ -1,6 +1,6 @@
 package uz.algorithmgateway.tezkorakfa.data.retrofit.models.sales_order_list
 
-import uz.algorithmgateway.data.api.models.ShowRoom
+import uz.algorithmgateway.tezkorakfa.data.models.ShowRoom
 import java.io.Serializable
 
 data class Result(

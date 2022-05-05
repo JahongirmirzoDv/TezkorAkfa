@@ -7,8 +7,8 @@ import okhttp3.RequestBody
 import okhttp3.ResponseBody
 import retrofit2.Response
 import retrofit2.http.*
-import uz.algorithmgateway.data.api.models.UserRequest
-import uz.algorithmgateway.data.api.models.UserResponse
+import uz.algorithmgateway.tezkorakfa.data.models.UserRequest
+import uz.algorithmgateway.tezkorakfa.data.models.UserResponse
 import uz.algorithmgateway.tezkorakfa.data.retrofit.models.accessory.Accessory
 import uz.algorithmgateway.tezkorakfa.data.retrofit.models.profile.Profile
 import uz.algorithmgateway.tezkorakfa.data.retrofit.models.sales_order_list.OderList
@@ -17,7 +17,7 @@ import uz.algorithmgateway.tezkorakfa.data.retrofit.models.window.Windows
 
 interface ApiService {
     @POST("user/login/")
-    suspend fun loginUser(@Body userRequest: UserRequest): Response<UserResponse>
+    fun loginUser(@Body userRequest: UserRequest): Flow<UserResponse>
 
     @GET("order/order")
     fun salesOrderList(

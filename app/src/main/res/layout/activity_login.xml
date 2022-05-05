@@ -58,7 +58,9 @@
                 android:background="#001E2431"
                 android:drawableEnd="@drawable/ic_account"
                 android:fontFamily="@font/roboto_400"
+                android:maxLines="1"
                 android:hint="@string/login"
+                android:imeOptions="actionNext"
                 android:textColor="@color/color_light_text"
                 android:textColorHint="@color/color_light_text"
                 android:textSize="@dimen/text_size_22sp" />
@@ -85,7 +87,9 @@
                 android:background="#001E2431"
                 android:drawableEnd="@drawable/ic_lock"
                 android:fontFamily="@font/roboto_400"
+                android:maxLines="1"
                 android:hint="@string/password"
+                android:imeOptions="actionDone"
                 android:textColor="@color/color_light_text"
                 android:textColorHint="@color/color_light_text"
                 android:textSize="@dimen/text_size_22sp" />
