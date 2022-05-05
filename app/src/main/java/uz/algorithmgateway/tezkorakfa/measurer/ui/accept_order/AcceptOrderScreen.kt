@@ -11,6 +11,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -21,6 +22,12 @@ import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.github.drjacky.imagepicker.ImagePicker
 import com.google.gson.Gson
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.asRequestBody
 import uz.algorithmgateway.tezkorakfa.R
 import uz.algorithmgateway.tezkorakfa.base.MyApplication
 import uz.algorithmgateway.tezkorakfa.data.retrofit.models.sales_order_list.Result
@@ -28,15 +35,21 @@ import uz.algorithmgateway.tezkorakfa.databinding.ScreenAcceptOrderBinding
 import uz.algorithmgateway.tezkorakfa.measurer.ui.accept_order.model.Locations
 import uz.algorithmgateway.tezkorakfa.measurer.ui.select_type.models.Drawing
 import uz.algorithmgateway.tezkorakfa.measurer.utils.FileUriUtils
+import uz.algorithmgateway.tezkorakfa.measurer.utils.compress
 import uz.algorithmgateway.tezkorakfa.measurer.viewmodel.DbViewmodel
+import uz.algorithmgateway.tezkorakfa.measurer.viewmodel.NetworkViewmodel
 import uz.algorithmgateway.tezkorakfa.ui.utils.SharedPref
 import java.io.File
 import java.io.IOException
 import java.util.*
 import javax.inject.Inject
+import kotlin.coroutines.CoroutineContext
 
 
-class AcceptOrderScreen : Fragment() {
+class AcceptOrderScreen : Fragment(), CoroutineScope {
+
+    @Inject
+    lateinit var networkViewmodel: NetworkViewmodel
 
     private var _binding: ScreenAcceptOrderBinding? = null
     private val binding get() = _binding!!
@@ -167,13 +180,44 @@ class AcceptOrderScreen : Fragment() {
 
     private fun navigateBackOrNext() {
         binding.btnNext.setOnClickListener {
-            dbViewmodel.addDrawing(Drawing(id = item.id.toString()))
-            findNavController().navigate(R.id.orderSelectType)
-            sharedPref.location = ""
-        }
+            launch {
+                when (filePath) {
+                    null -> {
+                        Toast.makeText(requireContext(), "Avval rasm tanlang", Toast.LENGTH_SHORT)
+                            .show()
+                    }
+                    "" -> {
+                        Toast.makeText(requireContext(), "Avval rasm tanlang", Toast.LENGTH_SHORT)
+                            .show()
+                    }
+                    else -> {
+                        val files = File(filePath!!).compress(requireContext())
 
-        binding.btnBack.setOnClickListener {
-            findNavController().navigateUp()
+                        val builder: MultipartBody.Builder = MultipartBody.Builder()
+                        builder.setType(MultipartBody.FORM)
+                        builder.addFormDataPart("id", item.id.toString())
+                        builder.addFormDataPart("first_name", item.client.first_name)
+                        builder.addFormDataPart("last_name", item.client.last_name)
+                        builder.addFormDataPart("address", item.client.address)
+                        builder.addFormDataPart("comment", item.comment)
+                        builder.addFormDataPart(
+                            "img",
+                            files.name,
+                            files.asRequestBody("multipart/form-data".toMediaTypeOrNull())
+                        )
+                        val body  = builder.build()
+                        networkViewmodel.updateUser(body)
+                    }
+                }
+
+                dbViewmodel.addDrawing(Drawing(id = item.id.toString()))
+                findNavController().navigate(R.id.orderSelectType)
+                sharedPref.location = ""
+            }
+
+            binding.btnBack.setOnClickListener {
+                findNavController().navigateUp()
+            }
         }
     }
 
@@ -203,4 +247,7 @@ class AcceptOrderScreen : Fragment() {
         super.onSaveInstanceState(oldInstanceState)
         oldInstanceState.clear()
     }
+
+    override val coroutineContext: CoroutineContext
+        get() = Job()
 }

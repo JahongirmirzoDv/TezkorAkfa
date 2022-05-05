@@ -35,24 +35,8 @@ interface ApiService {
     @GET("warehouse/accessory/list")
     fun getAccsessory(): Flow<Accessory>
 
-    @Multipart
     @Update
     fun updateUserData(
-        @Header("Authorization") token: String,
-        @Part file: MultipartBody.Part,
-        @Body image: RequestBody
+        @Body body: RequestBody
     ): Response<ResponseBody>
-
-
-//    val files = File(filePath!!).compress2(requireContext())
-//
-//    val builder: MultipartBody.Builder = MultipartBody.Builder()
-//    builder.setType(MultipartBody.FORM)
-//    builder.addFormDataPart("id", orderId!!.toString())
-//    builder.addFormDataPart(
-//    "img",
-//    files.name,
-//    files.asRequestBody("multipart/form-data".toMediaTypeOrNull())
-//    )
-//    val body = builder.build()
 }

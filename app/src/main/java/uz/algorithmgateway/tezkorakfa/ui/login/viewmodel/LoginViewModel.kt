@@ -34,8 +34,7 @@ class LoginViewModel @Inject constructor(
                     if (it.isSuccess) {
                         _state.value = UIState.Success(it.getOrNull())
                     } else if (it.isFailure) {
-                        _state.value = UIState.Error((it.exceptionOrNull()?.message
-                            ?: it.exceptionOrNull()).toString())
+                        _state.value = UIState.Error((it.exceptionOrNull()?.message ?: it.exceptionOrNull()).toString())
                     }
                 }
         }
