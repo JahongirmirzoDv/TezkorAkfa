@@ -7,6 +7,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import okhttp3.RequestBody
 import uz.algorithmgateway.tezkorakfa.data.retrofit.ApiService
 import uz.algorithmgateway.tezkorakfa.data.retrofit.models.accessory.Accessory
 import uz.algorithmgateway.tezkorakfa.data.retrofit.models.profile.Profile
@@ -91,5 +92,10 @@ class NetworkViewmodel @Inject constructor(
                 } else if (it.isFailure) _accessory.emit(null)
             }
         }
+    }
+
+
+    fun updateUser(body:RequestBody){
+        apiService.updateUserData(body)
     }
 }

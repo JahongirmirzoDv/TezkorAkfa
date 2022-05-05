@@ -15,8 +15,9 @@
     <style name="TextInputLayout.Login" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
         <item name="hintTextColor">@color/color_light_text</item>
         <item name="android:textColorHint">@color/color_light_text</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:imeOptions">actionDone</item>
         <item name="boxStrokeColor">#6E768C</item>
-
     </style>
 
     <style name="MaterialButton.Default" parent="Widget.MaterialComponents.Button">

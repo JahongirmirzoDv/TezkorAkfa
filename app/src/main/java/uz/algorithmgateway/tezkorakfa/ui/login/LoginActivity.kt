@@ -57,7 +57,6 @@ class LoginActivity : AppCompatActivity(), CoroutineScope {
                                 Toast.makeText(this@LoginActivity,
                                     it.message,
                                     Toast.LENGTH_SHORT).show()
-                                Log.e(TAG, "setupUI: ${it.message}")
                             }
                             is UIState.Success -> {
                                 sharedPref.isLogin = true

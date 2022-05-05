@@ -10,24 +10,30 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import uz.algorithmgateway.tezkorakfa.R
+import uz.algorithmgateway.tezkorakfa.databinding.FragmentSavePdfBinding
 import uz.algorithmgateway.tezkorakfa.databinding.FragmentSignatureBinding
 import java.io.File
 import java.io.FileOutputStream
 
 class SignatureFragment : Fragment(R.layout.fragment_signature) {
-    private val binding: FragmentSignatureBinding by viewBinding(FragmentSignatureBinding::bind)
+    private var _binding: FragmentSignatureBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentSignatureBinding.inflate(inflater, container, false)
 
         loadingBtn()
+        return  binding.root
     }
-
     private fun loadingBtn() {
         binding.apply {
             clear.setOnClickListener {
@@ -60,6 +66,11 @@ class SignatureFragment : Fragment(R.layout.fragment_signature) {
 
         findNavController().navigate(R.id.customerTakePhotoFragment)
 
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
 

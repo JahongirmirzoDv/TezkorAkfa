@@ -1,4 +1,4 @@
-package uz.algorithmgateway.data.api.models
+package uz.algorithmgateway.tezkorakfa.data.models
 
 import com.google.gson.annotations.SerializedName
 

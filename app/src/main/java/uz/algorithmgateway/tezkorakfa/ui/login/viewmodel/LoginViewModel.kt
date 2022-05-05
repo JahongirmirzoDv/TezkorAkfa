@@ -7,8 +7,8 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import uz.algorithmgateway.data.api.models.UserRequest
-import uz.algorithmgateway.data.api.models.UserResponse
+import uz.algorithmgateway.tezkorakfa.data.models.UserRequest
+import uz.algorithmgateway.tezkorakfa.data.models.UserResponse
 import uz.algorithmgateway.tezkorakfa.data.retrofit.ApiService
 import uz.algorithmgateway.tezkorakfa.data.retrofit.models.sales_order_list.OderList
 import uz.algorithmgateway.tezkorakfa.data.retrofit.repository.NetworkRepository
@@ -27,10 +27,16 @@ class LoginViewModel @Inject constructor(
 
     fun loginUser(phone: String, password: String) {
         viewModelScope.launch {
-            val responce = apiService.loginUser(UserRequest(phone, password))
-            if (responce.isSuccessful) {
-                _state.value = UIState.Success(responce.body())
-            } else _state.value = UIState.Error(responce.message())
+            networkRepository.loginUser(UserRequest(phone, password))
+                .catch {
+                    _state.value = UIState.Error(it.message.toString())
+                }.collect {
+                    if (it.isSuccess) {
+                        _state.value = UIState.Success(it.getOrNull())
+                    } else if (it.isFailure) {
+                        _state.value = UIState.Error((it.exceptionOrNull()?.message ?: it.exceptionOrNull()).toString())
+                    }
+                }
         }
     }
 

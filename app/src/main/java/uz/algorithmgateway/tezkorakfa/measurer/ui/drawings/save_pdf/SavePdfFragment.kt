@@ -27,6 +27,7 @@ import uz.algorithmgateway.core.util.toast
 import uz.algorithmgateway.tezkorakfa.R
 import uz.algorithmgateway.tezkorakfa.base.MyApplication
 import uz.algorithmgateway.tezkorakfa.databinding.FragmentSavePdfBinding
+import uz.algorithmgateway.tezkorakfa.databinding.ScreenSliderBinding
 import uz.algorithmgateway.tezkorakfa.measurer.ui.drawings.adapters.PdfAdapter
 import uz.algorithmgateway.tezkorakfa.measurer.ui.select_type.models.Drawing
 import uz.algorithmgateway.tezkorakfa.measurer.viewmodel.DbViewmodel
@@ -40,7 +41,8 @@ import kotlin.coroutines.CoroutineContext
 class SavePdfFragment : Fragment(), CoroutineScope {
     @Inject
     lateinit var viewmodel: DbViewmodel
-    lateinit var binding: FragmentSavePdfBinding
+    private var _binding: FragmentSavePdfBinding? = null
+    private val binding get() = _binding!!
     lateinit var list: MutableStateFlow<List<Drawing>>
 
     val REQUEST_PERMISSIONS = 1
@@ -61,7 +63,7 @@ class SavePdfFragment : Fragment(), CoroutineScope {
         savedInstanceState: Bundle?,
     ): View {
         // Inflate the layout for this fragment
-        binding = FragmentSavePdfBinding.inflate(inflater, container, false)
+        _binding = FragmentSavePdfBinding.inflate(inflater, container, false)
         list = MutableStateFlow(emptyList())
         list.value = viewmodel.getAllDrawing()
 
@@ -182,6 +184,7 @@ class SavePdfFragment : Fragment(), CoroutineScope {
     override fun onDestroyView() {
         super.onDestroyView()
         viewmodel.delete()
+        _binding = null
     }
 
     override val coroutineContext: CoroutineContext

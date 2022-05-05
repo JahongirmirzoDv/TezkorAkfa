@@ -5,6 +5,8 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
+import uz.algorithmgateway.tezkorakfa.data.models.UserRequest
+import uz.algorithmgateway.tezkorakfa.data.models.UserResponse
 import uz.algorithmgateway.tezkorakfa.data.retrofit.ApiService
 import uz.algorithmgateway.tezkorakfa.data.retrofit.models.accessory.Accessory
 import uz.algorithmgateway.tezkorakfa.data.retrofit.models.profile.Profile
@@ -32,6 +34,7 @@ class NetworkRepository @Inject constructor(private val apiService: ApiService) 
                 emit(Result.failure(it))
             }.flowOn(Dispatchers.IO)
     }
+
     fun getWindow(): Flow<Result<Windows>> {
         return apiService.getWindow()
             .map {
@@ -40,6 +43,7 @@ class NetworkRepository @Inject constructor(private val apiService: ApiService) 
                 emit(Result.failure(it))
             }.flowOn(Dispatchers.IO)
     }
+
     fun getShelf(): Flow<Result<Shelf>> {
         return apiService.getShelf()
             .map {
@@ -48,8 +52,18 @@ class NetworkRepository @Inject constructor(private val apiService: ApiService) 
                 emit(Result.failure(it))
             }.flowOn(Dispatchers.IO)
     }
+
     fun getAccsessory(): Flow<Result<Accessory>> {
         return apiService.getAccsessory()
+            .map {
+                Result.success(it)
+            }.catch {
+                emit(Result.failure(it))
+            }.flowOn(Dispatchers.IO)
+    }
+
+    fun loginUser(userRequest: UserRequest): Flow<Result<UserResponse>> {
+        return apiService.loginUser(userRequest)
             .map {
                 Result.success(it)
             }.catch {
