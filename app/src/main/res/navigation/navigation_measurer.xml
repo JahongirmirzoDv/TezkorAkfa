@@ -107,6 +107,10 @@
         android:id="@+id/customerTakePhotoFragment"
         android:name="uz.algorithmgateway.tezkorakfa.measurer.ui.customer_photo.CustomerTakePhotoFragment"
         android:label="fragment_customer_take_photo"
-        tools:layout="@layout/fragment_customer_take_photo" />
+        tools:layout="@layout/fragment_customer_take_photo" >
+        <action
+            android:id="@+id/action_customerTakePhotoFragment_to_confirmOrdersScreen"
+            app:destination="@id/confirmOrdersScreen" />
+    </fragment>
 
 </navigation>

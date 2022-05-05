@@ -18,10 +18,10 @@
             android:layout_height="56dp">
 
             <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/projet_number"
                 style="@style/TextView.Toolbar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/projet_number"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -43,12 +43,12 @@
     </androidx.appcompat.widget.Toolbar>
 
     <androidx.core.widget.NestedScrollView
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:orientation="vertical"
         android:paddingHorizontal="@dimen/screen_padding_horizontal"
-        app:layout_constraintTop_toBottomOf="@id/toolBar"
-        app:layout_constraintBottom_toTopOf="@id/layout_nav_buttons">
+        app:layout_constraintBottom_toTopOf="@id/layout_nav_buttons"
+        app:layout_constraintTop_toBottomOf="@id/toolBar">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -59,12 +59,24 @@
                 android:layout_width="120dp"
                 android:layout_height="120dp"
                 android:layout_marginTop="@dimen/default_item_space"
-                android:src="@drawable/ic_image"
                 android:background="#7E7E7E"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:shapeAppearanceOverlay="@style/roundedImageView" />
+
+            <ImageView
+                android:id="@+id/add_image"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_image"
+                app:layout_constraintBottom_toBottomOf="@+id/imageProduct"
+                app:layout_constraintHeight_percent="0.05"
+                app:layout_constraintHorizontal_bias="0.9"
+                app:layout_constraintLeft_toLeftOf="@+id/imageProduct"
+                app:layout_constraintRight_toRightOf="@+id/imageProduct"
+                app:layout_constraintWidth_percent="0.08" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/textViewName"
@@ -85,9 +97,9 @@
                 android:layout_marginTop="@dimen/margin_seven"
                 android:background="@drawable/bg_item_comment"
                 android:gravity="center_vertical"
+                android:maxLines="1"
                 android:padding="@dimen/item_normal_padding"
                 android:text="Bobur"
-                android:maxLines="1"
                 android:textColor="@color/white"
                 android:textColorHint="@color/text_dark_color"
                 android:textSize="@dimen/text_size_sixteen"
@@ -115,9 +127,9 @@
                 android:layout_marginTop="@dimen/margin_seven"
                 android:background="@drawable/bg_item_comment"
                 android:gravity="center_vertical"
+                android:maxLines="1"
                 android:padding="@dimen/item_normal_padding"
                 android:text="Abdullayev"
-                android:maxLines="1"
                 android:textColor="@color/white"
                 android:textColorHint="@color/text_dark_color"
                 android:textSize="@dimen/text_size_sixteen"
@@ -186,19 +198,19 @@
                 android:id="@+id/tv_comment"
                 android:layout_width="@dimen/border_width"
                 android:layout_height="wrap_content"
-                android:minHeight="100dp"
                 android:layout_marginTop="@dimen/margin_seven"
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/bg_item_comment"
                 android:gravity="start"
+                android:minHeight="100dp"
                 android:padding="@dimen/item_normal_padding"
                 android:text="Mijozga 10% chegirma qilinadi"
                 android:textColor="@color/white"
                 android:textColorHint="@color/text_dark_color"
                 android:textSize="@dimen/text_size_sixteen"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/textViewComment" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -209,26 +221,26 @@
         android:id="@+id/layout_nav_buttons"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:elevation="6dp"
-        android:paddingBottom="@dimen/screen_padding_horizontal"
-        android:paddingTop="10dp"
+        android:orientation="horizontal"
         android:paddingHorizontal="@dimen/screen_padding_horizontal"
-        app:layout_constraintStart_toStartOf="parent"
+        android:paddingTop="10dp"
+        android:paddingBottom="@dimen/screen_padding_horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintStart_toStartOf="parent">
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnBack"
             style="@style/MaterialButton.Default.Light"
             android:layout_width="match_parent"
             android:layout_height="@dimen/size_fifty_five"
+            android:layout_marginEnd="21dp"
             android:layout_weight="1"
             android:drawableStart="@drawable/ic_back_arrow_fragment"
             android:fontFamily="@font/roboto_500"
             android:text="@string/back_btn"
             android:textAllCaps="false"
-            android:layout_marginEnd="21dp"
             android:textSize="@dimen/text_size_sixteen"
             app:cornerRadius="@dimen/item_space_middle" />
 
@@ -237,14 +249,14 @@
             style="@style/MaterialButton.Default"
             android:layout_width="match_parent"
             android:layout_height="@dimen/size_fifty_five"
-            android:layout_weight="1"
             android:layout_marginStart="21dp"
+            android:layout_weight="1"
             android:drawableEnd="@drawable/ic_next_arrow_fr"
             android:fontFamily="@font/roboto_500"
             android:text="@string/next"
             android:textAllCaps="false"
             android:textSize="@dimen/text_size_sixteen"
-            app:cornerRadius="@dimen/item_space_middle"/>
+            app:cornerRadius="@dimen/item_space_middle" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 

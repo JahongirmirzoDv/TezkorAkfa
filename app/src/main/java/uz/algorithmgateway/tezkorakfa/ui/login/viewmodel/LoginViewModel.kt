@@ -19,7 +19,9 @@ class LoginViewModel @Inject constructor(
     var apiService: ApiService,
     var networkRepository: NetworkRepository,
 ) : ViewModel() {
+
     private val _state = MutableStateFlow<UIState<UserResponse?>>(UIState.Loading)
+
     val state: StateFlow<UIState<UserResponse?>>
         get() = _state
 

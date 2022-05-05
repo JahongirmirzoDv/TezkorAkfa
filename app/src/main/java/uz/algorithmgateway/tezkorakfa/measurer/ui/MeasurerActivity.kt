@@ -21,7 +21,6 @@ class MeasurerActivity : AppCompatActivity(), CoroutineScope {
     }
 
 
-
     override val coroutineContext: CoroutineContext
         get() = Job()
 
@@ -37,4 +36,10 @@ class MeasurerActivity : AppCompatActivity(), CoroutineScope {
 //            back = false
 //        }, 2000)
 //    }
+
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.clear()
+    }
 }

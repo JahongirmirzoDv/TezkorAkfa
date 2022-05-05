@@ -133,7 +133,7 @@ class AcceptOrderScreen : Fragment() {
                 editTextAddress.setText(address)
             }
         }
-        binding.imageProduct.setOnClickListener {
+        binding.addImage.setOnClickListener {
             pickCameraImage()
         }
     }

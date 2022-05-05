@@ -1,10 +1,12 @@
 package uz.algorithmgateway.tezkorakfa.data.retrofit
 
+import androidx.room.Update
 import kotlinx.coroutines.flow.Flow
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import okhttp3.ResponseBody
 import retrofit2.Response
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
+import retrofit2.http.*
 import uz.algorithmgateway.data.api.models.UserRequest
 import uz.algorithmgateway.data.api.models.UserResponse
 import uz.algorithmgateway.tezkorakfa.data.retrofit.models.accessory.Accessory
@@ -32,6 +34,14 @@ interface ApiService {
 
     @GET("warehouse/accessory/list")
     fun getAccsessory(): Flow<Accessory>
+
+    @Multipart
+    @Update
+    fun updateUserData(
+        @Header("Authorization") token: String,
+        @Part file: MultipartBody.Part,
+        @Body image: RequestBody
+    ): Response<ResponseBody>
 
 
 //    val files = File(filePath!!).compress2(requireContext())

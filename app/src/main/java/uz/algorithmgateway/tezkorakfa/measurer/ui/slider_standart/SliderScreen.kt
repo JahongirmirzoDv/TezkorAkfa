@@ -16,6 +16,7 @@ import android.os.Bundle
 import android.os.Environment
 import android.os.Handler
 import android.provider.MediaStore
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.PixelCopy
 import android.view.View
@@ -58,6 +59,7 @@ class SliderScreen : Fragment() {
     private lateinit var dialogBinding: LayoutChangeSizeDialogBinding
     private var customHorVer: Boolean? = null
     lateinit var drawing: Drawing
+    private var imageName: String = ""
 
     var lastView: View? = null
     var H: Int = 1300
@@ -98,10 +100,12 @@ class SliderScreen : Fragment() {
         binding.floatingNext.setOnClickListener {
             navController.navigate(R.id.drawingsFragment)
             verifyStoragePermission(requireActivity())
-            getBitmapFromView(binding.layoutDesigner, requireActivity(), callback = {
-                saveBitmap(it, "new api", drawing)
-            })
-            toast("Chizma galareyaga saqlandi")
+
+            saveCustomview()
+//            getBitmapFromView(binding.layoutDesigner, requireActivity(), callback = {
+//                saveBitmap(it, "new api", drawing)
+//            })
+//            toast("Chizma galareyaga saqlandi")
         }
         binding.apply {
             floatingBack.setOnClickListener {
@@ -112,6 +116,28 @@ class SliderScreen : Fragment() {
             }
 
         }
+    }
+
+    private fun saveCustomview() {
+
+        imageName = System.currentTimeMillis().toString()
+        binding.layoutDesigner.setDrawingCacheEnabled(true);
+        val bitmap = binding.layoutDesigner.getDrawingCache()
+
+        Log.d(
+            "MY777",
+            "IMAGE URL " + Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM)
+                .toString() + "/Operation.pdf"
+        )
+        bitmap.compress(
+            Bitmap.CompressFormat.JPEG,
+            90,
+            object : FileOutputStream(File("/storage/emulated/0/DCIM/${imageName}image.jpg")) {
+            })
+
+        drawing.projet_image_path = "/storage/emulated/0/DCIM/${imageName}image.jpg"
+        dbViewmodel.updateDrawing(drawing)
+
     }
 
     @RequiresApi(Build.VERSION_CODES.O)

@@ -23,13 +23,13 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.github.drjacky.imagepicker.ImagePicker
+import uz.algorithmgateway.core.util.toast
 import uz.algorithmgateway.tezkorakfa.R
 import uz.algorithmgateway.tezkorakfa.databinding.FragmentCustomerTakePhotoBinding
 import uz.algorithmgateway.tezkorakfa.measurer.utils.FileUriUtils
 import java.io.*
 
 class CustomerTakePhotoFragment : Fragment(R.layout.fragment_customer_take_photo) {
-
 
 
     private val binding: FragmentCustomerTakePhotoBinding by viewBinding(
@@ -62,10 +62,17 @@ class CustomerTakePhotoFragment : Fragment(R.layout.fragment_customer_take_photo
                 takePhoto()
             }
             next.setOnClickListener {
-
+                sendData()
+                toast("next btn")
+                findNavController().navigate(R.id.confirmOrdersScreen)
             }
 
         }
+
+    }
+
+    private fun sendData() {
+
 
     }
 
@@ -79,7 +86,7 @@ class CustomerTakePhotoFragment : Fragment(R.layout.fragment_customer_take_photo
         cameraLauncher.launch(
             ImagePicker.with(requireActivity())
                 .cameraOnly()
-                .maxResultSize(1080,1920)
+                .maxResultSize(1080, 1920)
                 .createIntent()
         )
     }
@@ -92,8 +99,6 @@ class CustomerTakePhotoFragment : Fragment(R.layout.fragment_customer_take_photo
                 binding.imageCustomer.setImageURI(uri)
             }
         }
-
-
 
 
 }
