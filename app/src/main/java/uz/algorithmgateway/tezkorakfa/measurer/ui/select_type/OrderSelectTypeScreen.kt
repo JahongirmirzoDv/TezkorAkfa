@@ -454,8 +454,8 @@ class OrderSelectTypeScreen : Fragment(), CoroutineScope {
                     }
                 }
                 val profile_type = profile_type
-                val profile_type_two =
-                    binding.layoutProfile.spinnerTypeProfile.selectedItem.toString().ifEmpty { "" }
+//                val profile_type_two =
+//                    binding.layoutProfile.spinnerTypeProfile.selectedItem.toString().ifEmpty { "" }
                 val uiSpinner1 =
                     binding.layoutProfile.spinnerTypeTexture.selectedItem.toString().ifEmpty { "" }
                 val profile_texture = uiSpinner1
@@ -465,7 +465,7 @@ class OrderSelectTypeScreen : Fragment(), CoroutineScope {
                 val uiSpinner =
                     binding.layoutWindow.spinnerWindowColor.selectedItem.toString().ifEmpty { "" }
                 val mirror_color = uiSpinner
-                val window_sill = shelf_List[binding.layoutShelf.tablayoutShelf.selectedTabPosition]
+//                val window_sill = shelf_List[binding.layoutShelf.tablayoutShelf.selectedTabPosition]
                 val sill_mm = shelf_
                 val sill_comment = binding.layoutShelf.comment.text.toString().ifEmpty { "" }
                 val handle =
@@ -483,12 +483,12 @@ class OrderSelectTypeScreen : Fragment(), CoroutineScope {
                     drawing.type_type,
                     external_or_Internal,
                     profile_type,
-                    profile_type_two,
+                    "profile_type_two",
                     profile_texture,
                     mirror_layer,
                     mirror_mm,
                     mirror_color,
-                    window_sill,
+                    "window_sill",
                     sill_mm,
                     sill_comment,
                     handle,

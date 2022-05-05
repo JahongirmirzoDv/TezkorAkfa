@@ -1,45 +1,53 @@
 package uz.algorithmgateway.tezkorakfa.measurer.ui.customer_photo
 
-import android.annotation.SuppressLint
+import android.app.Activity
+import android.content.ContentResolver
+import android.content.ContentValues
+import android.content.Context
+import android.content.pm.PackageManager
+import android.hardware.Camera
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
-import android.view.Gravity
+import android.os.Environment
+import android.provider.MediaStore
+import android.provider.MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE
+import android.util.Log
+import android.view.SurfaceHolder
+import android.view.SurfaceView
 import android.view.View
-import android.widget.LinearLayout
-import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
-import com.vansuita.pickimage.bundle.PickSetup
-import com.vansuita.pickimage.dialog.PickImageDialog
-import com.vansuita.pickimage.enums.EPickType
-import com.vansuita.pickimage.listeners.IPickClick
+import android.widget.FrameLayout
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import by.kirich1409.viewbindingdelegate.viewBinding
+import com.github.drjacky.imagepicker.ImagePicker
+import uz.algorithmgateway.core.util.toast
+import uz.algorithmgateway.tezkorakfa.R
+import uz.algorithmgateway.tezkorakfa.databinding.FragmentCustomerTakePhotoBinding
+import uz.algorithmgateway.tezkorakfa.measurer.utils.FileUriUtils
 import java.io.*
 
+class CustomerTakePhotoFragment : Fragment(R.layout.fragment_customer_take_photo) {
 
-class CustomerTakePhotoFragment : AppCompatActivity() {
-    lateinit var binding: CustomerTakePhotoFragment
 
-    lateinit var setup: PickSetup
+    private val binding: FragmentCustomerTakePhotoBinding by viewBinding(
+        FragmentCustomerTakePhotoBinding::bind
+    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        binding = CustomerTakePhotoFragment
-//        setContentView(binding.root)
 
-        installTakePhoto()
-        setup = PickSetup()
-            .setTitle("Rasm")
-            .setWidth(600)
-            .setHeight(600)
-            .setProgressText("saqlanyapti")
-            .setCancelText("bekor qilish")
-            .setFlip(true)
-            .setMaxSize(1)
-            .setPickTypes(EPickType.CAMERA)
-            .setIconGravity(Gravity.LEFT)
-            .setButtonOrientation(LinearLayout.HORIZONTAL)
-            .setSystemDialog(false)
 
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        installTakePhoto()
+
+    }
 
     private fun installTakePhoto() {
         binding.apply {
@@ -51,34 +59,46 @@ class CustomerTakePhotoFragment : AppCompatActivity() {
                 }
             }
             takePhotoBtn.setOnClickListener {
-                try {
-                    takePhoto()
-                } catch (e: Exception) {
-                    e.printStackTrace()
-                }
+                takePhoto()
             }
             next.setOnClickListener {
+                sendData()
+                toast("next btn")
+                findNavController().navigate(R.id.confirmOrdersScreen)
+            }
 
+        }
+
+    }
+
+    private fun sendData() {
+
+
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        //Clear the Activity's bundle of the subsidiary fragments' bundles.
+        outState.clear()
+    }
+
+    fun takePhoto() {
+        cameraLauncher.launch(
+            ImagePicker.with(requireActivity())
+                .cameraOnly()
+                .maxResultSize(1080, 1920)
+                .createIntent()
+        )
+    }
+
+
+    private val cameraLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+            if (it.resultCode == Activity.RESULT_OK) {
+                val uri = it.data?.data!!
+                binding.imageCustomer.setImageURI(uri)
             }
         }
-    }
 
-    @SuppressLint("RtlHardcoded")
-    fun takePhoto() {
-        try {
-            PickImageDialog.build(setup)
-                .setOnClick(object : IPickClick {
-                    override fun onGalleryClick() {
-                        Toast.makeText(requireContext(), "Gallery Click!", Toast.LENGTH_LONG).show()
-                    }
-
-                    override fun onCameraClick() {
-                        Toast.makeText(requireContext(), "Camera Click!", Toast.LENGTH_LONG).show()
-                    }
-                }).show(requireActivity())
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-    }
 
 }

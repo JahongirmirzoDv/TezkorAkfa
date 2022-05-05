@@ -14,6 +14,7 @@ import uz.algorithmgateway.tezkorakfa.data.retrofit.models.window.Windows
 import javax.inject.Inject
 
 class NetworkRepository @Inject constructor(private val apiService: ApiService) {
+
     fun salesOrderList(): Flow<Result<OderList>> {
         return apiService.salesOrderList()
             .map {
