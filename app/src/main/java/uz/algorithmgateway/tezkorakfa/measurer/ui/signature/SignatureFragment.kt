@@ -2,6 +2,7 @@ package uz.algorithmgateway.tezkorakfa.measurer.ui.signature
 
 import android.graphics.Bitmap
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +12,8 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import uz.algorithmgateway.tezkorakfa.R
 import uz.algorithmgateway.tezkorakfa.databinding.FragmentSavePdfBinding
 import uz.algorithmgateway.tezkorakfa.databinding.FragmentSignatureBinding
+import java.io.File
+import java.io.FileOutputStream
 
 class SignatureFragment : Fragment(R.layout.fragment_signature) {
     private var _binding: FragmentSignatureBinding? = null
@@ -49,6 +52,17 @@ class SignatureFragment : Fragment(R.layout.fragment_signature) {
     }
 
     private fun loadSignature(bitmap: Bitmap) {
+
+        val absolutePath = File(requireActivity().cacheDir, "Signature.png")
+        val fileOutputStream = FileOutputStream(absolutePath)
+
+        bitmap.compress(
+            Bitmap.CompressFormat.PNG,
+            90, fileOutputStream
+        )
+
+        Log.d("MY777","$absolutePath")
+//        Log.d("MY777","${absolutePath.absolutePath}")
 
         findNavController().navigate(R.id.customerTakePhotoFragment)
 
