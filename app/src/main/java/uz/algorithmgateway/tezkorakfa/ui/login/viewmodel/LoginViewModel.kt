@@ -10,7 +10,7 @@ import kotlinx.coroutines.launch
 import uz.algorithmgateway.tezkorakfa.data.models.UserRequest
 import uz.algorithmgateway.tezkorakfa.data.models.UserResponse
 import uz.algorithmgateway.tezkorakfa.data.retrofit.ApiService
-import uz.algorithmgateway.tezkorakfa.data.retrofit.models.sales_order_list.OderList
+import uz.algorithmgateway.tezkorakfa.data.retrofit.models.sales_order_list.OrderList
 import uz.algorithmgateway.tezkorakfa.data.retrofit.repository.NetworkRepository
 import uz.algorithmgateway.tezkorakfa.ui.utils.UIState
 import javax.inject.Inject
@@ -40,13 +40,13 @@ class LoginViewModel @Inject constructor(
         }
     }
 
-    private val _order = MutableStateFlow<UIState<OderList?>>(UIState.Loading)
-    val order: StateFlow<UIState<OderList?>>
+    private val _order = MutableStateFlow<UIState<OrderList?>>(UIState.Loading)
+    val order: StateFlow<UIState<OrderList?>>
         get() = _order
 
-    fun getOrder() {
+    fun getOrder(status:String) {
         viewModelScope.launch {
-            networkRepository.salesOrderList()
+            networkRepository.salesOrderList(status)
                 .catch {
                     _order.emit(UIState.Error("Internet bilan muammo, Qayta urining"))
                 }.collect {

@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.coroutines.CoroutineScope
@@ -12,10 +11,12 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import uz.algorithmgateway.data.const.Value
 import uz.algorithmgateway.tezkorakfa.base.MyApplication
 import uz.algorithmgateway.tezkorakfa.databinding.ActivityLoginBinding
 import uz.algorithmgateway.tezkorakfa.measurer.ui.MeasurerActivity
-import uz.algorithmgateway.tezkorakfa.ui.DesignerActivity
+import uz.algorithmgateway.tezkorakfa.montage.MontageActivity
+import uz.algorithmgateway.tezkorakfa.supplier.SupplierActivity
 import uz.algorithmgateway.tezkorakfa.ui.login.viewmodel.LoginViewModel
 import uz.algorithmgateway.tezkorakfa.ui.utils.SharedPref
 import uz.algorithmgateway.tezkorakfa.ui.utils.UIState
@@ -38,8 +39,10 @@ class LoginActivity : AppCompatActivity(), CoroutineScope {
         MyApplication.appComponent.login(this)
         setContentView(binding.root)
 
+
         setupUI()
     }
+
 
     private fun setupUI() {
         binding.btnEnter.setOnClickListener {
@@ -60,10 +63,40 @@ class LoginActivity : AppCompatActivity(), CoroutineScope {
                             }
                             is UIState.Success -> {
                                 sharedPref.isLogin = true
-                                val intent =
-                                    Intent(this@LoginActivity, MeasurerActivity::class.java)
-                                startActivity(intent)
-                                finish()
+                                when (it.data?.roleId) {
+                                    Value.SCALER -> {
+                                        sharedPref.user_role = Value.SCALER
+                                        val intent =
+                                            Intent(this@LoginActivity, MeasurerActivity::class.java)
+                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                                        startActivity(intent)
+                                        finish()
+                                    }
+                                    Value.SUPPLIER -> {
+                                        sharedPref.user_role = Value.SUPPLIER
+                                        val intent =
+                                            Intent(this@LoginActivity, SupplierActivity::class.java)
+                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                                        startActivity(intent)
+                                        finish()
+                                    }
+                                    Value.MONTAGER -> {
+                                        sharedPref.user_role = Value.MONTAGER
+                                        val intent =
+                                            Intent(this@LoginActivity, MontageActivity::class.java)
+                                        startActivity(intent)
+                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                                        finish()
+                                    }
+                                    Value.SERVICER -> {
+                                        sharedPref.user_role = Value.SERVICER
+//                                        val intent =
+//                                            Intent(this@LoginActivity, MontageActivity::class.java)
+//                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+//                                        startActivity(intent)
+//                                        finish()
+                                    }
+                                }
                             }
                         }
                     }

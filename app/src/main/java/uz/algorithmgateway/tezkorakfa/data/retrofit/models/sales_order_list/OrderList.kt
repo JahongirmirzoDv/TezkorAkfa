@@ -1,10 +1,8 @@
 package uz.algorithmgateway.tezkorakfa.data.retrofit.models.sales_order_list
 
-import java.io.Serializable
-
-data class OderList(
+data class OrderList(
     val count: Int,
-    val next: String,
+    val next: Any,
     val previous: Any,
-    val results: List<Result>,
-):Serializable
+    val results: List<Result>
+)

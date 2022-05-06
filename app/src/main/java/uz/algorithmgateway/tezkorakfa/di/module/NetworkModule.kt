@@ -1,5 +1,6 @@
 package uz.algorithmgateway.tezkorakfa.di.module
 
+import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.mocklets.pluto.PlutoInterceptor
 import dagger.Module
 import dagger.Provides
@@ -7,8 +8,11 @@ import me.sianaki.flowretrofitadapter.FlowCallAdapterFactory
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
+import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import uz.algorithmgateway.tezkorakfa.BuildConfig
+import uz.algorithmgateway.tezkorakfa.base.MyApplication
 import uz.algorithmgateway.tezkorakfa.data.retrofit.ApiService
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
@@ -42,9 +46,11 @@ class NetworkModule {
         val okHttpClient = OkHttpClient.Builder()
         return okHttpClient.addInterceptor(httpLoggingInterceptor)
             .addInterceptor(PlutoInterceptor())
+            .addInterceptor(ChuckerInterceptor.Builder(MyApplication.instance).build())
             .addInterceptor { chain ->
                 val newRequest = chain.request().newBuilder()
-                    .addHeader("Authorization", "Token be248ee5e3e9227150e2ff0d00465b79722296a3")
+                    .addHeader("Authorization", "Token 11cc2490c5cd16505ce887ff90d6865610ffb6cc")
+                    .addHeader("Content-Type", "application/json")
                     .build()
                 chain.proceed(newRequest)
             }
@@ -62,6 +68,7 @@ class NetworkModule {
     ): Retrofit {
         return Retrofit.Builder()
             .addConverterFactory(gsonConverterFactory)
+            .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
             .addCallAdapterFactory(FlowCallAdapterFactory.create())
             .baseUrl(baseUrl)
             .client(okHttpClient)

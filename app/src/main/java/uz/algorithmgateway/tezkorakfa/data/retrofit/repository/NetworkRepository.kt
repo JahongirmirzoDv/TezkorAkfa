@@ -10,15 +10,15 @@ import uz.algorithmgateway.tezkorakfa.data.models.UserResponse
 import uz.algorithmgateway.tezkorakfa.data.retrofit.ApiService
 import uz.algorithmgateway.tezkorakfa.data.retrofit.models.accessory.Accessory
 import uz.algorithmgateway.tezkorakfa.data.retrofit.models.profile.Profile
-import uz.algorithmgateway.tezkorakfa.data.retrofit.models.sales_order_list.OderList
+import uz.algorithmgateway.tezkorakfa.data.retrofit.models.sales_order_list.OrderList
 import uz.algorithmgateway.tezkorakfa.data.retrofit.models.shelf.Shelf
 import uz.algorithmgateway.tezkorakfa.data.retrofit.models.window.Windows
 import javax.inject.Inject
 
 class NetworkRepository @Inject constructor(private val apiService: ApiService) {
 
-    fun salesOrderList(): Flow<Result<OderList>> {
-        return apiService.salesOrderList()
+    fun salesOrderList(status:String): Flow<Result<OrderList>> {
+        return apiService.salesOrderList(status)
             .map {
                 Result.success(it)
             }.catch {

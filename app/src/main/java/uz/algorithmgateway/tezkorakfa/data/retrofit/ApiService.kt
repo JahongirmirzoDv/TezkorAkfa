@@ -1,8 +1,6 @@
 package uz.algorithmgateway.tezkorakfa.data.retrofit
 
-import androidx.room.Update
 import kotlinx.coroutines.flow.Flow
-import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okhttp3.ResponseBody
 import retrofit2.Response
@@ -11,7 +9,7 @@ import uz.algorithmgateway.tezkorakfa.data.models.UserRequest
 import uz.algorithmgateway.tezkorakfa.data.models.UserResponse
 import uz.algorithmgateway.tezkorakfa.data.retrofit.models.accessory.Accessory
 import uz.algorithmgateway.tezkorakfa.data.retrofit.models.profile.Profile
-import uz.algorithmgateway.tezkorakfa.data.retrofit.models.sales_order_list.OderList
+import uz.algorithmgateway.tezkorakfa.data.retrofit.models.sales_order_list.OrderList
 import uz.algorithmgateway.tezkorakfa.data.retrofit.models.shelf.Shelf
 import uz.algorithmgateway.tezkorakfa.data.retrofit.models.window.Windows
 
@@ -21,7 +19,8 @@ interface ApiService {
 
     @GET("order/order")
     fun salesOrderList(
-    ): Flow<OderList>
+        @Query("status") status: String,
+    ): Flow<OrderList>
 
     @GET("warehouse/profil/list")
     fun getProfile(): Flow<Profile>
@@ -35,8 +34,9 @@ interface ApiService {
     @GET("warehouse/accessory/list")
     fun getAccsessory(): Flow<Accessory>
 
-    @Update
-    fun updateUserData(
-        @Body body: RequestBody
+    @PUT("order/order/{id}/")
+    suspend fun updateUserData(
+        @Path("id") id: String,
+        @Body body: RequestBody,
     ): Response<ResponseBody>
 }

@@ -46,7 +46,7 @@ class PdfAdapter(var context: Context) : RecyclerView.Adapter<PdfAdapter.Vh>() {
 
                 })
                 .into(itemview.image)
-            itemview.romD.text = drawing.type
+            itemview.romD.text = "${drawing.type} soni ${drawing.count}"
             itemview.profileD.text =
                 "${drawing.profile_type} ${drawing.profile_type_two}(${drawing.profile_texture})"
             itemview.oynaD.text = "${drawing.mirror_color} ${drawing.mirror_layer}"

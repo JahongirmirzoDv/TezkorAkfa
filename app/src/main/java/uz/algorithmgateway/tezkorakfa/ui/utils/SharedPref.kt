@@ -16,7 +16,7 @@ class SharedPref @Inject constructor(
 
 
 
-    var imageUri: String?
+    var user_role: String?
         get() = mySharedPref.getString("use1r", "")
         set(value) = mySharedPref.edit {
             if (value != null) {

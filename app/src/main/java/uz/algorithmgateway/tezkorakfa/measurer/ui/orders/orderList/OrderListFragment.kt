@@ -60,7 +60,7 @@ class OrderListFragment(
         if (it) {
             launch(Dispatchers.Main) {
                 try {
-                    loginViewModel.getOrder()
+                    loginViewModel.getOrder(status)
                     loginViewModel.order.collect { list ->
                         when (list) {
                             is UIState.Loading -> {
