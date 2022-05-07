@@ -63,6 +63,7 @@ class LoginActivity : AppCompatActivity(), CoroutineScope {
                             }
                             is UIState.Success -> {
                                 sharedPref.isLogin = true
+                                sharedPref.userId = it.data?.userId.toString()
                                 when (it.data?.roleId) {
                                     Value.SCALER -> {
                                         sharedPref.user_role = Value.SCALER

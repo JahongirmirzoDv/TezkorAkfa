@@ -44,9 +44,9 @@ class LoginViewModel @Inject constructor(
     val order: StateFlow<UIState<OrderList?>>
         get() = _order
 
-    fun getOrder(status:String) {
+    fun getOrder(status:String,user_id:String) {
         viewModelScope.launch {
-            networkRepository.salesOrderList(status)
+            networkRepository.salesOrderList(status,user_id)
                 .catch {
                     _order.emit(UIState.Error("Internet bilan muammo, Qayta urining"))
                 }.collect {

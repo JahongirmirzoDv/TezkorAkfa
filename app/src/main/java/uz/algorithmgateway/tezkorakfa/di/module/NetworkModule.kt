@@ -8,7 +8,6 @@ import me.sianaki.flowretrofitadapter.FlowCallAdapterFactory
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import uz.algorithmgateway.tezkorakfa.BuildConfig
@@ -50,7 +49,6 @@ class NetworkModule {
             .addInterceptor { chain ->
                 val newRequest = chain.request().newBuilder()
                     .addHeader("Authorization", "Token 11cc2490c5cd16505ce887ff90d6865610ffb6cc")
-                    .addHeader("Content-Type", "application/json")
                     .build()
                 chain.proceed(newRequest)
             }

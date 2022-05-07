@@ -20,6 +20,7 @@ interface ApiService {
     @GET("order/order")
     fun salesOrderList(
         @Query("status") status: String,
+        @Query("scale") user_id: String,
     ): Flow<OrderList>
 
     @GET("warehouse/profil/list")
@@ -39,4 +40,9 @@ interface ApiService {
         @Path("id") id: String,
         @Body body: RequestBody,
     ): Response<ResponseBody>
+
+    @POST("order/order/measurement/")
+    suspend fun acceptOrder(
+        @Body body: HashMap<String, Any>?,
+    )
 }

@@ -6,11 +6,9 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
-import androidx.datastore.preferences.core.preferencesKey
-import kotlinx.coroutines.flow.first
 import uz.algorithmgateway.data.const.Value
-import uz.algorithmgateway.tezkorakfa.measurer.ui.MeasurerActivity
 import uz.algorithmgateway.tezkorakfa.R
+import uz.algorithmgateway.tezkorakfa.measurer.ui.MeasurerActivity
 import uz.algorithmgateway.tezkorakfa.montage.MontageActivity
 import uz.algorithmgateway.tezkorakfa.supplier.SupplierActivity
 import uz.algorithmgateway.tezkorakfa.ui.login.LoginActivity
@@ -27,7 +25,7 @@ class SplashActivity : AppCompatActivity() {
 
         Handler(Looper.getMainLooper()).postDelayed({
             if (sharedPref.isLogin) {
-                when(sharedPref.user_role){
+                when (sharedPref.user_role) {
                     Value.SCALER -> {
                         val intent =
                             Intent(this, MeasurerActivity::class.java)

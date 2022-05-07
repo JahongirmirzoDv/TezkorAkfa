@@ -5,6 +5,8 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
+import okhttp3.RequestBody
+import retrofit2.Response
 import uz.algorithmgateway.tezkorakfa.data.models.UserRequest
 import uz.algorithmgateway.tezkorakfa.data.models.UserResponse
 import uz.algorithmgateway.tezkorakfa.data.retrofit.ApiService
@@ -17,8 +19,8 @@ import javax.inject.Inject
 
 class NetworkRepository @Inject constructor(private val apiService: ApiService) {
 
-    fun salesOrderList(status:String): Flow<Result<OrderList>> {
-        return apiService.salesOrderList(status)
+    fun salesOrderList(status:String,user_id:String): Flow<Result<OrderList>> {
+        return apiService.salesOrderList(status,user_id)
             .map {
                 Result.success(it)
             }.catch {
@@ -69,5 +71,9 @@ class NetworkRepository @Inject constructor(private val apiService: ApiService) 
             }.catch {
                 emit(Result.failure(it))
             }.flowOn(Dispatchers.IO)
+    }
+
+    suspend  fun acceptOrder(body: HashMap<String, Any>?){
+        return apiService.acceptOrder(body)
     }
 }
