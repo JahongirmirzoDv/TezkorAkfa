@@ -35,9 +35,8 @@ interface ApiService {
     @GET("warehouse/accessory/list")
     fun getAccsessory(): Flow<Accessory>
 
-    @PUT("order/order/{id}/")
+    @POST("order/order_update/android/")
     suspend fun updateUserData(
-        @Path("id") id: String,
         @Body body: RequestBody,
     ): Response<ResponseBody>
 

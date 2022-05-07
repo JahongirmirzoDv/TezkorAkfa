@@ -97,7 +97,7 @@ class NetworkViewmodel @Inject constructor(
 
     fun updateUser(id: String, body: RequestBody) {
         viewModelScope.launch {
-            apiService.updateUserData(id, body)
+            apiService.updateUserData(body)
         }
     }
 

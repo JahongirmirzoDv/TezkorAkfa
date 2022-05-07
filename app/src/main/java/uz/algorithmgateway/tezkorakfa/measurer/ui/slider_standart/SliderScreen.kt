@@ -27,7 +27,6 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import uz.algorithmgateway.core.util.toast
 import uz.algorithmgateway.tezkorakfa.R
 import uz.algorithmgateway.tezkorakfa.base.MyApplication
 import uz.algorithmgateway.tezkorakfa.databinding.LayoutChangeSizeDialogBinding
@@ -58,7 +57,7 @@ class SliderScreen : Fragment() {
     var sliderObj = SliderScreen()
     private lateinit var dialogBinding: LayoutChangeSizeDialogBinding
     private var customHorVer: Boolean? = null
-    lateinit var drawing: Drawing
+    var drawing: Drawing? = null
     private var imageName: String = ""
 
     var lastView: View? = null
@@ -86,7 +85,7 @@ class SliderScreen : Fragment() {
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.projectId.text = "Loyiha ${drawing.id}"
+        binding.projectId.text = "Loyiha ${drawing?.id?.ifEmpty { "" }}"
         verifyStoragePermission(requireActivity())
         navigationButtons()
         dragAndDropListener = Area(requireContext())
@@ -135,8 +134,10 @@ class SliderScreen : Fragment() {
             object : FileOutputStream(File("/storage/emulated/0/DCIM/${imageName}image.jpg")) {
             })
 
-        drawing.projet_image_path = "/storage/emulated/0/DCIM/${imageName}image.jpg"
-        dbViewmodel.updateDrawing(drawing)
+        drawing?.projet_image_path = "/storage/emulated/0/DCIM/${imageName}image.jpg"
+        drawing?.width = W_T
+        drawing?.heigth = H_T
+        drawing?.let { dbViewmodel.updateDrawing(it) }
 
     }
 

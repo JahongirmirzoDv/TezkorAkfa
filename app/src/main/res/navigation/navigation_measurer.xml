@@ -20,6 +20,8 @@
         android:name="uz.algorithmgateway.tezkorakfa.measurer.ui.accept_order.AcceptOrderScreen"
         android:label="AcceptOrderScreen" >
         <action
+            app:popUpTo="@id/locationScreen"
+            app:popUpToInclusive="true"
             android:id="@+id/to_orderLocationScreen"
             app:destination="@id/locationScreen" />
         <action

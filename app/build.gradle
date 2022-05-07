@@ -50,7 +50,7 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
     implementation 'androidx.navigation:navigation-fragment-ktx:2.4.2'
     implementation 'androidx.navigation:navigation-ui-ktx:2.4.2'
-    implementation 'com.google.firebase:firebase-crashlytics:18.2.9'
+    implementation 'com.google.firebase:firebase-crashlytics:18.2.10'
     implementation 'com.google.firebase:firebase-analytics:20.1.2'
 
     implementation 'com.google.android.gms:play-services-maps:18.0.2'
@@ -123,9 +123,5 @@ dependencies {
     // for interceptor
     debugImplementation "com.github.chuckerteam.chucker:library:3.5.2"
     releaseImplementation "com.github.chuckerteam.chucker:library-no-op:3.5.2"
-
-
-    // Preferences Datastore
-    implementation "androidx.datastore:datastore-preferences:1.0.0-alpha04"
 
 }

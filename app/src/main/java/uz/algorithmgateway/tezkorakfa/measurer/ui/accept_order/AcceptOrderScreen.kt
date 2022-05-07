@@ -91,7 +91,7 @@ class AcceptOrderScreen : Fragment(), CoroutineScope {
             binding.imageProduct.setImageURI(Uri.fromFile(File(filePath!!)))
         } else {
             Glide.with(this)
-                .load(item.scaler_file) // Uri of the picture
+                .load(item.client_home_image) // Uri of the picture
                 .into(binding.imageProduct)
         }
 
@@ -156,6 +156,7 @@ class AcceptOrderScreen : Fragment(), CoroutineScope {
                     if (filePath != null) {
                         val files = File(filePath!!).compress(requireContext())
                         builder.setType(MultipartBody.FORM)
+                        builder.addFormDataPart("id", item.id.toString())
                         builder.addFormDataPart("first_name", binding.editTextName.text.toString())
                         builder.addFormDataPart("last_name",
                             binding.editTextSurname.text.toString())
@@ -168,6 +169,7 @@ class AcceptOrderScreen : Fragment(), CoroutineScope {
                         )
                     } else {
                         builder.setType(MultipartBody.FORM)
+                        builder.addFormDataPart("id", item.id.toString())
                         builder.addFormDataPart("first_name", binding.editTextName.text.toString())
                         builder.addFormDataPart("last_name",
                             binding.editTextSurname.text.toString())
@@ -186,10 +188,9 @@ class AcceptOrderScreen : Fragment(), CoroutineScope {
                 findNavController().navigate(R.id.orderSelectType)
                 sharedPref.location = ""
             }
-
-            binding.btnBack.setOnClickListener {
-                findNavController().popBackStack()
-            }
+        }
+        binding.btnBack.setOnClickListener {
+            findNavController().popBackStack()
         }
     }
 
@@ -201,14 +202,14 @@ class AcceptOrderScreen : Fragment(), CoroutineScope {
 
     private fun clickBack() {
         binding.imageBack.setOnClickListener {
-            findNavController().navigateUp()
+            findNavController().popBackStack()
         }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        dbViewmodel.delete()
-    }
+//    override fun onDestroy() {
+//        super.onDestroy()
+//        dbViewmodel.delete()
+//    }
 
     override fun onResume() {
         super.onResume()

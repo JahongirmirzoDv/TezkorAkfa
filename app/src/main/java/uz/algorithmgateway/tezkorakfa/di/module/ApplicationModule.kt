@@ -1,13 +1,10 @@
 package uz.algorithmgateway.tezkorakfa.di.module
 
 import android.content.Context
-import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.Preferences
 import dagger.Module
 import dagger.Provides
 import uz.algorithmgateway.tezkorakfa.base.MyApplication
 import javax.inject.Singleton
-import androidx.datastore.preferences.createDataStore
 
 
 @Module
