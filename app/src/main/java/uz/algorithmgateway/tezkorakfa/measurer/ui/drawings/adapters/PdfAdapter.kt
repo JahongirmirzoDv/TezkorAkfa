@@ -44,7 +44,7 @@ class PdfAdapter(var context: Context) : RecyclerView.Adapter<PdfAdapter.Vh>() {
                         return false
                     }
 
-                })
+                })  
                 .into(itemview.image)
             itemview.romD.text = "${drawing.type} soni ${drawing.count}"
             itemview.profileD.text =

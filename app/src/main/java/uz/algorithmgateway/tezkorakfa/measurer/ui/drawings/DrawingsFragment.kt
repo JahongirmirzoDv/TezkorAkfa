@@ -80,40 +80,7 @@ class DrawingsFragment : Fragment(), CoroutineScope {
         }
     }
 
-//    private fun showDialog(image_path: String) {
-//        val root = ImageDialogBinding.inflate(layoutInflater, null, false)
-//        val dialog = Dialog(requireContext())
-//        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-//        dialog.setCancelable(false)
-//        dialog.setContentView(root.root)
-//        val yesBtn = root.imageView
-//        Glide.with(requireActivity())
-//            .load(image_path) // Uri of the picture
-//            .listener(object : RequestListener<Drawable?> {
-//                override fun onLoadFailed(
-//                    e: GlideException?,
-//                    model: Any?,
-//                    target: Target<Drawable?>?,
-//                    isFirstResource: Boolean,
-//                ): Boolean {
-//                    println(e.toString())
-//                    return false
-//                }
-//
-//                override fun onResourceReady(
-//                    resource: Drawable?,
-//                    model: Any?,
-//                    target: Target<Drawable?>?,
-//                    dataSource: DataSource?,
-//                    isFirstResource: Boolean,
-//                ): Boolean {
-//                    return false
-//                }
-//
-//            })
-//            .into(yesBtn)
-//        dialog.show()
-//    }
+
 
     private fun setupUI() {
         binding.projectId.text = "Loyiha ${drawing?.id}"
