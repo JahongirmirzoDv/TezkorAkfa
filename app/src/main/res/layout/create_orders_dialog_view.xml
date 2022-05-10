@@ -35,17 +35,18 @@
                 android:text="Qayerdan"
                 android:textColor="@color/text_dark_color" />
 
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/color_bg_supplier_view"
-                android:padding="@dimen/item_space_middle">
+                android:padding="@dimen/item_small_padding">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Dillerdan"
-                    android:textColor="@color/white" />
+                <androidx.appcompat.widget.AppCompatSpinner
+                    android:id="@+id/spinnerRoomOrDoor"
+                    style="@style/mySpinnerItemStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
 
             </LinearLayout>
 
@@ -69,20 +70,19 @@
                         android:text="Soni"
                         android:textColor="@color/text_dark_color" />
 
-                    <LinearLayout
+                    <androidx.appcompat.widget.AppCompatEditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="@dimen/margin_seven"
-                        android:background="@color/color_bg_supplier_view"
-                        android:padding="@dimen/item_space_middle">
+                        android:layout_marginRight="@dimen/item_space_middle"
+                        android:background="@drawable/bg_item_comment"
+                        android:gravity="center_vertical"
+                        android:maxLines="1"
+                        android:padding="@dimen/item_normal_padding"
+                        android:text="150"
+                        android:textColor="@color/white"
+                        android:textColorHint="@color/text_dark_color"
+                        android:textSize="@dimen/text_size_sixteen" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="150"
-                            android:textColor="@color/white" />
-
-                    </LinearLayout>
 
                 </LinearLayout>
 
@@ -95,25 +95,23 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/item_space_middle"
+                        android:layout_marginLeft="15dp"
                         android:layout_marginBottom="@dimen/item_space_min"
                         android:text="Narxi"
                         android:textColor="@color/text_dark_color" />
 
-                    <LinearLayout
+                    <androidx.appcompat.widget.AppCompatEditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/margin_seven"
-                        android:background="@color/color_bg_supplier_view"
-                        android:padding="@dimen/item_space_middle">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="250"
-                            android:textColor="@color/white" />
-
-                    </LinearLayout>
+                        android:layout_marginLeft="@dimen/item_space_middle"
+                        android:background="@drawable/bg_item_comment"
+                        android:gravity="center_vertical"
+                        android:maxLines="1"
+                        android:padding="@dimen/item_normal_padding"
+                        android:text="150"
+                        android:textColor="@color/white"
+                        android:textColorHint="@color/text_dark_color"
+                        android:textSize="@dimen/text_size_sixteen" />
 
                 </LinearLayout>
 
@@ -129,19 +127,18 @@
                 android:text="Summasi"
                 android:textColor="@color/text_dark_color" />
 
-            <LinearLayout
+            <androidx.appcompat.widget.AppCompatEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/color_bg_supplier_view"
-                android:padding="@dimen/item_space_middle">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="2 500 000 "
-                    android:textColor="@color/white" />
-
-            </LinearLayout>
+                android:layout_marginRight="@dimen/item_space_middle"
+                android:background="@drawable/bg_item_comment"
+                android:gravity="center_vertical"
+                android:maxLines="1"
+                android:padding="@dimen/item_normal_padding"
+                android:text="2 500 000"
+                android:textColor="@color/white"
+                android:textColorHint="@color/text_dark_color"
+                android:textSize="@dimen/text_size_sixteen" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:layout_width="@dimen/size_150"
