@@ -106,4 +106,10 @@ class NetworkViewmodel @Inject constructor(
             networkRepository.acceptOrder(body)
         }
     }
+
+    suspend fun sendData(id: String, body: RequestBody) {
+        viewModelScope.launch {
+            networkRepository.sendData(id, body)
+        }
+    }
 }

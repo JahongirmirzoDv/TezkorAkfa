@@ -26,8 +26,8 @@ import kotlinx.coroutines.launch
 import uz.algorithmgateway.core.util.toast
 import uz.algorithmgateway.tezkorakfa.R
 import uz.algorithmgateway.tezkorakfa.base.MyApplication
+import uz.algorithmgateway.tezkorakfa.data.local.entity.Pdf
 import uz.algorithmgateway.tezkorakfa.databinding.FragmentSavePdfBinding
-import uz.algorithmgateway.tezkorakfa.databinding.ScreenSliderBinding
 import uz.algorithmgateway.tezkorakfa.measurer.ui.drawings.adapters.PdfAdapter
 import uz.algorithmgateway.tezkorakfa.measurer.ui.select_type.models.Drawing
 import uz.algorithmgateway.tezkorakfa.measurer.viewmodel.DbViewmodel
@@ -44,6 +44,7 @@ class SavePdfFragment : Fragment(), CoroutineScope {
     private var _binding: FragmentSavePdfBinding? = null
     private val binding get() = _binding!!
     lateinit var list: MutableStateFlow<List<Drawing>>
+    lateinit var drawing: Drawing
 
     val REQUEST_PERMISSIONS = 1
 
@@ -66,6 +67,7 @@ class SavePdfFragment : Fragment(), CoroutineScope {
         _binding = FragmentSavePdfBinding.inflate(inflater, container, false)
         list = MutableStateFlow(emptyList())
         list.value = viewmodel.getAllDrawing()
+        drawing = viewmodel.getAllDrawing().last()
 
 
         var adapter = PdfAdapter(requireContext())
@@ -90,7 +92,9 @@ class SavePdfFragment : Fragment(), CoroutineScope {
                         Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
                             .toString() + "/Operation.pdf"
                     )
+
                     toast(f.toString())
+                    viewmodel.addPdf(Pdf(id = drawing.id, pdf = f.toString(), null, null))
 
 //                    val shareIntent = Intent(Intent.ACTION_SEND)
 //                    shareIntent.putExtra(
@@ -183,7 +187,6 @@ class SavePdfFragment : Fragment(), CoroutineScope {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        viewmodel.delete()
         _binding = null
     }
 

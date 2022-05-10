@@ -20,6 +20,7 @@ import uz.algorithmgateway.tezkorakfa.base.MyApplication
 import uz.algorithmgateway.tezkorakfa.data.retrofit.models.sales_order_list.Result
 import uz.algorithmgateway.tezkorakfa.databinding.FragmentTabLayoutBinding
 import uz.algorithmgateway.tezkorakfa.measurer.ui.orders.OrderListAdapter
+import uz.algorithmgateway.tezkorakfa.measurer.viewmodel.DbViewmodel
 import uz.algorithmgateway.tezkorakfa.measurer.viewmodel.NetworkViewmodel
 import uz.algorithmgateway.tezkorakfa.ui.login.viewmodel.LoginViewModel
 import uz.algorithmgateway.tezkorakfa.ui.utils.SharedPref
@@ -36,6 +37,9 @@ class OrderListFragment(
 
     @Inject
     lateinit var viewmodel: NetworkViewmodel
+
+    @Inject
+    lateinit var db_viewmodel: DbViewmodel
 
     @Inject
     lateinit var networkConnectionLiveData: NetworkConnectionLiveData
@@ -124,4 +128,9 @@ class OrderListFragment(
     override val coroutineContext: CoroutineContext
         get() = Job()
 
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+//        db_viewmodel.delete()
+    }
 }

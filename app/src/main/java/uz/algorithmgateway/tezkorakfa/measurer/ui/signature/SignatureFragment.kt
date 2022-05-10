@@ -10,18 +10,25 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
 import uz.algorithmgateway.tezkorakfa.R
+import uz.algorithmgateway.tezkorakfa.base.MyApplication
+import uz.algorithmgateway.tezkorakfa.data.local.entity.Pdf
 import uz.algorithmgateway.tezkorakfa.databinding.FragmentSavePdfBinding
 import uz.algorithmgateway.tezkorakfa.databinding.FragmentSignatureBinding
+import uz.algorithmgateway.tezkorakfa.measurer.viewmodel.DbViewmodel
 import java.io.File
 import java.io.FileOutputStream
+import javax.inject.Inject
 
 class SignatureFragment : Fragment(R.layout.fragment_signature) {
     private var _binding: FragmentSignatureBinding? = null
     private val binding get() = _binding!!
 
+    @Inject
+    lateinit var viewmodel: DbViewmodel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        MyApplication.appComponent.signature(this)
     }
 
     override fun onCreateView(
@@ -64,6 +71,9 @@ class SignatureFragment : Fragment(R.layout.fragment_signature) {
         Log.d("MY777","$absolutePath")
 //        Log.d("MY777","${absolutePath.absolutePath}")
 
+        val pdf = viewmodel.getPdf().last()
+        pdf.signature = absolutePath.toString()
+        viewmodel.updatePdf(pdf)
         findNavController().navigate(R.id.customerTakePhotoFragment)
 
     }

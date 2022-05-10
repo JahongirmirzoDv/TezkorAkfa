@@ -53,6 +53,8 @@ class PdfAdapter(var context: Context) : RecyclerView.Adapter<PdfAdapter.Vh>() {
             itemview.podokonnikD.text = "${drawing.window_sill} "
             itemview.aksesuarD.text =
                 "${drawing.handle}(${drawing.handle_petla}) ${drawing.handle_texture}"
+            itemview.podokonnikCd.text = drawing.sill_comment
+            itemview.aksesuarCd.text = drawing.net
         }
     }
 

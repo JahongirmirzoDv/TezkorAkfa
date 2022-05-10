@@ -2,9 +2,8 @@ package uz.algorithmgateway.tezkorakfa.measurer.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import uz.algorithmgateway.tezkorakfa.data.local.entity.Pdf
 import uz.algorithmgateway.tezkorakfa.data.local.repoImpl.DbRepositoryImpl
 import uz.algorithmgateway.tezkorakfa.measurer.ui.select_type.models.Drawing
 import javax.inject.Inject
@@ -18,9 +17,21 @@ class DbViewmodel @Inject constructor(
         }
     }
 
+    fun addPdf(pdf: Pdf) {
+        viewModelScope.launch {
+            db.drawingsDao.addPdf(pdf)
+        }
+    }
+
     fun updateDrawing(drawing: Drawing) {
         viewModelScope.launch {
             db.drawingsDao.updateDrawing(drawing)
+        }
+    }
+
+    fun updatePdf(pdf: Pdf) {
+        viewModelScope.launch {
+            db.drawingsDao.updatePdf(pdf)
         }
     }
 
@@ -32,7 +43,15 @@ class DbViewmodel @Inject constructor(
         return list
     }
 
-    fun delete(){
+    fun getPdf(): List<Pdf> {
+        var list:  List<Pdf> = emptyList()
+        viewModelScope.launch {
+            list = db.drawingsDao.getPdf()
+        }
+        return list
+    }
+
+    fun delete() {
         viewModelScope.launch {
             db.drawingsDao.delete()
         }

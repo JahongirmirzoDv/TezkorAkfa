@@ -48,7 +48,7 @@ class NetworkModule {
             .addInterceptor(ChuckerInterceptor.Builder(MyApplication.instance).build())
             .addInterceptor { chain ->
                 val newRequest = chain.request().newBuilder()
-                    .addHeader("Authorization", "Token 11cc2490c5cd16505ce887ff90d6865610ffb6cc")
+                    .addHeader("Authorization", "Token b749d3fec5f9966211e079edbc208c7fd98ec49a")
                     .build()
                 chain.proceed(newRequest)
             }
