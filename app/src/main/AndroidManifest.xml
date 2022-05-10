@@ -54,8 +54,6 @@
         <activity
             android:name=".montage.MontageActivity"
             android:exported="true">
-
-
         </activity>
 
         <meta-data
@@ -84,7 +82,6 @@
         <service android:name=".measurer.ui.accept_order.service.LocationService"
             android:enabled="true"
             android:exported="false"/>
-
     </application>
 
 </manifest>

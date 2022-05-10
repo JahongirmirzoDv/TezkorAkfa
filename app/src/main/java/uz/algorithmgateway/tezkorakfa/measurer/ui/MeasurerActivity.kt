@@ -12,7 +12,7 @@ import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
 
 
-class MeasurerActivity : AppCompatActivity(), CoroutineScope {
+class MeasurerActivity : AppCompatActivity(), CoroutineScope{
     private lateinit var binding: ActivityMeasurerBinding
     private var back = false
     private val sharedPref by lazy { SharedPref(this) }
@@ -25,6 +25,7 @@ class MeasurerActivity : AppCompatActivity(), CoroutineScope {
         MyApplication.appComponent.measure(this)
         binding = ActivityMeasurerBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
     }
 
 
@@ -54,4 +55,6 @@ class MeasurerActivity : AppCompatActivity(), CoroutineScope {
         super.onDestroy()
         dbViewmodel.delete()
     }
+
+
 }

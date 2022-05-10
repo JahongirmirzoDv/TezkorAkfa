@@ -4,6 +4,7 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
 import android.graphics.pdf.PdfDocument
 import android.os.Bundle
 import android.os.Environment
@@ -17,6 +18,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.RecyclerView
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -89,7 +91,7 @@ class SavePdfFragment : Fragment(), CoroutineScope {
                 try {
                     createPdf()
                     val f = File(
-                        Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
+                        Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS)
                             .toString() + "/Operation.pdf"
                     )
 
@@ -141,21 +143,21 @@ class SavePdfFragment : Fragment(), CoroutineScope {
 
     private fun createPdf() {
         val printAttrs = PrintAttributes.Builder().setColorMode(PrintAttributes.COLOR_MODE_COLOR)
-            .setMediaSize(PrintAttributes.MediaSize.NA_LETTER)
+            .setMediaSize(PrintAttributes.MediaSize.ISO_C0)
             .setResolution(PrintAttributes.Resolution("zooey", Context.PRINT_SERVICE, 300, 300))
             .setMinMargins(PrintAttributes.Margins.NO_MARGINS).build()
         val document: PdfDocument = PrintedPdfDocument(requireContext(), printAttrs)
         // crate a page description
         // crate a page description
         val pageInfo =
-            PdfDocument.PageInfo.Builder(binding.rootView.width, binding.rootView.height, 1)
+            PdfDocument.PageInfo.Builder(binding.savePdf.width, binding.savePdf.height, 1)
                 .create()
         // create a new page from the PageInfo
         // create a new page from the PageInfo
         val page = document.startPage(pageInfo)
         // repaint the user's text into the page
         // repaint the user's text into the page
-        val content: ViewGroup = binding.rootView
+        val content: ViewGroup = binding.savePdf
         content.draw(page.canvas)
         // do final processing of the page
         // do final processing of the page
@@ -172,7 +174,7 @@ class SavePdfFragment : Fragment(), CoroutineScope {
         // accept a String/CharSequence. Meh.
         try {
             val f = File(
-                Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
+                Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS)
                     .toString() + "/Operation.pdf"
             )
             val fos = FileOutputStream(f)
@@ -184,6 +186,8 @@ class SavePdfFragment : Fragment(), CoroutineScope {
         }
 
     }
+
+
 
     override fun onDestroyView() {
         super.onDestroyView()

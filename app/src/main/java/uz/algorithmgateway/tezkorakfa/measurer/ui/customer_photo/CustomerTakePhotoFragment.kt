@@ -3,11 +3,12 @@ package uz.algorithmgateway.tezkorakfa.measurer.ui.customer_photo
 import android.app.Activity
 import android.os.Bundle
 import android.os.Environment
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import by.kirich1409.viewbindingdelegate.viewBinding
 import com.github.drjacky.imagepicker.ImagePicker
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -27,7 +28,7 @@ import java.io.File
 import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
 
-class CustomerTakePhotoFragment : Fragment(R.layout.fragment_customer_take_photo), CoroutineScope {
+class CustomerTakePhotoFragment : Fragment(), CoroutineScope {
 
     @Inject
     lateinit var viewmodel: DbViewmodel
@@ -36,22 +37,23 @@ class CustomerTakePhotoFragment : Fragment(R.layout.fragment_customer_take_photo
     lateinit var apiVm: NetworkViewmodel
 
 
-    private val binding: FragmentCustomerTakePhotoBinding by viewBinding(
-        FragmentCustomerTakePhotoBinding::bind
-    )
+    lateinit var  binding: FragmentCustomerTakePhotoBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         MyApplication.appComponent.photo(this)
-
-
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        binding = FragmentCustomerTakePhotoBinding.inflate(inflater, container,false)
 
         installTakePhoto()
 
+        return binding.root
     }
 
     private fun installTakePhoto() {
@@ -141,5 +143,12 @@ class CustomerTakePhotoFragment : Fragment(R.layout.fragment_customer_take_photo
     override val coroutineContext: CoroutineContext
         get() = Job()
 
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        viewmodel.delete()
+        requireActivity().finishAffinity()
+
+    }
 
 }
