@@ -5,20 +5,21 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
+import okhttp3.RequestBody
 import uz.algorithmgateway.tezkorakfa.data.models.UserRequest
 import uz.algorithmgateway.tezkorakfa.data.models.UserResponse
 import uz.algorithmgateway.tezkorakfa.data.retrofit.ApiService
 import uz.algorithmgateway.tezkorakfa.data.retrofit.models.accessory.Accessory
 import uz.algorithmgateway.tezkorakfa.data.retrofit.models.profile.Profile
-import uz.algorithmgateway.tezkorakfa.data.retrofit.models.sales_order_list.OderList
+import uz.algorithmgateway.tezkorakfa.data.retrofit.models.sales_order_list.OrderList
 import uz.algorithmgateway.tezkorakfa.data.retrofit.models.shelf.Shelf
 import uz.algorithmgateway.tezkorakfa.data.retrofit.models.window.Windows
 import javax.inject.Inject
 
 class NetworkRepository @Inject constructor(private val apiService: ApiService) {
 
-    fun salesOrderList(): Flow<Result<OderList>> {
-        return apiService.salesOrderList()
+    fun salesOrderList(status: String, user_id: String): Flow<Result<OrderList>> {
+        return apiService.salesOrderList(status, user_id)
             .map {
                 Result.success(it)
             }.catch {
@@ -69,5 +70,16 @@ class NetworkRepository @Inject constructor(private val apiService: ApiService) 
             }.catch {
                 emit(Result.failure(it))
             }.flowOn(Dispatchers.IO)
+    }
+
+    suspend fun acceptOrder(body: HashMap<String, Any>?) {
+        return apiService.acceptOrder(body)
+    }
+
+    suspend fun sendData(
+        id: String,
+        body: RequestBody,
+    ) {
+        return apiService.sendData(id, body)
     }
 }

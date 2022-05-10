@@ -38,7 +38,7 @@ class DrawingsFragment : Fragment(), CoroutineScope {
     lateinit var binding: FragmentDrawingsBinding
     lateinit var list: MutableStateFlow<List<Drawing>>
     lateinit var drawingAdapter: DrawingAdapter
-    lateinit var drawing: Drawing
+    var drawing: Drawing? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -116,11 +116,11 @@ class DrawingsFragment : Fragment(), CoroutineScope {
 //    }
 
     private fun setupUI() {
-        binding.projectId.text = "Loyiha ${drawing.id}"
+        binding.projectId.text = "Loyiha ${drawing?.id}"
 
         binding.add.setOnClickListener {
             val bundle = Bundle()
-            val plus = drawing.id.toInt().plus(1)
+            val plus = drawing?.id?.toInt()?.plus(1)
             bundle.putString("id","$plus")
             findNavController().navigate(R.id.orderSelectType,bundle)
         }

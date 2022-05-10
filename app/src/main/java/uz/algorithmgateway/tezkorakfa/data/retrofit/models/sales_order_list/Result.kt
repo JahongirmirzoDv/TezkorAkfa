@@ -1,17 +1,18 @@
 package uz.algorithmgateway.tezkorakfa.data.retrofit.models.sales_order_list
 
-import uz.algorithmgateway.tezkorakfa.data.models.ShowRoom
-import java.io.Serializable
-
 data class Result(
     val address: String,
+    val all_price: AllPrice,
+    val client_home_image: String,
     val client: Client,
     val comment: String,
     val contract_number: String,
     val district: District,
     val id: Int,
     val measurement_time: String,
-    val scaler: Scaler,
+    val scaler: Any,
+    val scaler_file: String,
     val show_room: ShowRoom,
-    val status: String
-):Serializable
+    val status: String,
+    val total_price: String,
+)

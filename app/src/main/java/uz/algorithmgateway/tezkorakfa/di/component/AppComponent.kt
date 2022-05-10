@@ -6,12 +6,14 @@ import uz.algorithmgateway.tezkorakfa.di.module.DatabaseModule
 import uz.algorithmgateway.tezkorakfa.di.module.NetworkModule
 import uz.algorithmgateway.tezkorakfa.measurer.ui.accept_order.AcceptOrderScreen
 import uz.algorithmgateway.tezkorakfa.measurer.ui.confirm_orders.ConfirmOrdersScreen
+import uz.algorithmgateway.tezkorakfa.measurer.ui.customer_photo.CustomerTakePhotoFragment
 import uz.algorithmgateway.tezkorakfa.measurer.ui.drawings.DrawingsFragment
 import uz.algorithmgateway.tezkorakfa.measurer.ui.drawings.save_pdf.SavePdfFragment
 import uz.algorithmgateway.tezkorakfa.measurer.ui.orders.orderList.OrderListFragment
 import uz.algorithmgateway.tezkorakfa.measurer.ui.select_count.ItemCountScreen
 import uz.algorithmgateway.tezkorakfa.measurer.ui.select_type.OrderSelectTypeScreen
 import uz.algorithmgateway.tezkorakfa.measurer.ui.select_type.models.Drawing
+import uz.algorithmgateway.tezkorakfa.measurer.ui.signature.SignatureFragment
 import uz.algorithmgateway.tezkorakfa.measurer.ui.slider_standart.SliderScreen
 import uz.algorithmgateway.tezkorakfa.ui.login.LoginActivity
 import javax.inject.Singleton
@@ -28,4 +30,6 @@ interface AppComponent {
     fun savePdf(savePdfFragment: SavePdfFragment)
     fun accept(acceptOrderScreen: AcceptOrderScreen)
     fun counter(itemCountScreen: ItemCountScreen)
+    fun signature(signatureFragment: SignatureFragment)
+    fun photo(customerTakePhotoFragment: CustomerTakePhotoFragment)
 }

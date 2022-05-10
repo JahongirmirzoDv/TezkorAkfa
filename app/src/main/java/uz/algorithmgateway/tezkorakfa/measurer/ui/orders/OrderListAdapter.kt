@@ -4,8 +4,8 @@ import android.annotation.SuppressLint
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import uz.algorithmgateway.tezkorakfa.core.util.layoutInflater
-import uz.algorithmgateway.tezkorakfa.data.retrofit.models.sales_order_list.Result
 import uz.algorithmgateway.tezkorakfa.databinding.ItemOrderBinding
+import uz.algorithmgateway.tezkorakfa.data.retrofit.models.sales_order_list.Result
 
 class OrderListAdapter(
     var onclick: onClick,

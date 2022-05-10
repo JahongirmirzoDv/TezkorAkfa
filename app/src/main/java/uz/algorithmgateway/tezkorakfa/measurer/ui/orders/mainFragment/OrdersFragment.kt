@@ -7,8 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.google.android.material.tabs.TabLayoutMediator
-import uz.algorithmgateway.tezkorakfa.measurer.ui.orders.ViewPagerAdapter
 import uz.algorithmgateway.tezkorakfa.databinding.ScreenOrdersBinding
+import uz.algorithmgateway.tezkorakfa.measurer.ui.orders.ViewPagerAdapter
 import uz.algorithmgateway.tezkorakfa.ui.login.LoginActivity
 import uz.algorithmgateway.tezkorakfa.ui.utils.SharedPref
 
@@ -41,6 +41,7 @@ class OrdersFragment : Fragment() {
 
         binding.logout.setOnClickListener {
             sharedPref.isLogin = false
+            sharedPref.clear()
             startActivity(Intent(requireActivity(), LoginActivity::class.java))
             requireActivity().finish()
         }

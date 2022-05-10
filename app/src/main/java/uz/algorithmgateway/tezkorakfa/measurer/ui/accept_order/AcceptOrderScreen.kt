@@ -2,7 +2,6 @@ package uz.algorithmgateway.tezkorakfa.measurer.ui.accept_order
 
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.graphics.drawable.Drawable
 import android.location.Address
 import android.location.Geocoder
 import android.net.Uri
@@ -11,20 +10,13 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.DataSource
-import com.bumptech.glide.load.engine.GlideException
-import com.bumptech.glide.request.RequestListener
-import com.bumptech.glide.request.target.Target
 import com.github.drjacky.imagepicker.ImagePicker
 import com.google.gson.Gson
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
@@ -99,29 +91,7 @@ class AcceptOrderScreen : Fragment(), CoroutineScope {
             binding.imageProduct.setImageURI(Uri.fromFile(File(filePath!!)))
         } else {
             Glide.with(this)
-                .load("content://media/external/images/media/2200") // Uri of the picture
-                .listener(object : RequestListener<Drawable?> {
-                    override fun onLoadFailed(
-                        e: GlideException?,
-                        model: Any?,
-                        target: Target<Drawable?>?,
-                        isFirstResource: Boolean,
-                    ): Boolean {
-                        println(e.toString())
-                        return false
-                    }
-
-                    override fun onResourceReady(
-                        resource: Drawable?,
-                        model: Any?,
-                        target: Target<Drawable?>?,
-                        dataSource: DataSource?,
-                        isFirstResource: Boolean,
-                    ): Boolean {
-                        return false
-                    }
-
-                })
+                .load(item.client_home_image) // Uri of the picture
                 .into(binding.imageProduct)
         }
 
@@ -180,44 +150,47 @@ class AcceptOrderScreen : Fragment(), CoroutineScope {
 
     private fun navigateBackOrNext() {
         binding.btnNext.setOnClickListener {
-            launch {
-                when (filePath) {
-                    null -> {
-                        Toast.makeText(requireContext(), "Avval rasm tanlang", Toast.LENGTH_SHORT)
-                            .show()
-                    }
-                    "" -> {
-                        Toast.makeText(requireContext(), "Avval rasm tanlang", Toast.LENGTH_SHORT)
-                            .show()
-                    }
-                    else -> {
+            launch(Dispatchers.Main) {
+                async {
+                    val builder: MultipartBody.Builder = MultipartBody.Builder()
+                    if (filePath != null) {
                         val files = File(filePath!!).compress(requireContext())
-
-                        val builder: MultipartBody.Builder = MultipartBody.Builder()
                         builder.setType(MultipartBody.FORM)
                         builder.addFormDataPart("id", item.id.toString())
-                        builder.addFormDataPart("first_name", item.client.first_name)
-                        builder.addFormDataPart("last_name", item.client.last_name)
-                        builder.addFormDataPart("address", item.client.address)
-                        builder.addFormDataPart("comment", item.comment)
+                        builder.addFormDataPart("first_name", binding.editTextName.text.toString())
+                        builder.addFormDataPart("last_name",
+                            binding.editTextSurname.text.toString())
+                        builder.addFormDataPart("address", binding.editTextAddress.text.toString())
+                        builder.addFormDataPart("comment", binding.textViewComment.text.toString())
                         builder.addFormDataPart(
-                            "img",
+                            "client_home_image",
                             files.name,
                             files.asRequestBody("multipart/form-data".toMediaTypeOrNull())
                         )
-                        val body  = builder.build()
-                        networkViewmodel.updateUser(body)
+                    } else {
+                        builder.setType(MultipartBody.FORM)
+                        builder.addFormDataPart("id", item.id.toString())
+                        builder.addFormDataPart("first_name", binding.editTextName.text.toString())
+                        builder.addFormDataPart("last_name",
+                            binding.editTextSurname.text.toString())
+                        builder.addFormDataPart("address", binding.editTextAddress.text.toString())
+                        builder.addFormDataPart("comment", binding.textViewComment.text.toString())
+                        builder.addFormDataPart(
+                            "client_home_image",
+                            "",
+                        )
                     }
+                    val body = builder.build()
+                    networkViewmodel.updateUser(item.id.toString(), body)
                 }
 
                 dbViewmodel.addDrawing(Drawing(id = item.id.toString()))
                 findNavController().navigate(R.id.orderSelectType)
                 sharedPref.location = ""
             }
-
-            binding.btnBack.setOnClickListener {
-                findNavController().navigateUp()
-            }
+        }
+        binding.btnBack.setOnClickListener {
+            findNavController().popBackStack()
         }
     }
 
@@ -229,14 +202,14 @@ class AcceptOrderScreen : Fragment(), CoroutineScope {
 
     private fun clickBack() {
         binding.imageBack.setOnClickListener {
-            findNavController().navigateUp()
+            findNavController().popBackStack()
         }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        dbViewmodel.delete()
-    }
+//    override fun onDestroy() {
+//        super.onDestroy()
+//        dbViewmodel.delete()
+//    }
 
     override fun onResume() {
         super.onResume()

@@ -24,16 +24,18 @@ annotation class MeasurerOrderStatus
 class Value {
     companion object {
 
+        const val TYPE = "user_role"
+
         //UserRole
-        const val SCALER = "scaler"
+        const val SCALER = "show_room"
         const val SUPPLIER = "supplier"
         const val MONTAGER = "montager"
         const val SERVICER = "servicer"
 
 
         //MeasurerOrderStatus
-        const val DONE = "done"
-        const val ACTIVE = "active"
-        const val NEW = "new"
+        const val DONE = "completed"
+        const val ACTIVE = "measurement"
+        const val NEW = "all"
     }
 }

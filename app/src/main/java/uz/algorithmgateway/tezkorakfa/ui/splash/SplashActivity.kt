@@ -6,8 +6,11 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
-import uz.algorithmgateway.tezkorakfa.measurer.ui.MeasurerActivity
+import uz.algorithmgateway.data.const.Value
 import uz.algorithmgateway.tezkorakfa.R
+import uz.algorithmgateway.tezkorakfa.measurer.ui.MeasurerActivity
+import uz.algorithmgateway.tezkorakfa.montage.MontageActivity
+import uz.algorithmgateway.tezkorakfa.supplier.SupplierActivity
 import uz.algorithmgateway.tezkorakfa.ui.login.LoginActivity
 import uz.algorithmgateway.tezkorakfa.ui.utils.SharedPref
 
@@ -22,7 +25,32 @@ class SplashActivity : AppCompatActivity() {
 
         Handler(Looper.getMainLooper()).postDelayed({
             if (sharedPref.isLogin) {
-                startActivity(Intent(this, MeasurerActivity::class.java))
+                when (sharedPref.user_role) {
+                    Value.SCALER -> {
+                        val intent =
+                            Intent(this, MeasurerActivity::class.java)
+                        startActivity(intent)
+                        finish()
+                    }
+                    Value.SUPPLIER -> {
+                        val intent =
+                            Intent(this, SupplierActivity::class.java)
+                        startActivity(intent)
+                        finish()
+                    }
+                    Value.MONTAGER -> {
+                        val intent =
+                            Intent(this, MontageActivity::class.java)
+                        startActivity(intent)
+                        finish()
+                    }
+                    Value.SERVICER -> {
+//                                        val intent =
+//                                            Intent(this@LoginActivity, MontageActivity::class.java)
+//                                        startActivity(intent)
+//                                        finish()
+                    }
+                }
             } else startActivity(Intent(this, LoginActivity::class.java))
             finish()
         }, 3000)

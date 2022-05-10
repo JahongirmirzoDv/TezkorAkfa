@@ -20,7 +20,10 @@ import uz.algorithmgateway.tezkorakfa.base.MyApplication
 import uz.algorithmgateway.tezkorakfa.data.retrofit.models.sales_order_list.Result
 import uz.algorithmgateway.tezkorakfa.databinding.FragmentTabLayoutBinding
 import uz.algorithmgateway.tezkorakfa.measurer.ui.orders.OrderListAdapter
+import uz.algorithmgateway.tezkorakfa.measurer.viewmodel.DbViewmodel
+import uz.algorithmgateway.tezkorakfa.measurer.viewmodel.NetworkViewmodel
 import uz.algorithmgateway.tezkorakfa.ui.login.viewmodel.LoginViewModel
+import uz.algorithmgateway.tezkorakfa.ui.utils.SharedPref
 import uz.algorithmgateway.tezkorakfa.ui.utils.UIState
 import uz.algorithmgateway.tezkorakfa.utils.NetworkConnectionLiveData
 import javax.inject.Inject
@@ -33,12 +36,19 @@ class OrderListFragment(
     lateinit var loginViewModel: LoginViewModel
 
     @Inject
+    lateinit var viewmodel: NetworkViewmodel
+
+    @Inject
+    lateinit var db_viewmodel: DbViewmodel
+
+    @Inject
     lateinit var networkConnectionLiveData: NetworkConnectionLiveData
 
     private lateinit var adapter: OrderListAdapter
 
     private var _binding: FragmentTabLayoutBinding? = null
     private val binding get() = _binding!!
+    private val sharedPref by lazy { SharedPref(requireContext()) }
 
 
     override fun onCreateView(
@@ -60,7 +70,7 @@ class OrderListFragment(
         if (it) {
             launch(Dispatchers.Main) {
                 try {
-                    loginViewModel.getOrder()
+                    loginViewModel.getOrder(status, sharedPref.userId ?: "")
                     loginViewModel.order.collect { list ->
                         when (list) {
                             is UIState.Loading -> {
@@ -85,6 +95,11 @@ class OrderListFragment(
                                         }
 
                                         override fun onAcceptClick(item: Result) {
+                                            launch {
+                                                val map: HashMap<String, Any> = HashMap()
+                                                map["order_id"] = item.id
+                                                viewmodel.acceptOrder(map)
+                                            }
                                             val bundle = Bundle()
                                             val toJson = Gson().toJson(item)
                                             bundle.putString("item", toJson)
@@ -113,4 +128,9 @@ class OrderListFragment(
     override val coroutineContext: CoroutineContext
         get() = Job()
 
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+//        db_viewmodel.delete()
+    }
 }
