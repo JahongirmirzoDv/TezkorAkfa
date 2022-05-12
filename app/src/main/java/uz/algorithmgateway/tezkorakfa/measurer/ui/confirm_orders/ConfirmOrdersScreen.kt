@@ -105,4 +105,9 @@ class ConfirmOrdersScreen : Fragment() {
             tabLayoutDate.addTab(tabLayoutDate.newTab().setText("Hafta"))
         }
     }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }

@@ -133,6 +133,6 @@ class OrderListFragment(
 
     override fun onDestroyView() {
         super.onDestroyView()
-//        db_viewmodel.delete()
+        _binding = null
     }
 }

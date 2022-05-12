@@ -39,7 +39,8 @@ import kotlin.coroutines.CoroutineContext
 
 class LocationScreen : Fragment(), OnMapReadyCallback, GoogleMap.OnMapClickListener,
     GoogleMap.OnMarkerDragListener, CoroutineScope {
-    lateinit var binding: LocationScreenBinding
+    private var _binding: LocationScreenBinding? = null
+    private val binding get() = _binding!!
     private lateinit var marker: Marker
     lateinit var googleApiClient: GoogleApiClient
     lateinit var googleMap: GoogleMap
@@ -51,7 +52,7 @@ class LocationScreen : Fragment(), OnMapReadyCallback, GoogleMap.OnMapClickListe
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-        binding = LocationScreenBinding.inflate(inflater, container, false)
+        _binding = LocationScreenBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -198,4 +199,9 @@ class LocationScreen : Fragment(), OnMapReadyCallback, GoogleMap.OnMapClickListe
 
     override val coroutineContext: CoroutineContext
         get() = Job()
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }

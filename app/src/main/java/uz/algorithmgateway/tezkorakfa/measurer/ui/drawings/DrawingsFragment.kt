@@ -24,6 +24,7 @@ import kotlinx.coroutines.launch
 import uz.algorithmgateway.tezkorakfa.R
 import uz.algorithmgateway.tezkorakfa.base.MyApplication
 import uz.algorithmgateway.tezkorakfa.databinding.FragmentDrawingsBinding
+import uz.algorithmgateway.tezkorakfa.databinding.ScreenOrdersBinding
 import uz.algorithmgateway.tezkorakfa.measurer.ui.drawings.adapters.DrawingAdapter
 import uz.algorithmgateway.tezkorakfa.measurer.ui.select_type.models.Drawing
 import uz.algorithmgateway.tezkorakfa.measurer.viewmodel.DbViewmodel
@@ -35,7 +36,8 @@ class DrawingsFragment : Fragment(), CoroutineScope {
     @Inject
     lateinit var dbViewmodel: DbViewmodel
 
-    lateinit var binding: FragmentDrawingsBinding
+    private var _binding: FragmentDrawingsBinding?  = null
+    private val binding get() = _binding!!
     lateinit var list: MutableStateFlow<List<Drawing>>
     lateinit var drawingAdapter: DrawingAdapter
     var drawing: Drawing? = null
@@ -59,7 +61,7 @@ class DrawingsFragment : Fragment(), CoroutineScope {
         savedInstanceState: Bundle?,
     ): View {
         // Inflate the layout for this fragment
-        binding = FragmentDrawingsBinding.inflate(inflater, container, false)
+        _binding = FragmentDrawingsBinding.inflate(inflater, container, false)
         setupUI()
         loadData()
 
@@ -104,4 +106,8 @@ class DrawingsFragment : Fragment(), CoroutineScope {
     override val coroutineContext: CoroutineContext
         get() = Job()
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }

@@ -526,11 +526,11 @@ class OrderSelectTypeScreen : Fragment(), CoroutineScope {
         }
     }
 
-//    override fun onDestroy() {
-//        super.onDestroy()
-//        dbViewmodel.delete()
-//    }
-
     override val coroutineContext: CoroutineContext
         get() = Job()
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }

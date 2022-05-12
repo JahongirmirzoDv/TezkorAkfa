@@ -99,4 +99,9 @@ class ItemCountScreen : Fragment() {
         super.onSaveInstanceState(oldInstanceState)
         oldInstanceState.clear()
     }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
 }

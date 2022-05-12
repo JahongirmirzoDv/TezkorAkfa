@@ -227,4 +227,11 @@ class AcceptOrderScreen : Fragment(), CoroutineScope {
 
     override val coroutineContext: CoroutineContext
         get() = Job()
+
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
 }

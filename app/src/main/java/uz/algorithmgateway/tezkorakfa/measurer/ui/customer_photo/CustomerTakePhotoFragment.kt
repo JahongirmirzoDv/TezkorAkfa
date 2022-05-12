@@ -38,9 +38,8 @@ class CustomerTakePhotoFragment : Fragment(), CoroutineScope {
     @Inject
     lateinit var apiVm: NetworkViewmodel
 
-
-    lateinit var binding: FragmentCustomerTakePhotoBinding
-
+    private var _binding: FragmentCustomerTakePhotoBinding? = null
+    private val binding get() = _binding!!
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         MyApplication.appComponent.photo(this)
@@ -50,8 +49,8 @@ class CustomerTakePhotoFragment : Fragment(), CoroutineScope {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View? {
-        binding = FragmentCustomerTakePhotoBinding.inflate(inflater, container, false)
+    ): View {
+        _binding = FragmentCustomerTakePhotoBinding.inflate(inflater, container, false)
 
         installTakePhoto()
 
@@ -143,4 +142,8 @@ class CustomerTakePhotoFragment : Fragment(), CoroutineScope {
     override val coroutineContext: CoroutineContext
         get() = Job()
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }
