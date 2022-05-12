@@ -32,6 +32,7 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import uz.algorithmgateway.tezkorakfa.R
 import uz.algorithmgateway.tezkorakfa.base.MyApplication
+import uz.algorithmgateway.tezkorakfa.data.local.entity.Pdf
 import uz.algorithmgateway.tezkorakfa.databinding.FragmentSavePdfBinding
 import uz.algorithmgateway.tezkorakfa.measurer.ui.drawings.adapters.PdfAdapter
 import uz.algorithmgateway.tezkorakfa.measurer.ui.select_type.models.Drawing
@@ -106,6 +107,16 @@ open class SavePdfFragment : Fragment(), CoroutineScope {
                 try {
                     val screenshotFromRecyclerView = getScreenshotFromRecyclerView(binding.savePdf)
                     screenshotFromRecyclerView?.let { it1 -> saveImageToPDF(height, it1, "chizma") }
+
+
+//                    val f = File(
+//                        Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS)
+//                            .toString() + "/Operation.pdf"
+//                    )
+//
+//                    toast(f.toString())
+//                    viewmodel.addPdf(Pdf(id = drawing.id, pdf = f.toString(), null, null))
+
                 } catch (e: Exception) {
                     Log.e("eror", "loadPdf: ${e.message}")
                 }
@@ -174,7 +185,13 @@ open class SavePdfFragment : Fragment(), CoroutineScope {
         val mFile =
             File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS)
                 .toString(),
-                "${filename}_${System.currentTimeMillis()}.pdf")
+                "${filename}_${System.currentTimeMillis().toString()}.pdf")
+        viewmodel.addPdf(
+            Pdf(
+                id = drawing.id,
+                pdf = "${filename}_${System.currentTimeMillis().toString()}.pdf",
+                signature = null,
+                image = null))
         if (!mFile.exists()) {
             val height = heig + bitmap.height
             val document = PdfDocument()

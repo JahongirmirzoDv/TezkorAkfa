@@ -120,15 +120,6 @@ class NetworkViewmodel @Inject constructor(
     suspend fun sendData(id: String, body: RequestBody) {
         viewModelScope.launch {
             networkRepository.sendData(id, body)
-                .catch {
-
-                }.collect {
-                    if (it.isSuccess) {
-
-                    } else if (it.isFailure) {
-
-                    }
-                }
         }
     }
 }

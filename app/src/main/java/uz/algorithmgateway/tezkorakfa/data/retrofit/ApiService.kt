@@ -51,5 +51,5 @@ interface ApiService {
     suspend fun sendData(
         @Path("id") id: String,
         @Body body: RequestBody,
-    ): Flow<Response<ResponseBody>>
+    )
 }

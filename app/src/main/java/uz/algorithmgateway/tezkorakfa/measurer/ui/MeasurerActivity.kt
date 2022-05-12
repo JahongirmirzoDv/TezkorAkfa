@@ -51,10 +51,4 @@ class MeasurerActivity : AppCompatActivity(), CoroutineScope{
         outState.clear()
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        dbViewmodel.delete()
-    }
-
-
 }

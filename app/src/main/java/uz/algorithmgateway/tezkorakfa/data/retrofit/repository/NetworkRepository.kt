@@ -85,12 +85,7 @@ class NetworkRepository @Inject constructor(private val apiService: ApiService) 
     suspend fun sendData(
         id: String,
         body: RequestBody,
-    ): Flow<Result<Response<ResponseBody>>> {
+    ){
         return apiService.sendData(id, body)
-            .map {
-                Result.success(it)
-            }.catch {
-                emit(Result.failure(it))
-            }.flowOn(Dispatchers.IO)
     }
 }

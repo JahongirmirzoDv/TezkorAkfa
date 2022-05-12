@@ -13,7 +13,6 @@ import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
-import com.squareup.picasso.Picasso
 import uz.algorithmgateway.tezkorakfa.databinding.PdfItemBinding
 import uz.algorithmgateway.tezkorakfa.measurer.ui.select_type.models.Drawing
 
