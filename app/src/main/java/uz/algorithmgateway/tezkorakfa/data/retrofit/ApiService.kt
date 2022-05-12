@@ -1,6 +1,7 @@
 package uz.algorithmgateway.tezkorakfa.data.retrofit
 
 import kotlinx.coroutines.flow.Flow
+import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okhttp3.ResponseBody
 import retrofit2.Response
@@ -35,20 +36,20 @@ interface ApiService {
     @GET("warehouse/accessory/list")
     fun getAccsessory(): Flow<Accessory>
 
+    @Multipart
     @POST("order/order_update/android/")
     suspend fun updateUserData(
-        @Body body: RequestBody,
+        @Part body: List<MultipartBody.Part>,
     ): Response<ResponseBody>
 
     @POST("order/order/measurement/")
     suspend fun acceptOrder(
         @Body body: HashMap<String, Any>?,
-    )
-
+    ): Flow<Response<ResponseBody>>
 
     @PATCH("order/order/update/{id}/")
     suspend fun sendData(
         @Path("id") id: String,
         @Body body: RequestBody,
-    )
+    ): Flow<Response<ResponseBody>>
 }

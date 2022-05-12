@@ -98,7 +98,7 @@ class OrderListFragment(
                                             launch {
                                                 val map: HashMap<String, Any> = HashMap()
                                                 map["order_id"] = item.id
-                                                viewmodel.acceptOrder(map)
+//                                                viewmodel.acceptOrder(map)
                                             }
                                             val bundle = Bundle()
                                             val toJson = Gson().toJson(item)

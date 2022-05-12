@@ -124,4 +124,9 @@ dependencies {
     debugImplementation "com.github.chuckerteam.chucker:library:3.5.2"
     releaseImplementation "com.github.chuckerteam.chucker:library-no-op:3.5.2"
 
+    implementation 'com.github.tejpratap46:PDFCreatorAndroid:3.0.2'
+    implementation 'com.github.Gkemon:Android-XML-to-PDF-Generator:2.6.1'
+
+    implementation 'com.squareup.picasso:picasso:2.71828'
+
 }

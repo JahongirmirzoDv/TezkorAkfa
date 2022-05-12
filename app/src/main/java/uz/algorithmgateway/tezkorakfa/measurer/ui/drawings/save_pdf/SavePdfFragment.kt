@@ -1,19 +1,24 @@
 package uz.algorithmgateway.tezkorakfa.measurer.ui.drawings.save_pdf
 
 import android.Manifest
+import android.Manifest.permission.MANAGE_EXTERNAL_STORAGE
 import android.annotation.SuppressLint
-import android.content.Context
+import android.content.ContentResolver
+import android.content.ContentValues
 import android.content.pm.PackageManager
-import android.graphics.Bitmap
+import android.graphics.*
 import android.graphics.pdf.PdfDocument
-import android.os.Bundle
-import android.os.Environment
-import android.print.PrintAttributes
-import android.print.pdf.PrintedPdfDocument
+import android.graphics.pdf.PdfDocument.PageInfo
+import android.net.Uri
+import android.os.*
+import android.provider.MediaStore
 import android.util.Log
+import android.util.LruCache
 import android.view.LayoutInflater
+import android.view.PixelCopy
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -25,10 +30,8 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import uz.algorithmgateway.core.util.toast
 import uz.algorithmgateway.tezkorakfa.R
 import uz.algorithmgateway.tezkorakfa.base.MyApplication
-import uz.algorithmgateway.tezkorakfa.data.local.entity.Pdf
 import uz.algorithmgateway.tezkorakfa.databinding.FragmentSavePdfBinding
 import uz.algorithmgateway.tezkorakfa.measurer.ui.drawings.adapters.PdfAdapter
 import uz.algorithmgateway.tezkorakfa.measurer.ui.select_type.models.Drawing
@@ -36,18 +39,23 @@ import uz.algorithmgateway.tezkorakfa.measurer.viewmodel.DbViewmodel
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
+import java.io.OutputStream
 import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
 
 
-class SavePdfFragment : Fragment(), CoroutineScope {
+open class SavePdfFragment : Fragment(), CoroutineScope {
     @Inject
     lateinit var viewmodel: DbViewmodel
     private var _binding: FragmentSavePdfBinding? = null
     private val binding get() = _binding!!
     lateinit var list: MutableStateFlow<List<Drawing>>
     lateinit var drawing: Drawing
+    var position = 0
+    lateinit var adapter: PdfAdapter
 
+    var wil = 0
+    var height = 0
     val REQUEST_PERMISSIONS = 1
 
     var booleanPermission = false
@@ -60,6 +68,7 @@ class SavePdfFragment : Fragment(), CoroutineScope {
     }
 
 
+    @RequiresApi(Build.VERSION_CODES.R)
     @SuppressLint("NotifyDataSetChanged")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -71,43 +80,34 @@ class SavePdfFragment : Fragment(), CoroutineScope {
         list.value = viewmodel.getAllDrawing()
         drawing = viewmodel.getAllDrawing().last()
 
+        wil = binding.savePdf.width
+        height = binding.savePdf.height
 
-        var adapter = PdfAdapter(requireContext())
-        binding.savePdf.adapter = adapter
+
+
         launch(Dispatchers.Main) {
             list.collect {
-                adapter.list = it
-                adapter.notifyDataSetChanged()
+                adapter = PdfAdapter(requireContext(), it)
+                binding.savePdf.adapter = adapter
+                position = it.size
+                binding.savePdf.smoothScrollToPosition(position)
             }
         }
         loadPdf()
         return binding.root
     }
 
+    @RequiresApi(Build.VERSION_CODES.R)
     private fun loadPdf() {
         binding.save.setOnClickListener {
+
             if (booleanPermission) {
 
                 try {
-                    createPdf()
-                    val f = File(
-                        Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS)
-                            .toString() + "/Operation.pdf"
-                    )
-
-                    toast(f.toString())
-                    viewmodel.addPdf(Pdf(id = drawing.id, pdf = f.toString(), null, null))
-
-//                    val shareIntent = Intent(Intent.ACTION_SEND)
-//                    shareIntent.putExtra(
-//                        Intent.EXTRA_STREAM,
-//                        context?.let { it1 -> uriFromFile(it1, f) })
-//                    shareIntent.flags = Intent.FLAG_GRANT_READ_URI_PERMISSION
-//                    shareIntent.type = "application/pdf"
-//                    startActivity(Intent.createChooser(shareIntent, getString(R.string.share)))
+                    val screenshotFromRecyclerView = getScreenshotFromRecyclerView(binding.savePdf)
+                    screenshotFromRecyclerView?.let { it1 -> saveImageToPDF(height, it1, "chizma") }
                 } catch (e: Exception) {
                     Log.e("eror", "loadPdf: ${e.message}")
-//                    mainListener?.showError("Please try again") {}
                 }
                 findNavController().navigate(R.id.confirmOrdersScreen)
 
@@ -119,19 +119,16 @@ class SavePdfFragment : Fragment(), CoroutineScope {
         requestPermission()
     }
 
+    @RequiresApi(Build.VERSION_CODES.R)
     private fun requestPermission() {
-        if ((ContextCompat.checkSelfPermission(
+        if ((ContextCompat.checkSelfPermission(requireContext(),
+                MANAGE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) && (ContextCompat.checkSelfPermission(
                 requireContext(),
-                Manifest.permission.READ_EXTERNAL_STORAGE
-            ) != PackageManager.PERMISSION_GRANTED) &&
-            (ContextCompat.checkSelfPermission(
-                requireContext(),
-                Manifest.permission.WRITE_EXTERNAL_STORAGE
-            ) != PackageManager.PERMISSION_GRANTED)
+                Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)
         ) {
             ActivityCompat.requestPermissions(
                 requireActivity(), arrayOf(
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                    MANAGE_EXTERNAL_STORAGE,
                     Manifest.permission.READ_EXTERNAL_STORAGE
                 ), REQUEST_PERMISSIONS
             )
@@ -141,52 +138,139 @@ class SavePdfFragment : Fragment(), CoroutineScope {
         }
     }
 
-    private fun createPdf() {
-        val printAttrs = PrintAttributes.Builder().setColorMode(PrintAttributes.COLOR_MODE_COLOR)
-            .setMediaSize(PrintAttributes.MediaSize.ISO_C0)
-            .setResolution(PrintAttributes.Resolution("zooey", Context.PRINT_SERVICE, 300, 300))
-            .setMinMargins(PrintAttributes.Margins.NO_MARGINS).build()
-        val document: PdfDocument = PrintedPdfDocument(requireContext(), printAttrs)
-        // crate a page description
-        // crate a page description
-        val pageInfo =
-            PdfDocument.PageInfo.Builder(binding.savePdf.width, binding.savePdf.height, 1)
-                .create()
-        // create a new page from the PageInfo
-        // create a new page from the PageInfo
-        val page = document.startPage(pageInfo)
-        // repaint the user's text into the page
-        // repaint the user's text into the page
-        val content: ViewGroup = binding.savePdf
-        content.draw(page.canvas)
-        // do final processing of the page
-        // do final processing of the page
-        document.finishPage(page)
-        // Here you could add more pages in a longer doc app, but you'd have
-        // to handle page-breaking yourself in e.g., write your own word processor...
-        // Now write the PDF document to a file; it actually needs to be a file
-        // since the Share mechanism can't accept a byte[]. though it can
-        // accept a String/CharSequence. Meh.
-        // Here you could add more pages in a longer doc app, but you'd have
-        // to handle page-breaking yourself in e.g., write your own word processor...
-        // Now write the PDF document to a file; it actually needs to be a file
-        // since the Share mechanism can't accept a byte[]. though it can
-        // accept a String/CharSequence. Meh.
-        try {
-            val f = File(
-                Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS)
-                    .toString() + "/Operation.pdf"
-            )
-            val fos = FileOutputStream(f)
-            document.writeTo(fos)
-            document.close()
-            fos.close()
-        } catch (e: IOException) {
-            throw RuntimeException("Error generating file", e)
-        }
 
+    @Throws(IOException::class)
+    private fun saveBitmap(bitmap: Bitmap, name: String) {
+        val saved: Boolean
+        val fos: OutputStream?
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            val resolver: ContentResolver = requireActivity().contentResolver
+            val contentValues = ContentValues()
+            contentValues.put(MediaStore.MediaColumns.DISPLAY_NAME, name)
+            contentValues.put(MediaStore.MediaColumns.MIME_TYPE, "image/png")
+            contentValues.put(MediaStore.MediaColumns.RELATIVE_PATH, "DCIM/Camera")
+            val imageUri: Uri? =
+                resolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues)
+            fos = imageUri?.let { resolver.openOutputStream(it) }
+
+        } else {
+            val imagesDir = Environment.getExternalStoragePublicDirectory(
+                Environment.DIRECTORY_DCIM
+            ).toString() + File.separator + "Camera"
+            val file = File(imagesDir)
+            if (!file.exists()) {
+                file.mkdir()
+            }
+            val image = File(imagesDir, "$name.png")
+            fos = FileOutputStream(image)
+        }
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, fos)
+        fos?.flush()
+        fos?.close()
     }
 
+
+    fun saveImageToPDF(heig: Int, bitmap: Bitmap, filename: String) {
+        val mFile =
+            File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS)
+                .toString(),
+                "${filename}_${System.currentTimeMillis()}.pdf")
+        if (!mFile.exists()) {
+            val height = heig + bitmap.height
+            val document = PdfDocument()
+            val pageInfo = PageInfo.Builder(bitmap.width, height, 1).create()
+            val page = document.startPage(pageInfo)
+            val canvas = page.canvas
+            binding.savePdf.draw(canvas)
+            canvas.drawBitmap(bitmap,
+                null,
+                Rect(0, heig, bitmap.width, bitmap.height),
+                null)
+            document.finishPage(page)
+            try {
+                mFile.createNewFile()
+                val out: OutputStream = FileOutputStream(mFile)
+                document.writeTo(out)
+                document.close()
+                out.close()
+            } catch (e: IOException) {
+                e.printStackTrace()
+                Log.e("log_e", "saveImageToPDF: ${e.message}")
+            }
+        }
+    }
+
+
+    fun getScreenshotFromRecyclerView(view: RecyclerView): Bitmap? {
+        val adapter = view.adapter
+        var bigBitmap: Bitmap? = null
+        if (adapter != null) {
+            val size = adapter.itemCount
+            var height = 0
+            val paint = Paint()
+            var iHeight = 0
+            val maxMemory = (Runtime.getRuntime().maxMemory() / 1024).toInt()
+
+            // Use 1/8th of the available memory for this memory cache.
+            val cacheSize = maxMemory / 8
+            val bitmaCache: LruCache<String, Bitmap> = LruCache(cacheSize)
+            for (i in 0 until size) {
+                val holder = adapter.createViewHolder(view, adapter.getItemViewType(i))
+                adapter.onBindViewHolder(holder, i)
+                holder.itemView.measure(View.MeasureSpec.makeMeasureSpec(view.width,
+                    View.MeasureSpec.EXACTLY),
+                    View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED))
+                holder.itemView.layout(0,
+                    0,
+                    holder.itemView.measuredWidth,
+                    holder.itemView.measuredHeight)
+                holder.itemView.isDrawingCacheEnabled = true
+                holder.itemView.buildDrawingCache()
+                val drawingCache = holder.itemView.drawingCache
+                if (drawingCache != null) {
+                    bitmaCache.put(i.toString(), drawingCache)
+                }
+                height += holder.itemView.measuredHeight
+            }
+            bigBitmap = Bitmap.createBitmap(view.measuredWidth, height, Bitmap.Config.ARGB_8888)
+            val bigCanvas = Canvas(bigBitmap)
+            bigCanvas.drawColor(Color.WHITE)
+            for (i in 0 until size) {
+                val bitmap: Bitmap = bitmaCache.get(i.toString())
+                bigCanvas.drawBitmap(bitmap, 0f, iHeight.toFloat(), paint)
+                iHeight += bitmap.height
+                bitmap.recycle()
+            }
+        }
+        return bigBitmap
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun getBitmapFromView(view: View, callback: (Bitmap) -> Unit) {
+        requireActivity().window?.let { window ->
+            val bitmap = Bitmap.createBitmap(view.width, view.height, Bitmap.Config.ARGB_8888)
+            val locationOfViewInWindow = IntArray(2)
+            view.getLocationInWindow(locationOfViewInWindow)
+            try {
+                PixelCopy.request(window,
+                    Rect(locationOfViewInWindow[0],
+                        locationOfViewInWindow[1],
+                        locationOfViewInWindow[0] + view.width,
+                        locationOfViewInWindow[1] + view.height),
+                    bitmap,
+                    { copyResult ->
+                        if (copyResult == PixelCopy.SUCCESS) {
+                            callback(bitmap)
+                        }
+                        // possible to handle other result codes ...
+                    },
+                    Handler(Looper.getMainLooper()))
+            } catch (e: IllegalArgumentException) {
+                // PixelCopy may throw IllegalArgumentException, make sure to handle it
+                e.printStackTrace()
+            }
+        }
+    }
 
 
     override fun onDestroyView() {

@@ -151,22 +151,31 @@ class AcceptOrderScreen : Fragment(), CoroutineScope {
     private fun navigateBackOrNext() {
         binding.btnNext.setOnClickListener {
             launch(Dispatchers.Main) {
+                val list = ArrayList<MultipartBody.Part>()
                 async {
                     val builder: MultipartBody.Builder = MultipartBody.Builder()
                     if (filePath != null) {
-                        val files = File(filePath!!).compress(requireContext())
-                        builder.setType(MultipartBody.FORM)
-                        builder.addFormDataPart("id", item.id.toString())
-                        builder.addFormDataPart("first_name", binding.editTextName.text.toString())
-                        builder.addFormDataPart("last_name",
-                            binding.editTextSurname.text.toString())
-                        builder.addFormDataPart("address", binding.editTextAddress.text.toString())
-                        builder.addFormDataPart("comment", binding.textViewComment.text.toString())
-                        builder.addFormDataPart(
-                            "client_home_image",
-                            files.name,
-                            files.asRequestBody("multipart/form-data".toMediaTypeOrNull())
-                        )
+                        for (i in 0..2) {
+                            val files = File(filePath!!).compress(requireContext())
+                            builder.setType(MultipartBody.FORM)
+                            builder.addFormDataPart("id", item.id.toString())
+                            builder.addFormDataPart("first_name",
+                                binding.editTextName.text.toString())
+                            builder.addFormDataPart("last_name",
+                                binding.editTextSurname.text.toString())
+                            builder.addFormDataPart("address",
+                                binding.editTextAddress.text.toString())
+                            builder.addFormDataPart("comment",
+                                binding.textViewComment.text.toString())
+                            builder.addFormDataPart(
+                                "client_home_image",
+                                files.name,
+                                files.asRequestBody("multipart/form-data".toMediaTypeOrNull())
+                            )
+                            val body = builder.build()
+                            list.add(MultipartBody.Part.create(body))
+                        }
+                        networkViewmodel.updateUser(item.id.toString(), list)
                     } else {
                         builder.setType(MultipartBody.FORM)
                         builder.addFormDataPart("id", item.id.toString())
@@ -180,8 +189,8 @@ class AcceptOrderScreen : Fragment(), CoroutineScope {
                             "",
                         )
                     }
-                    val body = builder.build()
-                    networkViewmodel.updateUser(item.id.toString(), body)
+
+
                 }
 
                 dbViewmodel.addDrawing(Drawing(id = item.id.toString()))
@@ -205,11 +214,6 @@ class AcceptOrderScreen : Fragment(), CoroutineScope {
             findNavController().popBackStack()
         }
     }
-
-//    override fun onDestroy() {
-//        super.onDestroy()
-//        dbViewmodel.delete()
-//    }
 
     override fun onResume() {
         super.onResume()

@@ -16,6 +16,7 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import uz.algorithmgateway.tezkorakfa.R
 import uz.algorithmgateway.tezkorakfa.base.MyApplication
@@ -37,7 +38,7 @@ class CustomerTakePhotoFragment : Fragment(), CoroutineScope {
     lateinit var apiVm: NetworkViewmodel
 
 
-    lateinit var  binding: FragmentCustomerTakePhotoBinding
+    lateinit var binding: FragmentCustomerTakePhotoBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,9 +48,9 @@ class CustomerTakePhotoFragment : Fragment(), CoroutineScope {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
-        binding = FragmentCustomerTakePhotoBinding.inflate(inflater, container,false)
+        binding = FragmentCustomerTakePhotoBinding.inflate(inflater, container, false)
 
         installTakePhoto()
 
@@ -137,9 +138,23 @@ class CustomerTakePhotoFragment : Fragment(), CoroutineScope {
                     }
                     val body = builder.build()
                     apiVm.sendData(pdf.id, body)
+
                 }
             }
         }
+
+
+    fun send() {
+        var list = ArrayList<MultipartBody.Part>()
+
+        list.add(
+            MultipartBody.Part.createFormData("name",
+            "",
+            RequestBody.create(MultipartBody.FORM, "")))
+
+
+    }
+
     override val coroutineContext: CoroutineContext
         get() = Job()
 

@@ -6,6 +6,8 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 import okhttp3.RequestBody
+import okhttp3.ResponseBody
+import retrofit2.Response
 import uz.algorithmgateway.tezkorakfa.data.models.UserRequest
 import uz.algorithmgateway.tezkorakfa.data.models.UserResponse
 import uz.algorithmgateway.tezkorakfa.data.retrofit.ApiService
@@ -72,14 +74,23 @@ class NetworkRepository @Inject constructor(private val apiService: ApiService) 
             }.flowOn(Dispatchers.IO)
     }
 
-    suspend fun acceptOrder(body: HashMap<String, Any>?) {
+    suspend fun acceptOrder(body: HashMap<String, Any>?): Flow<Result<Response<ResponseBody>>> {
         return apiService.acceptOrder(body)
+            .map {
+                Result.success(it)
+            }.catch { emit(Result.failure(it)) }
+            .flowOn(Dispatchers.IO)
     }
 
     suspend fun sendData(
         id: String,
         body: RequestBody,
-    ) {
+    ): Flow<Result<Response<ResponseBody>>> {
         return apiService.sendData(id, body)
+            .map {
+                Result.success(it)
+            }.catch {
+                emit(Result.failure(it))
+            }.flowOn(Dispatchers.IO)
     }
 }
