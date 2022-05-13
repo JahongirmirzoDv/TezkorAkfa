@@ -135,7 +135,7 @@ class CustomerTakePhotoFragment : Fragment(), CoroutineScope {
                 }
                 Handler(Looper.getMainLooper()).postDelayed({
                     binding.next.isEnabled = true
-                }, 700)
+                }, 800)
             }
         }
 

@@ -120,7 +120,7 @@ open class SavePdfFragment : Fragment(), CoroutineScope {
                 } catch (e: Exception) {
                     Log.e("eror", "loadPdf: ${e.message}")
                 }
-                findNavController().navigate(R.id.confirmOrdersScreen)
+                findNavController().navigate(R.id.signatureFragment)
 
             } else {
                 requestPermission()
@@ -180,16 +180,21 @@ open class SavePdfFragment : Fragment(), CoroutineScope {
         fos?.close()
     }
 
+    private fun randomKey(): String = List(6) {
+        (('a'..'z') + ('A'..'Z') + ('0'..'9')).random()
+    }.joinToString("")
+
 
     fun saveImageToPDF(heig: Int, bitmap: Bitmap, filename: String) {
+        val randomKey = randomKey()
         val mFile =
             File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS)
                 .toString(),
-                "${filename}_${System.currentTimeMillis().toString()}.pdf")
+                "${filename}_${randomKey}.pdf")
         viewmodel.addPdf(
             Pdf(
                 id = drawing.id,
-                pdf = "${filename}_${System.currentTimeMillis().toString()}.pdf",
+                pdf = "${filename}_${randomKey}.pdf",
                 signature = null,
                 image = null))
         if (!mFile.exists()) {
