@@ -105,15 +105,6 @@ class NetworkViewmodel @Inject constructor(
     suspend fun acceptOrder(body: HashMap<String, Any>?) {
         viewModelScope.launch {
             networkRepository.acceptOrder(body)
-                .catch {
-
-                }.collect {
-                    if (it.isSuccess) {
-
-                    } else if (it.isFailure) {
-
-                    }
-                }
         }
     }
 

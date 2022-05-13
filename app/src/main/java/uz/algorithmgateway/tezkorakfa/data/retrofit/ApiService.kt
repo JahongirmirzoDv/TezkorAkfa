@@ -18,10 +18,10 @@ interface ApiService {
     @POST("user/login/")
     fun loginUser(@Body userRequest: UserRequest): Flow<UserResponse>
 
-    @GET("order/order")
+    @GET("order/order/")
     fun salesOrderList(
-        @Query("status") status: String,
-        @Query("scale") user_id: String,
+        @Query("position") status: String,
+        @Query("scaler") user_id: String,
     ): Flow<OrderList>
 
     @GET("warehouse/profil/list")
@@ -42,10 +42,10 @@ interface ApiService {
         @Part body: List<MultipartBody.Part>,
     ): Response<ResponseBody>
 
-    @POST("order/order/measurement/")
+    @POST("order/order/on_scaler/")
     suspend fun acceptOrder(
         @Body body: HashMap<String, Any>?,
-    ): Flow<Response<ResponseBody>>
+    )
 
     @PATCH("order/order/update/{id}/")
     suspend fun sendData(

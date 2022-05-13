@@ -98,7 +98,7 @@ class OrderListFragment(
                                             launch {
                                                 val map: HashMap<String, Any> = HashMap()
                                                 map["order_id"] = item.id
-//                                                viewmodel.acceptOrder(map)
+                                                viewmodel.acceptOrder(map)
                                                 db_viewmodel.delete()
                                                 db_viewmodel.deletePdf()
                                             }

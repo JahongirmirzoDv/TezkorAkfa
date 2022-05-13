@@ -74,12 +74,8 @@ class NetworkRepository @Inject constructor(private val apiService: ApiService) 
             }.flowOn(Dispatchers.IO)
     }
 
-    suspend fun acceptOrder(body: HashMap<String, Any>?): Flow<Result<Response<ResponseBody>>> {
+    suspend fun acceptOrder(body: HashMap<String, Any>?) {
         return apiService.acceptOrder(body)
-            .map {
-                Result.success(it)
-            }.catch { emit(Result.failure(it)) }
-            .flowOn(Dispatchers.IO)
     }
 
     suspend fun sendData(
