@@ -22,7 +22,6 @@ import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import uz.algorithmgateway.tezkorakfa.R
 import uz.algorithmgateway.tezkorakfa.base.MyApplication
-import uz.algorithmgateway.tezkorakfa.data.retrofit.models.sales_order_list.Result
 import uz.algorithmgateway.tezkorakfa.databinding.ScreenAcceptOrderBinding
 import uz.algorithmgateway.tezkorakfa.measurer.ui.accept_order.model.Locations
 import uz.algorithmgateway.tezkorakfa.measurer.ui.select_type.models.Drawing

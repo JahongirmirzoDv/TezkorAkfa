@@ -17,7 +17,6 @@ import kotlinx.coroutines.launch
 import uz.algorithmgateway.core.util.toast
 import uz.algorithmgateway.tezkorakfa.R
 import uz.algorithmgateway.tezkorakfa.base.MyApplication
-import uz.algorithmgateway.tezkorakfa.data.retrofit.models.sales_order_list.Result
 import uz.algorithmgateway.tezkorakfa.databinding.FragmentTabLayoutBinding
 import uz.algorithmgateway.tezkorakfa.measurer.ui.orders.OrderListAdapter
 import uz.algorithmgateway.tezkorakfa.measurer.viewmodel.DbViewmodel
