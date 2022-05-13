@@ -35,6 +35,7 @@ import java.io.IOException
 import java.util.*
 import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
+import uz.algorithmgateway.tezkorakfa.data.retrofit.models.sales_order_list.Result
 
 
 class AcceptOrderScreen : Fragment(), CoroutineScope {
