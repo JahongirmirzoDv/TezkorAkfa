@@ -145,7 +145,7 @@
                 <androidx.cardview.widget.CardView
                     android:layout_width="@dimen/size_fifty"
                     android:layout_height="@dimen/size_sixty"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
                     android:layout_weight="1"
                     app:cardBackgroundColor="@color/layout_back_color"
                     app:cardCornerRadius="@dimen/margin_seven">
@@ -154,7 +154,8 @@
                         style="@style/TextView.Title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
+                        android:layout_gravity="start"
+                        android:maxLines="4"
                         android:text="Izoh: Mijozga 10% chegirma qilinadi"
                         android:textSize="11sp" />
 
@@ -213,9 +214,9 @@
                             android:textSize="11sp" />
 
                         <androidx.cardview.widget.CardView
-                            android:layout_width="match_parent"
+                            android:layout_width="0dp"
                             android:layout_height="@dimen/save_button_space"
-                            android:layout_marginLeft="10dp"
+                            android:layout_marginStart="5dp"
                             android:layout_weight="1"
                             app:cardBackgroundColor="@color/layout_back_color"
                             app:cardCornerRadius="@dimen/margin_seven">
@@ -241,11 +242,42 @@
                     android:orientation="horizontal">
 
                     <androidx.cardview.widget.CardView
+                        android:id="@+id/reject_order"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/save_button_space"
+                        android:layout_gravity="bottom"
+                        android:layout_marginStart="5dp"
+                        android:layout_weight="1"
+                        app:cardBackgroundColor="@color/color_red"
+                        app:cardCornerRadius="@dimen/margin_seven">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+
+                            <com.google.android.material.textview.MaterialTextView
+                                style="@style/TextView.Title"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:text="Bekor qilish"
+                                android:textSize="11sp" />
+
+                        </LinearLayout>
+
+
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
                         android:id="@+id/config_order"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/save_button_space"
                         android:layout_gravity="bottom"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginStart="5dp"
                         android:layout_weight="1"
                         app:cardBackgroundColor="@color/blue"
                         app:cardCornerRadius="@dimen/margin_seven">
@@ -256,26 +288,20 @@
                             android:gravity="center"
                             android:orientation="horizontal">
 
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:src="@drawable/ic_btn_src_document" />
-
                             <com.google.android.material.textview.MaterialTextView
                                 style="@style/TextView.Title"
-                                android:layout_width="wrap_content"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
                                 android:layout_weight="1"
-                                android:text="Yakunlash"
+                                android:gravity="center"
+                                android:text="Tahrirlash"
                                 android:textSize="11sp" />
 
                         </LinearLayout>
 
 
                     </androidx.cardview.widget.CardView>
-
 
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
