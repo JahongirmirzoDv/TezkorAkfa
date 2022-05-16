@@ -45,7 +45,6 @@ interface ApiService {
         @Body body: HashMap<String, Any>?,
     )
 
-
     @PATCH("order/order/update/{id}/")
     suspend fun sendData(
         @Path("id") id: String,

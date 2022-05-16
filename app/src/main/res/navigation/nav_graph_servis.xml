@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_servis"
+    app:startDestination="@id/servisHomeFragment">
+
+    <fragment
+        android:id="@+id/servisHomeFragment"
+        android:name="uz.algorithmgateway.tezkorakfa.servis.ui.home.ServisHomeFragment"
+        android:label="fragment_servis_home"
+        tools:layout="@layout/fragment_servis_home" >
+        <action
+            android:id="@+id/action_servisHomeFragment_to_orderInfoFragment"
+            app:destination="@id/orderInfoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/orderInfoFragment"
+        android:name="uz.algorithmgateway.tezkorakfa.servis.ui.orders_info.OrderInfoFragment"
+        android:label="fragment_order_info"
+        tools:layout="@layout/fragment_order_info" >
+        <action
+            android:id="@+id/action_orderInfoFragment_to_acceptOrderServisFragment"
+            app:destination="@id/acceptOrderServisFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/acceptOrderServisFragment"
+        android:name="uz.algorithmgateway.tezkorakfa.servis.ui.accept_order.AcceptOrderServisFragment"
+        android:label="fragment_accept_order_servis"
+        tools:layout="@layout/fragment_accept_order_servis" />
+</navigation>

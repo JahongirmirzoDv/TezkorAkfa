@@ -39,14 +39,14 @@ class OrderListFragmentSup : Fragment(), InterfaceOrderClick {
         loadOrderList()
         loadOrderStatusSpinner()
         loadSearchView()
-        loadOrderHistoryButton()
+//        loadOrderHistoryButton()
     }
 
-    private fun loadOrderHistoryButton() {
-        binding.btnOrderHistory.setOnClickListener {
-            findNavController().navigate(R.id.orderHistoryFragment)
-        }
-    }
+//    private fun loadOrderHistoryButton() {
+//        binding.btnOrderHistory.setOnClickListener {
+//            findNavController().navigate(R.id.orderHistoryFragment)
+//        }
+//    }
 
     private fun loadSearchView() {
         binding.editTextSearch.doOnTextChanged { text, start, before, count ->

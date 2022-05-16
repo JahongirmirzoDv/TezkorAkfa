@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item
-        android:id="@+id/productListFragment"
-        android:enabled="true"
-        android:icon="@drawable/ic_menu_product_list"
-        android:title="@string/text_menu_product_list"/>
+<!--    <item-->
+<!--        android:id="@+id/productListFragment"-->
+<!--        android:enabled="true"-->
+<!--        android:icon="@drawable/ic_menu_product_list"-->
+<!--        android:title="@string/text_menu_product_list"/>-->
     <item
         android:id="@+id/orderListFragment"
         android:enabled="true"
         android:icon="@drawable/ic_menu_order"
         android:title="@string/orders"/>
     <item
-        android:id="@+id/foundListFragment"
+        android:id="@+id/orderHistoryFragment"
         android:enabled="true"
         android:icon="@drawable/ic_menu_found_list"
         android:title="@string/text_found_list"/>
