@@ -22,6 +22,7 @@ import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import uz.algorithmgateway.tezkorakfa.R
 import uz.algorithmgateway.tezkorakfa.base.MyApplication
+import uz.algorithmgateway.tezkorakfa.data.retrofit.models.sales_order_list.Result
 import uz.algorithmgateway.tezkorakfa.databinding.ScreenAcceptOrderBinding
 import uz.algorithmgateway.tezkorakfa.measurer.ui.accept_order.model.Locations
 import uz.algorithmgateway.tezkorakfa.measurer.ui.select_type.models.Drawing
@@ -35,7 +36,6 @@ import java.io.IOException
 import java.util.*
 import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
-import uz.algorithmgateway.tezkorakfa.data.retrofit.models.sales_order_list.Result
 
 
 class AcceptOrderScreen : Fragment(), CoroutineScope {
@@ -151,31 +151,27 @@ class AcceptOrderScreen : Fragment(), CoroutineScope {
     private fun navigateBackOrNext() {
         binding.btnNext.setOnClickListener {
             launch(Dispatchers.Main) {
-                val list = ArrayList<MultipartBody.Part>()
                 async {
                     val builder: MultipartBody.Builder = MultipartBody.Builder()
                     if (filePath != null) {
-                        for (i in 0..2) {
-                            val files = File(filePath!!).compress(requireContext())
-                            builder.setType(MultipartBody.FORM)
-                            builder.addFormDataPart("id", item.id.toString())
-                            builder.addFormDataPart("first_name",
-                                binding.editTextName.text.toString())
-                            builder.addFormDataPart("last_name",
-                                binding.editTextSurname.text.toString())
-                            builder.addFormDataPart("address",
-                                binding.editTextAddress.text.toString())
-                            builder.addFormDataPart("comment",
-                                binding.textViewComment.text.toString())
-                            builder.addFormDataPart(
-                                "client_home_image",
-                                files.name,
-                                files.asRequestBody("multipart/form-data".toMediaTypeOrNull())
-                            )
-                            val body = builder.build()
-                            list.add(MultipartBody.Part.create(body))
-                        }
-                        networkViewmodel.updateUser(item.id.toString(), list)
+                        val files = File(filePath!!).compress(requireContext())
+                        builder.setType(MultipartBody.FORM)
+                        builder.addFormDataPart("id", item.id.toString())
+                        builder.addFormDataPart("first_name",
+                            binding.editTextName.text.toString())
+                        builder.addFormDataPart("last_name",
+                            binding.editTextSurname.text.toString())
+                        builder.addFormDataPart("address",
+                            binding.editTextAddress.text.toString())
+                        builder.addFormDataPart("comment",
+                            binding.textViewComment.text.toString())
+                        builder.addFormDataPart(
+                            "client_home_image",
+                            files.name,
+                            files.asRequestBody("multipart/form-data".toMediaTypeOrNull())
+                        )
+                        val body = builder.build()
+                        networkViewmodel.sendData(item.id.toString(), body)
                     } else {
                         builder.setType(MultipartBody.FORM)
                         builder.addFormDataPart("id", item.id.toString())
@@ -189,8 +185,8 @@ class AcceptOrderScreen : Fragment(), CoroutineScope {
                             "",
                         )
                     }
-
-
+                    val body = builder.build()
+                    networkViewmodel.sendData(item.id.toString(), body)
                 }
 
                 dbViewmodel.addDrawing(Drawing(id = item.id.toString()))

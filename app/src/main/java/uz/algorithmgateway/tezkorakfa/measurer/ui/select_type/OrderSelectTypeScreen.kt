@@ -460,7 +460,7 @@ class OrderSelectTypeScreen : Fragment(), CoroutineScope {
                     binding.layoutProfile.spinnerTypeTexture.selectedItem.toString().ifEmpty { "" }
                 val profile_texture = uiSpinner1
                 val mirror_layer =
-                    mirror_layer_List[binding.layoutWindow.tabLayoutWindow.selectedTabPosition]
+                    mirror_layer_List[binding.layoutWindow.tabLayoutWindow.selectedTabPosition].ifEmpty { "" }
                 val mirror_mm = oyna_
                 val uiSpinner =
                     binding.layoutWindow.spinnerWindowColor.selectedItem.toString().ifEmpty { "" }

@@ -1,6 +1,7 @@
 package uz.algorithmgateway.tezkorakfa.measurer.ui.slider_standart
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.ClipData
 import android.content.ClipDescription
@@ -79,9 +80,14 @@ class SliderScreen : Fragment() {
     ): View {
         _binding = ScreenSliderBinding.inflate(inflater, container, false)
         drawing = dbViewmodel.getAllDrawing().last()
+        H = drawing!!.heigth!!
+        W = drawing!!.width!!
+        H_T = drawing!!.heigth!!
+        W_T = drawing!!.width!!
         return binding.root
     }
 
+    @SuppressLint("SetTextI18n")
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

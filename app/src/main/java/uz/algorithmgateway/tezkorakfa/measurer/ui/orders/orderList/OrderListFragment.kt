@@ -15,6 +15,7 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import uz.algorithmgateway.core.util.toast
+import uz.algorithmgateway.data.const.Value
 import uz.algorithmgateway.tezkorakfa.R
 import uz.algorithmgateway.tezkorakfa.base.MyApplication
 import uz.algorithmgateway.tezkorakfa.data.retrofit.models.sales_order_list.Result
@@ -29,9 +30,7 @@ import uz.algorithmgateway.tezkorakfa.utils.NetworkConnectionLiveData
 import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
 
-class OrderListFragment(
-    private val status: String,
-) : Fragment(), CoroutineScope {
+class OrderListFragment() : Fragment(), CoroutineScope {
     @Inject
     lateinit var loginViewModel: LoginViewModel
 
@@ -49,6 +48,12 @@ class OrderListFragment(
     private var _binding: FragmentTabLayoutBinding? = null
     private val binding get() = _binding!!
     private val sharedPref by lazy { SharedPref(requireContext()) }
+    private var status: String = Value.NEW
+
+    constructor(status: String) : this() {
+        this.status = status
+    }
+
 
 
     override fun onCreateView(
@@ -70,7 +75,7 @@ class OrderListFragment(
         if (it) {
             launch(Dispatchers.Main) {
                 try {
-                    loginViewModel.getOrder(status, sharedPref.userId ?: "")
+                    loginViewModel.getOrder(status, if (status == Value.NEW) "" else sharedPref.userId ?: "")
                     loginViewModel.order.collect { list ->
                         when (list) {
                             is UIState.Loading -> {
@@ -111,6 +116,7 @@ class OrderListFragment(
                                     }
                                 )
                                 binding.rvOrders.adapter = adapter
+                                adapter.isCompleted = status == Value.DONE
                                 adapter.updateList(list.data?.results ?: emptyList())
                                 binding.progress.visibility = View.GONE
                                 binding.retry.visibility = View.GONE

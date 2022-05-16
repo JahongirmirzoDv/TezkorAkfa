@@ -8,6 +8,7 @@ import retrofit2.Response
 import retrofit2.http.*
 import uz.algorithmgateway.tezkorakfa.data.models.UserRequest
 import uz.algorithmgateway.tezkorakfa.data.models.UserResponse
+import uz.algorithmgateway.tezkorakfa.data.retrofit.models.Responce
 import uz.algorithmgateway.tezkorakfa.data.retrofit.models.accessory.Accessory
 import uz.algorithmgateway.tezkorakfa.data.retrofit.models.profile.Profile
 import uz.algorithmgateway.tezkorakfa.data.retrofit.models.sales_order_list.OrderList
@@ -36,10 +37,9 @@ interface ApiService {
     @GET("warehouse/accessory/list")
     fun getAccsessory(): Flow<Accessory>
 
-    @Multipart
     @POST("order/order_update/android/")
     suspend fun updateUserData(
-        @Part body: List<MultipartBody.Part>,
+        @Body body: RequestBody,
     ): Response<ResponseBody>
 
     @POST("order/order/on_scaler/")
@@ -52,4 +52,10 @@ interface ApiService {
         @Path("id") id: String,
         @Body body: RequestBody,
     )
+
+    @POST("order/order/{path}/")
+    fun confirm(
+        @Path("path") path: String,
+        @Body body: HashMap<String, Any>?
+    ):Flow<Responce>
 }

@@ -62,10 +62,13 @@
     </fragment>
     <fragment
         android:id="@+id/confirmOrdersScreen"
-        android:name="uz.algorithmgateway.tezkorakfa.measurer.ui.confirm_orders.ConfirmOrdersScreen"
+        android:name="uz.algorithmgateway.tezkorakfa.measurer.ui.confirm_orders.confirmed.ConfirmOrdersScreen"
         android:label="ConfirmOrdersScreen"
         tools:layout="@layout/screen_confirm_orders">
 
+        <action
+            android:id="@+id/action_confirmOrdersScreen_to_orderListFragment"
+            app:destination="@id/orderListFragment" />
     </fragment>
     <fragment
         android:id="@+id/orderListFragment"
@@ -83,9 +86,7 @@
         tools:layout="@layout/fragment_drawings">
         <action
             android:id="@+id/action_drawingsFragment_to_savePdfFragment"
-            app:destination="@id/savePdfFragment"
-            app:popUpTo="@id/savePdfFragment"
-            app:popUpToInclusive="true" />
+            app:destination="@id/savePdfFragment"/>
     </fragment>
     <fragment
         android:id="@+id/savePdfFragment"
@@ -94,10 +95,7 @@
         tools:layout="@layout/fragment_save_pdf">
         <action
             android:id="@+id/action_savePdfFragment_to_confirmOrdersScreen"
-            app:destination="@id/signatureFragment"
-            app:launchSingleTop="true"
-            app:popUpTo="@id/signatureFragment"
-            app:popUpToInclusive="true" />
+            app:destination="@id/signatureFragment" />
     </fragment>
     <fragment
         android:id="@+id/signatureFragment"
@@ -106,10 +104,7 @@
         tools:layout="@layout/fragment_signature">
         <action
             android:id="@+id/action_signatureFragment_to_customerTakePhotoFragment"
-            app:destination="@id/customerTakePhotoFragment"
-            app:popUpTo="@id/customerTakePhotoFragment"
-            app:launchSingleTop="true"
-            app:popUpToInclusive="true" />
+            app:destination="@id/customerTakePhotoFragment" />
     </fragment>
     <fragment
         android:id="@+id/customerTakePhotoFragment"
@@ -118,10 +113,16 @@
         tools:layout="@layout/fragment_customer_take_photo">
         <action
             android:id="@+id/action_customerTakePhotoFragment_to_confirmOrdersScreen"
-            app:destination="@id/confirmOrdersScreen"
-            app:popUpTo="@id/confirmOrdersScreen"
-            app:launchSingleTop="true"
-            app:popUpToInclusive="true" />
+            app:destination="@id/unconfirmedFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/unconfirmedFragment"
+        android:name="uz.algorithmgateway.tezkorakfa.measurer.ui.confirm_orders.unconfirmed.UnconfirmedFragment"
+        android:label="UnconfirmedFragment"
+        tools:layout="@layout/fragment_unconfirmed">
+        <action
+            android:id="@+id/action_unconfirmedFragment_to_confirmOrdersScreen"
+            app:destination="@id/confirmOrdersScreen" />
     </fragment>
 
 </navigation>

@@ -133,13 +133,13 @@ open class SavePdfFragment : Fragment(), CoroutineScope {
     @RequiresApi(Build.VERSION_CODES.R)
     private fun requestPermission() {
         if ((ContextCompat.checkSelfPermission(requireContext(),
-                MANAGE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) && (ContextCompat.checkSelfPermission(
+                Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) && (ContextCompat.checkSelfPermission(
                 requireContext(),
                 Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)
         ) {
             ActivityCompat.requestPermissions(
                 requireActivity(), arrayOf(
-                    MANAGE_EXTERNAL_STORAGE,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE,
                     Manifest.permission.READ_EXTERNAL_STORAGE
                 ), REQUEST_PERMISSIONS
             )

@@ -70,9 +70,7 @@ class CustomerTakePhotoFragment : Fragment(), CoroutineScope {
                 takePhoto()
             }
             next.setOnClickListener {
-                viewmodel.deletePdf()
-                viewmodel.delete()
-                findNavController().navigate(R.id.confirmOrdersScreen)
+                findNavController().navigate(R.id.unconfirmedFragment)
             }
 
         }
