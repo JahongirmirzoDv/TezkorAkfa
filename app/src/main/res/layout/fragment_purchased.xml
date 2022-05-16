@@ -21,43 +21,55 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <LinearLayout
+    <!--    <LinearLayout-->
+    <!--        android:id="@+id/layout_tab"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="72dp"-->
+    <!--        android:layout_marginTop="@dimen/screen_padding_vertical"-->
+    <!--        android:orientation="horizontal"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toBottomOf="@id/tv_title_page">-->
+
+    <!--        <androidx.appcompat.widget.AppCompatTextView-->
+    <!--            android:id="@+id/tv_tab_first"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="match_parent"-->
+    <!--            android:layout_weight="1"-->
+    <!--            android:gravity="center"-->
+    <!--            android:text="@string/text_purchase"-->
+    <!--            android:textAppearance="@style/Text20Light" />-->
+
+    <!--        <androidx.appcompat.widget.AppCompatTextView-->
+    <!--            android:id="@+id/tv_tab_second"-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="match_parent"-->
+    <!--            android:layout_weight="1"-->
+    <!--            android:gravity="center"-->
+    <!--            android:text="@string/text_purchased"-->
+    <!--            android:textAppearance="@style/Text20Light" />-->
+    <!--    </LinearLayout>-->
+
+    <com.google.android.material.tabs.TabLayout
         android:id="@+id/layout_tab"
+        style="@style/TabLayout.Order.BuyOrders"
         android:layout_width="match_parent"
-        android:layout_height="72dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/screen_padding_vertical"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_title_page">
+        android:background="@drawable/back_tablayout_confirm_screeen"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title_page"
+        app:tabTextAppearance="@style/Text16Dark" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_tab_first"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="@string/text_purchase"
-            android:textAppearance="@style/Text20Light"/>
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_tab_second"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="@string/text_purchased"
-            android:textAppearance="@style/Text20Light" />
-    </LinearLayout>
-    
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fragment_container_view"
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/view_pager2"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintStart_toStartOf="parent"
+        android:background="@color/comment_color"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/layout_tab"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/layout_tab" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

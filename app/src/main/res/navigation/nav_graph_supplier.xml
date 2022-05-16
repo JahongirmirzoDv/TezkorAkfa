@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph_supplier"
-    app:startDestination="@id/productListFragment">
+    app:startDestination="@id/orderListFragment">
 
     <fragment
         android:id="@+id/productListFragment"
@@ -11,6 +11,9 @@
         android:label="ProductListFragment"
         tools:layout="@layout/fragment_product_list">
 
+        <action
+            android:id="@+id/action_productListFragment_to_foundListFragment"
+            app:destination="@id/foundListFragment" />
     </fragment>
     <fragment
         android:id="@+id/orderListFragment"
@@ -18,6 +21,9 @@
         android:label="OrderListFragment"
         tools:layout="@layout/fragment_order_list_sup">
 
+        <action
+            android:id="@+id/action_orderListFragment_to_productListFragment"
+            app:destination="@id/productListFragment" />
     </fragment>
     <fragment
         android:id="@+id/foundListFragment"
@@ -52,7 +58,7 @@
         tools:layout="@layout/fragment_purchase_first" />
     <fragment
         android:id="@+id/secondPageFragment"
-        tools:layout="@layout/fragment_purchase_second"
         android:name="uz.algorithmgateway.tezkorakfa.supplier.purchased.SecondPageFragment"
-        android:label="SecondPageFragment" />
+        android:label="SecondPageFragment"
+        tools:layout="@layout/fragment_purchase_second" />
 </navigation>

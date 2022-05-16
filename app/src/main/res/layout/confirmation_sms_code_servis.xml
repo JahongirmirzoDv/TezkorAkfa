@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/checkbox_size"
+    android:background="@drawable/sms_code_config_servis_background_alertdialog">
+
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/liner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mijozimiz"
+            android:textColor="@color/text_dark_color"
+            android:textSize="16sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="+ 99891 111-11-11"
+            android:textColor="#57B81C"
+            android:textSize="17sp" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/liner2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/liner">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="raqami egasiga tasdiqlash kodi yuborildi!"
+            android:textColor="@color/text_dark_color"
+            android:textSize="16sp" />
+
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/liner3"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginTop="30dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/liner2">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/circle1"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@color/layout_light"
+            app:civ_border_color="#FFF"
+            app:civ_border_width="2dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+        </de.hdodenhof.circleimageview.CircleImageView>
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:digits="0123456789"
+            android:hint="1"
+            android:inputType="number"
+            android:maxEms="1"
+            android:textColor="@color/text_dark_color"
+            android:textColorHint="@color/text_dark_color"
+            app:layout_constraintBottom_toBottomOf="@+id/circle1"
+            app:layout_constraintLeft_toLeftOf="@+id/circle1"
+            app:layout_constraintRight_toRightOf="@+id/circle1"
+            app:layout_constraintTop_toTopOf="@+id/circle1" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/circle2"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="10dp"
+            android:src="@color/layout_light"
+            app:civ_border_color="#FFF"
+            app:civ_border_width="2dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/circle1"
+            app:layout_constraintTop_toTopOf="parent">
+
+        </de.hdodenhof.circleimageview.CircleImageView>
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:digits="0123456789"
+            android:hint="2"
+            android:inputType="number"
+            android:maxEms="1"
+            android:textColor="@color/text_dark_color"
+            android:textColorHint="@color/text_dark_color"
+            app:layout_constraintBottom_toBottomOf="@+id/circle2"
+            app:layout_constraintLeft_toLeftOf="@+id/circle2"
+            app:layout_constraintRight_toRightOf="@+id/circle2"
+            app:layout_constraintTop_toTopOf="@+id/circle2" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/circle3"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="10dp"
+            android:src="@color/layout_light"
+            app:civ_border_color="#FFF"
+            app:civ_border_width="2dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/circle2"
+            app:layout_constraintTop_toTopOf="parent">
+
+        </de.hdodenhof.circleimageview.CircleImageView>
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:digits="0123456789"
+            android:hint="3"
+            android:inputType="number"
+            android:maxEms="1"
+            android:textColor="@color/text_dark_color"
+            android:textColorHint="@color/text_dark_color"
+            app:layout_constraintBottom_toBottomOf="@+id/circle3"
+            app:layout_constraintLeft_toLeftOf="@+id/circle3"
+            app:layout_constraintRight_toRightOf="@+id/circle3"
+            app:layout_constraintTop_toTopOf="@+id/circle3" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/circle4"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="10dp"
+            android:src="@color/layout_light"
+            app:civ_border_color="#FFF"
+            app:civ_border_width="2dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/circle3"
+            app:layout_constraintTop_toTopOf="parent">
+
+        </de.hdodenhof.circleimageview.CircleImageView>
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:digits="0123456789"
+            android:hint="4"
+            android:inputType="number"
+            android:maxEms="1"
+            android:textColor="@color/text_dark_color"
+            android:textColorHint="@color/text_dark_color"
+            app:layout_constraintBottom_toBottomOf="@+id/circle4"
+            app:layout_constraintLeft_toLeftOf="@+id/circle4"
+            app:layout_constraintRight_toRightOf="@+id/circle4"
+            app:layout_constraintTop_toTopOf="@+id/circle4" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/timer_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="17dp"
+        android:text="00:58"
+        android:textColor="@color/white"
+        android:textSize="17sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/liner3" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/config_order_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_gravity="bottom"
+        android:layout_marginTop="25dp"
+        android:background="#3399FF"
+        android:text="Tasdiqlash"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/timer_tv" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_thirty"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/config_order_btn">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="20dp"
+            android:src="@drawable/ic_baseline_info_24" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="10dp"
+            android:text="+99891 111-11-11"
+            android:textColor="@color/text_dark_color"
+            android:textSize="14sp" />
+
+        <TextView
+            style="@style/Widget.AppCompat.Button.Borderless.Colored"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="@string/yakunlash"
+            android:textAllCaps="false"
+            android:textColor="@color/blue"
+            android:textSize="14sp" />
+
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

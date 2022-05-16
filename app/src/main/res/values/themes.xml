@@ -80,8 +80,6 @@
     //TextStyles
 
 
-
-
     <style name="roundedImageView" parent="">
         <item name="cornerFamilyTopRight">rounded</item>
         <item name="cornerSize">50%</item>
@@ -122,6 +120,21 @@
         <item name="tabIndicatorHeight">@dimen/size_forty</item>
         <item name="tabIndicator">@drawable/back_tab_indicator_confirm_screen</item>
         <item name="tabIndicatorColor">#DC6470</item>
+
+        <!--        <item name="tabBackground">@drawable/back_tab_indicator</item>-->
+        <!--        <item name="selectableItemBackground">@drawable/back_tab_indicator</item>-->
+    </style>
+
+    <style name="TabLayout.Order.BuyOrders" parent="Widget.MaterialComponents.TabLayout">
+        <item name="tabGravity">fill</item>
+        <item name="tabIndicatorGravity">center</item>
+        <item name="tabMode">fixed</item>
+        <item name="tabTextColor">@color/white</item>
+        <item name="tabSelectedTextColor">@color/blue</item>
+        <item name="tabTextAppearance">@style/TextView.TabItemConfirmScreen</item>
+        <item name="tabIndicatorHeight">@dimen/size_forty</item>
+        <item name="tabIndicator">@drawable/back_tab_indicator_confirm_screen</item>
+        <item name="tabIndicatorColor">@color/comment_color</item>
 
         <!--        <item name="tabBackground">@drawable/back_tab_indicator</item>-->
         <!--        <item name="selectableItemBackground">@drawable/back_tab_indicator</item>-->

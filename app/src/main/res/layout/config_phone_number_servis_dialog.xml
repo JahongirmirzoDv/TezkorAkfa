@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="250dp"
+    android:background="@drawable/sms_code_config_servis_background_alertdialog">
+
+
+    <EditText
+        android:id="@+id/sms_code_edit_text"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="50dp"
+        android:background="@color/white"
+        android:gravity="center"
+        android:hint="1234"
+        android:inputType="number"
+        android:textColor="@color/black"
+        app:layout_constraintHeight_percent="0.2"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.5" />
+
+    <TextView
+        android:id="@+id/timer_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="17dp"
+        android:text="00:58"
+        android:textColor="@color/white"
+        android:textSize="17sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sms_code_edit_text" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/config_order_btn"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_gravity="bottom"
+        android:layout_marginTop="25dp"
+        android:background="#3399FF"
+        android:text="Tasdiqlash"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        app:layout_constraintHeight_percent="0.15"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/timer_tv"
+        app:layout_constraintWidth_percent="0.45" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

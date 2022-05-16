@@ -3,16 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="uz.algorithmgateway.tezkorakfa">
 
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
-        tools:ignore="ScopedStorage" />
-    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE"
-        tools:ignore="ScopedStorage" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
+
     <uses-feature android:name="android.hardware.camera" />
 
     <application
@@ -27,13 +25,12 @@
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning"
         tools:targetApi="m">
-
+        <activity
+            android:name=".ServisMainActivity"
+            android:exported="false" />
         <activity
             android:name=".ui.DesignerActivity"
-            android:exported="true">
-
-        </activity>
-
+            android:exported="true"></activity>
         <activity
             android:name="uz.algorithmgateway.tezkorakfa.ui.splash.SplashActivity"
             android:exported="true"
@@ -47,17 +44,16 @@
         <activity
             android:name="uz.algorithmgateway.tezkorakfa.ui.login.LoginActivity"
             android:exported="true" />
-        <activity android:name=".measurer.ui.MeasurerActivity"
-            android:exported="true">
-
-        </activity>
+        <activity
+            android:name=".measurer.ui.MeasurerActivity"
+            android:exported="true"></activity>
         <activity
             android:name=".supplier.SupplierActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".montage.MontageActivity"
-            android:exported="true">
-        </activity>
+            android:exported="true"></activity>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -82,9 +78,11 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/picker_provider_paths" />
         </provider>
-        <service android:name=".measurer.ui.accept_order.service.LocationService"
+
+        <service
+            android:name=".measurer.ui.accept_order.service.LocationService"
             android:enabled="true"
-            android:exported="false"/>
+            android:exported="false" />
     </application>
 
 </manifest>

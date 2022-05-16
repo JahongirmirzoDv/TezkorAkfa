@@ -28,7 +28,7 @@ class Value {
 
         //UserRole
         const val SCALER = "show_room"
-        const val SUPPLIER = "supplier"
+        const val SUPPLIER = "warehouse"
         const val MONTAGER = "montager"
         const val SERVICER = "servicer"
 
