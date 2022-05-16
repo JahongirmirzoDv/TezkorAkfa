@@ -5,5 +5,5 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class Pdf(
-    @PrimaryKey var id:String, val pdf: String, var signature: String? = null, var image: String? = null,
+    @PrimaryKey var id:String, var pdf: String, var signature: String? = null, var image: String? = null,
 )

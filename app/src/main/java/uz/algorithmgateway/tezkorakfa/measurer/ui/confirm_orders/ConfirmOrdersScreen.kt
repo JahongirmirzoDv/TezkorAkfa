@@ -25,7 +25,6 @@ class ConfirmOrdersScreen : Fragment() {
     private var _binding: ScreenConfirmOrdersBinding? = null
     private val binding get() = _binding!!
 
-    private val navController by lazy(LazyThreadSafetyMode.NONE) { findNavController() }
 
     private lateinit var adapter: ConfirmOrderListAdapter
     private lateinit var list: ArrayList<UiConfirmOrder>
@@ -53,12 +52,8 @@ class ConfirmOrdersScreen : Fragment() {
         loadSpinnerType()
 
         loadConfirmOrderData()
-        createPdf()
     }
 
-    private fun createPdf() {
-
-    }
 
 
     private fun loadConfirmOrderData() {
@@ -109,5 +104,10 @@ class ConfirmOrdersScreen : Fragment() {
             tabLayoutDate.addTab(tabLayoutDate.newTab().setText("Oy"))
             tabLayoutDate.addTab(tabLayoutDate.newTab().setText("Hafta"))
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

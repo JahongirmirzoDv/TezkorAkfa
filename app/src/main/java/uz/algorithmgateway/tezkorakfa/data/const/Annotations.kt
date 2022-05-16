@@ -35,7 +35,7 @@ class Value {
 
         //MeasurerOrderStatus
         const val DONE = "completed"
-        const val ACTIVE = "measurement"
+        const val ACTIVE = "on_scaler"
         const val NEW = "all"
     }
 }

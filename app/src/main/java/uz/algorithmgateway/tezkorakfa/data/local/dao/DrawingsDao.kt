@@ -26,4 +26,7 @@ interface DrawingsDao {
 
     @Query("delete from drawing")
     fun delete()
+
+    @Query("delete from pdf")
+    fun deletePdf()
 }

@@ -6,24 +6,24 @@
     app:startDestination="@id/ordersFragment">
 
     <fragment
-        tools:layout="@layout/screen_orders"
         android:id="@+id/ordersFragment"
         android:name="uz.algorithmgateway.tezkorakfa.measurer.ui.orders.mainFragment.OrdersFragment"
-        android:label="OrdersScreen" >
+        android:label="OrdersScreen"
+        tools:layout="@layout/screen_orders">
         <action
             android:id="@+id/to_AcceptOrder"
             app:destination="@id/acceptOrderScreen" />
     </fragment>
     <fragment
-        tools:layout="@layout/screen_accept_order"
         android:id="@+id/acceptOrderScreen"
         android:name="uz.algorithmgateway.tezkorakfa.measurer.ui.accept_order.AcceptOrderScreen"
-        android:label="AcceptOrderScreen" >
+        android:label="AcceptOrderScreen"
+        tools:layout="@layout/screen_accept_order">
         <action
-            app:popUpTo="@id/locationScreen"
-            app:popUpToInclusive="true"
             android:id="@+id/to_orderLocationScreen"
-            app:destination="@id/locationScreen" />
+            app:destination="@id/locationScreen"
+            app:popUpTo="@id/locationScreen"
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/to_orderSelectType"
             app:destination="@id/orderSelectType" />
@@ -34,46 +34,44 @@
         android:label="location_screen_"
         tools:layout="@layout/location_screen_" />
     <fragment
-        tools:layout="@layout/screen_select_type_order"
         android:id="@+id/orderSelectType"
         android:name="uz.algorithmgateway.tezkorakfa.measurer.ui.select_type.OrderSelectTypeScreen"
-        android:label="OrderSelectType" >
+        android:label="OrderSelectType"
+        tools:layout="@layout/screen_select_type_order">
         <action
             android:id="@+id/to_ItemCountScreen"
             app:destination="@id/itemCountScreen" />
     </fragment>
     <fragment
-        tools:layout="@layout/screen_select_count"
         android:id="@+id/itemCountScreen"
         android:name="uz.algorithmgateway.tezkorakfa.measurer.ui.select_count.ItemCountScreen"
-        android:label="ItemCountScreen" >
+        android:label="ItemCountScreen"
+        tools:layout="@layout/screen_select_count">
         <action
             android:id="@+id/to_sliderScreen"
             app:destination="@id/sliderScreen" />
     </fragment>
     <fragment
-        tools:layout="@layout/screen_slider"
         android:id="@+id/sliderScreen"
         android:name="uz.algorithmgateway.tezkorakfa.measurer.ui.slider_standart.SliderScreen"
-        android:label="SliderScreen" >
+        android:label="SliderScreen"
+        tools:layout="@layout/screen_slider">
         <action
             android:id="@+id/action_sliderScreen_to_drawingsFragment"
             app:destination="@id/drawingsFragment" />
     </fragment>
     <fragment
-        tools:layout="@layout/screen_confirm_orders"
         android:id="@+id/confirmOrdersScreen"
         android:name="uz.algorithmgateway.tezkorakfa.measurer.ui.confirm_orders.ConfirmOrdersScreen"
-        android:label="ConfirmOrdersScreen" >
-        <action
-            android:id="@+id/action_confirmOrdersScreen_to_signatureFragment"
-            app:destination="@id/signatureFragment" />
+        android:label="ConfirmOrdersScreen"
+        tools:layout="@layout/screen_confirm_orders">
+
     </fragment>
     <fragment
         android:id="@+id/orderListFragment"
-        tools:layout="@layout/fragment_tab_layout"
         android:name="uz.algorithmgateway.tezkorakfa.measurer.ui.orders.orderList.OrderListFragment"
-        android:label="OrderListFragment" >
+        android:label="OrderListFragment"
+        tools:layout="@layout/fragment_tab_layout">
         <action
             android:id="@+id/action_orderListFragment_to_acceptOrderScreen"
             app:destination="@id/acceptOrderScreen" />
@@ -82,45 +80,48 @@
         android:id="@+id/drawingsFragment"
         android:name="uz.algorithmgateway.tezkorakfa.measurer.ui.drawings.DrawingsFragment"
         android:label="fragment_drawings"
-        tools:layout="@layout/fragment_drawings" >
+        tools:layout="@layout/fragment_drawings">
         <action
-            app:popUpTo="@id/savePdfFragment"
-            app:popUpToInclusive="true"
             android:id="@+id/action_drawingsFragment_to_savePdfFragment"
-            app:destination="@id/savePdfFragment" />
+            app:destination="@id/savePdfFragment"
+            app:popUpTo="@id/savePdfFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/savePdfFragment"
         android:name="uz.algorithmgateway.tezkorakfa.measurer.ui.drawings.save_pdf.SavePdfFragment"
         android:label="fragment_save_pdf"
-        tools:layout="@layout/fragment_save_pdf" >
+        tools:layout="@layout/fragment_save_pdf">
         <action
-            app:popUpTo="@id/confirmOrdersScreen"
-            app:popUpToInclusive="true"
             android:id="@+id/action_savePdfFragment_to_confirmOrdersScreen"
-            app:destination="@id/confirmOrdersScreen" />
+            app:destination="@id/signatureFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/signatureFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/signatureFragment"
         android:name="uz.algorithmgateway.tezkorakfa.measurer.ui.signature.SignatureFragment"
         android:label="fragment_signature"
-        tools:layout="@layout/fragment_signature" >
+        tools:layout="@layout/fragment_signature">
         <action
-            app:popUpTo="@id/customerTakePhotoFragment"
-            app:popUpToInclusive="true"
             android:id="@+id/action_signatureFragment_to_customerTakePhotoFragment"
-            app:destination="@id/customerTakePhotoFragment" />
+            app:destination="@id/customerTakePhotoFragment"
+            app:popUpTo="@id/customerTakePhotoFragment"
+            app:launchSingleTop="true"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/customerTakePhotoFragment"
         android:name="uz.algorithmgateway.tezkorakfa.measurer.ui.customer_photo.CustomerTakePhotoFragment"
         android:label="fragment_customer_take_photo"
-        tools:layout="@layout/fragment_customer_take_photo" >
+        tools:layout="@layout/fragment_customer_take_photo">
         <action
-            app:popUpTo="@id/confirmOrdersScreen"
-            app:popUpToInclusive="true"
             android:id="@+id/action_customerTakePhotoFragment_to_confirmOrdersScreen"
-            app:destination="@id/confirmOrdersScreen" />
+            app:destination="@id/confirmOrdersScreen"
+            app:popUpTo="@id/confirmOrdersScreen"
+            app:launchSingleTop="true"
+            app:popUpToInclusive="true" />
     </fragment>
 
 </navigation>

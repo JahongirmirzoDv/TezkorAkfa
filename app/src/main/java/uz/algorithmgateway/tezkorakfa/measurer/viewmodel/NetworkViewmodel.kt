@@ -7,6 +7,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import uz.algorithmgateway.tezkorakfa.data.retrofit.ApiService
 import uz.algorithmgateway.tezkorakfa.data.retrofit.models.accessory.Accessory
@@ -95,7 +96,7 @@ class NetworkViewmodel @Inject constructor(
     }
 
 
-    fun updateUser(id: String, body: RequestBody) {
+    fun updateUser(id: String, body: List<MultipartBody.Part>) {
         viewModelScope.launch {
             apiService.updateUserData(body)
         }

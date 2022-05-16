@@ -4,20 +4,28 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
+import uz.algorithmgateway.tezkorakfa.base.MyApplication
 import uz.algorithmgateway.tezkorakfa.databinding.ActivityMeasurerBinding
+import uz.algorithmgateway.tezkorakfa.measurer.viewmodel.DbViewmodel
 import uz.algorithmgateway.tezkorakfa.ui.utils.SharedPref
+import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
 
 
-class MeasurerActivity : AppCompatActivity(), CoroutineScope {
+class MeasurerActivity : AppCompatActivity(), CoroutineScope{
     private lateinit var binding: ActivityMeasurerBinding
     private var back = false
     private val sharedPref by lazy { SharedPref(this) }
 
+    @Inject
+    lateinit var dbViewmodel: DbViewmodel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        MyApplication.appComponent.measure(this)
         binding = ActivityMeasurerBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
     }
 
 
@@ -42,4 +50,5 @@ class MeasurerActivity : AppCompatActivity(), CoroutineScope {
         super.onSaveInstanceState(outState)
         outState.clear()
     }
+
 }

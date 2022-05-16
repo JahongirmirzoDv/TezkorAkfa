@@ -56,4 +56,9 @@ class DbViewmodel @Inject constructor(
             db.drawingsDao.delete()
         }
     }
+    fun deletePdf() {
+        viewModelScope.launch {
+            db.drawingsDao.deletePdf()
+        }
+    }
 }

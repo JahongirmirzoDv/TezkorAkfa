@@ -5,8 +5,10 @@ import android.content.Context
 import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.Priority
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
@@ -14,10 +16,8 @@ import com.bumptech.glide.request.target.Target
 import uz.algorithmgateway.tezkorakfa.databinding.PdfItemBinding
 import uz.algorithmgateway.tezkorakfa.measurer.ui.select_type.models.Drawing
 
-class PdfAdapter(var context: Context) : RecyclerView.Adapter<PdfAdapter.Vh>() {
 
-    var list: List<Drawing> = emptyList()
-
+class PdfAdapter(var context: Context,var list : List<Drawing>) : RecyclerView.Adapter<PdfAdapter.Vh>() {
     inner class Vh(val itemview: PdfItemBinding) : RecyclerView.ViewHolder(itemview.root) {
         @SuppressLint("SetTextI18n")
         fun bind(drawing: Drawing) {
@@ -45,7 +45,10 @@ class PdfAdapter(var context: Context) : RecyclerView.Adapter<PdfAdapter.Vh>() {
                     }
 
                 })
+                .priority(Priority.HIGH)
+                .override(500,500)
                 .into(itemview.image)
+
             itemview.romD.text = "${drawing.type} soni ${drawing.count}"
             itemview.profileD.text =
                 "${drawing.profile_type} ${drawing.profile_type_two}(${drawing.profile_texture})"

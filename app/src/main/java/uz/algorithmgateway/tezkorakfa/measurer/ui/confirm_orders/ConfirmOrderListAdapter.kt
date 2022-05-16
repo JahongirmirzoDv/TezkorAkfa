@@ -25,9 +25,7 @@ class ConfirmOrderListAdapter(
         fun onBind(model: UiConfirmOrder) {
             itemView.apply {
                 binding.imageStatus.setImageResource(model.status)
-                binding.configOrder.setOnClickListener {
-                    findNavController().navigate(R.id.signatureFragment)
-                }
+
 //                binding.btnAccept.isVisible = model.btnStatus
             }
 //            binding.btnAccept.setOnClickListener {

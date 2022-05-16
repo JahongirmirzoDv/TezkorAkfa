@@ -82,6 +82,4 @@ class SignatureFragment : Fragment(R.layout.fragment_signature) {
         super.onDestroyView()
         _binding = null
     }
-
-
 }

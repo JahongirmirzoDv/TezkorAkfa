@@ -3,11 +3,14 @@ package uz.algorithmgateway.tezkorakfa.measurer.ui.customer_photo
 import android.app.Activity
 import android.os.Bundle
 import android.os.Environment
+import android.os.Handler
+import android.os.Looper
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import by.kirich1409.viewbindingdelegate.viewBinding
 import com.github.drjacky.imagepicker.ImagePicker
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -27,7 +30,7 @@ import java.io.File
 import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
 
-class CustomerTakePhotoFragment : Fragment(R.layout.fragment_customer_take_photo), CoroutineScope {
+class CustomerTakePhotoFragment : Fragment(), CoroutineScope {
 
     @Inject
     lateinit var viewmodel: DbViewmodel
@@ -35,23 +38,23 @@ class CustomerTakePhotoFragment : Fragment(R.layout.fragment_customer_take_photo
     @Inject
     lateinit var apiVm: NetworkViewmodel
 
-
-    private val binding: FragmentCustomerTakePhotoBinding by viewBinding(
-        FragmentCustomerTakePhotoBinding::bind
-    )
-
+    private var _binding: FragmentCustomerTakePhotoBinding? = null
+    private val binding get() = _binding!!
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         MyApplication.appComponent.photo(this)
-
-
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
+    ): View {
+        _binding = FragmentCustomerTakePhotoBinding.inflate(inflater, container, false)
 
         installTakePhoto()
 
+        return binding.root
     }
 
     private fun installTakePhoto() {
@@ -67,17 +70,12 @@ class CustomerTakePhotoFragment : Fragment(R.layout.fragment_customer_take_photo
                 takePhoto()
             }
             next.setOnClickListener {
-                sendData()
-
+                viewmodel.deletePdf()
+                viewmodel.delete()
                 findNavController().navigate(R.id.confirmOrdersScreen)
             }
 
         }
-
-    }
-
-    private fun sendData() {
-
 
     }
 
@@ -103,16 +101,15 @@ class CustomerTakePhotoFragment : Fragment(R.layout.fragment_customer_take_photo
                 val pdf = viewmodel.getPdf().last()
                 pdf.image = uri.toString()
                 val filePath = FileUriUtils.getRealPath(requireActivity(), uri)
-                viewmodel.updatePdf(pdf)
                 binding.imageCustomer.setImageURI(uri)
                 val files = filePath?.let { it1 -> File(it1).compress(requireContext()) }
                 launch(Dispatchers.IO) {
                     val builder: MultipartBody.Builder = MultipartBody.Builder()
 
                     val f = File(
-                        Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
-                            .toString() + "/Operation.pdf"
-                    )
+                        Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS)
+                            .toString(),
+                        pdf.pdf)
                     val signature = File(requireActivity().cacheDir, "Signature.png")
 
                     builder.setType(MultipartBody.FORM)
@@ -136,10 +133,17 @@ class CustomerTakePhotoFragment : Fragment(R.layout.fragment_customer_take_photo
                     val body = builder.build()
                     apiVm.sendData(pdf.id, body)
                 }
+                Handler(Looper.getMainLooper()).postDelayed({
+                    binding.next.isEnabled = true
+                }, 800)
             }
         }
+
     override val coroutineContext: CoroutineContext
         get() = Job()
 
-
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }

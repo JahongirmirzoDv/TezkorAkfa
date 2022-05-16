@@ -1,6 +1,6 @@
 package uz.algorithmgateway.tezkorakfa.data.retrofit.models.sales_order_list
 
-data class DistrictX(
+data class Role(
     val id: Int,
-    val name: String
+    val type: String
 )

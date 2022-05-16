@@ -71,7 +71,7 @@ class OrderSelectTypeScreen : Fragment(), CoroutineScope {
         super.onViewCreated(view, savedInstanceState)
 
         if (id != null) binding.projectId.text =
-            "Loyiha ${drawing.id}_$id" else binding.projectId.text = "Loyiha ${drawing.id}"
+            "Loyiha $id" else binding.projectId.text = "Loyiha ${drawing.id}"
         backClick()
         loadSpinnerDoorOrWindow()
         profile()
@@ -477,7 +477,7 @@ class OrderSelectTypeScreen : Fragment(), CoroutineScope {
                         .ifEmpty { "" }
                 val net = binding.comment.text.toString().ifEmpty { "" }
                 drawing = Drawing(
-                    id = if (id != null) "${drawing.id}_$id" else drawing.id,
+                    id = if (id != null) "$id" else drawing.id,
                     type,
                     drawing.count,
                     drawing.type_type,
@@ -526,11 +526,11 @@ class OrderSelectTypeScreen : Fragment(), CoroutineScope {
         }
     }
 
-//    override fun onDestroy() {
-//        super.onDestroy()
-//        dbViewmodel.delete()
-//    }
-
     override val coroutineContext: CoroutineContext
         get() = Job()
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }
