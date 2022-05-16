@@ -10,6 +10,7 @@ import kotlinx.coroutines.launch
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import uz.algorithmgateway.tezkorakfa.data.retrofit.ApiService
+import uz.algorithmgateway.tezkorakfa.data.retrofit.models.Responce
 import uz.algorithmgateway.tezkorakfa.data.retrofit.models.accessory.Accessory
 import uz.algorithmgateway.tezkorakfa.data.retrofit.models.profile.Profile
 import uz.algorithmgateway.tezkorakfa.data.retrofit.models.shelf.Shelf
@@ -96,7 +97,7 @@ class NetworkViewmodel @Inject constructor(
     }
 
 
-    fun updateUser(id: String, body: List<MultipartBody.Part>) {
+    fun updateUser(id: String, body: RequestBody) {
         viewModelScope.launch {
             apiService.updateUserData(body)
         }
@@ -112,5 +113,20 @@ class NetworkViewmodel @Inject constructor(
         viewModelScope.launch {
             networkRepository.sendData(id, body)
         }
+    }
+
+    suspend fun confirm(path:String,body: HashMap<String, Any>?): MutableStateFlow<String> {
+        val flow = MutableStateFlow("")
+        viewModelScope.launch {
+            networkRepository.confirm(path,body)
+                .catch {
+
+                }.collect {
+                    if (it.isSuccess) {
+                        flow.emit("Succes")
+                    } else if (it.isFailure) flow.emit("Error")
+                }
+        }
+        return flow
     }
 }

@@ -63,6 +63,8 @@ class ItemCountScreen : Fragment() {
             }
             drawing.count = binding.textViewCount.text.toString().toInt()
             drawing.type_type = tab
+            drawing.heigth = if (binding.editTextHeight.text.toString() == "") 1300 else binding.editTextHeight.text.toString().toInt()
+            drawing.width = if (binding.editTextWidth.text.toString() == "") 2000 else binding.editTextWidth.text.toString().toInt()
 
             dbViewmodel.updateDrawing(
                 drawing)
@@ -92,6 +94,7 @@ class ItemCountScreen : Fragment() {
         with(binding) {
             tabLayoutDoor.addTab(tabLayoutDoor.newTab().setText("Standart"))
             tabLayoutDoor.addTab(tabLayoutDoor.newTab().setText("Slider"))
+            textViewDoor.text = drawing.type
         }
     }
 
@@ -99,6 +102,7 @@ class ItemCountScreen : Fragment() {
         super.onSaveInstanceState(oldInstanceState)
         oldInstanceState.clear()
     }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

@@ -1,8 +1,10 @@
 package uz.algorithmgateway.tezkorakfa.measurer.ui.orders
 
 import android.annotation.SuppressLint
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import uz.algorithmgateway.tezkorakfa.R
 import uz.algorithmgateway.tezkorakfa.core.util.layoutInflater
 import uz.algorithmgateway.tezkorakfa.data.retrofit.models.sales_order_list.Result
 import uz.algorithmgateway.tezkorakfa.databinding.ItemOrderBinding
@@ -13,6 +15,7 @@ class OrderListAdapter(
     RecyclerView.Adapter<OrderListAdapter.VH>() {
 
     private var myList: MutableList<Result> = mutableListOf()
+    var isCompleted = false
 
     @SuppressLint("NotifyDataSetChanged")
     fun updateList(newList: List<Result>) {
@@ -44,6 +47,11 @@ class OrderListAdapter(
             binding.tvPhone2.text = item.client.phone_number
             binding.tvComment.text = "Izoh: ${item.comment}"
             binding.tvAddress.text = item.address
+            if (isCompleted){
+                binding.imageStatus.setImageResource(R.drawable.ic_green)
+                binding.btnAccept.visibility = View.GONE
+                binding.btnPhone.visibility = View.GONE
+            }
             binding.btnAccept.setOnClickListener {
                 onclick.onAcceptClick(item)
             }

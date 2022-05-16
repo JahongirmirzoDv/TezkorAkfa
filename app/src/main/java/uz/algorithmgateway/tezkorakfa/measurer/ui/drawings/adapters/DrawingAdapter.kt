@@ -46,7 +46,7 @@ class DrawingAdapter(var context: Context,var onpress: onPress) : RecyclerView.A
                 })
                 .into(itemview.image)
             itemview.size.text = "${drawing.width}*${drawing.heigth}"
-            itemview.number.text = drawing.id
+            itemview.number.text = drawing.count.toString()
             itemview.root.setOnClickListener {
                 onpress.click(drawing.projet_image_path)
             }

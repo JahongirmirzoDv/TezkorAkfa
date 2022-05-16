@@ -6,7 +6,8 @@ import uz.algorithmgateway.tezkorakfa.di.module.DatabaseModule
 import uz.algorithmgateway.tezkorakfa.di.module.NetworkModule
 import uz.algorithmgateway.tezkorakfa.measurer.ui.MeasurerActivity
 import uz.algorithmgateway.tezkorakfa.measurer.ui.accept_order.AcceptOrderScreen
-import uz.algorithmgateway.tezkorakfa.measurer.ui.confirm_orders.ConfirmOrdersScreen
+import uz.algorithmgateway.tezkorakfa.measurer.ui.confirm_orders.confirmed.ConfirmOrdersScreen
+import uz.algorithmgateway.tezkorakfa.measurer.ui.confirm_orders.unconfirmed.UnconfirmedFragment
 import uz.algorithmgateway.tezkorakfa.measurer.ui.customer_photo.CustomerTakePhotoFragment
 import uz.algorithmgateway.tezkorakfa.measurer.ui.drawings.DrawingsFragment
 import uz.algorithmgateway.tezkorakfa.measurer.ui.drawings.save_pdf.SavePdfFragment
@@ -33,4 +34,5 @@ interface AppComponent {
     fun signature(signatureFragment: SignatureFragment)
     fun photo(customerTakePhotoFragment: CustomerTakePhotoFragment)
     fun measure(measurerActivity: MeasurerActivity)
+    fun unconfirmed(unconfirmedFragment: UnconfirmedFragment)
 }

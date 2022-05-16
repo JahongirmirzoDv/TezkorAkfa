@@ -11,6 +11,7 @@ import retrofit2.Response
 import uz.algorithmgateway.tezkorakfa.data.models.UserRequest
 import uz.algorithmgateway.tezkorakfa.data.models.UserResponse
 import uz.algorithmgateway.tezkorakfa.data.retrofit.ApiService
+import uz.algorithmgateway.tezkorakfa.data.retrofit.models.Responce
 import uz.algorithmgateway.tezkorakfa.data.retrofit.models.accessory.Accessory
 import uz.algorithmgateway.tezkorakfa.data.retrofit.models.profile.Profile
 import uz.algorithmgateway.tezkorakfa.data.retrofit.models.sales_order_list.OrderList
@@ -83,5 +84,14 @@ class NetworkRepository @Inject constructor(private val apiService: ApiService) 
         body: RequestBody,
     ){
         return apiService.sendData(id, body)
+    }
+
+    fun confirm(path:String,body: HashMap<String, Any>?): Flow<Result<Responce>> {
+        return apiService.confirm(path,body)
+            .map {
+                Result.success(it)
+            }.catch {
+                emit(Result.failure(it))
+            }.flowOn(Dispatchers.IO)
     }
 }
