@@ -14,6 +14,7 @@ import uz.algorithmgateway.tezkorakfa.data.models.OrderSupplier
 import uz.algorithmgateway.supplier.orderList.InterfaceOrderClick
 import uz.algorithmgateway.tezkorakfa.R
 import uz.algorithmgateway.tezkorakfa.databinding.FragmentOrderListSupBinding
+import uz.algorithmgateway.tezkorakfa.supplier.SupplierActivity
 import uz.algorithmgateway.tezkorakfa.supplier.adapter.AdapterTableSpinner
 
 class OrderListFragmentSup : Fragment(), InterfaceOrderClick {
@@ -36,6 +37,8 @@ class OrderListFragmentSup : Fragment(), InterfaceOrderClick {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val mainActivity = activity as SupplierActivity
+        mainActivity.bottomNavigationViewVisibility()
         loadOrderList()
         loadOrderStatusSpinner()
         loadSearchView()
@@ -103,7 +106,9 @@ class OrderListFragmentSup : Fragment(), InterfaceOrderClick {
     }
 
     private fun loadOrderList() {
-        orderListAdapter = AdapterOrderList(this)
+        orderListAdapter = AdapterOrderList {
+            findNavController().navigate(R.id.productListFragment)
+        }
         binding.rvOrderList.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         binding.rvOrderList.adapter = orderListAdapter

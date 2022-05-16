@@ -14,7 +14,7 @@ import uz.algorithmgateway.tezkorakfa.databinding.ItemProductTableBinding
 
 class AdapterProductList(
     private val context: Context,
-    private val adapterOnClick: InterfaceProductClick
+    val itemClick: (Product) -> Unit
 ) : RecyclerView.Adapter<AdapterProductList.VH>() {
     private var myList = mutableListOf<Product>()
 
@@ -57,7 +57,8 @@ class AdapterProductList(
                 binding.btnFound.setBackgroundColor(context.getColor(R.color.select_blue))
                 binding.btnFound.text = "Topildi"
                 binding.btnFound.setOnClickListener {
-                    adapterOnClick.onButtonClick(item)
+                    itemClick.invoke(item)
+//                    adapterOnClick.onButtonClick(item)
                 }
             }
         }

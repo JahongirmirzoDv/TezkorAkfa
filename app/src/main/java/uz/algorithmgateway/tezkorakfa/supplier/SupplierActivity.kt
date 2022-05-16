@@ -1,6 +1,7 @@
 package uz.algorithmgateway.tezkorakfa.supplier
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
@@ -30,5 +31,13 @@ class SupplierActivity : AppCompatActivity() {
             binding.bottomNavigationView,
             navHostFragment.navController
         )
+    }
+
+    fun bottomNavigationViewVisibilityGone() {
+        binding.bottomNavigationView.visibility = View.GONE
+    }
+
+    fun bottomNavigationViewVisibility() {
+        binding.bottomNavigationView.visibility = View.VISIBLE
     }
 }

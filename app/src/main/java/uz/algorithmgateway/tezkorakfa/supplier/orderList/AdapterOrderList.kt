@@ -13,7 +13,7 @@ import uz.algorithmgateway.tezkorakfa.R
 import uz.algorithmgateway.tezkorakfa.databinding.ItemOrderListBinding
 
 class AdapterOrderList(
-    private val orderClick: InterfaceOrderClick
+    var itemClickListener: (OrderSupplier) -> Unit
 ) : RecyclerView.Adapter<AdapterOrderList.VH>() {
     private var myList = mutableListOf<OrderSupplier>()
     private lateinit var ctx: Context
@@ -51,6 +51,10 @@ class AdapterOrderList(
                 1 -> binding.ivStatus.setBackgroundColor(ctx.getColor(R.color.color_green))
                 2 -> binding.ivStatus.setBackgroundColor(ctx.getColor(R.color.color_gray))
                 3 -> binding.ivStatus.setBackgroundColor(ctx.getColor(R.color.color_red))
+            }
+
+            itemView.setOnClickListener {
+                itemClickListener.invoke(item)
             }
         }
     }

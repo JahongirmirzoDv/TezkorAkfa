@@ -32,46 +32,49 @@ class PurchasedFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 //        loadTabFragment()
 
-        laodTablayout()
+//        laodTablayout()
         loadViewPager2()
 
     }
 
     private fun loadViewPager2() {
         adapterViewPager2 = AdapterViewPager2(childFragmentManager, lifecycle)
-        binding.viewPager2.adapter = adapterViewPager2
-        TabLayoutMediator(binding.layoutTab, binding.viewPager2) { tab, position ->
+        binding.pagerView.adapter = adapterViewPager2
+        TabLayoutMediator(binding.layoutTab, binding.pagerView) { tab, position ->
 //            if (position == 0) {
 //                binding.layoutTab.tabTextColors = resources.getColor(R.color.blue, R.color.white)
 //            }
+            if (position == 0) {
+                tab.text = "Sotib olish"
+            } else if (position == 1) {
+                tab.text = "Sotib olinganlar"
+            }
 
         }.attach()
 
-        binding.layoutTab.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-            override fun onTabSelected(tab: TabLayout.Tab?) {
-
-
-            }
-
-            override fun onTabUnselected(tab: TabLayout.Tab?) {
-
-            }
-
-            override fun onTabReselected(tab: TabLayout.Tab?) {
-                TODO("Not yet implemented")
-            }
-
-        })
+//        binding.layoutTab.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+//            override fun onTabSelected(tab: TabLayout.Tab?) {
+//
+//            }
+//
+//            override fun onTabUnselected(tab: TabLayout.Tab?) {
+//
+//            }
+//
+//            override fun onTabReselected(tab: TabLayout.Tab?) {
+//            }
+//
+//        })
 
     }
 
-    private fun laodTablayout() {
-        with(binding) {
-            layoutTab.addTab(layoutTab.newTab().setText("Sotib olish").setId(0))
-            layoutTab.addTab(layoutTab.newTab().setText("Sotib olingan").setId(1))
-        }
-
-    }
+//    private fun laodTablayout() {
+//        with(binding) {
+//            layoutTab.addTab(layoutTab.newTab().setText("Sotib olish").setId(0))
+//            layoutTab.addTab(layoutTab.newTab().setText("Sotib olingan").setId(1))
+//        }
+//
+//    }
 
 
     private fun loadTabFragment() {
