@@ -10,7 +10,7 @@
 
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_title_page"
+        android:id="@+id/title_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/roboto_900"
@@ -57,11 +57,11 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/screen_padding_vertical"
         android:background="@drawable/back_tablayout_confirm_screeen"
-        app:layout_constraintTop_toBottomOf="@+id/tv_title_page"
+        app:layout_constraintTop_toBottomOf="@+id/title_tv"
         app:tabTextAppearance="@style/Text16Dark" />
 
     <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/view_pager2"
+        android:id="@+id/pager_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:background="@color/comment_color"

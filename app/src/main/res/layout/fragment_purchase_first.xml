@@ -8,7 +8,7 @@
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/layout_filter"
+        android:id="@+id/filter"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/item_large_padding"
@@ -17,7 +17,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/image_search_icon"
+            android:id="@+id/search_icon"
             android:layout_width="@dimen/normal_icon_size"
             android:layout_height="@dimen/normal_icon_size"
             android:src="@drawable/ic_search_menu"
@@ -27,7 +27,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/editTextSearch"
+            android:id="@+id/serach"
             android:layout_width="0dp"
             android:layout_height="@dimen/view_normal_height"
             android:layout_marginStart="@dimen/item_normal_padding"
@@ -39,13 +39,13 @@
             android:textColorHint="@color/color_light_text"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@id/image_search_icon"
+            app:layout_constraintStart_toEndOf="@id/search_icon"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintWidth_percent="0.5" />
 
 
         <androidx.appcompat.widget.AppCompatSpinner
-            android:id="@+id/spinnerProductType"
+            android:id="@+id/spiner_productType"
             style="@style/mySpinnerItemStyle"
             android:layout_width="0dp"
             android:layout_height="@dimen/view_normal_height"
@@ -60,26 +60,26 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/item_small_padding"
             android:src="@drawable/ic_all_open"
-            app:layout_constraintBottom_toBottomOf="@id/spinnerProductType"
-            app:layout_constraintEnd_toEndOf="@id/spinnerProductType"
+            app:layout_constraintBottom_toBottomOf="@id/spiner_productType"
+            app:layout_constraintEnd_toEndOf="@id/spiner_productType"
             app:layout_constraintHorizontal_bias="1"
-            app:layout_constraintStart_toStartOf="@id/spinnerProductType"
-            app:layout_constraintTop_toTopOf="@id/spinnerProductType" />
+            app:layout_constraintStart_toStartOf="@id/spiner_productType"
+            app:layout_constraintTop_toTopOf="@id/spiner_productType" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     <LinearLayout
-        android:id="@+id/layout_table_header"
+        android:id="@+id/table"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/layout_filter">
+        app:layout_constraintTop_toBottomOf="@id/filter">
 
         <include
-            android:id="@+id/layoutTableHeader"
+            android:id="@+id/layoutTable"
             layout="@layout/item_purchase_first_header" />
     </LinearLayout>
 
@@ -89,14 +89,14 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/layout_table_header">
+        app:layout_constraintTop_toBottomOf="@id/table">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_product_list"
+                android:id="@+id/rv_list"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 tools:listitem="@layout/item_purchase_first"

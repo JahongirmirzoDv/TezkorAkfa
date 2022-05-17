@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import uz.algorithmgateway.core.util.toast
 import uz.algorithmgateway.tezkorakfa.data.models.Product
 import uz.algorithmgateway.supplier.productList.InterfaceProductClick
 import uz.algorithmgateway.tezkorakfa.databinding.FragmentPurchaseFirstBinding
@@ -41,7 +42,7 @@ class FirstPageFragment : Fragment(), InterfaceProductClick {
     }
 
     private fun loadSearchView() {
-        binding.editTextSearch.doOnTextChanged { text, start, before, count ->
+        binding.serach.doOnTextChanged { text, start, before, count ->
 
             val filterList: List<Product> = if (productType == 0) {
                 productList!!
@@ -66,8 +67,8 @@ class FirstPageFragment : Fragment(), InterfaceProductClick {
 
     private fun loadProductTypeSpinner() {
         val adapter = AdapterTableSpinner(requireContext(), productTypeList(), true)
-        binding.spinnerProductType.adapter = adapter
-        binding.spinnerProductType.onItemSelectedListener =
+        binding.spinerProductType.adapter = adapter
+        binding.spinerProductType.onItemSelectedListener =
             object : AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(
                     parent: AdapterView<*>?,
@@ -98,10 +99,12 @@ class FirstPageFragment : Fragment(), InterfaceProductClick {
     }
 
     private fun loadProductList() {
-        productListAdapter = AdapterProductList(requireContext(), this)
-        binding.rvProductList.layoutManager =
+        productListAdapter = AdapterProductList(requireContext()) {
+            toast("$it")
+        }
+        binding.rvList.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-        binding.rvProductList.adapter = productListAdapter
+        binding.rvList.adapter = productListAdapter
     }
 
     private fun productList() = listOf<Product>(

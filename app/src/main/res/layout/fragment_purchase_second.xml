@@ -90,7 +90,6 @@
             app:layout_constraintTop_toBottomOf="@id/layout_filter">
 
             <include
-                android:id="@+id/layoutTableHeader"
                 layout="@layout/item_found_list_header" />
         </LinearLayout>
 

@@ -9,9 +9,11 @@ import android.widget.Toast
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import uz.algorithmgateway.core.util.toast
 import uz.algorithmgateway.tezkorakfa.data.models.Product
 import uz.algorithmgateway.supplier.productList.InterfaceProductClick
 import uz.algorithmgateway.tezkorakfa.databinding.FragmentProductListBinding
+import uz.algorithmgateway.tezkorakfa.supplier.SupplierActivity
 import uz.algorithmgateway.tezkorakfa.supplier.adapter.AdapterTableSpinner
 
 
@@ -33,9 +35,13 @@ class ProductListFragment : Fragment(), InterfaceProductClick {
 
     }
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         productList = productList()
+        val mainActivity = activity as SupplierActivity
+        mainActivity.bottomNavigationViewVisibilityGone()
+
         loadProductList()
         loadProductTypeSpinner()
         loadSearchView()
@@ -99,7 +105,9 @@ class ProductListFragment : Fragment(), InterfaceProductClick {
     }
 
     private fun loadProductList() {
-        productListAdapter = AdapterProductList(requireContext(), this)
+        productListAdapter = AdapterProductList(requireContext()) {
+            toast("show Alert dialog")
+        }
         binding.rvProductList.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         binding.rvProductList.adapter = productListAdapter
@@ -138,4 +146,6 @@ class ProductListFragment : Fragment(), InterfaceProductClick {
     override fun onButtonClick(product: Product) {
         Toast.makeText(requireContext(), "FoundButtonClicked", Toast.LENGTH_SHORT).show()
     }
+
+
 }

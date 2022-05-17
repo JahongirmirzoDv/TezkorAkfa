@@ -45,6 +45,12 @@
         android:label="PurchasedFragment"
         tools:layout="@layout/fragment_purchased">
 
+        <action
+            android:id="@+id/action_purchasedFragment_to_secondPageFragment"
+            app:destination="@id/secondPageFragment" />
+        <action
+            android:id="@+id/action_purchasedFragment_to_firstPageFragment"
+            app:destination="@id/firstPageFragment" />
     </fragment>
     <fragment
         android:id="@+id/orderHistoryFragment"
