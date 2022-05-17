@@ -1,5 +1,7 @@
 package uz.algorithmgateway.tezkorakfa.supplier.productList
 
+import android.app.AlertDialog
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,11 +10,15 @@ import android.widget.AdapterView
 import android.widget.Toast
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import uz.algorithmgateway.core.util.toast
 import uz.algorithmgateway.tezkorakfa.data.models.Product
 import uz.algorithmgateway.supplier.productList.InterfaceProductClick
+import uz.algorithmgateway.tezkorakfa.R
+import uz.algorithmgateway.tezkorakfa.databinding.CreateOrdersDialogViewBinding
 import uz.algorithmgateway.tezkorakfa.databinding.FragmentProductListBinding
+import uz.algorithmgateway.tezkorakfa.databinding.LayoutChangeSizeDialogBinding
 import uz.algorithmgateway.tezkorakfa.supplier.SupplierActivity
 import uz.algorithmgateway.tezkorakfa.supplier.adapter.AdapterTableSpinner
 
@@ -42,9 +48,25 @@ class ProductListFragment : Fragment(), InterfaceProductClick {
         val mainActivity = activity as SupplierActivity
         mainActivity.bottomNavigationViewVisibilityGone()
 
+        installTolbar()
         loadProductList()
         loadProductTypeSpinner()
         loadSearchView()
+    }
+
+    private fun installTolbar() {
+        binding.toolbar.apply {
+            backArrowFragment.setOnClickListener {
+                findNavController().popBackStack()
+            }
+            searchToolbar.visibility = View.GONE
+            titleTolbar.setText("Mahsulotlar ro'yxati")
+            otherToolbar.setImageResource(R.drawable.ic_next_arrow_fr)
+            otherToolbar.setOnClickListener {
+                findNavController().navigate(R.id.foundListFragment)
+            }
+        }
+
     }
 
     private fun loadSearchView() {
@@ -106,11 +128,25 @@ class ProductListFragment : Fragment(), InterfaceProductClick {
 
     private fun loadProductList() {
         productListAdapter = AdapterProductList(requireContext()) {
+
+            showDialogView()
             toast("show Alert dialog")
         }
         binding.rvProductList.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         binding.rvProductList.adapter = productListAdapter
+    }
+
+    private fun showDialogView() {
+        val builder = AlertDialog.Builder(requireContext())
+        val dialogBinding = CreateOrdersDialogViewBinding.inflate(layoutInflater)
+        builder.setView(dialogBinding.root)
+        val alertDialog: AlertDialog = builder.create()
+        alertDialog.window?.setBackgroundDrawable(ColorDrawable(android.graphics.Color.TRANSPARENT))
+
+
+        alertDialog.show()
+
     }
 
     private fun productList() = listOf<Product>(

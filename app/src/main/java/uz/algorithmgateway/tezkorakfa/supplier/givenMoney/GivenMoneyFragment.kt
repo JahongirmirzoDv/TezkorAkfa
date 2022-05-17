@@ -1,5 +1,8 @@
 package uz.algorithmgateway.tezkorakfa.supplier.givenMoney
 
+import android.app.AlertDialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,7 +11,9 @@ import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import uz.algorithmgateway.tezkorakfa.data.models.GivenMoney
+import uz.algorithmgateway.tezkorakfa.databinding.CreateOrdersDialogViewBinding
 import uz.algorithmgateway.tezkorakfa.databinding.FragmentGivenMoneyBinding
+import uz.algorithmgateway.tezkorakfa.databinding.GivenMoneyDialogBinding
 
 class GivenMoneyFragment : Fragment() {
 
@@ -23,6 +28,9 @@ class GivenMoneyFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View {
         binding = FragmentGivenMoneyBinding.inflate(inflater, container, false)
+
+        loadBtn()
+
         //load list
         loadGivenMoneyList()
 
@@ -31,6 +39,26 @@ class GivenMoneyFragment : Fragment() {
 
         return binding.root
     }
+
+    private fun loadBtn() {
+        binding.moneyBtn.setOnClickListener {
+            showDialogView()
+        }
+
+    }
+
+    private fun showDialogView() {
+        val builder = AlertDialog.Builder(requireContext())
+        val dialogBinding = GivenMoneyDialogBinding.inflate(layoutInflater)
+        builder.setView(dialogBinding.root)
+        val alertDialog: AlertDialog = builder.create()
+        alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+
+        alertDialog.show()
+
+    }
+
 
     private fun loadSearchView() {
         binding.editTextSearch.doOnTextChanged { text, start, before, count ->

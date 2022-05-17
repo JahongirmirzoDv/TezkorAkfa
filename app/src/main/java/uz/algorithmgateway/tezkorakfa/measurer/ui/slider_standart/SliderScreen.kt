@@ -339,6 +339,16 @@ class SliderScreen : Fragment() {
 
 
     private fun setDragAndDropToViews() {
+        binding.arka.setOnLongClickListener { v ->
+            lastView = v
+            startDrag(
+                v,
+                DragAndDropListener.TAG_ARAKA
+            )
+
+        }
+
+
         binding.viewDivideThreeHorizontal.setOnLongClickListener { v ->
             lastView = v
             startDrag(

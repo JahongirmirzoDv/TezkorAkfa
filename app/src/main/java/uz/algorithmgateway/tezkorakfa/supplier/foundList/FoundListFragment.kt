@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import uz.algorithmgateway.tezkorakfa.data.models.FoundProduct
 import uz.algorithmgateway.tezkorakfa.databinding.FragmentFoundListBinding
@@ -29,6 +30,9 @@ class FoundListFragment : Fragment() {
     ): View {
         binding = FragmentFoundListBinding.inflate(inflater, container, false)
 
+        //insall toolbar
+        installToolbar()
+
         //load list
         loadOrderList()
 
@@ -40,6 +44,18 @@ class FoundListFragment : Fragment() {
         loadSearchView()
 
         return binding.root
+    }
+
+    private fun installToolbar() {
+        binding.toolbar.apply {
+            searchToolbar.visibility = View.GONE
+            otherToolbar.visibility = View.GONE
+            titleTolbar.setText("Topilganlar")
+            backArrowFragment.setOnClickListener {
+                findNavController().popBackStack()
+            }
+        }
+
     }
 
     private fun loadSearchView() {

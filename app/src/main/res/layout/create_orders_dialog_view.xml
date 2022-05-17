@@ -5,12 +5,11 @@
     android:layout_height="match_parent">
 
     <androidx.cardview.widget.CardView
+        android:layout_margin="@dimen/item_normal_padding"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_margin="10dp"
+        android:layout_height="350dp"
         app:cardBackgroundColor="@color/layout_light"
         app:cardCornerRadius="@dimen/item_space_middle"
-        app:layout_constraintHeight_percent="0.55"
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout

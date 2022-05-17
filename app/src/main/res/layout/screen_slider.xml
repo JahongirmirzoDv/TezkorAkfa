@@ -128,13 +128,23 @@
                 android:orientation="horizontal">
 
                 <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/arka"
+                    android:layout_width="@dimen/size_icon_designer_view"
+                    android:layout_height="@dimen/size_icon_designer_view"
+                    android:src="@drawable/arka"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/view_divide_two_horizontal"
                     android:layout_width="@dimen/size_icon_designer_view"
                     android:layout_height="@dimen/size_icon_designer_view"
                     android:src="@drawable/ic_line_vertical"
                     app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/arka"
                     app:layout_constraintEnd_toStartOf="@id/view_divide_two_vertical"
-                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <androidx.appcompat.widget.AppCompatImageView

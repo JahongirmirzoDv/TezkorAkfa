@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/layout_back_color"
     android:paddingHorizontal="@dimen/screen_padding_horizontal"
     android:paddingVertical="@dimen/screen_padding_vertical">
@@ -13,29 +13,49 @@
         android:id="@+id/tv_title_page"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:text="@string/text_menu_given_money"
         android:fontFamily="@font/roboto_900"
+        android:text="@string/text_menu_given_money"
+        android:textColor="@color/white"
         android:textSize="@dimen/toolbar_text_size"
-        android:textColor="@color/white"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/money_btn"
+        style="@style/MaterialButton.Default.Light"
+        android:layout_width="@dimen/border_width"
+        android:layout_height="@dimen/size_fifty_five"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="15dp"
+        android:drawableRight="@drawable/ic_money"
+        android:fontFamily="@font/roboto_500"
+        android:text="Kassadan pul"
+        android:textAllCaps="false"
+        android:textColor="@color/blue"
+        android:textSize="@dimen/text_size_sixteen"
+        app:cornerRadius="@dimen/item_space_middle"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title_page"
+        app:layout_constraintWidth_percent="0.5" />
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="@dimen/screen_padding_vertical"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_title_page"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/money_btn">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layout_filter"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/item_large_padding"
             android:background="@color/layout_light"
+            android:padding="@dimen/item_large_padding"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -67,6 +87,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintWidth_percent="0.5" />
 
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <LinearLayout
@@ -97,17 +118,16 @@
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_order_list"
-                    tools:listitem="@layout/item_given_money"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:listitem="@layout/item_given_money" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

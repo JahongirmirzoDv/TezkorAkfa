@@ -28,6 +28,7 @@ class DragAndDropListener : View.OnDragListener {
     lateinit var context: Context
     companion object {
         const val TAG_DIV_HOR_THREE = "divide_three_horizontal"
+        const val TAG_ARAKA = "panel_vertical"
         const val TAG_DIV_HOR_TWO = "divide_two_horizontal"
         const val TAG_DIV_VER_TWO = "divide_two_vertical"
         const val TAG_DOOR_TURN_LEFT = "door_turn_left"
@@ -45,6 +46,8 @@ class DragAndDropListener : View.OnDragListener {
 
     override fun onDrag(view: View, event: DragEvent): Boolean {
         return when (event.action) {
+
+
             DragEvent.ACTION_DRAG_STARTED -> {
                 event.clipDescription.hasMimeType(ClipDescription.MIMETYPE_TEXT_PLAIN)
             }
@@ -71,6 +74,11 @@ class DragAndDropListener : View.OnDragListener {
                 val destination = view as Area
 
                 when (dragData) {
+
+                    TAG_ARAKA ->{
+                        destination.addWindow(Window.Companion.WindowOrientation.TILT_TOP_AND_TURN_LEFT)
+                    }
+
                     TAG_DIV_HOR_THREE -> {
                         destination.divideHorizontalThree()
                     }
