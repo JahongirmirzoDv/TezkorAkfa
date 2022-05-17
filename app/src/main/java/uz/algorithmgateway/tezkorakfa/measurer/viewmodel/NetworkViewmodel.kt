@@ -1,5 +1,6 @@
 package uz.algorithmgateway.tezkorakfa.measurer.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -16,6 +17,7 @@ import uz.algorithmgateway.tezkorakfa.data.retrofit.models.profile.Profile
 import uz.algorithmgateway.tezkorakfa.data.retrofit.models.shelf.Shelf
 import uz.algorithmgateway.tezkorakfa.data.retrofit.models.window.Windows
 import uz.algorithmgateway.tezkorakfa.data.retrofit.repository.NetworkRepository
+import uz.algorithmgateway.tezkorakfa.ui.utils.UIState
 import javax.inject.Inject
 
 class NetworkViewmodel @Inject constructor(
@@ -109,14 +111,23 @@ class NetworkViewmodel @Inject constructor(
         }
     }
 
-    suspend fun sendData(id: String, body: RequestBody) {
+    suspend fun sendData(id: String, body: RequestBody): MutableStateFlow<UIState<Responce?>> {
+        val flow = MutableStateFlow<UIState<Responce?>>(UIState.Loading)
         viewModelScope.launch {
             networkRepository.sendData(id, body)
+                .catch {
+                    Log.e("Throw", "sendData: ${it.message}")
+                }.collect {
+                    if (it.isSuccess) {
+                        flow.value = UIState.Success(it.getOrNull())
+                    } else if (it.isFailure) flow.emit(UIState.Error((it.exceptionOrNull()?.message ?: it.exceptionOrNull()).toString()))
+                }
         }
+        return flow
     }
 
-    suspend fun confirm(path:String,body: HashMap<String, Any>?): MutableStateFlow<String> {
-        val flow = MutableStateFlow("")
+    fun confirm(path:String,body: HashMap<String, Any>?): MutableStateFlow<String> {
+        val flow = MutableStateFlow("Error")
         viewModelScope.launch {
             networkRepository.confirm(path,body)
                 .catch {

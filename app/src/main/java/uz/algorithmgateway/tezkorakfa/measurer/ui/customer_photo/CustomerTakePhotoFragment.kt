@@ -5,9 +5,11 @@ import android.os.Bundle
 import android.os.Environment
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -15,6 +17,7 @@ import com.github.drjacky.imagepicker.ImagePicker
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
@@ -26,6 +29,7 @@ import uz.algorithmgateway.tezkorakfa.measurer.utils.FileUriUtils
 import uz.algorithmgateway.tezkorakfa.measurer.utils.compress
 import uz.algorithmgateway.tezkorakfa.measurer.viewmodel.DbViewmodel
 import uz.algorithmgateway.tezkorakfa.measurer.viewmodel.NetworkViewmodel
+import uz.algorithmgateway.tezkorakfa.ui.utils.UIState
 import java.io.File
 import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
@@ -129,7 +133,19 @@ class CustomerTakePhotoFragment : Fragment(), CoroutineScope {
                         )
                     }
                     val body = builder.build()
-                    apiVm.sendData(pdf.id, body)
+                    apiVm.sendData(pdf.id, body).collect {
+                        when (it) {
+                            is UIState.Loading -> {
+
+                            }
+                            is UIState.Error -> {
+
+                            }
+                            is UIState.Success -> {
+                                Log.d("TAG", ": $it.data?.result ?: succes")
+                            }
+                        }
+                    }
                 }
                 Handler(Looper.getMainLooper()).postDelayed({
                     binding.next.isEnabled = true

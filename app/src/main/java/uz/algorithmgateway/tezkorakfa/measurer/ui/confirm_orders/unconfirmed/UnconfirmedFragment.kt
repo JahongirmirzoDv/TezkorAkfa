@@ -16,7 +16,6 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import uz.algorithmgateway.core.util.toast
 import uz.algorithmgateway.tezkorakfa.R
 import uz.algorithmgateway.tezkorakfa.base.MyApplication
 import uz.algorithmgateway.tezkorakfa.data.retrofit.models.sales_order_list.Result
@@ -98,7 +97,7 @@ class UnconfirmedFragment : Fragment(), CoroutineScope {
                         adapter.list = list.data!!.results
                         adapter.notifyDataSetChanged()
                         adapter.onpress = object : ConfirmOrderListAdapter.onPress {
-                            override fun complete(result: Result) {
+                            override fun complete(result: Result, sum: String) {
                                 val navBuilder = NavOptions.Builder()
                                 val navOptions: NavOptions =
                                     navBuilder.setPopUpTo(R.id.ordersFragment, false).build()
@@ -106,12 +105,9 @@ class UnconfirmedFragment : Fragment(), CoroutineScope {
                                     .navigate(R.id.ordersFragment, null, navOptions)
                                 val map: HashMap<String, Any> = HashMap()
                                 map["order_id"] = result.id
-                                map["prepayment"]
-                                launch {
-                                    viewmodeltwo.confirm("finished",map).collect {
-                                        Toast.makeText(requireContext(), "$it", Toast.LENGTH_SHORT)
-                                            .show()
-                                    }
+                                map["paid_price"] = sum
+                                launch(Dispatchers.Main) {
+                                    viewmodeltwo.confirm("finished", map)
                                     db.deletePdf()
                                     db.delete()
                                 }
@@ -120,11 +116,8 @@ class UnconfirmedFragment : Fragment(), CoroutineScope {
                             override fun reject(result: Result) {
                                 val map: HashMap<String, Any> = HashMap()
                                 map["order_id"] = result.id
-                                launch {
-                                    viewmodeltwo.confirm("canceled",map).collect {
-                                        Toast.makeText(requireContext(), "$it", Toast.LENGTH_SHORT)
-                                            .show()
-                                    }
+                                launch(Dispatchers.Main) {
+                                    viewmodeltwo.confirm("canceled", map)
                                 }
                             }
 

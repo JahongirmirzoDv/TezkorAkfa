@@ -86,7 +86,7 @@ class ConfirmOrdersScreen : Fragment(), CoroutineScope {
                         adapter.isCompleted = true
                         adapter.notifyDataSetChanged()
                         adapter.onpress = object : ConfirmOrderListAdapter.onPress {
-                            override fun complete(result: Result) {
+                            override fun complete(result: Result,sum:String) {
 
                             }
 

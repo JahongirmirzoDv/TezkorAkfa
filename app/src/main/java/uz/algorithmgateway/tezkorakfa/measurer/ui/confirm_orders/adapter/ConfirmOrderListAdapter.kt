@@ -42,7 +42,7 @@ class ConfirmOrderListAdapter() :
             itemview.comment.text = "${result.comment}"
 //            itemview.window.text = "Derazalar soni ${re}"
             itemview.configOrder.setOnClickListener {
-                onpress.complete(result)
+                onpress.complete(result,itemview.sum.text.toString())
             }
             itemview.rejectOrder.setOnClickListener {
                 onpress.reject(result)
@@ -67,7 +67,7 @@ class ConfirmOrderListAdapter() :
     override fun getItemCount(): Int = list.size
 
     interface onPress {
-        fun complete(result: Result)
+        fun complete(result: Result,sum:String)
         fun reject(result: Result)
         fun edit(result: Result)
     }

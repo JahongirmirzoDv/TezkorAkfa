@@ -48,10 +48,10 @@ interface ApiService {
     )
 
     @PATCH("order/order/update/{id}/")
-    suspend fun sendData(
+    fun sendData(
         @Path("id") id: String,
         @Body body: RequestBody,
-    )
+    ):Flow<Responce>
 
     @POST("order/order/{path}/")
     fun confirm(

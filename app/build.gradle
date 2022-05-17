@@ -23,7 +23,6 @@ android {
     buildFeatures {
         viewBinding true
     }
-
     buildTypes {
         debug {
             buildConfigField "String", "BASE_URL", "\"http://157.245.62.70:8002/api/v1/\""

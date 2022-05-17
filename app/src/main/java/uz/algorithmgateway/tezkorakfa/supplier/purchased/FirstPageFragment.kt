@@ -124,7 +124,6 @@ class FirstPageFragment : Fragment(), InterfaceProductClick {
         Product(17, "Tutqich(oddiy)", 3, 3, 70000, 210000, false),
         Product(18, "Alyuminiy profil", 1, 3, 70000, 210000, true),
         Product(19, "Alyuminiy profil", 1, 3, 70000, 210000, false)
-
     )
 
     private fun productTypeList() = listOf<String>(
