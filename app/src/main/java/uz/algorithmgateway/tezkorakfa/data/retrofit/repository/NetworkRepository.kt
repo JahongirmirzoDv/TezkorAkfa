@@ -99,4 +99,8 @@ class NetworkRepository @Inject constructor(private val apiService: ApiService) 
                 emit(Result.failure(it))
             }.flowOn(Dispatchers.IO)
     }
+
+    suspend fun downloadFile(url:String): Response<ResponseBody> {
+        return apiService.downloadFile(url)
+    }
 }
