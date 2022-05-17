@@ -1,7 +1,6 @@
 package uz.algorithmgateway.tezkorakfa.data.retrofit
 
 import kotlinx.coroutines.flow.Flow
-import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okhttp3.ResponseBody
 import retrofit2.Response
@@ -48,14 +47,18 @@ interface ApiService {
     )
 
     @PATCH("order/order/update/{id}/")
-    suspend fun sendData(
+    fun sendData(
         @Path("id") id: String,
         @Body body: RequestBody,
-    )
+    ): Flow<Responce>
 
     @POST("order/order/{path}/")
     fun confirm(
         @Path("path") path: String,
-        @Body body: HashMap<String, Any>?
-    ):Flow<Responce>
+        @Body body: HashMap<String, Any>?,
+    ): Flow<Responce>
+
+    @Streaming
+    @GET
+    suspend fun downloadFile(@Url url: String): Response<ResponseBody>
 }

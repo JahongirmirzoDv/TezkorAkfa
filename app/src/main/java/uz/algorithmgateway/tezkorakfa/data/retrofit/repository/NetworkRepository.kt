@@ -82,8 +82,13 @@ class NetworkRepository @Inject constructor(private val apiService: ApiService) 
     suspend fun sendData(
         id: String,
         body: RequestBody,
-    ){
+    ): Flow<Result<Responce>> {
         return apiService.sendData(id, body)
+            .map {
+                Result.success(it)
+            }.catch {
+                emit(Result.failure(it))
+            }.flowOn(Dispatchers.IO)
     }
 
     fun confirm(path:String,body: HashMap<String, Any>?): Flow<Result<Responce>> {
@@ -93,5 +98,9 @@ class NetworkRepository @Inject constructor(private val apiService: ApiService) 
             }.catch {
                 emit(Result.failure(it))
             }.flowOn(Dispatchers.IO)
+    }
+
+    suspend fun downloadFile(url:String): Response<ResponseBody> {
+        return apiService.downloadFile(url)
     }
 }

@@ -10,6 +10,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -17,6 +18,7 @@ import com.bumptech.glide.Glide
 import com.github.drjacky.imagepicker.ImagePicker
 import com.google.gson.Gson
 import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.collect
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
@@ -31,6 +33,7 @@ import uz.algorithmgateway.tezkorakfa.measurer.utils.compress
 import uz.algorithmgateway.tezkorakfa.measurer.viewmodel.DbViewmodel
 import uz.algorithmgateway.tezkorakfa.measurer.viewmodel.NetworkViewmodel
 import uz.algorithmgateway.tezkorakfa.ui.utils.SharedPref
+import uz.algorithmgateway.tezkorakfa.ui.utils.UIState
 import java.io.File
 import java.io.IOException
 import java.util.*
@@ -171,7 +174,21 @@ class AcceptOrderScreen : Fragment(), CoroutineScope {
                             files.asRequestBody("multipart/form-data".toMediaTypeOrNull())
                         )
                         val body = builder.build()
-                        networkViewmodel.sendData(item.id.toString(), body)
+                        networkViewmodel.sendData(item.id.toString(), body).collect {
+                            when (it) {
+                                is UIState.Loading -> {
+
+                                }
+                                is UIState.Error -> {
+
+                                }
+                                is UIState.Success -> {
+                                    Toast.makeText(requireContext(),
+                                        it.data?.result ?: "succes0.1",
+                                        Toast.LENGTH_SHORT).show()
+                                }
+                            }
+                        }
                     } else {
                         builder.setType(MultipartBody.FORM)
                         builder.addFormDataPart("id", item.id.toString())
@@ -186,7 +203,21 @@ class AcceptOrderScreen : Fragment(), CoroutineScope {
                         )
                     }
                     val body = builder.build()
-                    networkViewmodel.sendData(item.id.toString(), body)
+                    networkViewmodel.sendData(item.id.toString(), body).collect {
+                        when (it) {
+                            is UIState.Loading -> {
+
+                            }
+                            is UIState.Error -> {
+
+                            }
+                            is UIState.Success -> {
+                                Toast.makeText(requireContext(),
+                                    it.data?.result ?: "succes0.1",
+                                    Toast.LENGTH_SHORT).show()
+                            }
+                        }
+                    }
                 }
 
                 dbViewmodel.addDrawing(Drawing(id = item.id.toString()))
