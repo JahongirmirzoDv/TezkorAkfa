@@ -12,7 +12,7 @@ import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import uz.algorithmgateway.tezkorakfa.BuildConfig
 import uz.algorithmgateway.tezkorakfa.base.MyApplication
-import uz.algorithmgateway.tezkorakfa.data.retrofit.ApiService
+import uz.algorithmgateway.tezkorakfa.data.retrofit.api.ApiService
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 

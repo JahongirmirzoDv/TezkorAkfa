@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import uz.algorithmgateway.tezkorakfa.data.models.UserRequest
 import uz.algorithmgateway.tezkorakfa.data.models.UserResponse
-import uz.algorithmgateway.tezkorakfa.data.retrofit.ApiService
+import uz.algorithmgateway.tezkorakfa.data.retrofit.api.ApiService
 import uz.algorithmgateway.tezkorakfa.data.retrofit.models.sales_order_list.OrderList
 import uz.algorithmgateway.tezkorakfa.data.retrofit.repository.NetworkRepository
 import uz.algorithmgateway.tezkorakfa.ui.utils.UIState

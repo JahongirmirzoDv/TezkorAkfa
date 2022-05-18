@@ -1,4 +1,4 @@
-package uz.algorithmgateway.tezkorakfa.data.retrofit
+package uz.algorithmgateway.tezkorakfa.data.retrofit.api
 
 import kotlinx.coroutines.flow.Flow
 import okhttp3.RequestBody

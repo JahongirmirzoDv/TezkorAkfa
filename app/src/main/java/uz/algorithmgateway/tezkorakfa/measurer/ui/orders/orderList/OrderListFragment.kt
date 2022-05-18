@@ -46,7 +46,7 @@ class OrderListFragment() : Fragment(), CoroutineScope {
     private lateinit var adapter: OrderListAdapter
 
     private var _binding: FragmentTabLayoutBinding? = null
-    private val binding get() = _binding!!
+    private val binding get() = _binding ?: throw NullPointerException("null")
     private val sharedPref by lazy { SharedPref(requireContext()) }
     private var status: String = Value.NEW
 
@@ -54,15 +54,17 @@ class OrderListFragment() : Fragment(), CoroutineScope {
         this.status = status
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        MyApplication.appComponent.orders(this)
+    }
 
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-        MyApplication.appComponent.orders(this)
         _binding = FragmentTabLayoutBinding.inflate(inflater, container, false)
-
 
         networkConnectionLiveData.observe(requireActivity()) {
             loadData(it)

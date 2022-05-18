@@ -8,15 +8,26 @@ import android.view.ViewGroup
 import by.kirich1409.viewbindingdelegate.viewBinding
 import uz.algorithmgateway.tezkorakfa.R
 import uz.algorithmgateway.tezkorakfa.databinding.FragmentOrderInfoBinding
+import uz.algorithmgateway.tezkorakfa.databinding.FragmentServisHomeBinding
 
-class OrderInfoFragment : Fragment(R.layout.fragment_order_info) {
+class OrderInfoFragment : Fragment() {
 
-    val binding: FragmentOrderInfoBinding by viewBinding()
+    private var _binding: FragmentOrderInfoBinding? = null
+    private val binding get() = _binding ?: throw NullPointerException("null")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
     }
 
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
+    ): View {
+        _binding = FragmentOrderInfoBinding.inflate(inflater, container, false)
+
+        return binding.root
+    }
 
 }
