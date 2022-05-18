@@ -1,12 +1,15 @@
 package uz.algorithmgateway.tezkorakfa.servis.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import uz.algorithmgateway.tezkorakfa.R
+import androidx.appcompat.app.AppCompatActivity
+import uz.algorithmgateway.tezkorakfa.databinding.ActivityServisMainBinding
 
 class ServisMainActivity : AppCompatActivity() {
+    lateinit var binding: ActivityServisMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_servis_main)
+        binding = ActivityServisMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
     }
 }

@@ -1,0 +1,4 @@
+package uz.algorithmgateway.tezkorakfa.data.retrofit.api
+
+interface SupplierService {
+}

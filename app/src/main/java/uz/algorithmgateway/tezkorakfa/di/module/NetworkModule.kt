@@ -12,7 +12,10 @@ import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import uz.algorithmgateway.tezkorakfa.BuildConfig
 import uz.algorithmgateway.tezkorakfa.base.MyApplication
-import uz.algorithmgateway.tezkorakfa.data.retrofit.ApiService
+import uz.algorithmgateway.tezkorakfa.data.retrofit.api.ApiService
+import uz.algorithmgateway.tezkorakfa.data.retrofit.api.MontageService
+import uz.algorithmgateway.tezkorakfa.data.retrofit.api.Servicer
+import uz.algorithmgateway.tezkorakfa.data.retrofit.api.SupplierService
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
@@ -76,4 +79,18 @@ class NetworkModule {
     @Singleton
     @Provides
     fun provideApiService(retrofit: Retrofit): ApiService = retrofit.create(ApiService::class.java)
+
+    @Singleton
+    @Provides
+    fun provideMontageService(retrofit: Retrofit): MontageService =
+        retrofit.create(MontageService::class.java)
+
+    @Singleton
+    @Provides
+    fun provideServicer(retrofit: Retrofit): Servicer = retrofit.create(Servicer::class.java)
+
+    @Singleton
+    @Provides
+    fun provideSupplierService(retrofit: Retrofit): SupplierService =
+        retrofit.create(SupplierService::class.java)
 }

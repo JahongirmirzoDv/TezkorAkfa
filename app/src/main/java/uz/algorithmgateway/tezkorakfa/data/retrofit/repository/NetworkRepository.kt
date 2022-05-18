@@ -10,7 +10,7 @@ import okhttp3.ResponseBody
 import retrofit2.Response
 import uz.algorithmgateway.tezkorakfa.data.models.UserRequest
 import uz.algorithmgateway.tezkorakfa.data.models.UserResponse
-import uz.algorithmgateway.tezkorakfa.data.retrofit.ApiService
+import uz.algorithmgateway.tezkorakfa.data.retrofit.api.ApiService
 import uz.algorithmgateway.tezkorakfa.data.retrofit.models.Responce
 import uz.algorithmgateway.tezkorakfa.data.retrofit.models.accessory.Accessory
 import uz.algorithmgateway.tezkorakfa.data.retrofit.models.profile.Profile
