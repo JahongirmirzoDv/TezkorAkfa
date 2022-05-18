@@ -21,15 +21,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/btn_back"
-        android:layout_width="@dimen/view_normal_height"
-        android:layout_height="@dimen/view_normal_height"
-        android:padding="8dp"
-        android:src="@drawable/ic_back_arrow_fragment"
-        app:layout_constraintBottom_toBottomOf="@id/tv_title_page"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/tv_title_page" />
+<!--    <androidx.appcompat.widget.AppCompatImageView-->
+<!--        android:id="@+id/btn_back"-->
+<!--        android:layout_width="@dimen/view_normal_height"-->
+<!--        android:layout_height="@dimen/view_normal_height"-->
+<!--        android:padding="8dp"-->
+<!--        android:src="@drawable/ic_back_arrow_fragment"-->
+<!--        app:layout_constraintBottom_toBottomOf="@id/tv_title_page"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="@id/tv_title_page" />-->
 
     <LinearLayout
         android:id="@+id/layout_date_filter"

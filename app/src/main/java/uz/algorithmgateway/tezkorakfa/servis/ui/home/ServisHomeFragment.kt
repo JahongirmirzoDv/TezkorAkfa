@@ -29,6 +29,18 @@ class ServisHomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        installToolbar()
+    }
+
+    private fun installToolbar() {
+        binding.toolbar.apply {
+            otherToolbar.visibility = View.GONE
+            backArrowFragment.visibility = View.GONE
+            titleTolbar.setText("Buyurtmalar")
+
+        }
+
     }
 
 

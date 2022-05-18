@@ -16,6 +16,7 @@ import uz.algorithmgateway.tezkorakfa.base.MyApplication
 import uz.algorithmgateway.tezkorakfa.databinding.ActivityLoginBinding
 import uz.algorithmgateway.tezkorakfa.measurer.ui.MeasurerActivity
 import uz.algorithmgateway.tezkorakfa.montage.MontageActivity
+import uz.algorithmgateway.tezkorakfa.servis.ui.ServisMainActivity
 import uz.algorithmgateway.tezkorakfa.supplier.SupplierActivity
 import uz.algorithmgateway.tezkorakfa.ui.login.viewmodel.LoginViewModel
 import uz.algorithmgateway.tezkorakfa.ui.utils.SharedPref
@@ -57,9 +58,11 @@ class LoginActivity : AppCompatActivity(), CoroutineScope {
 
                             }
                             is UIState.Error -> {
-                                Toast.makeText(this@LoginActivity,
+                                Toast.makeText(
+                                    this@LoginActivity,
                                     it.message,
-                                    Toast.LENGTH_SHORT).show()
+                                    Toast.LENGTH_SHORT
+                                ).show()
                             }
                             is UIState.Success -> {
                                 sharedPref.isLogin = true
@@ -74,9 +77,9 @@ class LoginActivity : AppCompatActivity(), CoroutineScope {
                                         finish()
                                     }
                                     Value.SUPPLIER -> {
-                                        sharedPref.user_role = Value.SUPPLIER
+                                        sharedPref.user_role = Value.SERVICER
                                         val intent =
-                                            Intent(this@LoginActivity, SupplierActivity::class.java)
+                                            Intent(this@LoginActivity, ServisMainActivity::class.java)
                                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                                         startActivity(intent)
                                         finish()
@@ -91,11 +94,14 @@ class LoginActivity : AppCompatActivity(), CoroutineScope {
                                     }
                                     Value.SERVICER -> {
                                         sharedPref.user_role = Value.SERVICER
-//                                        val intent =
-//                                            Intent(this@LoginActivity, MontageActivity::class.java)
-//                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-//                                        startActivity(intent)
-//                                        finish()
+                                        val intent =
+                                            Intent(
+                                                this@LoginActivity,
+                                                ServisMainActivity::class.java
+                                            )
+                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                                        startActivity(intent)
+                                        finish()
                                     }
                                 }
                             }
