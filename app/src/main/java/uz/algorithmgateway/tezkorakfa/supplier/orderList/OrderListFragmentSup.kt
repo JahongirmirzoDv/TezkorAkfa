@@ -10,21 +10,41 @@ import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
+import uz.algorithmgateway.core.util.toast
 import uz.algorithmgateway.tezkorakfa.data.models.OrderSupplier
 import uz.algorithmgateway.supplier.orderList.InterfaceOrderClick
 import uz.algorithmgateway.tezkorakfa.R
+import uz.algorithmgateway.tezkorakfa.base.MyApplication
+import uz.algorithmgateway.tezkorakfa.data.retrofit.models.sales_order_list.OrderList
+import uz.algorithmgateway.tezkorakfa.data.retrofit.models.sales_order_list.Result
 import uz.algorithmgateway.tezkorakfa.databinding.FragmentOrderListSupBinding
+import uz.algorithmgateway.tezkorakfa.measurer.resource.OrdersListResource
 import uz.algorithmgateway.tezkorakfa.supplier.SupplierActivity
 import uz.algorithmgateway.tezkorakfa.supplier.adapter.AdapterTableSpinner
+import uz.algorithmgateway.tezkorakfa.supplier.viewmodel.NetworkViewModel
+import javax.inject.Inject
+import kotlin.coroutines.CoroutineContext
 
-class OrderListFragmentSup : Fragment(), InterfaceOrderClick {
+class OrderListFragmentSup : Fragment(), InterfaceOrderClick, CoroutineScope {
 
     lateinit var binding: FragmentOrderListSupBinding
-
     private var orderStatus: Int = 0
-    private val orderList: List<OrderSupplier> = createOrderList()
+
+    //    private val orderList: List<OrderSupplier> = createOrderList()
     private var orderListAdapter: AdapterOrderList? = null
 
+    @Inject
+    lateinit var networkViewModel: NetworkViewModel
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        MyApplication.appComponent.orderListSupplier(this)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,37 +59,53 @@ class OrderListFragmentSup : Fragment(), InterfaceOrderClick {
         super.onViewCreated(view, savedInstanceState)
         val mainActivity = activity as SupplierActivity
         mainActivity.bottomNavigationViewVisibility()
-        loadOrderList()
+
+        loadNetworData()
         loadOrderStatusSpinner()
         loadSearchView()
 //        loadOrderHistoryButton()
     }
 
-//    private fun loadOrderHistoryButton() {
-//        binding.btnOrderHistory.setOnClickListener {
-//            findNavController().navigate(R.id.orderHistoryFragment)
-//        }
-//    }
+    private fun loadNetworData() {
+        launch {
+            networkViewModel.getOrdersList().collect {
+                when (it) {
+                    is OrdersListResource.Error -> {
+                        toast(it.message)
+                    }
+                    OrdersListResource.Loading -> {
+                        toast("Loading...")
+                    }
+                    is OrdersListResource.SuccesList -> {
+                        loadOrderList(it.list.results)
+                    }
+                }
+
+            }
+        }
+
+    }
+
 
     private fun loadSearchView() {
         binding.editTextSearch.doOnTextChanged { text, start, before, count ->
 
-            val filterList: List<OrderSupplier> = if (orderStatus == 0) {
-                orderList
-            } else {
-                orderList.filter { s -> s.status == orderStatus }
-            }
+//            val filterList: List<OrderSupplier> = if (orderStatus == 0) {
+////                orderList
+//            } else {
+////                orderList.filter { s -> s.status == orderStatus }
+//            }
 
-            val searchList = mutableListOf<OrderSupplier>()
-            for (i in filterList) {
-                if (text.toString().toRegex().find(i.id.toString()) != null) {
-                    searchList.add(i)
-                }
-            }
+//            val searchList = mutableListOf<OrderSupplier>()
+//            for (i in filterList) {
+//                if (text.toString().toRegex().find(i.id.toString()) != null) {
+//                    searchList.add(i)
+//                }
+//            }
 
-            searchList.let {
-                orderListAdapter?.updateList(searchList)
-            }
+//            searchList.let {
+//                orderListAdapter?.updateList(searchList)
+//            }
 
 
         }
@@ -95,18 +131,18 @@ class OrderListFragmentSup : Fragment(), InterfaceOrderClick {
     }
 
     private fun filterOrderList(position: Int) {
-        val filterList: List<OrderSupplier> = if (position == 0) {
-            orderList
-        } else {
-            orderList.filter { s -> s.status == position }
-        }
-        filterList.let {
-            orderListAdapter?.updateList(filterList)
-        }
+//        val filterList: List<OrderSupplier> = if (position == 0) {
+//            orderList
+//        } else {
+//            orderList.filter { s -> s.status == position }
+//        }
+//        filterList.let {
+//            orderListAdapter?.updateList(filterList)
+//        }
     }
 
-    private fun loadOrderList() {
-        orderListAdapter = AdapterOrderList {
+    private fun loadOrderList(list: List<Result>) {
+        orderListAdapter = AdapterOrderList(list) {
             findNavController().navigate(R.id.productListFragment)
         }
         binding.rvOrderList.layoutManager =
@@ -135,5 +171,8 @@ class OrderListFragmentSup : Fragment(), InterfaceOrderClick {
         OrderSupplier(1030, "3 500 000", "06.02.2022", 3),
         OrderSupplier(1032, "3 500 000", "06.02.2022", 1)
     )
+
+    override val coroutineContext: CoroutineContext
+        get() = Dispatchers.Main + Job()
 
 }
