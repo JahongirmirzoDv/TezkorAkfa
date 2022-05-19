@@ -85,7 +85,7 @@
         <entry key="..\:/Android_studio/otherProject/tezkorAkfa/app/src/main/res/layout/fragment_given_money.xml" value="0.25" />
         <entry key="..\:/Android_studio/otherProject/tezkorAkfa/app/src/main/res/layout/fragment_order_history.xml" value="0.25" />
         <entry key="..\:/Android_studio/otherProject/tezkorAkfa/app/src/main/res/layout/fragment_order_info.xml" value="0.2359375" />
-        <entry key="..\:/Android_studio/otherProject/tezkorAkfa/app/src/main/res/layout/fragment_order_list_sup.xml" value="0.25" />
+        <entry key="..\:/Android_studio/otherProject/tezkorAkfa/app/src/main/res/layout/fragment_order_list_sup.xml" value="0.264" />
         <entry key="..\:/Android_studio/otherProject/tezkorAkfa/app/src/main/res/layout/fragment_parametr.xml" value="0.25" />
         <entry key="..\:/Android_studio/otherProject/tezkorAkfa/app/src/main/res/layout/fragment_product_list.xml" value="0.24947916666666667" />
         <entry key="..\:/Android_studio/otherProject/tezkorAkfa/app/src/main/res/layout/fragment_purchase_first.xml" value="0.2" />
@@ -105,6 +105,8 @@
         <entry key="..\:/Android_studio/otherProject/tezkorAkfa/app/src/main/res/layout/item_multi_spinner.xml" value="0.25" />
         <entry key="..\:/Android_studio/otherProject/tezkorAkfa/app/src/main/res/layout/item_order.xml" value="0.25" />
         <entry key="..\:/Android_studio/otherProject/tezkorAkfa/app/src/main/res/layout/item_order_list.xml" value="0.24947916666666667" />
+        <entry key="..\:/Android_studio/otherProject/tezkorAkfa/app/src/main/res/layout/item_order_list_header.xml" value="0.25" />
+        <entry key="..\:/Android_studio/otherProject/tezkorAkfa/app/src/main/res/layout/item_order_list_supplier.xml" value="0.25" />
         <entry key="..\:/Android_studio/otherProject/tezkorAkfa/app/src/main/res/layout/item_product_table.xml" value="0.25" />
         <entry key="..\:/Android_studio/otherProject/tezkorAkfa/app/src/main/res/layout/item_two_square_horizontal.xml" value="0.25" />
         <entry key="..\:/Android_studio/otherProject/tezkorAkfa/app/src/main/res/layout/layout_change_size_dialog.xml" value="0.24635416666666668" />

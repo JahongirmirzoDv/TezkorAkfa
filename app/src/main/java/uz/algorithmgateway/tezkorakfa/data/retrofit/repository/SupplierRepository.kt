@@ -18,4 +18,12 @@ class SupplierRepository @Inject constructor(private val supplierService: Suppli
             emit(Result.failure(it))
         }.flowOn(Dispatchers.IO)
     }
+
+    fun getOrderDetialList(contractsNumber: String): Flow<Result<OrderList>> {
+        return supplierService.getOrderDetial(contractsNumber).map {
+            Result.success(it)
+        }.catch {
+            emit(Result.failure(it))
+        }.flowOn(Dispatchers.IO)
+    }
 }

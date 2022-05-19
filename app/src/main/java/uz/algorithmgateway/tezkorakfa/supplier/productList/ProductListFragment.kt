@@ -44,7 +44,7 @@ class ProductListFragment : Fragment(), InterfaceProductClick {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        productList = productList()
+//        productList = productList()
         val mainActivity = activity as SupplierActivity
         mainActivity.bottomNavigationViewVisibilityGone()
 
@@ -86,7 +86,7 @@ class ProductListFragment : Fragment(), InterfaceProductClick {
             }
 
             searchList.let {
-                productListAdapter?.updateList(searchList)
+//                productListAdapter?.updateList(searchList)
             }
 
 
@@ -121,12 +121,17 @@ class ProductListFragment : Fragment(), InterfaceProductClick {
             productList!!.filter { s -> s.type == productType }
         }
         filterList.let {
-            productListAdapter?.updateList(filterList)
+//            productListAdapter?.updateList(filterList)
         }
 
     }
 
     private fun loadProductList() {
+        val contractNumber = arguments?.getString("contract_nuber")
+        if (contractNumber.isNullOrEmpty()) {
+
+        }
+
         productListAdapter = AdapterProductList(requireContext()) {
 
             showDialogView()
@@ -149,28 +154,28 @@ class ProductListFragment : Fragment(), InterfaceProductClick {
 
     }
 
-    private fun productList() = listOf<Product>(
-        Product(1, "Alyuminiy profil", 1, 3, 70000, 210000, false),
-        Product(2, "Plastik profil", 1, 2, 80000, 160000, false),
-        Product(3, "Yodoviy oyna", 2, 3, 70000, 210000, true),
-        Product(4, "Gulli oyna", 2, 3, 70000, 210000, false),
-        Product(5, "Tutqich(oddiy)", 3, 3, 70000, 210000, false),
-        Product(6, "Tutqich(oddiy)", 3, 3, 70000, 210000, true),
-        Product(7, "Tutqich(oddiy)", 3, 3, 70000, 210000, false),
-        Product(8, "Alyuminiy profil", 1, 3, 70000, 210000, true),
-        Product(9, "Alyuminiy profil", 1, 3, 70000, 210000, false),
-        Product(10, "Alyuminiy profil", 1, 3, 70000, 210000, false),
-        Product(11, "Alyuminiy profil", 1, 3, 70000, 210000, false),
-        Product(12, "Plastik profil", 1, 2, 80000, 160000, false),
-        Product(13, "Yodoviy oyna", 2, 3, 70000, 210000, true),
-        Product(14, "Gulli oyna", 2, 3, 70000, 210000, false),
-        Product(15, "Tutqich(oddiy)", 3, 3, 70000, 210000, false),
-        Product(16, "Tutqich(oddiy)", 3, 3, 70000, 210000, true),
-        Product(17, "Tutqich(oddiy)", 3, 3, 70000, 210000, false),
-        Product(18, "Alyuminiy profil", 1, 3, 70000, 210000, true),
-        Product(19, "Alyuminiy profil", 1, 3, 70000, 210000, false)
-
-    )
+//    private fun productList() = listOf<Product>(
+//        Product(1, "Alyuminiy profil", 1, 3, 70000, 210000, false),
+//        Product(2, "Plastik profil", 1, 2, 80000, 160000, false),
+//        Product(3, "Yodoviy oyna", 2, 3, 70000, 210000, true),
+//        Product(4, "Gulli oyna", 2, 3, 70000, 210000, false),
+//        Product(5, "Tutqich(oddiy)", 3, 3, 70000, 210000, false),
+//        Product(6, "Tutqich(oddiy)", 3, 3, 70000, 210000, true),
+//        Product(7, "Tutqich(oddiy)", 3, 3, 70000, 210000, false),
+//        Product(8, "Alyuminiy profil", 1, 3, 70000, 210000, true),
+//        Product(9, "Alyuminiy profil", 1, 3, 70000, 210000, false),
+//        Product(10, "Alyuminiy profil", 1, 3, 70000, 210000, false),
+//        Product(11, "Alyuminiy profil", 1, 3, 70000, 210000, false),
+//        Product(12, "Plastik profil", 1, 2, 80000, 160000, false),
+//        Product(13, "Yodoviy oyna", 2, 3, 70000, 210000, true),
+//        Product(14, "Gulli oyna", 2, 3, 70000, 210000, false),
+//        Product(15, "Tutqich(oddiy)", 3, 3, 70000, 210000, false),
+//        Product(16, "Tutqich(oddiy)", 3, 3, 70000, 210000, true),
+//        Product(17, "Tutqich(oddiy)", 3, 3, 70000, 210000, false),
+//        Product(18, "Alyuminiy profil", 1, 3, 70000, 210000, true),
+//        Product(19, "Alyuminiy profil", 1, 3, 70000, 210000, false)
+//
+//    )
 
     private fun productTypeList() = listOf<String>(
         "Barchasi",

@@ -13,10 +13,11 @@ import uz.algorithmgateway.tezkorakfa.R
 import uz.algorithmgateway.tezkorakfa.data.retrofit.models.sales_order_list.OrderList
 import uz.algorithmgateway.tezkorakfa.data.retrofit.models.sales_order_list.Result
 import uz.algorithmgateway.tezkorakfa.databinding.ItemOrderListBinding
+import uz.algorithmgateway.tezkorakfa.databinding.ItemOrderListSupplierBinding
 
 class AdapterOrderList(
     private val myList: List<Result>,
-    var itemClickListener: (Result) -> Unit
+    var itemClickListener: (String) -> Unit
 ) : RecyclerView.Adapter<AdapterOrderList.VH>() {
     //    private var myList = mutableListOf<OrderSupplier>()
     private lateinit var ctx: Context
@@ -31,7 +32,7 @@ class AdapterOrderList(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
         ctx = parent.context
         return VH(
-            ItemOrderListBinding.inflate(parent.layoutInflater, parent, false)
+            ItemOrderListSupplierBinding.inflate(parent.layoutInflater, parent, false)
         )
     }
 
@@ -41,13 +42,14 @@ class AdapterOrderList(
 
     override fun getItemCount(): Int = myList.size
 
-    inner class VH(private val binding: ItemOrderListBinding) :
+    inner class VH(private val binding: ItemOrderListSupplierBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun onBind(item: Result) {
             binding.tvNumber.text = item.contract_number.toString()
             binding.tvPrice.text = item.total_price.toString()
             binding.tvTime.text = item.measurement_time.toString()
+
 //            when (item.status) {
 //                1 -> binding.ivStatus.setBackgroundColor(ctx.getColor(R.color.color_green))
 //                2 -> binding.ivStatus.setBackgroundColor(ctx.getColor(R.color.color_gray))
@@ -55,7 +57,7 @@ class AdapterOrderList(
 //            }
 
             itemView.setOnClickListener {
-                itemClickListener.invoke(item)
+                itemClickListener.invoke(item.contract_number)
             }
         }
     }

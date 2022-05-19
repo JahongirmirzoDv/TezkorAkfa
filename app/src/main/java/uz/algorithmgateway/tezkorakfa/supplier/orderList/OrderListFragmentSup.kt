@@ -142,7 +142,9 @@ class OrderListFragmentSup : Fragment(), InterfaceOrderClick, CoroutineScope {
     }
 
     private fun loadOrderList(list: List<Result>) {
+        var bundle = Bundle()
         orderListAdapter = AdapterOrderList(list) {
+            bundle.putString("contract_nuber", it)
             findNavController().navigate(R.id.productListFragment)
         }
         binding.rvOrderList.layoutManager =

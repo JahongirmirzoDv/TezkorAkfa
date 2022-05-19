@@ -3,19 +3,40 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="60dp"
-    android:background="@drawable/bg_item_table_header">
+    android:background="@drawable/bg_item_table">
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/number"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="1"
+        android:textAppearance="@style/Text12Dark"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.13" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="1dp"
+        android:layout_height="0dp"
+        android:background="@color/color_border_table"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/number"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_number"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:text="Buyurtma nomeri"
+        android:text="1024"
         android:textAppearance="@style/Text12Dark"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintWidth_percent="0.25" />
+        app:layout_constraintStart_toEndOf="@id/view"
+        app:layout_constraintWidth_percent="0.18" />
 
     <View
         android:id="@+id/view1"
@@ -31,12 +52,12 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:gravity="center"
+        android:text="3 400 000"
         android:textAppearance="@style/Text12Dark"
-        android:text="Summasi"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/view1"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintWidth_percent="0.25" />
+        app:layout_constraintWidth_percent="0.32" />
 
     <View
         android:id="@+id/view2"
@@ -52,12 +73,12 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:gravity="center"
+        android:text="19.02.2021"
         android:textAppearance="@style/Text12Dark"
-        android:text="Muddati"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/view2"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintWidth_percent="0.25" />
+        app:layout_constraintWidth_percent="0.2" />
 
     <View
         android:id="@+id/view3"
@@ -68,17 +89,18 @@
         app:layout_constraintStart_toEndOf="@id/tv_time"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_found"
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/iv_status"
         android:layout_width="0dp"
-        android:layout_height="match_parent"
+        android:layout_height="24dp"
         android:gravity="center"
-        android:textAppearance="@style/Text12Dark"
-        android:text="Topilgan"
+        android:src="@drawable/bg_order_found_circle"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/view3"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.15" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -25,7 +25,20 @@ class NetworkViewModel @Inject constructor(val supplierRepository: SupplierRepos
 
         }
         return flow
+    }
 
+    fun getOrderDetialList(contractsNumber: String): StateFlow<OrdersListResource> {
+        val flow = MutableStateFlow<OrdersListResource>(OrdersListResource.Loading)
+
+        viewModelScope.launch {
+            supplierRepository.getOrderDetialList(contractsNumber).collect {
+                if (it.isSuccess) {
+                    flow.emit(OrdersListResource.SuccesList(it.getOrThrow()))
+                } else if (it.isFailure) flow.emit(OrdersListResource.Error(it.exceptionOrNull()?.message.toString()))
+            }
+
+        }
+        return flow
     }
 
 }

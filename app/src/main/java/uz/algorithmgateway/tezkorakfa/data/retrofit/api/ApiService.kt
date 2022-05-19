@@ -14,7 +14,7 @@ import uz.algorithmgateway.tezkorakfa.data.retrofit.models.sales_order_list.Orde
 import uz.algorithmgateway.tezkorakfa.data.retrofit.models.shelf.Shelf
 import uz.algorithmgateway.tezkorakfa.data.retrofit.models.window.Windows
 
-interface ApiService {
+interface   ApiService {
     @POST("user/login/")
     fun loginUser(@Body userRequest: UserRequest): Flow<UserResponse>
 

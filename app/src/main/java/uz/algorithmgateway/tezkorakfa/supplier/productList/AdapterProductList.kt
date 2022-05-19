@@ -31,7 +31,6 @@ class AdapterProductList(
         )
     }
 
-    @RequiresApi(Build.VERSION_CODES.M)
     override fun onBindViewHolder(holder: VH, position: Int) {
         holder.onBind(myList[position])
     }
@@ -41,7 +40,7 @@ class AdapterProductList(
     inner class VH(private val binding: ItemProductTableBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        @RequiresApi(Build.VERSION_CODES.M)
+//        @RequiresApi(Build.VERSION_CODES.M)
         fun onBind(item: Product) {
             binding.tvNumber.text = item.id.toString()
             binding.tvName.text = item.name

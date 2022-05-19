@@ -77,7 +77,7 @@ class LoginActivity : AppCompatActivity(), CoroutineScope {
                                         finish()
                                     }
                                     Value.SUPPLIER -> {
-                                        sharedPref.user_role = Value.SERVICER
+                                        sharedPref.user_role = Value.SUPPLIER
                                         val intent =
                                             Intent(this@LoginActivity, SupplierActivity::class.java)
                                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
