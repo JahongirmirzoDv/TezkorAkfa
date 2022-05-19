@@ -1,4 +1,4 @@
-package uz.algorithmgateway.tezkorakfa.supplier.viewmodel
+package uz.algorithmgateway.tezkorakfa.presenter.supplier.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import uz.algorithmgateway.tezkorakfa.data.retrofit.repository.SupplierRepository
-import uz.algorithmgateway.tezkorakfa.measurer.resource.OrdersListResource
+import uz.algorithmgateway.tezkorakfa.presenter.measurer.resource.OrdersListResource
 import javax.inject.Inject
 
 class NetworkViewModel @Inject constructor(val supplierRepository: SupplierRepository) :

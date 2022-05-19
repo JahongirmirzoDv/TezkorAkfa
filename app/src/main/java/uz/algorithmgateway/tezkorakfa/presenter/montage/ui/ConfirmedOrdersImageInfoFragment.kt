@@ -14,11 +14,6 @@ class ConfirmedOrdersImageInfoFragment : Fragment() {
     private var _binding: FragmentConfirmedOrdersBinding? = null
     private val binding get() = _binding ?: throw NullPointerException("null")
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -27,10 +22,6 @@ class ConfirmedOrdersImageInfoFragment : Fragment() {
         _binding = FragmentConfirmedOrdersBinding.inflate(inflater, container, false)
 
         return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
     }
 
 }

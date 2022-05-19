@@ -66,7 +66,7 @@ class SizeDialog : DialogFragment() {
             val text = etSize.text
             if (text != null) {
                 if (text.length > 0) {
-                    etSize.setText(text?.substring(0, text.length.minus(1)))
+                    etSize.setText(text.substring(0, text.length.minus(1)))
                 }
             }
         }

@@ -50,7 +50,7 @@ class FoundListFragment : Fragment() {
         binding.toolbar.apply {
             searchToolbar.visibility = View.GONE
             otherToolbar.visibility = View.GONE
-            titleTolbar.setText("Topilganlar")
+            titleTolbar.text = "Topilganlar"
             backArrowFragment.setOnClickListener {
                 findNavController().popBackStack()
             }

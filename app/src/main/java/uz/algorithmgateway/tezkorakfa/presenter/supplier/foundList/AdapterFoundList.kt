@@ -10,7 +10,7 @@ import uz.algorithmgateway.tezkorakfa.core.util.layoutInflater
 import uz.algorithmgateway.tezkorakfa.data.models.FoundProduct
 import uz.algorithmgateway.tezkorakfa.databinding.ItemFoundListBinding
 
-class AdapterFoundList() : RecyclerView.Adapter<AdapterFoundList.VH>() {
+class AdapterFoundList : RecyclerView.Adapter<AdapterFoundList.VH>() {
     private var myList = mutableListOf<FoundProduct>()
     private lateinit var ctx: Context
 

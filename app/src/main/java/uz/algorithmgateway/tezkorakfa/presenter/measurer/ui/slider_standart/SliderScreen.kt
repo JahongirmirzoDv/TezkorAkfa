@@ -125,8 +125,8 @@ class SliderScreen : Fragment() {
 
     private fun saveCustomview() {
         imageName = System.currentTimeMillis().toString()
-        binding.layoutDesigner.setDrawingCacheEnabled(true);
-        val bitmap = binding.layoutDesigner.getDrawingCache()
+        binding.layoutDesigner.isDrawingCacheEnabled = true
+        val bitmap = binding.layoutDesigner.drawingCache
 
         Log.d(
             "MY777",

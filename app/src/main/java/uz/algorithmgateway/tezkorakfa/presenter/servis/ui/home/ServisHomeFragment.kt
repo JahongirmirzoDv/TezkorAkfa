@@ -12,11 +12,6 @@ class ServisHomeFragment : Fragment() {
     private var _binding: FragmentServisHomeBinding? = null
     private val binding get() = _binding ?: throw NullPointerException("null")
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -37,7 +32,7 @@ class ServisHomeFragment : Fragment() {
         binding.toolbar.apply {
             otherToolbar.visibility = View.GONE
             backArrowFragment.visibility = View.GONE
-            titleTolbar.setText("Buyurtmalar")
+            titleTolbar.text = "Buyurtmalar"
 
         }
 

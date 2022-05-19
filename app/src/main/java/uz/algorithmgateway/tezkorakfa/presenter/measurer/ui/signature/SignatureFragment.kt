@@ -48,7 +48,7 @@ class SignatureFragment : Fragment(R.layout.fragment_signature) {
             }
 
             toolbar.apply {
-                titleTolbar.setText("Imzo")
+                titleTolbar.text = "Imzo"
                 searchToolbar.visibility = View.GONE
                 otherToolbar.visibility = View.GONE
             }

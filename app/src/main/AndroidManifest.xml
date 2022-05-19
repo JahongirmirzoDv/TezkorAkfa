@@ -29,10 +29,10 @@
             android:name=".presenter.servis.ui.ServisMainActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.DesignerActivity"
+            android:name=".presenter.ui.DesignerActivity"
             android:exported="true" />
         <activity
-            android:name="uz.algorithmgateway.tezkorakfa.ui.splash.SplashActivity"
+            android:name="uz.algorithmgateway.tezkorakfa.presenter.ui.splash.SplashActivity"
             android:exported="true"
             android:windowSoftInputMode="adjustResize">
             <intent-filter>
@@ -42,17 +42,17 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="uz.algorithmgateway.tezkorakfa.ui.login.LoginActivity"
+            android:name="uz.algorithmgateway.tezkorakfa.presenter.ui.login.LoginActivity"
             android:exported="true" />
         <activity
             android:name=".presenter.measurer.ui.MeasurerActivity"
             android:exported="true" />
         <activity
-            android:name=".supplier.SupplierActivity"
+            android:name=".presenter.supplier.SupplierActivity"
             android:exported="true"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".montage.MontageActivity"
+            android:name=".presenter.montage.MontageActivity"
             android:exported="true" />
 
         <meta-data
@@ -80,7 +80,7 @@
         </provider>
 
         <service
-            android:name=".measurer.ui.accept_order.service.LocationService"
+            android:name=".presenter.measurer.ui.accept_order.service.LocationService"
             android:enabled="true"
             android:exported="false" />
     </application>

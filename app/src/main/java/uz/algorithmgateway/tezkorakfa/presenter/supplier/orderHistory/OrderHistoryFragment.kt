@@ -75,7 +75,7 @@ class OrderHistoryFragment : Fragment(), InterfaceOrderClick {
                 activity?.supportFragmentManager!!, "dateRangePicker"
             )
         }
-        val dateFormat = SimpleDateFormat("dd MMM yyyy");
+        val dateFormat = SimpleDateFormat("dd MMM yyyy")
         dateRangePicker.addOnNegativeButtonClickListener { dateRangePicker.dismiss() }
         dateRangePicker.addOnPositiveButtonClickListener {
             binding.tvDateRangePicker.text =

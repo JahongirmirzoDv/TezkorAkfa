@@ -8,6 +8,7 @@ import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
 import uz.algorithmgateway.data.const.Value
 import uz.algorithmgateway.tezkorakfa.R
+import uz.algorithmgateway.tezkorakfa.presenter.measurer.ui.MeasurerActivity
 import uz.algorithmgateway.tezkorakfa.presenter.montage.MontageActivity
 import uz.algorithmgateway.tezkorakfa.presenter.supplier.SupplierActivity
 import uz.algorithmgateway.tezkorakfa.presenter.ui.login.LoginActivity
@@ -27,7 +28,7 @@ class SplashActivity : AppCompatActivity() {
                 when (sharedPref.user_role) {
                     Value.SCALER -> {
                         val intent =
-                            Intent(this, uz.algorithmgateway.tezkorakfa.presenter.measurer.ui.MeasurerActivity::class.java)
+                            Intent(this, MeasurerActivity::class.java)
                         startActivity(intent)
                         finish()
                     }

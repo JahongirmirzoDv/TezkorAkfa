@@ -10,7 +10,7 @@ import uz.algorithmgateway.tezkorakfa.core.util.layoutInflater
 import uz.algorithmgateway.tezkorakfa.data.models.GivenMoney
 import uz.algorithmgateway.tezkorakfa.databinding.ItemGivenMoneyBinding
 
-class AdapterGivenMoneyList() : RecyclerView.Adapter<AdapterGivenMoneyList.VH>() {
+class AdapterGivenMoneyList : RecyclerView.Adapter<AdapterGivenMoneyList.VH>() {
     private var myList = mutableListOf<GivenMoney>()
     private lateinit var ctx: Context
 

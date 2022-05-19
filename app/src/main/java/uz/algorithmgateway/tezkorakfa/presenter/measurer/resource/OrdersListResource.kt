@@ -1,4 +1,4 @@
-package uz.algorithmgateway.tezkorakfa.measurer.resource
+package uz.algorithmgateway.tezkorakfa.presenter.measurer.resource
 
 import uz.algorithmgateway.tezkorakfa.data.retrofit.models.sales_order_list.OrderList
 

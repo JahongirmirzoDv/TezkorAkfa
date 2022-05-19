@@ -39,7 +39,6 @@ class OrderListFragmentSup : Fragment(), InterfaceOrderClick {
         super.onViewCreated(view, savedInstanceState)
         val mainActivity = activity as SupplierActivity
         mainActivity.bottomNavigationViewVisibility()
-        loadOrderList()
         loadOrderStatusSpinner()
         loadSearchView()
 //        loadOrderHistoryButton()
@@ -66,12 +65,6 @@ class OrderListFragmentSup : Fragment(), InterfaceOrderClick {
                     searchList.add(i)
                 }
             }
-
-            searchList.let {
-                orderListAdapter?.updateList(searchList)
-            }
-
-
         }
     }
 
@@ -100,20 +93,7 @@ class OrderListFragmentSup : Fragment(), InterfaceOrderClick {
         } else {
             orderList.filter { s -> s.status == position }
         }
-        filterList.let {
-            orderListAdapter?.updateList(filterList)
-        }
     }
-
-    private fun loadOrderList() {
-        orderListAdapter = AdapterOrderList {
-            findNavController().navigate(R.id.productListFragment)
-        }
-        binding.rvOrderList.layoutManager =
-            LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-        binding.rvOrderList.adapter = orderListAdapter
-    }
-
     override fun onItemClick(order: OrderSupplier) {
         Toast.makeText(requireContext(), order.id.toString(), Toast.LENGTH_SHORT).show()
     }

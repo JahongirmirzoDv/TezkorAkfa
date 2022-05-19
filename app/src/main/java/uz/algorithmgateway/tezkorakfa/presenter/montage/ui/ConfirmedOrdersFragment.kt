@@ -15,10 +15,6 @@ class ConfirmedOrdersFragment : Fragment() {
 
     private var _binding: FragmentConfirmedOrdersBinding? = null
     private val binding get() = _binding ?: throw NullPointerException("null")
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,

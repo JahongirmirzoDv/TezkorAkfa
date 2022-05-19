@@ -59,7 +59,7 @@ class ProductListFragment : Fragment(), InterfaceProductClick {
                 findNavController().popBackStack()
             }
             searchToolbar.visibility = View.GONE
-            titleTolbar.setText("Mahsulotlar ro'yxati")
+            titleTolbar.text = "Mahsulotlar ro'yxati"
             otherToolbar.setImageResource(R.drawable.ic_next_arrow_fr)
             otherToolbar.setOnClickListener {
                 findNavController().navigate(R.id.foundListFragment)
