@@ -3,7 +3,7 @@ package uz.algorithmgateway.tezkorakfa.data.local.repoImpl
 import uz.algorithmgateway.tezkorakfa.data.local.dao.DrawingsDao
 import uz.algorithmgateway.tezkorakfa.data.local.entity.Pdf
 import uz.algorithmgateway.tezkorakfa.data.local.repository.DbRepository
-import uz.algorithmgateway.tezkorakfa.measurer.ui.select_type.models.Drawing
+import uz.algorithmgateway.tezkorakfa.presenter.measurer.ui.select_type.models.Drawing
 import javax.inject.Inject
 import javax.inject.Singleton
 

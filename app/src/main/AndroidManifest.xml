@@ -26,11 +26,11 @@
         tools:ignore="GoogleAppIndexingWarning"
         tools:targetApi="m">
         <activity
-            android:name=".servis.ui.ServisMainActivity"
+            android:name=".presenter.servis.ui.ServisMainActivity"
             android:exported="false" />
         <activity
             android:name=".ui.DesignerActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
         <activity
             android:name="uz.algorithmgateway.tezkorakfa.ui.splash.SplashActivity"
             android:exported="true"
@@ -45,15 +45,15 @@
             android:name="uz.algorithmgateway.tezkorakfa.ui.login.LoginActivity"
             android:exported="true" />
         <activity
-            android:name=".measurer.ui.MeasurerActivity"
-            android:exported="true"></activity>
+            android:name=".presenter.measurer.ui.MeasurerActivity"
+            android:exported="true" />
         <activity
             android:name=".supplier.SupplierActivity"
             android:exported="true"
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".montage.MontageActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"

@@ -6,7 +6,7 @@ import dagger.Module
 import dagger.Provides
 import uz.algorithmgateway.tezkorakfa.data.local.dao.DrawingsDao
 import uz.algorithmgateway.tezkorakfa.data.local.db.AppDatabase
-import uz.algorithmgateway.tezkorakfa.measurer.ui.MeasurerActivity
+import uz.algorithmgateway.tezkorakfa.presenter.measurer.ui.MeasurerActivity
 import javax.inject.Singleton
 
 @Module

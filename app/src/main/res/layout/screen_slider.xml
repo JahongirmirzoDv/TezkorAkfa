@@ -200,7 +200,7 @@
 
         </LinearLayout>
 
-        <uz.algorithmgateway.tezkorakfa.windowdoordisegner.ui.DesignerLayout
+        <uz.algorithmgateway.tezkorakfa.presenter.windowdoordisegner.ui.DesignerLayout
             android:id="@+id/layout_designer"
             android:layout_width="match_parent"
             android:layout_height="0dp"

@@ -1,7 +1,7 @@
 package uz.algorithmgateway.tezkorakfa.data.local.repository
 
 import uz.algorithmgateway.tezkorakfa.data.local.entity.Pdf
-import uz.algorithmgateway.tezkorakfa.measurer.ui.select_type.models.Drawing
+import uz.algorithmgateway.tezkorakfa.presenter.measurer.ui.select_type.models.Drawing
 
 
 interface DbRepository {
