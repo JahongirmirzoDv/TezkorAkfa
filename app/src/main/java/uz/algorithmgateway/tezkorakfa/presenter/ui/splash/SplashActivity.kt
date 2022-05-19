@@ -1,4 +1,4 @@
-package uz.algorithmgateway.tezkorakfa.ui.splash
+package uz.algorithmgateway.tezkorakfa.presenter.ui.splash
 
 import android.annotation.SuppressLint
 import android.content.Intent

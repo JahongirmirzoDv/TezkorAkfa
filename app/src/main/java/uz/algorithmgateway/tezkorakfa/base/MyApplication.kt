@@ -12,7 +12,7 @@ class MyApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         instance = this
-//        Pluto.initialize(this)
+        Pluto.initialize(this)
         appComponent = DaggerAppComponent.builder()
             .applicationModule(ApplicationModule(this))
             .build()

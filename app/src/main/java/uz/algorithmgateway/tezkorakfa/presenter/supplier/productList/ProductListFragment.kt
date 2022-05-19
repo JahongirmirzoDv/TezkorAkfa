@@ -71,22 +71,22 @@ class ProductListFragment : Fragment(), InterfaceProductClick {
     private fun loadSearchView() {
         binding.editTextSearch.doOnTextChanged { text, start, before, count ->
 
-            val filterList: List<Product> = if (productType == 0) {
-                productList!!
-            } else {
-                productList!!.filter { s -> s.type == productType }
-            }
-
-            val searchList = mutableListOf<Product>()
-            for (i in filterList) {
-                if (text.toString().lowercase().toRegex().find(i.name.lowercase()) != null) {
-                    searchList.add(i)
-                }
-            }
-
-            searchList.let {
-//                productListAdapter?.updateList(searchList)
-            }
+//            val filterList: List<Product> = if (productType == 0) {
+//                productList!!
+//            } else {
+//                productList!!.filter { s -> s.type == productType }
+//            }
+//
+//            val searchList = mutableListOf<Product>()
+//            for (i in filterList) {
+//                if (text.toString().lowercase().toRegex().find(i.name.lowercase()) != null) {
+//                    searchList.add(i)
+//                }
+//            }
+//
+//            searchList.let {
+////                productListAdapter?.updateList(searchList)
+//            }
 
 
         }
@@ -114,14 +114,14 @@ class ProductListFragment : Fragment(), InterfaceProductClick {
 
     private fun filterProductList(productType: Int) {
 
-        val filterList: List<Product> = if (productType == 0) {
-            productList!!
-        } else {
-            productList!!.filter { s -> s.type == productType }
-        }
-        filterList.let {
-//            productListAdapter?.updateList(filterList)
-        }
+//        val filterList: List<Product> = if (productType == 0) {
+//            productList!!
+//        } else {
+//            productList!!.filter { s -> s.type == productType }
+//        }
+//        filterList.let {
+////            productListAdapter?.updateList(filterList)
+//        }
 
     }
 

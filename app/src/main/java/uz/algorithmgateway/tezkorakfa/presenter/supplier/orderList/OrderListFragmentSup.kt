@@ -91,18 +91,18 @@ class OrderListFragmentSup : Fragment(), InterfaceOrderClick, CoroutineScope {
         binding.editTextSearch.doOnTextChanged { text, start, before, count ->
 
 //            val filterList: List<OrderSupplier> = if (orderStatus == 0) {
-////                orderList
+//                orderList
 //            } else {
-////                orderList.filter { s -> s.status == orderStatus }
+//                orderList.filter { s -> s.status == orderStatus }
 //            }
-
+////
 //            val searchList = mutableListOf<OrderSupplier>()
 //            for (i in filterList) {
 //                if (text.toString().toRegex().find(i.id.toString()) != null) {
 //                    searchList.add(i)
 //                }
 //            }
-
+////
 //            searchList.let {
 //                orderListAdapter?.updateList(searchList)
 //            }

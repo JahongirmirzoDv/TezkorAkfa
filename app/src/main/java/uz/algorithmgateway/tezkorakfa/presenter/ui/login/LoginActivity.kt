@@ -21,6 +21,7 @@ import uz.algorithmgateway.tezkorakfa.presenter.ui.utils.UIState
 import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
 import uz.algorithmgateway.tezkorakfa.presenter.servis.ui.ServisMainActivity
+import uz.algorithmgateway.tezkorakfa.presenter.supplier.SupplierActivity
 
 
 class LoginActivity : AppCompatActivity(), CoroutineScope {
@@ -77,7 +78,7 @@ class LoginActivity : AppCompatActivity(), CoroutineScope {
                                     Value.SUPPLIER -> {
                                         sharedPref.user_role = Value.SUPPLIER
                                         val intent =
-                                            Intent(this@LoginActivity, uz.algorithmgateway.tezkorakfa.presenter.servis.ui.ServisMainActivity::class.java)
+                                            Intent(this@LoginActivity, SupplierActivity::class.java)
                                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                                         startActivity(intent)
                                         finish()
