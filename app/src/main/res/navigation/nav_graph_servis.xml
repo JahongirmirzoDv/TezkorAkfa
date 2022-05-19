@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/orderInfoFragment"
-        android:name="uz.algorithmgateway.tezkorakfa.servis.ui.orders_info.OrderInfoFragment"
+        android:name="uz.algorithmgateway.tezkorakfa.presenter.servis.ui.orders_info.OrderInfoFragment"
         android:label="fragment_order_info"
         tools:layout="@layout/fragment_order_info" >
         <action

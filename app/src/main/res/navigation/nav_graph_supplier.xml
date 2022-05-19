@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/productListFragment"
-        android:name="uz.algorithmgateway.tezkorakfa.supplier.productList.ProductListFragment"
+        android:name="uz.algorithmgateway.tezkorakfa.presenter.supplier.productList.ProductListFragment"
         android:label="ProductListFragment"
         tools:layout="@layout/fragment_product_list">
 
@@ -17,7 +17,7 @@
     </fragment>
     <fragment
         android:id="@+id/orderListFragment"
-        android:name="uz.algorithmgateway.tezkorakfa.supplier.orderList.OrderListFragmentSup"
+        android:name="uz.algorithmgateway.tezkorakfa.presenter.supplier.orderList.OrderListFragmentSup"
         android:label="OrderListFragment"
         tools:layout="@layout/fragment_order_list_sup">
 
@@ -27,21 +27,21 @@
     </fragment>
     <fragment
         android:id="@+id/foundListFragment"
-        android:name="uz.algorithmgateway.tezkorakfa.supplier.foundList.FoundListFragment"
+        android:name="uz.algorithmgateway.tezkorakfa.presenter.supplier.foundList.FoundListFragment"
         android:label="FoundListFragment"
         tools:layout="@layout/fragment_found_list">
 
     </fragment>
     <fragment
         android:id="@+id/givenMoneyFragment"
-        android:name="uz.algorithmgateway.tezkorakfa.supplier.givenMoney.GivenMoneyFragment"
+        android:name="uz.algorithmgateway.tezkorakfa.presenter.supplier.givenMoney.GivenMoneyFragment"
         android:label="GivenMoneyFragment"
         tools:layout="@layout/fragment_given_money">
 
     </fragment>
     <fragment
         android:id="@+id/purchasedFragment"
-        android:name="uz.algorithmgateway.tezkorakfa.supplier.purchased.PurchasedFragment"
+        android:name="uz.algorithmgateway.tezkorakfa.presenter.supplier.purchased.PurchasedFragment"
         android:label="PurchasedFragment"
         tools:layout="@layout/fragment_purchased">
 
@@ -54,17 +54,17 @@
     </fragment>
     <fragment
         android:id="@+id/orderHistoryFragment"
-        android:name="uz.algorithmgateway.tezkorakfa.supplier.orderHistory.OrderHistoryFragment"
+        android:name="uz.algorithmgateway.tezkorakfa.presenter.supplier.orderHistory.OrderHistoryFragment"
         android:label="OrderHistoryFragment"
         tools:layout="@layout/fragment_order_history" />
     <fragment
         android:id="@+id/firstPageFragment"
-        android:name="uz.algorithmgateway.tezkorakfa.supplier.purchased.FirstPageFragment"
+        android:name="uz.algorithmgateway.tezkorakfa.presenter.supplier.purchased.FirstPageFragment"
         android:label="FirstPageFragment"
         tools:layout="@layout/fragment_purchase_first" />
     <fragment
         android:id="@+id/secondPageFragment"
-        android:name="uz.algorithmgateway.tezkorakfa.supplier.purchased.SecondPageFragment"
+        android:name="uz.algorithmgateway.tezkorakfa.presenter.supplier.purchased.SecondPageFragment"
         android:label="SecondPageFragment"
         tools:layout="@layout/fragment_purchase_second" />
 </navigation>
