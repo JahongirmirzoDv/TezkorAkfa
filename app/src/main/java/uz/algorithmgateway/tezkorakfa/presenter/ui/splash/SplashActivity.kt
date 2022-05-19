@@ -10,6 +10,7 @@ import uz.algorithmgateway.data.const.Value
 import uz.algorithmgateway.tezkorakfa.R
 import uz.algorithmgateway.tezkorakfa.presenter.measurer.ui.MeasurerActivity
 import uz.algorithmgateway.tezkorakfa.presenter.montage.MontageActivity
+import uz.algorithmgateway.tezkorakfa.presenter.servis.ui.ServisMainActivity
 import uz.algorithmgateway.tezkorakfa.presenter.supplier.SupplierActivity
 import uz.algorithmgateway.tezkorakfa.presenter.ui.login.LoginActivity
 import uz.algorithmgateway.tezkorakfa.presenter.ui.utils.SharedPref
@@ -45,10 +46,10 @@ class SplashActivity : AppCompatActivity() {
                         finish()
                     }
                     Value.SERVICER -> {
-//                                        val intent =
-//                                            Intent(this@LoginActivity, MontageActivity::class.java)
-//                                        startActivity(intent)
-//                                        finish()
+                        val intent =
+                            Intent(this, ServisMainActivity::class.java)
+                        startActivity(intent)
+                        finish()
                     }
                 }
             } else startActivity(Intent(this, LoginActivity::class.java))
