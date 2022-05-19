@@ -109,7 +109,7 @@
 
     </LinearLayout>
 
-    <uz.algorithmgateway.tezkorakfa.windowdoordisegner.ui.WindowDoorDesigner
+    <uz.algorithmgateway.tezkorakfa.presenter.windowdoordisegner.ui.WindowDoorDesigner
         android:id="@+id/layout_designer"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -119,7 +119,7 @@
         app:layout_constraintTop_toBottomOf="@id/layout_item_bar"
         app:layout_constraintBottom_toTopOf="@id/view_size_horizontal" />
 
-    <uz.algorithmgateway.tezkorakfa.windowdoordisegner.ui.sizeview.SizeViewHorizontal
+    <uz.algorithmgateway.tezkorakfa.presenter.windowdoordisegner.ui.sizeview.SizeViewHorizontal
         android:id="@+id/view_size_horizontal"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

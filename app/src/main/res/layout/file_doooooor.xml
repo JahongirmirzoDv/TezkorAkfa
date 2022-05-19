@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <uz.algorithmgateway.tezkorakfa.windowdoordisegner.ui.Area
+    <uz.algorithmgateway.tezkorakfa.presenter.windowdoordisegner.ui.Area
         android:id="@+id/child_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/ordersFragment2"
-        android:name="uz.algorithmgateway.tezkorakfa.montage.ui.OrdersFragment"
+        android:name="uz.algorithmgateway.tezkorakfa.presenter.montage.ui.OrdersFragment"
         android:label="fragment_orders"
         tools:layout="@layout/fragment_orders">
         <action
@@ -20,7 +20,7 @@
     </fragment>
     <fragment
         android:id="@+id/parametrFragment"
-        android:name="uz.algorithmgateway.tezkorakfa.montage.ui.ParametrFragment"
+        android:name="uz.algorithmgateway.tezkorakfa.presenter.montage.ui.ParametrFragment"
         android:label="fragment_parametr"
         tools:layout="@layout/fragment_parametr">
 
@@ -30,7 +30,7 @@
     </fragment>
     <fragment
         android:id="@+id/confirmedOrdersFragment"
-        android:name="uz.algorithmgateway.tezkorakfa.montage.ui.ConfirmedOrdersFragment"
+        android:name="uz.algorithmgateway.tezkorakfa.presenter.montage.ui.ConfirmedOrdersFragment"
         android:label="fragment_confirmed_orders"
         tools:layout="@layout/fragment_confirmed_orders" >
         <action
@@ -39,7 +39,7 @@
     </fragment>
     <fragment
         android:id="@+id/confirmedOrdersImageInfoFragment"
-        android:name="uz.algorithmgateway.tezkorakfa.montage.ui.ConfirmedOrdersImageInfoFragment"
+        android:name="uz.algorithmgateway.tezkorakfa.presenter.montage.ui.ConfirmedOrdersImageInfoFragment"
         android:label="fragment_confirmed_orders_image_info"
         tools:layout="@layout/fragment_confirmed_orders_image_info" >
         <action

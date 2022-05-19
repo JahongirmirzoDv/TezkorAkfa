@@ -175,7 +175,7 @@
         <entry key="..\:/anp/abs/app/src/main/res/drawable/ic_window.xml" value="0.1735" />
         <entry key="..\:/anp/abs/app/src/main/res/layout/activity_designer.xml" value="0.1" />
         <entry key="..\:/anp/abs/app/src/main/res/layout/activity_login.xml" value="0.17777777777777778" />
-        <entry key="..\:/anp/abs/app/src/main/res/layout/activity_measurer.xml" value="0.1" />
+        <entry key="..\:/anp/abs/app/src/main/res/layout/activity_measurer.xml" value="0.22" />
         <entry key="..\:/anp/abs/app/src/main/res/layout/activity_montage.xml" value="0.1" />
         <entry key="..\:/anp/abs/app/src/main/res/layout/activity_splash.xml" value="0.22447916666666667" />
         <entry key="..\:/anp/abs/app/src/main/res/layout/activity_supplier.xml" value="0.22447916666666667" />
@@ -199,6 +199,8 @@
         <entry key="..\:/anp/abs/app/src/main/res/layout/fragment_purchased.xml" value="0.22447916666666667" />
         <entry key="..\:/anp/abs/app/src/main/res/layout/fragment_supplier.xml" value="0.22447916666666667" />
         <entry key="..\:/anp/abs/app/src/main/res/layout/fragment_tab_layout.xml" value="0.22447916666666667" />
+        <entry key="..\:/anp/abs/app/src/main/res/layout/fragment_unconfirmed.xml" value="0.21666666666666667" />
+        <entry key="..\:/anp/abs/app/src/main/res/layout/item_confirem_orders.xml" value="0.21666666666666667" />
         <entry key="..\:/anp/abs/app/src/main/res/layout/item_confirm.xml" value="0.22447916666666667" />
         <entry key="..\:/anp/abs/app/src/main/res/layout/item_found_list_header.xml" value="0.22447916666666667" />
         <entry key="..\:/anp/abs/app/src/main/res/layout/item_order.xml" value="0.5" />

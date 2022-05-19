@@ -3,13 +3,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <uz.algorithmgateway.tezkorakfa.windowdoordisegner.ui.door.Door
+    <uz.algorithmgateway.tezkorakfa.presenter.windowdoordisegner.ui.door.Door
         android:id="@+id/view_door"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:elevation="3dp" />
 
-    <uz.algorithmgateway.tezkorakfa.windowdoordisegner.ui.Area
+    <uz.algorithmgateway.tezkorakfa.presenter.windowdoordisegner.ui.Area
         android:id="@+id/view_area"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/ordersFragment"
-        android:name="uz.algorithmgateway.tezkorakfa.measurer.ui.orders.mainFragment.OrdersFragment"
+        android:name="uz.algorithmgateway.tezkorakfa.presenter.measurer.ui.orders.mainFragment.OrdersFragment"
         android:label="OrdersScreen"
         tools:layout="@layout/screen_orders">
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/acceptOrderScreen"
-        android:name="uz.algorithmgateway.tezkorakfa.measurer.ui.accept_order.AcceptOrderScreen"
+        android:name="uz.algorithmgateway.tezkorakfa.presenter.measurer.ui.accept_order.AcceptOrderScreen"
         android:label="AcceptOrderScreen"
         tools:layout="@layout/screen_accept_order">
         <action
@@ -30,12 +30,12 @@
     </fragment>
     <fragment
         android:id="@+id/locationScreen"
-        android:name="uz.algorithmgateway.tezkorakfa.measurer.ui.accept_order.LocationScreen"
+        android:name="uz.algorithmgateway.tezkorakfa.presenter.measurer.ui.accept_order.LocationScreen"
         android:label="location_screen_"
         tools:layout="@layout/location_screen_" />
     <fragment
         android:id="@+id/orderSelectType"
-        android:name="uz.algorithmgateway.tezkorakfa.measurer.ui.select_type.OrderSelectTypeScreen"
+        android:name="uz.algorithmgateway.tezkorakfa.presenter.measurer.ui.select_type.OrderSelectTypeScreen"
         android:label="OrderSelectType"
         tools:layout="@layout/screen_select_type_order">
         <action
@@ -44,7 +44,7 @@
     </fragment>
     <fragment
         android:id="@+id/itemCountScreen"
-        android:name="uz.algorithmgateway.tezkorakfa.measurer.ui.select_count.ItemCountScreen"
+        android:name="uz.algorithmgateway.tezkorakfa.presenter.measurer.ui.select_count.ItemCountScreen"
         android:label="ItemCountScreen"
         tools:layout="@layout/screen_select_count">
         <action
@@ -53,7 +53,7 @@
     </fragment>
     <fragment
         android:id="@+id/sliderScreen"
-        android:name="uz.algorithmgateway.tezkorakfa.measurer.ui.slider_standart.SliderScreen"
+        android:name="uz.algorithmgateway.tezkorakfa.presenter.measurer.ui.slider_standart.SliderScreen"
         android:label="SliderScreen"
         tools:layout="@layout/screen_slider">
         <action
@@ -62,17 +62,17 @@
     </fragment>
     <fragment
         android:id="@+id/confirmOrdersScreen"
-        android:name="uz.algorithmgateway.tezkorakfa.measurer.ui.confirm_orders.confirmed.ConfirmOrdersScreen"
+        android:name="uz.algorithmgateway.tezkorakfa.presenter.measurer.ui.confirm_orders.confirmed.ConfirmOrdersScreen"
         android:label="ConfirmOrdersScreen"
         tools:layout="@layout/screen_confirm_orders">
 
         <action
-            android:id="@+id/action_confirmOrdersScreen_to_orderListFragment"
-            app:destination="@id/orderListFragment" />
+            android:id="@+id/action_confirmOrdersScreen_to_signatureFragment"
+            app:destination="@id/signatureFragment" />
     </fragment>
     <fragment
         android:id="@+id/orderListFragment"
-        android:name="uz.algorithmgateway.tezkorakfa.measurer.ui.orders.orderList.OrderListFragment"
+        android:name="uz.algorithmgateway.tezkorakfa.presenter.measurer.ui.orders.orderList.OrderListFragment"
         android:label="OrderListFragment"
         tools:layout="@layout/fragment_tab_layout">
         <action
@@ -81,7 +81,7 @@
     </fragment>
     <fragment
         android:id="@+id/drawingsFragment"
-        android:name="uz.algorithmgateway.tezkorakfa.measurer.ui.drawings.DrawingsFragment"
+        android:name="uz.algorithmgateway.tezkorakfa.presenter.measurer.ui.drawings.DrawingsFragment"
         android:label="fragment_drawings"
         tools:layout="@layout/fragment_drawings">
         <action
@@ -90,16 +90,17 @@
     </fragment>
     <fragment
         android:id="@+id/savePdfFragment"
-        android:name="uz.algorithmgateway.tezkorakfa.measurer.ui.drawings.save_pdf.SavePdfFragment"
+        android:name="uz.algorithmgateway.tezkorakfa.presenter.measurer.ui.drawings.save_pdf.SavePdfFragment"
         android:label="fragment_save_pdf"
         tools:layout="@layout/fragment_save_pdf">
+
         <action
-            android:id="@+id/action_savePdfFragment_to_confirmOrdersScreen"
-            app:destination="@id/signatureFragment" />
+            android:id="@+id/action_savePdfFragment_to_unconfirmedFragment"
+            app:destination="@id/unconfirmedFragment" />
     </fragment>
     <fragment
         android:id="@+id/signatureFragment"
-        android:name="uz.algorithmgateway.tezkorakfa.measurer.ui.signature.SignatureFragment"
+        android:name="uz.algorithmgateway.tezkorakfa.presenter.measurer.ui.signature.SignatureFragment"
         android:label="fragment_signature"
         tools:layout="@layout/fragment_signature">
         <action
@@ -108,18 +109,20 @@
     </fragment>
     <fragment
         android:id="@+id/customerTakePhotoFragment"
-        android:name="uz.algorithmgateway.tezkorakfa.measurer.ui.customer_photo.CustomerTakePhotoFragment"
+        android:name="uz.algorithmgateway.tezkorakfa.presenter.measurer.ui.customer_photo.CustomerTakePhotoFragment"
         android:label="fragment_customer_take_photo"
         tools:layout="@layout/fragment_customer_take_photo">
+
         <action
-            android:id="@+id/action_customerTakePhotoFragment_to_confirmOrdersScreen"
-            app:destination="@id/unconfirmedFragment" />
+            android:id="@+id/action_customerTakePhotoFragment_to_ordersFragment"
+            app:destination="@id/ordersFragment" />
     </fragment>
     <fragment
         android:id="@+id/unconfirmedFragment"
-        android:name="uz.algorithmgateway.tezkorakfa.measurer.ui.confirm_orders.unconfirmed.UnconfirmedFragment"
+        android:name="uz.algorithmgateway.tezkorakfa.presenter.measurer.ui.confirm_orders.unconfirmed.UnconfirmedFragment"
         android:label="UnconfirmedFragment"
         tools:layout="@layout/fragment_unconfirmed">
+
         <action
             android:id="@+id/action_unconfirmedFragment_to_confirmOrdersScreen"
             app:destination="@id/confirmOrdersScreen" />

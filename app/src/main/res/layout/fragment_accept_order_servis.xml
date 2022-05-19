@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/layout_back_color"
     android:orientation="vertical"
-    tools:context=".servis.ui.accept_order.AcceptOrderServisFragment">
+    tools:context=".presenter.servis.ui.accept_order.AcceptOrderServisFragment">
 
     <include
         android:id="@+id/toolbar"

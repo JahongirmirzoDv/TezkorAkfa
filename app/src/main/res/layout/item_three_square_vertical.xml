@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <uz.algorithmgateway.tezkorakfa.windowdoordisegner.ui.Area
+    <uz.algorithmgateway.tezkorakfa.presenter.windowdoordisegner.ui.Area
         android:id="@+id/sub_layout_1"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -13,7 +13,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/mullion_1" />
 
-    <uz.algorithmgateway.tezkorakfa.windowdoordisegner.ui.Mullion
+    <uz.algorithmgateway.tezkorakfa.presenter.windowdoordisegner.ui.Mullion
         android:id="@+id/mullion_1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -23,7 +23,7 @@
         app:layout_constraintTop_toBottomOf="@id/sub_layout_1"
         app:layout_constraintBottom_toTopOf="@id/sub_layout_2" />
 
-    <uz.algorithmgateway.tezkorakfa.windowdoordisegner.ui.Area
+    <uz.algorithmgateway.tezkorakfa.presenter.windowdoordisegner.ui.Area
         android:id="@+id/sub_layout_2"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -32,7 +32,7 @@
         app:layout_constraintTop_toBottomOf="@id/mullion_1"
         app:layout_constraintBottom_toTopOf="@id/mullion_2" />
 
-    <uz.algorithmgateway.tezkorakfa.windowdoordisegner.ui.Mullion
+    <uz.algorithmgateway.tezkorakfa.presenter.windowdoordisegner.ui.Mullion
         android:id="@+id/mullion_2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -42,7 +42,7 @@
         app:layout_constraintTop_toBottomOf="@id/sub_layout_2"
         app:layout_constraintBottom_toTopOf="@id/sub_layout_3" />
 
-    <uz.algorithmgateway.tezkorakfa.windowdoordisegner.ui.Area
+    <uz.algorithmgateway.tezkorakfa.presenter.windowdoordisegner.ui.Area
         android:id="@+id/sub_layout_3"
         android:layout_width="match_parent"
         android:layout_height="0dp"
