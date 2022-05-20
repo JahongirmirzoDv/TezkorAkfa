@@ -181,6 +181,7 @@
         <entry key="..\:/anp/abs/app/src/main/res/layout/file_disegner.xml" value="0.1" />
         <entry key="..\:/anp/abs/app/src/main/res/layout/file_doooooor.xml" value="0.22447916666666667" />
         <entry key="..\:/anp/abs/app/src/main/res/layout/file_door.xml" value="0.22447916666666667" />
+        <entry key="..\:/anp/abs/app/src/main/res/layout/fragment_accept_order_servis.xml" value="0.25" />
         <entry key="..\:/anp/abs/app/src/main/res/layout/fragment_customer_take_photo.xml" value="0.22447916666666667" />
         <entry key="..\:/anp/abs/app/src/main/res/layout/fragment_designer.xml" value="0.22447916666666667" />
         <entry key="..\:/anp/abs/app/src/main/res/layout/fragment_drawings.xml" value="0.25" />
@@ -188,6 +189,7 @@
         <entry key="..\:/anp/abs/app/src/main/res/layout/fragment_given_money.xml" value="0.22447916666666667" />
         <entry key="..\:/anp/abs/app/src/main/res/layout/fragment_order.xml" value="0.1" />
         <entry key="..\:/anp/abs/app/src/main/res/layout/fragment_order_history.xml" value="0.22447916666666667" />
+        <entry key="..\:/anp/abs/app/src/main/res/layout/fragment_order_info.xml" value="0.1094224924012158" />
         <entry key="..\:/anp/abs/app/src/main/res/layout/fragment_order_list.xml" value="0.1" />
         <entry key="..\:/anp/abs/app/src/main/res/layout/fragment_orders.xml" value="0.22447916666666667" />
         <entry key="..\:/anp/abs/app/src/main/res/layout/fragment_parametr.xml" value="0.33" />
@@ -228,7 +230,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_17" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
