@@ -10,6 +10,7 @@ import javax.inject.Singleton
 @Module
 class ApplicationModule(var myApplication: MyApplication) {
 
+
     @Provides
     @Singleton
     fun provideApp(): MyApplication = myApplication

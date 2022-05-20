@@ -29,6 +29,9 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.asRequestBody
 import uz.algorithmgateway.tezkorakfa.R
 import uz.algorithmgateway.tezkorakfa.base.MyApplication
 import uz.algorithmgateway.tezkorakfa.data.local.entity.Pdf
@@ -36,6 +39,8 @@ import uz.algorithmgateway.tezkorakfa.databinding.FragmentSavePdfBinding
 import uz.algorithmgateway.tezkorakfa.presenter.measurer.ui.drawings.adapters.PdfAdapter
 import uz.algorithmgateway.tezkorakfa.presenter.measurer.ui.select_type.models.Drawing
 import uz.algorithmgateway.tezkorakfa.presenter.measurer.viewmodel.DbViewmodel
+import uz.algorithmgateway.tezkorakfa.presenter.measurer.viewmodel.NetworkViewmodel
+import uz.algorithmgateway.tezkorakfa.presenter.ui.utils.UIState
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
@@ -47,6 +52,10 @@ import kotlin.coroutines.CoroutineContext
 open class SavePdfFragment : Fragment(), CoroutineScope {
     @Inject
     lateinit var viewmodel: DbViewmodel
+
+    @Inject
+    lateinit var apiVm: NetworkViewmodel
+
     private var _binding: FragmentSavePdfBinding? = null
     private val binding get() = _binding!!
     lateinit var list: MutableStateFlow<List<Drawing>>
@@ -100,22 +109,56 @@ open class SavePdfFragment : Fragment(), CoroutineScope {
     @RequiresApi(Build.VERSION_CODES.R)
     private fun loadPdf() {
         binding.save.setOnClickListener {
-
             if (booleanPermission) {
-
                 try {
                     val screenshotFromRecyclerView = getScreenshotFromRecyclerView(binding.savePdf)
                     screenshotFromRecyclerView?.let { it1 -> saveImageToPDF(height, it1, "chizma") }
 
+                    launch(Dispatchers.IO) {
+                        val pdf = viewmodel.getPdf().last()
+                        val list = viewmodel.getAllDrawing()
+                        var eshik = 0
+                        var oyna = 0
+                        list.forEach {
+                            if (it.type == "Eshik") {
+                                eshik += it.count ?:0
+                            } else if (it.type == "Oyna") {
+                                oyna += it.count ?:0
+                            }
+                        }
 
-//                    val f = File(
-//                        Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS)
-//                            .toString() + "/Operation.pdf"
-//                    )
-//
-//                    toast(f.toString())
-//                    viewmodel.addPdf(Pdf(id = drawing.id, pdf = f.toString(), null, null))
+                        val builder: MultipartBody.Builder = MultipartBody.Builder()
 
+                        val f = File(
+                            Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS)
+                                .toString(),
+                            pdf.pdf
+                        )
+
+                        builder.setType(MultipartBody.FORM)
+                        builder.addFormDataPart(
+                            "scaler_file",
+                            f.name,
+                            f.asRequestBody("multipart/form-data".toMediaTypeOrNull())
+                        )
+                        builder.addFormDataPart("number_of_rooms", "$oyna")
+                        builder.addFormDataPart("number_of_doors", "$eshik")
+
+                        val body = builder.build()
+                        apiVm.sendData(pdf.id, body).collect {
+                            when (it) {
+                                is UIState.Loading -> {
+
+                                }
+                                is UIState.Error -> {
+
+                                }
+                                is UIState.Success -> {
+                                    Log.d("TAG", ": $it.data?.result ?: succes")
+                                }
+                            }
+                        }
+                    }
                 } catch (e: Exception) {
                     Log.e("eror", "loadPdf: ${e.message}")
                 }
@@ -131,10 +174,13 @@ open class SavePdfFragment : Fragment(), CoroutineScope {
 
     @RequiresApi(Build.VERSION_CODES.R)
     private fun requestPermission() {
-        if ((ContextCompat.checkSelfPermission(requireContext(),
-                Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) && (ContextCompat.checkSelfPermission(
+        if ((ContextCompat.checkSelfPermission(
                 requireContext(),
-                Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)
+                Manifest.permission.WRITE_EXTERNAL_STORAGE
+            ) != PackageManager.PERMISSION_GRANTED) && (ContextCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.READ_EXTERNAL_STORAGE
+            ) != PackageManager.PERMISSION_GRANTED)
         ) {
             ActivityCompat.requestPermissions(
                 requireActivity(), arrayOf(
@@ -187,15 +233,19 @@ open class SavePdfFragment : Fragment(), CoroutineScope {
     fun saveImageToPDF(heig: Int, bitmap: Bitmap, filename: String) {
         val randomKey = randomKey()
         val mFile =
-            File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS)
-                .toString(),
-                "${filename}_${randomKey}.pdf")
+            File(
+                Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS)
+                    .toString(),
+                "${filename}_${randomKey}.pdf"
+            )
         viewmodel.addPdf(
             Pdf(
                 id = drawing.id,
                 pdf = "${filename}_${randomKey}.pdf",
                 signature = null,
-                image = null))
+                image = null
+            )
+        )
         if (!mFile.exists()) {
             val height = heig + bitmap.height
             val document = PdfDocument()
@@ -203,10 +253,12 @@ open class SavePdfFragment : Fragment(), CoroutineScope {
             val page = document.startPage(pageInfo)
             val canvas = page.canvas
             binding.savePdf.draw(canvas)
-            canvas.drawBitmap(bitmap,
+            canvas.drawBitmap(
+                bitmap,
                 null,
                 Rect(0, heig, bitmap.width, bitmap.height),
-                null)
+                null
+            )
             document.finishPage(page)
             try {
                 mFile.createNewFile()
@@ -238,13 +290,19 @@ open class SavePdfFragment : Fragment(), CoroutineScope {
             for (i in 0 until size) {
                 val holder = adapter.createViewHolder(view, adapter.getItemViewType(i))
                 adapter.onBindViewHolder(holder, i)
-                holder.itemView.measure(View.MeasureSpec.makeMeasureSpec(view.width,
-                    View.MeasureSpec.EXACTLY),
-                    View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED))
-                holder.itemView.layout(0,
+                holder.itemView.measure(
+                    View.MeasureSpec.makeMeasureSpec(
+                        view.width,
+                        View.MeasureSpec.EXACTLY
+                    ),
+                    View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED)
+                )
+                holder.itemView.layout(
+                    0,
                     0,
                     holder.itemView.measuredWidth,
-                    holder.itemView.measuredHeight)
+                    holder.itemView.measuredHeight
+                )
                 holder.itemView.isDrawingCacheEnabled = true
                 holder.itemView.buildDrawingCache()
                 val drawingCache = holder.itemView.drawingCache
@@ -273,11 +331,14 @@ open class SavePdfFragment : Fragment(), CoroutineScope {
             val locationOfViewInWindow = IntArray(2)
             view.getLocationInWindow(locationOfViewInWindow)
             try {
-                PixelCopy.request(window,
-                    Rect(locationOfViewInWindow[0],
+                PixelCopy.request(
+                    window,
+                    Rect(
+                        locationOfViewInWindow[0],
                         locationOfViewInWindow[1],
                         locationOfViewInWindow[0] + view.width,
-                        locationOfViewInWindow[1] + view.height),
+                        locationOfViewInWindow[1] + view.height
+                    ),
                     bitmap,
                     { copyResult ->
                         if (copyResult == PixelCopy.SUCCESS) {
@@ -285,7 +346,8 @@ open class SavePdfFragment : Fragment(), CoroutineScope {
                         }
                         // possible to handle other result codes ...
                     },
-                    Handler(Looper.getMainLooper()))
+                    Handler(Looper.getMainLooper())
+                )
             } catch (e: IllegalArgumentException) {
                 // PixelCopy may throw IllegalArgumentException, make sure to handle it
                 e.printStackTrace()

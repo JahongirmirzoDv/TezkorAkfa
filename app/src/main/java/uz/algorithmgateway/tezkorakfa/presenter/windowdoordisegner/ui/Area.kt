@@ -116,24 +116,6 @@ class Area @JvmOverloads constructor(
         }
     }
 
-    fun removeWindow() {
-        childLayout = findViewById<View>(R.id.child_layout) as LinearLayout
-        val saveImage = childLayout?.let { saveImage(it) }
-        saveImage?.let { saveBitmap(it, "rasm") }
-    }
-
-    fun clearView() {
-            val window = WindowLayout(ctx)
-            window.setViewScale(viewScale)
-            window.setW(2000)
-            window.setH(1300)
-            window.layoutParams = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
-
-            childLayout?.removeAllViews()
-            childLayout?.addView(window)
-
-    }
-
     private fun saveImage(view: View): Bitmap {
         val specWidth =
             View.MeasureSpec.makeMeasureSpec(1324, View.MeasureSpec.AT_MOST)
