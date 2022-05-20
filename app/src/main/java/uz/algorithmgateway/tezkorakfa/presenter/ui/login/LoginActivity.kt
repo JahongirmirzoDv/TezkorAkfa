@@ -96,7 +96,7 @@ class LoginActivity : AppCompatActivity(), CoroutineScope {
                                         val intent =
                                             Intent(
                                                 this@LoginActivity,
-                                                uz.algorithmgateway.tezkorakfa.presenter.servis.ui.ServisMainActivity::class.java
+                                                ServisMainActivity::class.java
                                             )
                                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                                         startActivity(intent)

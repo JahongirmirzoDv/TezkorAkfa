@@ -1,5 +1,6 @@
 package uz.algorithmgateway.tezkorakfa.supplier.orderList
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -27,6 +28,8 @@ import uz.algorithmgateway.tezkorakfa.presenter.supplier.SupplierActivity
 import uz.algorithmgateway.tezkorakfa.presenter.supplier.adapter.AdapterTableSpinner
 import uz.algorithmgateway.tezkorakfa.presenter.supplier.orderList.AdapterOrderList
 import uz.algorithmgateway.tezkorakfa.presenter.supplier.viewmodel.NetworkViewModel
+import uz.algorithmgateway.tezkorakfa.presenter.ui.login.LoginActivity
+import uz.algorithmgateway.tezkorakfa.presenter.ui.utils.SharedPref
 import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
 
@@ -34,6 +37,8 @@ class OrderListFragmentSup : Fragment(), InterfaceOrderClick, CoroutineScope {
 
     lateinit var binding: FragmentOrderListSupBinding
     private var orderStatus: Int = 0
+    private lateinit var orderList: ArrayList<Result>
+    private val sharedPref by lazy { SharedPref(requireContext()) }
 
     //    private val orderList: List<OrderSupplier> = createOrderList()
     private var orderListAdapter: AdapterOrderList? = null
@@ -60,10 +65,21 @@ class OrderListFragmentSup : Fragment(), InterfaceOrderClick, CoroutineScope {
         val mainActivity = activity as SupplierActivity
         mainActivity.bottomNavigationViewVisibility()
 
+        installLogOut()
         loadNetworData()
         loadOrderStatusSpinner()
         loadSearchView()
 //        loadOrderHistoryButton()
+    }
+
+    private fun installLogOut() {
+        binding.logout.setOnClickListener {
+            sharedPref.isLogin = false
+            sharedPref.clear()
+            startActivity(Intent(requireActivity(), LoginActivity::class.java))
+            requireActivity().finish()
+        }
+
     }
 
     private fun loadNetworData() {
@@ -74,10 +90,13 @@ class OrderListFragmentSup : Fragment(), InterfaceOrderClick, CoroutineScope {
                         toast(it.message)
                     }
                     OrdersListResource.Loading -> {
-                        toast("Loading...")
+                        binding.progressView.visibility = View.VISIBLE
                     }
                     is OrdersListResource.SuccesList -> {
                         loadOrderList(it.list.results)
+                        orderList = ArrayList()
+                        orderList.addAll(it.list.results)
+                        binding.progressView.visibility = View.GONE
                     }
                 }
 
@@ -90,22 +109,22 @@ class OrderListFragmentSup : Fragment(), InterfaceOrderClick, CoroutineScope {
     private fun loadSearchView() {
         binding.editTextSearch.doOnTextChanged { text, start, before, count ->
 
-//            val filterList: List<OrderSupplier> = if (orderStatus == 0) {
+//            val filterList: List<Result> = if (orderStatus == 0) {
 //                orderList
 //            } else {
 //                orderList.filter { s -> s.status == orderStatus }
 //            }
-////
-//            val searchList = mutableListOf<OrderSupplier>()
-//            for (i in filterList) {
-//                if (text.toString().toRegex().find(i.id.toString()) != null) {
-//                    searchList.add(i)
-//                }
-//            }
-////
-//            searchList.let {
-//                orderListAdapter?.updateList(searchList)
-//            }
+//
+            val searchList = mutableListOf<Result>()
+            for (i in orderList) {
+                if (text.toString().toRegex().find(i.id.toString()) != null) {
+                    searchList.add(i)
+                }
+            }
+//
+            searchList.let {
+                orderListAdapter?.updateList(searchList)
+            }
 
 
         }
@@ -142,7 +161,7 @@ class OrderListFragmentSup : Fragment(), InterfaceOrderClick, CoroutineScope {
     }
 
     private fun loadOrderList(list: List<Result>) {
-        orderListAdapter = AdapterOrderList(list) {
+        orderListAdapter = AdapterOrderList(list as ArrayList<Result>) {
             findNavController().navigate(R.id.productListFragment)
         }
         binding.rvOrderList.layoutManager =

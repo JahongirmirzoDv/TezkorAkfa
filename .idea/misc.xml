@@ -49,10 +49,14 @@
         <entry key="..\:/Android_studio/Dager Hilt/TezkorAkfa/app/src/main/res/layout/section_window.xml" value="0.4" />
         <entry key="..\:/Android_studio/Dager Hilt/TezkorAkfa/app/src/main/res/layout/toolbar_montage.xml" value="0.25" />
         <entry key="..\:/Android_studio/otherProject/tezkorAkfa/app/src/main/res/drawable/back_tablayout_confirm_screeen.xml" value="0.137" />
+        <entry key="..\:/Android_studio/otherProject/tezkorAkfa/app/src/main/res/drawable/ic_arka.xml" value="0.1405" />
         <entry key="..\:/Android_studio/otherProject/tezkorAkfa/app/src/main/res/drawable/ic_back_arrow_fragment.xml" value="0.179" />
         <entry key="..\:/Android_studio/otherProject/tezkorAkfa/app/src/main/res/drawable/ic_baseline_keyboard_arrow_left_24.xml" value="0.1515" />
         <entry key="..\:/Android_studio/otherProject/tezkorAkfa/app/src/main/res/drawable/ic_door_handle_left.xml" value="0.153" />
+        <entry key="..\:/Android_studio/otherProject/tezkorAkfa/app/src/main/res/drawable/ic_door_handle_right.xml" value="0.1405" />
         <entry key="..\:/Android_studio/otherProject/tezkorAkfa/app/src/main/res/drawable/ic_door_left.xml" value="0.153" />
+        <entry key="..\:/Android_studio/otherProject/tezkorAkfa/app/src/main/res/drawable/ic_door_right.xml" value="0.1405" />
+        <entry key="..\:/Android_studio/otherProject/tezkorAkfa/app/src/main/res/drawable/ic_give_money.xml" value="0.128" />
         <entry key="..\:/Android_studio/otherProject/tezkorAkfa/app/src/main/res/drawable/ic_glass.xml" value="0.153" />
         <entry key="..\:/Android_studio/otherProject/tezkorAkfa/app/src/main/res/drawable/ic_hinge_horizontal.xml" value="0.153" />
         <entry key="..\:/Android_studio/otherProject/tezkorAkfa/app/src/main/res/drawable/ic_next_arrow_fr.xml" value="0.179" />
@@ -83,9 +87,11 @@
         <entry key="..\:/Android_studio/otherProject/tezkorAkfa/app/src/main/res/layout/fragment_drawings.xml" value="0.25" />
         <entry key="..\:/Android_studio/otherProject/tezkorAkfa/app/src/main/res/layout/fragment_found_list.xml" value="0.25" />
         <entry key="..\:/Android_studio/otherProject/tezkorAkfa/app/src/main/res/layout/fragment_given_money.xml" value="0.25" />
+        <entry key="..\:/Android_studio/otherProject/tezkorAkfa/app/src/main/res/layout/fragment_order.xml" value="0.25" />
         <entry key="..\:/Android_studio/otherProject/tezkorAkfa/app/src/main/res/layout/fragment_order_history.xml" value="0.25" />
         <entry key="..\:/Android_studio/otherProject/tezkorAkfa/app/src/main/res/layout/fragment_order_info.xml" value="0.2359375" />
         <entry key="..\:/Android_studio/otherProject/tezkorAkfa/app/src/main/res/layout/fragment_order_list_sup.xml" value="0.264" />
+        <entry key="..\:/Android_studio/otherProject/tezkorAkfa/app/src/main/res/layout/fragment_orders.xml" value="0.25" />
         <entry key="..\:/Android_studio/otherProject/tezkorAkfa/app/src/main/res/layout/fragment_parametr.xml" value="0.25" />
         <entry key="..\:/Android_studio/otherProject/tezkorAkfa/app/src/main/res/layout/fragment_product_list.xml" value="0.24947916666666667" />
         <entry key="..\:/Android_studio/otherProject/tezkorAkfa/app/src/main/res/layout/fragment_purchase_first.xml" value="0.2" />
@@ -108,7 +114,13 @@
         <entry key="..\:/Android_studio/otherProject/tezkorAkfa/app/src/main/res/layout/item_order_list_header.xml" value="0.25" />
         <entry key="..\:/Android_studio/otherProject/tezkorAkfa/app/src/main/res/layout/item_order_list_supplier.xml" value="0.25" />
         <entry key="..\:/Android_studio/otherProject/tezkorAkfa/app/src/main/res/layout/item_product_table.xml" value="0.25" />
+        <entry key="..\:/Android_studio/otherProject/tezkorAkfa/app/src/main/res/layout/item_purchase_first.xml" value="0.25" />
+        <entry key="..\:/Android_studio/otherProject/tezkorAkfa/app/src/main/res/layout/item_purchase_first_header.xml" value="0.25" />
+        <entry key="..\:/Android_studio/otherProject/tezkorAkfa/app/src/main/res/layout/item_spinner.xml" value="0.25" />
+        <entry key="..\:/Android_studio/otherProject/tezkorAkfa/app/src/main/res/layout/item_three_square_horizontal.xml" value="0.25" />
+        <entry key="..\:/Android_studio/otherProject/tezkorAkfa/app/src/main/res/layout/item_three_square_vertical.xml" value="0.25" />
         <entry key="..\:/Android_studio/otherProject/tezkorAkfa/app/src/main/res/layout/item_two_square_horizontal.xml" value="0.25" />
+        <entry key="..\:/Android_studio/otherProject/tezkorAkfa/app/src/main/res/layout/item_two_square_vertical.xml" value="0.25" />
         <entry key="..\:/Android_studio/otherProject/tezkorAkfa/app/src/main/res/layout/layout_change_size_dialog.xml" value="0.24635416666666668" />
         <entry key="..\:/Android_studio/otherProject/tezkorAkfa/app/src/main/res/layout/layout_designer.xml" value="0.25" />
         <entry key="..\:/Android_studio/otherProject/tezkorAkfa/app/src/main/res/layout/layout_horizontal_size_view.xml" value="0.25" />

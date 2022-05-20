@@ -16,18 +16,20 @@ import uz.algorithmgateway.tezkorakfa.databinding.ItemOrderListBinding
 import uz.algorithmgateway.tezkorakfa.databinding.ItemOrderListSupplierBinding
 
 class AdapterOrderList(
-    private val myList: List<Result>,
+    private var myList: ArrayList<Result>,
     var itemClickListener: (String) -> Unit
 ) : RecyclerView.Adapter<AdapterOrderList.VH>() {
     //    private var myList = mutableListOf<OrderSupplier>()
     private lateinit var ctx: Context
 
-//    @SuppressLint("NotifyDataSetChanged")
-//    fun updateList(newList: List<OrderSupplier>) {
-//        myList.clear()
-//        myList.addAll(newList)
-//        this.notifyDataSetChanged()
-//    }
+    private var count: Int = 1
+
+    //    @SuppressLint("NotifyDataSetChanged")
+    fun updateList(newList: List<Result>) {
+        myList.clear()
+        myList.addAll(newList)
+        this.notifyDataSetChanged()
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
         ctx = parent.context
@@ -46,9 +48,13 @@ class AdapterOrderList(
         RecyclerView.ViewHolder(binding.root) {
 
         fun onBind(item: Result) {
-            binding.tvNumber.text = item.contract_number.toString()
-            binding.tvPrice.text = item.total_price.toString()
-            binding.tvTime.text = item.measurement_time.toString()
+            binding.apply {
+                tvNumber.text = item.contract_number.toString()
+                tvPrice.text = item.total_price.toString()
+                tvTime.text = item.measurement_time.toString()
+                number.setText(count.toString())
+                count++
+            }
 
 //            when (item.status) {
 //                1 -> binding.ivStatus.setBackgroundColor(ctx.getColor(R.color.color_green))

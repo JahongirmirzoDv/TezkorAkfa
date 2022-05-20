@@ -18,7 +18,7 @@ class MontageActivity : AppCompatActivity() {
         binding = ActivityMontageBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        setupViews()
+//        setupViews()
     }
 
     private fun setupViews() {
@@ -26,9 +26,9 @@ class MontageActivity : AppCompatActivity() {
             supportFragmentManager.findFragmentById(R.id.fragmentView) as NavHostFragment
         navController = navHostFragment.navController
 
-        NavigationUI.setupWithNavController(
-            binding.bottomNavigationView,
-            navHostFragment.navController
-        )
+//        NavigationUI.setupWithNavController(
+//            binding.bottomNavigationView,
+//            navHostFragment.navController
+//        )
     }
 }
