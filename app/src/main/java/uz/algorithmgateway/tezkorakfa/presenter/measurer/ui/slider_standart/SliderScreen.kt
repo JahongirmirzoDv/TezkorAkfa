@@ -79,11 +79,11 @@ class SliderScreen : Fragment() {
         savedInstanceState: Bundle?,
     ): View {
         _binding = ScreenSliderBinding.inflate(inflater, container, false)
-        drawing = dbViewmodel.getAllDrawing().last()
-        H = drawing!!.heigth!!
-        W = drawing!!.width!!
-        H_T = drawing!!.heigth!!
-        W_T = drawing!!.width!!
+//        drawing = dbViewmodel.getAllDrawing().last()
+//        H = drawing!!.heigth!!
+//        W = drawing!!.width!!
+//        H_T = drawing!!.heigth!!
+//        W_T = drawing!!.width!!
         return binding.root
     }
 
@@ -91,7 +91,7 @@ class SliderScreen : Fragment() {
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.projectId.text = "Loyiha ${drawing?.id?.ifEmpty { "" }}"
+//        binding.projectId.text = "Loyiha ${drawing?.id?.ifEmpty { "" }}"
         verifyStoragePermission(requireActivity())
         navigationButtons()
         dragAndDropListener = Area(requireContext())

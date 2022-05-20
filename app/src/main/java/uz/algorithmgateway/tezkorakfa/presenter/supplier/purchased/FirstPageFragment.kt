@@ -1,5 +1,8 @@
 package uz.algorithmgateway.tezkorakfa.presenter.supplier.purchased
 
+import android.app.AlertDialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import uz.algorithmgateway.core.util.toast
 import uz.algorithmgateway.tezkorakfa.data.models.Product
 import uz.algorithmgateway.supplier.productList.InterfaceProductClick
+import uz.algorithmgateway.tezkorakfa.databinding.CreateOrdersDialogViewBinding
 import uz.algorithmgateway.tezkorakfa.databinding.FragmentPurchaseFirstBinding
 import uz.algorithmgateway.tezkorakfa.presenter.supplier.adapter.AdapterTableSpinner
 import uz.algorithmgateway.tezkorakfa.presenter.supplier.productList.AdapterProductList
@@ -100,12 +104,33 @@ class FirstPageFragment : Fragment(), InterfaceProductClick {
 
     private fun loadProductList() {
         productListAdapter = AdapterProductList(requireContext()) {
-            toast("$it")
+            showDialogView()
         }
         binding.rvList.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         binding.rvList.adapter = productListAdapter
     }
+
+    private fun showDialogView() {
+        val builder = AlertDialog.Builder(requireContext())
+        val dialogBinding = CreateOrdersDialogViewBinding.inflate(layoutInflater)
+        builder.setView(dialogBinding.root)
+        val alertDialog: AlertDialog = builder.create()
+        alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+        val adapter = AdapterTableSpinner(requireContext(), typeList(), true)
+        dialogBinding.spinnertypeBuy.adapter = adapter
+        dialogBinding.configOrderBtn.setOnClickListener {
+            alertDialog.dismiss()
+        }
+        alertDialog.show()
+
+    }
+
+    private fun typeList() = listOf<String>(
+        "Ko'chadan",
+        "Dillerdan",
+    )
 
     private fun productList() = listOf<Product>(
         Product(1, "Alyuminiy profil", 1, 3, 70000, 210000, false),

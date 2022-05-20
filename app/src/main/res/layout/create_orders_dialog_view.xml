@@ -2,12 +2,12 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
         android:layout_margin="@dimen/item_normal_padding"
         android:layout_width="match_parent"
-        android:layout_height="350dp"
+        android:layout_height="380dp"
         app:cardBackgroundColor="@color/layout_light"
         app:cardCornerRadius="@dimen/item_space_middle"
         app:layout_constraintTop_toTopOf="parent">
@@ -42,7 +42,7 @@
                 android:padding="@dimen/item_small_padding">
 
                 <androidx.appcompat.widget.AppCompatSpinner
-                    android:id="@+id/spinnerRoomOrDoor"
+                    android:id="@+id/spinnertypeBuy"
                     style="@style/mySpinnerItemStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
@@ -77,7 +77,7 @@
                         android:gravity="center_vertical"
                         android:maxLines="1"
                         android:padding="@dimen/item_normal_padding"
-                        android:text="150"
+                        android:text="3"
                         android:textColor="@color/white"
                         android:textColorHint="@color/text_dark_color"
                         android:textSize="@dimen/text_size_sixteen" />
@@ -107,7 +107,7 @@
                         android:gravity="center_vertical"
                         android:maxLines="1"
                         android:padding="@dimen/item_normal_padding"
-                        android:text="150"
+                        android:text="150 000"
                         android:textColor="@color/white"
                         android:textColorHint="@color/text_dark_color"
                         android:textSize="@dimen/text_size_sixteen" />
@@ -140,6 +140,7 @@
                 android:textSize="@dimen/text_size_sixteen" />
 
             <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/config_order_btn"
                 android:layout_width="@dimen/size_150"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"

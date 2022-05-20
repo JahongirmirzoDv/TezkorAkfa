@@ -37,10 +37,10 @@ class OrderListFragmentSup : Fragment(), InterfaceOrderClick, CoroutineScope {
 
     lateinit var binding: FragmentOrderListSupBinding
     private var orderStatus: Int = 0
-    private lateinit var orderList: ArrayList<Result>
+//    private lateinit var orderList: ArrayList<Result>
     private val sharedPref by lazy { SharedPref(requireContext()) }
 
-    //    private val orderList: List<OrderSupplier> = createOrderList()
+        private val orderList: List<OrderSupplier> = createOrderList()
     private var orderListAdapter: AdapterOrderList? = null
 
     @Inject
@@ -66,7 +66,8 @@ class OrderListFragmentSup : Fragment(), InterfaceOrderClick, CoroutineScope {
         mainActivity.bottomNavigationViewVisibility()
 
         installLogOut()
-        loadNetworData()
+//        loadNetworData()
+        loadOrderList()
         loadOrderStatusSpinner()
         loadSearchView()
 //        loadOrderHistoryButton()
@@ -93,9 +94,9 @@ class OrderListFragmentSup : Fragment(), InterfaceOrderClick, CoroutineScope {
                         binding.progressView.visibility = View.VISIBLE
                     }
                     is OrdersListResource.SuccesList -> {
-                        loadOrderList(it.list.results)
-                        orderList = ArrayList()
-                        orderList.addAll(it.list.results)
+//                        loadOrderList(it.list.results)
+//                        orderList = ArrayList()
+//                        orderList.addAll(it.list.results)
                         binding.progressView.visibility = View.GONE
                     }
                 }
@@ -114,8 +115,13 @@ class OrderListFragmentSup : Fragment(), InterfaceOrderClick, CoroutineScope {
 //            } else {
 //                orderList.filter { s -> s.status == orderStatus }
 //            }
+            val filterList: List<OrderSupplier> = if (orderStatus == 0) {
+                orderList
+            } else {
+                orderList.filter { s -> s.status == orderStatus }
+            }
 //
-            val searchList = mutableListOf<Result>()
+            val searchList = mutableListOf<OrderSupplier>()
             for (i in orderList) {
                 if (text.toString().toRegex().find(i.id.toString()) != null) {
                     searchList.add(i)
@@ -150,18 +156,19 @@ class OrderListFragmentSup : Fragment(), InterfaceOrderClick, CoroutineScope {
     }
 
     private fun filterOrderList(position: Int) {
-//        val filterList: List<OrderSupplier> = if (position == 0) {
-//            orderList
-//        } else {
-//            orderList.filter { s -> s.status == position }
-//        }
-//        filterList.let {
-//            orderListAdapter?.updateList(filterList)
-//        }
+        val filterList: List<OrderSupplier> = if (position == 0) {
+            orderList
+        } else {
+            orderList.filter { s -> s.status == position }
+        }
+        filterList.let {
+            orderListAdapter?.updateList(filterList)
+        }
     }
 
-    private fun loadOrderList(list: List<Result>) {
-        orderListAdapter = AdapterOrderList(list as ArrayList<Result>) {
+    private fun loadOrderList() {
+//        orderListAdapter = AdapterOrderList(list as ArrayList<Result>) {
+        orderListAdapter = AdapterOrderList() {
             findNavController().navigate(R.id.productListFragment)
         }
         binding.rvOrderList.layoutManager =
@@ -183,9 +190,9 @@ class OrderListFragmentSup : Fragment(), InterfaceOrderClick, CoroutineScope {
     private fun createOrderList(): List<OrderSupplier> = listOf(
         OrderSupplier(1024, "3 500 000", "06.02.2022", 1),
         OrderSupplier(1025, "3 500 000", "06.02.2022", 2),
-        OrderSupplier(1026, "3 500 000", "06.02.2022", 2),
-        OrderSupplier(1027, "3 500 000", "06.02.2022", 3),
-        OrderSupplier(1028, "3 500 000", "06.02.2022", 1),
+        OrderSupplier(1026, "5 500 000", "06.02.2022", 2),
+        OrderSupplier(1027, "6 500 000", "06.02.2022", 3),
+        OrderSupplier(1028, "7 800 000", "06.02.2022", 1),
         OrderSupplier(1029, "3 500 000", "06.02.2022", 1),
         OrderSupplier(1030, "3 500 000", "06.02.2022", 3),
         OrderSupplier(1032, "3 500 000", "06.02.2022", 1)

@@ -14,6 +14,7 @@ import uz.algorithmgateway.tezkorakfa.data.models.GivenMoney
 import uz.algorithmgateway.tezkorakfa.databinding.CreateOrdersDialogViewBinding
 import uz.algorithmgateway.tezkorakfa.databinding.FragmentGivenMoneyBinding
 import uz.algorithmgateway.tezkorakfa.databinding.GivenMoneyDialogBinding
+import uz.algorithmgateway.tezkorakfa.presenter.supplier.adapter.AdapterTableSpinner
 
 class GivenMoneyFragment : Fragment() {
 
@@ -54,6 +55,12 @@ class GivenMoneyFragment : Fragment() {
         val alertDialog: AlertDialog = builder.create()
         alertDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
+        val adapter = AdapterTableSpinner(requireContext(), productTypeList(), true)
+        dialogBinding.spinnerRoomOrDoor.adapter = adapter
+
+        dialogBinding.saveMoney.setOnClickListener {
+            alertDialog.dismiss()
+        }
 
         alertDialog.show()
 
@@ -93,6 +100,14 @@ class GivenMoneyFragment : Fragment() {
         GivenMoney(3, "120 000", "110 000", "12.04.2022"),
         GivenMoney(4, "120 000", "110 000", "12.04.2022"),
         GivenMoney(5, "120 000", "110 000", "12.04.2022")
+    )
+
+    private fun productTypeList(): List<String> = listOf(
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
     )
 
 }

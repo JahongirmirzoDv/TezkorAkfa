@@ -9,7 +9,9 @@
 
     <include
         android:id="@+id/toolbar"
-        layout="@layout/toolbar_montage" />
+        layout="@layout/toolbar_montage"
+        tools:layout_editor_absoluteX="-16dp"
+        tools:layout_editor_absoluteY="0dp" />
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -40,9 +42,13 @@
                     app:cardCornerRadius="5dp">
 
                     <LinearLayout
+                        android:id="@+id/config_order_btn"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@drawable/card_item"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:foreground="?android:attr/selectableItemBackground"
                         android:gravity="center_vertical"
                         android:paddingHorizontal="35dp"
                         android:paddingVertical="8dp">
@@ -52,13 +58,13 @@
                             android:layout_height="wrap_content"
                             android:text="QABUL QILISH"
                             android:textColor="#3399FF"
-                            android:textSize="15sp" />
+                            android:textSize="14sp" />
 
-<!--                        <ImageView-->
-<!--                            android:layout_width="wrap_content"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:layout_marginStart="15dp"-->
-<!--                            android:src="@drawable/ic_add" />-->
+                        <!--                        <ImageView-->
+                        <!--                            android:layout_width="wrap_content"-->
+                        <!--                            android:layout_height="wrap_content"-->
+                        <!--                            android:layout_marginStart="15dp"-->
+                        <!--                            android:src="@drawable/ic_add" />-->
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
             </LinearLayout>
@@ -121,8 +127,10 @@
             </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_list"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:listitem="@layout/meter_item" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>

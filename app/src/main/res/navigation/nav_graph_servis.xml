@@ -11,6 +11,9 @@
         android:label="fragment_servis_home"
         tools:layout="@layout/fragment_servis_home" >
         <action
+            app:launchSingleTop="true"
+            app:popUpTo="@+id/main_nav_graph"
+            app:popUpToInclusive="true"
             android:id="@+id/action_servisHomeFragment_to_orderInfoFragment"
             app:destination="@id/orderInfoFragment" />
     </fragment>

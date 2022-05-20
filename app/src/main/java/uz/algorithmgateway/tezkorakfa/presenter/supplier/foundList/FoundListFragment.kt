@@ -148,13 +148,13 @@ class FoundListFragment : Fragment() {
     }
 
     private fun foundByWhereList(): List<String> = listOf(
-        "Qayerdan",
+        "Barchasi",
         "Dilerdan",
         "Ko'chadan"
     )
 
     private fun productTypeList(): List<String> = listOf(
-        "Turi",
+        "Barchasi",
         "Profil",
         "Oyna"
     )

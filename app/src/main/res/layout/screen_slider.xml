@@ -132,8 +132,8 @@
                     android:layout_width="@dimen/size_icon_designer_view"
                     android:layout_height="@dimen/size_icon_designer_view"
                     android:src="@drawable/arka"
-                    app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
 
@@ -143,8 +143,8 @@
                     android:layout_height="@dimen/size_icon_designer_view"
                     android:src="@drawable/ic_line_vertical"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/arka"
                     app:layout_constraintEnd_toStartOf="@id/view_divide_two_vertical"
+                    app:layout_constraintStart_toEndOf="@id/arka"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <androidx.appcompat.widget.AppCompatImageView
@@ -200,14 +200,21 @@
 
         </LinearLayout>
 
+        <!--        <uz.algorithmgateway.tezkorakfa.presenter.windowdoordisegner.ui.DesignerLayout-->
+        <!--            android:id="@+id/layout_designer_view"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="0dp"-->
+        <!--            android:layout_margin="10dp"-->
+        <!--            app:layout_constraintHeight_percent="0.2"-->
+        <!--            app:layout_constraintTop_toBottomOf="@+id/layout_item_bar" />-->
+
         <uz.algorithmgateway.tezkorakfa.presenter.windowdoordisegner.ui.DesignerLayout
             android:id="@+id/layout_designer"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_margin="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/layout_item_bar" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/layout_item_bar" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
