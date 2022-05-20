@@ -14,6 +14,7 @@ class ApplicationModule(var myApplication: MyApplication) {
     @Singleton
     fun provideApp(): MyApplication = myApplication
 
+
     @Provides
     @Singleton
     fun provideContext(): Context = myApplication.applicationContext
