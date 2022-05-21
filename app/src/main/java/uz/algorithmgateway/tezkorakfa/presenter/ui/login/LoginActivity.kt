@@ -15,12 +15,12 @@ import uz.algorithmgateway.data.const.Value
 import uz.algorithmgateway.tezkorakfa.base.MyApplication
 import uz.algorithmgateway.tezkorakfa.databinding.ActivityLoginBinding
 import uz.algorithmgateway.tezkorakfa.presenter.montage.MontageActivity
+import uz.algorithmgateway.tezkorakfa.presenter.servis.ui.ServisMainActivity
 import uz.algorithmgateway.tezkorakfa.presenter.ui.login.viewmodel.LoginViewModel
 import uz.algorithmgateway.tezkorakfa.presenter.ui.utils.SharedPref
 import uz.algorithmgateway.tezkorakfa.presenter.ui.utils.UIState
 import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
-import uz.algorithmgateway.tezkorakfa.presenter.servis.ui.ServisMainActivity
 
 
 class LoginActivity : AppCompatActivity(), CoroutineScope {
@@ -75,9 +75,9 @@ class LoginActivity : AppCompatActivity(), CoroutineScope {
                                         finish()
                                     }
                                     Value.SUPPLIER -> {
-                                        sharedPref.user_role = Value.SERVICER
+                                        sharedPref.user_role = Value.SUPPLIER
                                         val intent =
-                                            Intent(this@LoginActivity, uz.algorithmgateway.tezkorakfa.presenter.servis.ui.ServisMainActivity::class.java)
+                                            Intent(this@LoginActivity, ServisMainActivity::class.java)
                                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                                         startActivity(intent)
                                         finish()
@@ -95,7 +95,7 @@ class LoginActivity : AppCompatActivity(), CoroutineScope {
                                         val intent =
                                             Intent(
                                                 this@LoginActivity,
-                                                uz.algorithmgateway.tezkorakfa.presenter.servis.ui.ServisMainActivity::class.java
+                                                ServisMainActivity::class.java
                                             )
                                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                                         startActivity(intent)
