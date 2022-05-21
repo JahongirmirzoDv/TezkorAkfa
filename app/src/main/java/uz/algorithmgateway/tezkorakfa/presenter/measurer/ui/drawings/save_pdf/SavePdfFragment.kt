@@ -2,19 +2,20 @@ package uz.algorithmgateway.tezkorakfa.presenter.measurer.ui.drawings.save_pdf
 
 import android.Manifest
 import android.annotation.SuppressLint
-import android.content.ContentResolver
-import android.content.ContentValues
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.*
 import android.graphics.pdf.PdfDocument
 import android.graphics.pdf.PdfDocument.PageInfo
 import android.net.Uri
-import android.os.*
-import android.provider.MediaStore
+import android.os.Build
+import android.os.Build.VERSION.SDK_INT
+import android.os.Bundle
+import android.os.Environment
+import android.provider.Settings
 import android.util.Log
 import android.util.LruCache
 import android.view.LayoutInflater
-import android.view.PixelCopy
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
@@ -113,57 +114,56 @@ open class SavePdfFragment : Fragment(), CoroutineScope {
                 try {
                     val screenshotFromRecyclerView = getScreenshotFromRecyclerView(binding.savePdf)
                     screenshotFromRecyclerView?.let { it1 -> saveImageToPDF(height, it1, "chizma") }
-
-                    launch(Dispatchers.IO) {
-                        val pdf = viewmodel.getPdf().last()
-                        val list = viewmodel.getAllDrawing()
-                        var eshik = 0
-                        var oyna = 0
-                        list.forEach {
-                            if (it.type == "Eshik") {
-                                eshik += it.count ?:0
-                            } else if (it.type == "Oyna") {
-                                oyna += it.count ?:0
-                            }
-                        }
-
-                        val builder: MultipartBody.Builder = MultipartBody.Builder()
-
-                        val f = File(
-                            Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS)
-                                .toString(),
-                            pdf.pdf
-                        )
-
-                        builder.setType(MultipartBody.FORM)
-                        builder.addFormDataPart(
-                            "scaler_file",
-                            f.name,
-                            f.asRequestBody("multipart/form-data".toMediaTypeOrNull())
-                        )
-                        builder.addFormDataPart("number_of_rooms", "$oyna")
-                        builder.addFormDataPart("number_of_doors", "$eshik")
-
-                        val body = builder.build()
-                        apiVm.sendData(pdf.id, body).collect {
-                            when (it) {
-                                is UIState.Loading -> {
-
-                                }
-                                is UIState.Error -> {
-
-                                }
-                                is UIState.Success -> {
-                                    Log.d("TAG", ": $it.data?.result ?: succes")
-                                }
-                            }
-                        }
-                    }
                 } catch (e: Exception) {
                     Log.e("eror", "loadPdf: ${e.message}")
                 }
                 findNavController().navigate(R.id.unconfirmedFragment)
 
+                val pdf = viewmodel.getPdf().last()
+                val list = viewmodel.getAllDrawing()
+                var eshik = 0
+                var oyna = 0
+                list.forEach {
+                    if (it.type == "Eshik") {
+                        eshik += it.count ?: 0
+                    } else if (it.type == "Oyna") {
+                        oyna += it.count ?: 0
+                    }
+                }
+
+                val builder: MultipartBody.Builder = MultipartBody.Builder()
+
+                val f = File(
+                    Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS)
+                        .toString(),
+                    pdf.pdf
+                )
+
+                builder.setType(MultipartBody.FORM)
+                builder.addFormDataPart(
+                    "scaler_file",
+                    f.name,
+                    f.asRequestBody("multipart/form-data".toMediaTypeOrNull())
+                )
+                builder.addFormDataPart("number_of_rooms", "$oyna")
+                builder.addFormDataPart("number_of_doors", "$eshik")
+
+                val body = builder.build()
+                launch(Dispatchers.IO) {
+                    apiVm.sendData(pdf.id, body).collect {
+                        when (it) {
+                            is UIState.Loading -> {
+
+                            }
+                            is UIState.Error -> {
+                                Log.d("TAG", "send: ${it.message}")
+                            }
+                            is UIState.Success -> {
+                                Log.d("TAG", ": $it.data?.result ?: succes")
+                            }
+                        }
+                    }
+                }
             } else {
                 requestPermission()
             }
@@ -174,55 +174,47 @@ open class SavePdfFragment : Fragment(), CoroutineScope {
 
     @RequiresApi(Build.VERSION_CODES.R)
     private fun requestPermission() {
-        if ((ContextCompat.checkSelfPermission(
-                requireContext(),
-                Manifest.permission.WRITE_EXTERNAL_STORAGE
-            ) != PackageManager.PERMISSION_GRANTED) && (ContextCompat.checkSelfPermission(
-                requireContext(),
-                Manifest.permission.READ_EXTERNAL_STORAGE
-            ) != PackageManager.PERMISSION_GRANTED)
-        ) {
-            ActivityCompat.requestPermissions(
-                requireActivity(), arrayOf(
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                    Manifest.permission.READ_EXTERNAL_STORAGE
-                ), REQUEST_PERMISSIONS
-            )
-
-        } else {
-            booleanPermission = true
-        }
-    }
-
-
-    @Throws(IOException::class)
-    private fun saveBitmap(bitmap: Bitmap, name: String) {
-        val saved: Boolean
-        val fos: OutputStream?
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-            val resolver: ContentResolver = requireActivity().contentResolver
-            val contentValues = ContentValues()
-            contentValues.put(MediaStore.MediaColumns.DISPLAY_NAME, name)
-            contentValues.put(MediaStore.MediaColumns.MIME_TYPE, "image/png")
-            contentValues.put(MediaStore.MediaColumns.RELATIVE_PATH, "DCIM/Camera")
-            val imageUri: Uri? =
-                resolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues)
-            fos = imageUri?.let { resolver.openOutputStream(it) }
-
-        } else {
-            val imagesDir = Environment.getExternalStoragePublicDirectory(
-                Environment.DIRECTORY_DCIM
-            ).toString() + File.separator + "Camera"
-            val file = File(imagesDir)
-            if (!file.exists()) {
-                file.mkdir()
+        if (SDK_INT >= Build.VERSION_CODES.R) {
+            if (!Environment.isExternalStorageManager()) {
+                try {
+                    val intent = Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION)
+                    intent.addCategory("android.intent.category.DEFAULT")
+                    intent.data = Uri.parse(
+                        String.format(
+                            "package:%s",
+                            requireContext().applicationContext.packageName
+                        )
+                    )
+                    startActivityForResult(intent, 2296)
+                    booleanPermission = true
+                } catch (e: Exception) {
+                    val intent = Intent()
+                    intent.action = Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION;
+                    startActivityForResult(intent, 2296)
+                    booleanPermission = true
+                }
+            }else{
+                booleanPermission = true
             }
-            val image = File(imagesDir, "$name.png")
-            fos = FileOutputStream(image)
+        } else {
+            if ((ContextCompat.checkSelfPermission(
+                    requireContext(),
+                    Manifest.permission.MANAGE_EXTERNAL_STORAGE,
+                ) != PackageManager.PERMISSION_GRANTED) && (ContextCompat.checkSelfPermission(
+                    requireContext(),
+                    Manifest.permission.READ_EXTERNAL_STORAGE
+                ) != PackageManager.PERMISSION_GRANTED)
+            ) {
+                ActivityCompat.requestPermissions(
+                    requireActivity(), arrayOf(
+                        Manifest.permission.MANAGE_EXTERNAL_STORAGE,
+                        Manifest.permission.READ_EXTERNAL_STORAGE
+                    ), REQUEST_PERMISSIONS
+                )
+            } else {
+                booleanPermission = true
+            }
         }
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, fos)
-        fos?.flush()
-        fos?.close()
     }
 
     private fun randomKey(): String = List(6) {
@@ -323,38 +315,6 @@ open class SavePdfFragment : Fragment(), CoroutineScope {
         }
         return bigBitmap
     }
-
-    @RequiresApi(Build.VERSION_CODES.O)
-    fun getBitmapFromView(view: View, callback: (Bitmap) -> Unit) {
-        requireActivity().window?.let { window ->
-            val bitmap = Bitmap.createBitmap(view.width, view.height, Bitmap.Config.ARGB_8888)
-            val locationOfViewInWindow = IntArray(2)
-            view.getLocationInWindow(locationOfViewInWindow)
-            try {
-                PixelCopy.request(
-                    window,
-                    Rect(
-                        locationOfViewInWindow[0],
-                        locationOfViewInWindow[1],
-                        locationOfViewInWindow[0] + view.width,
-                        locationOfViewInWindow[1] + view.height
-                    ),
-                    bitmap,
-                    { copyResult ->
-                        if (copyResult == PixelCopy.SUCCESS) {
-                            callback(bitmap)
-                        }
-                        // possible to handle other result codes ...
-                    },
-                    Handler(Looper.getMainLooper())
-                )
-            } catch (e: IllegalArgumentException) {
-                // PixelCopy may throw IllegalArgumentException, make sure to handle it
-                e.printStackTrace()
-            }
-        }
-    }
-
 
     override fun onDestroyView() {
         super.onDestroyView()
