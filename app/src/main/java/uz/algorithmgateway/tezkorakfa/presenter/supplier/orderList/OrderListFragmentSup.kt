@@ -9,6 +9,7 @@ import android.widget.AdapterView
 import android.widget.Toast
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.coroutines.CoroutineScope
@@ -33,15 +34,16 @@ import uz.algorithmgateway.tezkorakfa.presenter.ui.utils.SharedPref
 import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
 
-class OrderListFragmentSup : Fragment(), InterfaceOrderClick, CoroutineScope {
+class OrderListFragmentSup : Fragment(), CoroutineScope {
 
     lateinit var binding: FragmentOrderListSupBinding
     private var orderStatus: Int = 0
-//    private lateinit var orderList: ArrayList<Result>
+    private lateinit var orderList: ArrayList<Result>
     private val sharedPref by lazy { SharedPref(requireContext()) }
 
-        private val orderList: List<OrderSupplier> = createOrderList()
-    private var orderListAdapter: AdapterOrderList? = null
+    //        private val orderList: List<OrderSupplier> = createOrderList()
+//    private var orderListAdapter: AdapterOrderList? = null
+    lateinit var orderListAdapter: AdapterOrderList
 
     @Inject
     lateinit var networkViewModel: NetworkViewModel
@@ -66,8 +68,8 @@ class OrderListFragmentSup : Fragment(), InterfaceOrderClick, CoroutineScope {
         mainActivity.bottomNavigationViewVisibility()
 
         installLogOut()
-//        loadNetworData()
-        loadOrderList()
+        loadNetworData()
+//        loadOrderList()
         loadOrderStatusSpinner()
         loadSearchView()
 //        loadOrderHistoryButton()
@@ -94,9 +96,9 @@ class OrderListFragmentSup : Fragment(), InterfaceOrderClick, CoroutineScope {
                         binding.progressView.visibility = View.VISIBLE
                     }
                     is OrdersListResource.SuccesList -> {
-//                        loadOrderList(it.list.results)
-//                        orderList = ArrayList()
-//                        orderList.addAll(it.list.results)
+                        loadOrderList(it.list.results)
+                        orderList = ArrayList()
+                        orderList.addAll(it.list.results)
                         binding.progressView.visibility = View.GONE
                     }
                 }
@@ -110,18 +112,18 @@ class OrderListFragmentSup : Fragment(), InterfaceOrderClick, CoroutineScope {
     private fun loadSearchView() {
         binding.editTextSearch.doOnTextChanged { text, start, before, count ->
 
-//            val filterList: List<Result> = if (orderStatus == 0) {
+            val filterList: List<Result> = if (orderStatus == 0) {
+                orderList
+            } else {
+                orderList.filter { s -> s.id == orderStatus }
+            }
+//            val filterList: List<OrderSupplier> = if (orderStatus == 0) {
 //                orderList
 //            } else {
 //                orderList.filter { s -> s.status == orderStatus }
-//            }
-            val filterList: List<OrderSupplier> = if (orderStatus == 0) {
-                orderList
-            } else {
-                orderList.filter { s -> s.status == orderStatus }
-            }
+//        }
 //
-            val searchList = mutableListOf<OrderSupplier>()
+            val searchList = mutableListOf<Result>()
             for (i in orderList) {
                 if (text.toString().toRegex().find(i.id.toString()) != null) {
                     searchList.add(i)
@@ -131,10 +133,10 @@ class OrderListFragmentSup : Fragment(), InterfaceOrderClick, CoroutineScope {
             searchList.let {
                 orderListAdapter?.updateList(searchList)
             }
-
-
         }
+
     }
+
 
     private fun loadOrderStatusSpinner() {
         val adapter = AdapterTableSpinner(requireContext(), orderStatusList(), true)
@@ -156,19 +158,19 @@ class OrderListFragmentSup : Fragment(), InterfaceOrderClick, CoroutineScope {
     }
 
     private fun filterOrderList(position: Int) {
-        val filterList: List<OrderSupplier> = if (position == 0) {
-            orderList
-        } else {
-            orderList.filter { s -> s.status == position }
-        }
-        filterList.let {
-            orderListAdapter?.updateList(filterList)
-        }
+//        val filterList: List<OrderSupplier> = if (position == 0) {
+//            orderList
+//        } else {
+//            orderList.filter { s -> s.status == position }
+//        }
+//        filterList.let {
+//            orderListAdapter?.updateList(filterList)
+//        }
     }
 
-    private fun loadOrderList() {
-//        orderListAdapter = AdapterOrderList(list as ArrayList<Result>) {
-        orderListAdapter = AdapterOrderList() {
+    private fun loadOrderList(list: List<Result>) {
+        orderListAdapter = AdapterOrderList(list as ArrayList<Result>) {
+//        orderListAdapter = AdapterOrderList() {
             findNavController().navigate(R.id.productListFragment)
         }
         binding.rvOrderList.layoutManager =
@@ -176,9 +178,9 @@ class OrderListFragmentSup : Fragment(), InterfaceOrderClick, CoroutineScope {
         binding.rvOrderList.adapter = orderListAdapter
     }
 
-    override fun onItemClick(order: OrderSupplier) {
-        Toast.makeText(requireContext(), order.id.toString(), Toast.LENGTH_SHORT).show()
-    }
+//    override fun onItemClick(order: OrderSupplier) {
+//        Toast.makeText(requireContext(), order.id.toString(), Toast.LENGTH_SHORT).show()
+//    }
 
     private fun orderStatusList(): List<String> = listOf(
         "Barchasi",

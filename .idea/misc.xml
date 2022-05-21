@@ -64,6 +64,7 @@
         <entry key="..\:/Android_studio/otherProject/tezkorAkfa/app/src/main/res/drawable/ic_window_handle_horizontal.xml" value="0.2115" />
         <entry key="..\:/Android_studio/otherProject/tezkorAkfa/app/src/main/res/drawable/oval_phone_number_servis_dialog_background.xml" value="0.107" />
         <entry key="..\:/Android_studio/otherProject/tezkorAkfa/app/src/main/res/drawable/sms_code_config_servis_background_alertdialog.xml" value="0.1675" />
+        <entry key="..\:/Android_studio/otherProject/tezkorAkfa/app/src/main/res/layout/activity_designer.xml" value="0.25" />
         <entry key="..\:/Android_studio/otherProject/tezkorAkfa/app/src/main/res/layout/activity_login.xml" value="0.25" />
         <entry key="..\:/Android_studio/otherProject/tezkorAkfa/app/src/main/res/layout/activity_measurer.xml" value="0.25" />
         <entry key="..\:/Android_studio/otherProject/tezkorAkfa/app/src/main/res/layout/activity_montage.xml" value="0.25" />
@@ -113,7 +114,7 @@
         <entry key="..\:/Android_studio/otherProject/tezkorAkfa/app/src/main/res/layout/item_order.xml" value="0.25" />
         <entry key="..\:/Android_studio/otherProject/tezkorAkfa/app/src/main/res/layout/item_order_list.xml" value="0.24947916666666667" />
         <entry key="..\:/Android_studio/otherProject/tezkorAkfa/app/src/main/res/layout/item_order_list_header.xml" value="0.25" />
-        <entry key="..\:/Android_studio/otherProject/tezkorAkfa/app/src/main/res/layout/item_order_list_supplier.xml" value="0.25" />
+        <entry key="..\:/Android_studio/otherProject/tezkorAkfa/app/src/main/res/layout/item_order_list_supplier.xml" value="0.72" />
         <entry key="..\:/Android_studio/otherProject/tezkorAkfa/app/src/main/res/layout/item_product_table.xml" value="0.25" />
         <entry key="..\:/Android_studio/otherProject/tezkorAkfa/app/src/main/res/layout/item_purchase_first.xml" value="0.25" />
         <entry key="..\:/Android_studio/otherProject/tezkorAkfa/app/src/main/res/layout/item_purchase_first_header.xml" value="0.25" />

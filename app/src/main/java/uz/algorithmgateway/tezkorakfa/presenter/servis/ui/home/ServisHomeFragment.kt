@@ -58,13 +58,13 @@ class ServisHomeFragment : Fragment() {
 
     private fun loadOrderList() {
 //        orderListAdapter = AdapterOrderList(list as ArrayList<Result>) {
-        orderListAdapter = AdapterOrderList() {
-            findNavController().navigate(R.id.orderInfoFragment)
-        }
-        orderListAdapter?.updateList(orderList)
-        binding.rvOrderList.layoutManager =
-            LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-        binding.rvOrderList.adapter = orderListAdapter
+//        orderListAdapter = AdapterOrderList() {
+//            findNavController().navigate(R.id.orderInfoFragment)
+//        }
+//        orderListAdapter?.updateList(orderList)
+//        binding.rvOrderList.layoutManager =
+//            LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+//        binding.rvOrderList.adapter = orderListAdapter
     }
 
     private fun createOrderList(): List<OrderSupplier> = listOf(

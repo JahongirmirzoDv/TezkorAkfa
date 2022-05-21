@@ -16,18 +16,18 @@ import uz.algorithmgateway.tezkorakfa.databinding.ItemOrderListBinding
 import uz.algorithmgateway.tezkorakfa.databinding.ItemOrderListSupplierBinding
 
 class AdapterOrderList(
-//    private var myList: ArrayList<Result>,
+    private var myList: ArrayList<Result>,
     var itemClickListener: (String) -> Unit
 ) : RecyclerView.Adapter<AdapterOrderList.VH>() {
-    private var myList = mutableListOf<OrderSupplier>()
+//    private var myList = mutableListOf<OrderSupplier>()
     private lateinit var ctx: Context
 
     private var count: Int = 1
 
     //    @SuppressLint("NotifyDataSetChanged")
-    fun updateList(newList: List<OrderSupplier>) {
+    fun updateList(newList: List<Result>) {
         myList.clear()
-        myList.addAll(newList)
+//        myList.addAll(newList)
         this.notifyDataSetChanged()
     }
 
@@ -47,20 +47,20 @@ class AdapterOrderList(
     inner class VH(private val binding: ItemOrderListSupplierBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun onBind(item: OrderSupplier) {
+        fun onBind(item: Result) {
             binding.apply {
-                tvNumber.text = item.id.toString()
-                tvPrice.text = item.price.toString()
-                tvTime.text = item.time.toString()
+                tvNumber.text = item.contract_number.toString()
+//                tvPrice.text = item.total_price.toString()
+                tvTime.text = item.measurement_time.toString()
                 number.setText(count.toString())
                 count++
             }
 
-            when (item.status) {
-                1 -> binding.ivStatus.setBackgroundColor(ctx.getColor(R.color.color_green))
-                2 -> binding.ivStatus.setBackgroundColor(ctx.getColor(R.color.color_gray))
-                3 -> binding.ivStatus.setBackgroundColor(ctx.getColor(R.color.color_red))
-            }
+//            when (item.status) {
+//                1 -> binding.ivStatus.setBackgroundColor(ctx.getColor(R.color.color_green))
+//                2 -> binding.ivStatus.setBackgroundColor(ctx.getColor(R.color.color_gray))
+//                3 -> binding.ivStatus.setBackgroundColor(ctx.getColor(R.color.color_red))
+//            }
 
             itemView.setOnClickListener {
 //                itemClickListener.invoke(item.contract_number)

@@ -200,13 +200,6 @@
 
         </LinearLayout>
 
-        <!--        <uz.algorithmgateway.tezkorakfa.presenter.windowdoordisegner.ui.DesignerLayout-->
-        <!--            android:id="@+id/layout_designer_view"-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="0dp"-->
-        <!--            android:layout_margin="10dp"-->
-        <!--            app:layout_constraintHeight_percent="0.2"-->
-        <!--            app:layout_constraintTop_toBottomOf="@+id/layout_item_bar" />-->
 
         <uz.algorithmgateway.tezkorakfa.presenter.windowdoordisegner.ui.DesignerLayout
             android:id="@+id/layout_designer"
