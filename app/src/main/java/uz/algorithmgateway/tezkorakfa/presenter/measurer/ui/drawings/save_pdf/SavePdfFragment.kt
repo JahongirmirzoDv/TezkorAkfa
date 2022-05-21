@@ -175,22 +175,27 @@ open class SavePdfFragment : Fragment(), CoroutineScope {
     @RequiresApi(Build.VERSION_CODES.R)
     private fun requestPermission() {
         if (SDK_INT >= Build.VERSION_CODES.R) {
-            try {
-                val intent =Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
-                intent.addCategory("android.intent.category.DEFAULT");
-                intent.data = Uri.parse(
-                    String.format(
-                        "package:%s",
-                        requireContext().applicationContext.packageName
+            if (!Environment.isExternalStorageManager()) {
+                try {
+                    val intent = Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION)
+                    intent.addCategory("android.intent.category.DEFAULT")
+                    intent.data = Uri.parse(
+                        String.format(
+                            "package:%s",
+                            requireContext().applicationContext.packageName
+                        )
                     )
-                )
-                startActivityForResult(intent, 2296)
-            } catch (e:Exception) {
-                val intent = Intent()
-                intent.action = Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION;
-                startActivityForResult(intent, 2296)
+                    startActivityForResult(intent, 2296)
+                    booleanPermission = true
+                } catch (e: Exception) {
+                    val intent = Intent()
+                    intent.action = Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION;
+                    startActivityForResult(intent, 2296)
+                    booleanPermission = true
+                }
+            }else{
+                booleanPermission = true
             }
-            booleanPermission = true
         } else {
             if ((ContextCompat.checkSelfPermission(
                     requireContext(),

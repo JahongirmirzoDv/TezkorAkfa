@@ -141,7 +141,6 @@ class UnconfirmedFragment : Fragment(), CoroutineScope {
         }
     }
 
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
