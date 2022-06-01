@@ -93,7 +93,7 @@ class OrderListFragment() : Fragment(), CoroutineScope {
                                 }
                             }
                             is UIState.Success -> {
-                                viewmodel.downloadFile(list.data?.results?.get(0)?.show_room_file.toString())
+//                                viewmodel.downloadFile(list.data?.results?.get(0)?.show_room_file.toString())
                                 adapter = OrderListAdapter(
                                     object : OrderListAdapter.onClick {
                                         override fun onCallClick(number: String) {

@@ -28,4 +28,5 @@ data class Drawing(
     var projet_image_path: String? = null,
     var width: Int? = null,
     var heigth: Int? = null,
+    var comment_user: String = ""
 ) : Serializable

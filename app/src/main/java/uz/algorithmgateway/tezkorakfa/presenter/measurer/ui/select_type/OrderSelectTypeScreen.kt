@@ -493,6 +493,7 @@ class OrderSelectTypeScreen : Fragment(), CoroutineScope {
                     binding.layoutAccessory.spinnerTypeTexture.selectedItem.toString()
                         .ifEmpty { "" }
                 val net = binding.comment.text.toString().ifEmpty { "" }
+                val comment_user = binding.commentUser.text.toString().ifEmpty { "" }
                 drawing = Drawing(
                     id = if (id != null) "$id" else drawing.id,
                     type,
@@ -511,7 +512,8 @@ class OrderSelectTypeScreen : Fragment(), CoroutineScope {
                     handle,
                     handle_petla,
                     handle_texture,
-                    net
+                    net,
+                    comment_user = comment_user
                 )
                 Log.e("TAG", "navigateButton: $id")
                 if (id != null) dbViewmodel.addDrawing(drawing) else dbViewmodel.updateDrawing(

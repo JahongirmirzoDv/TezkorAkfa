@@ -17,7 +17,6 @@ import uz.algorithmgateway.tezkorakfa.R
 import uz.algorithmgateway.tezkorakfa.base.MyApplication
 import uz.algorithmgateway.tezkorakfa.data.retrofit.models.sales_order_list.Result
 import uz.algorithmgateway.tezkorakfa.databinding.ScreenConfirmOrdersBinding
-import uz.algorithmgateway.tezkorakfa.presenter.measurer.SpinnerTextAdapter
 import uz.algorithmgateway.tezkorakfa.presenter.measurer.ui.confirm_orders.adapter.ConfirmOrderListAdapter
 import uz.algorithmgateway.tezkorakfa.presenter.measurer.viewmodel.NetworkViewmodel
 import uz.algorithmgateway.tezkorakfa.presenter.ui.login.viewmodel.LoginViewModel
