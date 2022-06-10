@@ -15,9 +15,9 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import uz.algorithmgateway.core.util.toast
-import uz.algorithmgateway.data.const.Value
 import uz.algorithmgateway.tezkorakfa.R
 import uz.algorithmgateway.tezkorakfa.base.MyApplication
+import uz.algorithmgateway.tezkorakfa.data.const.Value
 import uz.algorithmgateway.tezkorakfa.data.retrofit.models.sales_order_list.Result
 import uz.algorithmgateway.tezkorakfa.databinding.FragmentTabLayoutBinding
 import uz.algorithmgateway.tezkorakfa.presenter.measurer.ui.orders.OrderListAdapter

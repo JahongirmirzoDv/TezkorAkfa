@@ -2,8 +2,7 @@ package uz.algorithmgateway.core
 
 import android.content.Context
 import android.content.SharedPreferences
-import uz.algorithmgateway.data.const.Constants
-import javax.inject.Inject
+import uz.algorithmgateway.tezkorakfa.data.const.Constants
 import javax.inject.Singleton
 
 

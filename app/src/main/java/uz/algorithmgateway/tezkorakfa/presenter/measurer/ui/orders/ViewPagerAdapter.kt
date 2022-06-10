@@ -2,7 +2,7 @@ package uz.algorithmgateway.tezkorakfa.presenter.measurer.ui.orders
 
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import uz.algorithmgateway.data.const.Value
+import uz.algorithmgateway.tezkorakfa.data.const.Value
 import uz.algorithmgateway.tezkorakfa.presenter.measurer.ui.orders.orderList.OrderListFragment
 
 

@@ -6,8 +6,8 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
-import uz.algorithmgateway.data.const.Value
 import uz.algorithmgateway.tezkorakfa.R
+import uz.algorithmgateway.tezkorakfa.data.const.Value
 import uz.algorithmgateway.tezkorakfa.presenter.measurer.ui.MeasurerActivity
 import uz.algorithmgateway.tezkorakfa.presenter.montage.MontageActivity
 import uz.algorithmgateway.tezkorakfa.presenter.servis.ui.ServisMainActivity

@@ -11,8 +11,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import uz.algorithmgateway.data.const.Value
 import uz.algorithmgateway.tezkorakfa.base.MyApplication
+import uz.algorithmgateway.tezkorakfa.data.const.Value
 import uz.algorithmgateway.tezkorakfa.databinding.ActivityLoginBinding
 import uz.algorithmgateway.tezkorakfa.presenter.montage.MontageActivity
 import uz.algorithmgateway.tezkorakfa.presenter.ui.login.viewmodel.LoginViewModel

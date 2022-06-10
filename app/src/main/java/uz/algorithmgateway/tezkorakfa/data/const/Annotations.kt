@@ -1,4 +1,4 @@
-package uz.algorithmgateway.data.const
+package uz.algorithmgateway.tezkorakfa.data.const
 
 import androidx.annotation.StringDef
 
