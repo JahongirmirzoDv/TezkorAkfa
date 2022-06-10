@@ -18,16 +18,16 @@ import android.os.Environment
 import android.os.Handler
 import android.provider.MediaStore
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.PixelCopy
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import android.widget.LinearLayout
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import uz.algorithmgateway.core.util.toast
 import uz.algorithmgateway.tezkorakfa.R
 import uz.algorithmgateway.tezkorakfa.base.MyApplication
 import uz.algorithmgateway.tezkorakfa.databinding.LayoutChangeSizeDialogBinding
@@ -35,6 +35,7 @@ import uz.algorithmgateway.tezkorakfa.databinding.ScreenSliderBinding
 import uz.algorithmgateway.tezkorakfa.presenter.measurer.ui.select_type.models.Drawing
 import uz.algorithmgateway.tezkorakfa.presenter.measurer.viewmodel.DbViewmodel
 import uz.algorithmgateway.tezkorakfa.presenter.windowdoordisegner.DragAndDropListener
+import uz.algorithmgateway.tezkorakfa.presenter.windowdoordisegner.arch.DragShadowBuilder
 import uz.algorithmgateway.tezkorakfa.presenter.windowdoordisegner.ui.Area
 import uz.algorithmgateway.tezkorakfa.presenter.windowdoordisegner.ui.DesignerLayout
 import java.io.File
@@ -92,13 +93,70 @@ class SliderScreen : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 //        binding.projectId.text = "Loyiha ${drawing?.id?.ifEmpty { "" }}"
+
         verifyStoragePermission(requireActivity())
         navigationButtons()
         dragAndDropListener = Area(requireContext())
-
         setUpDesignerLayout()
         setDragAndDropToViews()
+
+        binding.liner.setOnDragListener(dragListener)
+        binding.liner2.setOnDragListener(dragListener)
+
+        binding.arka.setOnLongClickListener {
+            val clipText = "This is our Clip Data text"
+            val item = ClipData.Item(clipText)
+            val mimeTypes = arrayOf(ClipDescription.MIMETYPE_TEXT_PLAIN)
+            val data = ClipData(clipText, mimeTypes, item)
+
+            val dragShadowBuilder = View.DragShadowBuilder(it)
+            it.startDragAndDrop(data, dragShadowBuilder, it, 0)
+
+            it.visibility = View.INVISIBLE
+            true
+        }
+
+
     }
+
+    val dragListener = View.OnDragListener { v, event ->
+        when (event.action) {
+            DragEvent.ACTION_DRAG_STARTED -> {
+                event.clipDescription.hasMimeType(ClipDescription.MIMETYPE_TEXT_PLAIN)
+            }
+            DragEvent.ACTION_DRAG_ENDED -> {
+                v.invalidate()
+                true
+            }
+            DragEvent.ACTION_DRAG_LOCATION -> {
+                true
+            }
+            DragEvent.ACTION_DRAG_EXITED -> {
+                v.invalidate()
+                true
+            }
+            DragEvent.ACTION_DROP -> {
+                val item = event.clipData.getItemAt(0)
+                val dragData = item.text
+                 toast(dragData.toString())
+                v.invalidate()
+
+                val v1 = event.localState as View
+                val owner = v1.parent as ViewGroup
+                owner.removeView(v1)
+                val destination = v as LinearLayoutCompat
+                destination.addView(v1)
+                v.visibility = View.INVISIBLE
+                true
+            }
+            DragEvent.ACTION_DRAG_ENDED -> {
+                v.invalidate()
+                true
+            }
+            else -> false
+        }
+    }
+
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun navigationButtons() {

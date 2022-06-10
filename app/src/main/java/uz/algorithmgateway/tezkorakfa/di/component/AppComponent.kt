@@ -14,6 +14,7 @@ import uz.algorithmgateway.tezkorakfa.presenter.measurer.ui.select_count.ItemCou
 import uz.algorithmgateway.tezkorakfa.presenter.measurer.ui.select_type.OrderSelectTypeScreen
 import uz.algorithmgateway.tezkorakfa.presenter.measurer.ui.signature.SignatureFragment
 import uz.algorithmgateway.tezkorakfa.presenter.measurer.ui.slider_standart.SliderScreen
+import uz.algorithmgateway.tezkorakfa.presenter.supplier.productList.ProductListFragment
 import uz.algorithmgateway.tezkorakfa.presenter.ui.login.LoginActivity
 import uz.algorithmgateway.tezkorakfa.supplier.orderList.OrderListFragmentSup
 import javax.inject.Singleton
@@ -35,4 +36,5 @@ interface AppComponent {
     fun measure(measurerActivity: uz.algorithmgateway.tezkorakfa.presenter.measurer.ui.MeasurerActivity)
     fun unconfirmed(unconfirmedFragment: UnconfirmedFragment)
     fun orderListSupplier(orderListFragmentSup: OrderListFragmentSup)
+    fun productListDetail(productListFragment: ProductListFragment)
 }

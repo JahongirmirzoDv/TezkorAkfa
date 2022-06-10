@@ -62,7 +62,7 @@ class FirstPageFragment : Fragment(), InterfaceProductClick {
             }
 
             searchList.let {
-                productListAdapter?.updateList(searchList)
+//                productListAdapter?.updateList(searchList)
             }
 
 
@@ -96,9 +96,9 @@ class FirstPageFragment : Fragment(), InterfaceProductClick {
         } else {
             productList!!.filter { s -> s.type == productType }
         }
-        filterList.let {
-            productListAdapter?.updateList(filterList)
-        }
+//        filterList.let {
+//            productListAdapter?.updateList(filterList)
+//        }
 
     }
 

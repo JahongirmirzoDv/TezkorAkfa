@@ -122,12 +122,13 @@
             </LinearLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/liner2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:orientation="horizontal">
 
-                <androidx.appcompat.widget.AppCompatImageView
+                <ImageView
                     android:id="@+id/arka"
                     android:layout_width="@dimen/size_icon_designer_view"
                     android:layout_height="@dimen/size_icon_designer_view"
@@ -200,6 +201,20 @@
 
         </LinearLayout>
 
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/liner"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintHeight_percent="0.23"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/layout_item_bar"
+            app:layout_constraintWidth_percent="0.8">
+
+
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
 
         <uz.algorithmgateway.tezkorakfa.presenter.windowdoordisegner.ui.DesignerLayout
             android:id="@+id/layout_designer"
@@ -207,7 +222,7 @@
             android:layout_height="0dp"
             android:layout_margin="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/layout_item_bar" />
+            app:layout_constraintTop_toBottomOf="@+id/liner" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -6,10 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
-import android.widget.Toast
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
-import androidx.navigation.Navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.coroutines.CoroutineScope
@@ -19,12 +17,11 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import uz.algorithmgateway.core.util.toast
 import uz.algorithmgateway.tezkorakfa.data.models.OrderSupplier
-import uz.algorithmgateway.supplier.orderList.InterfaceOrderClick
 import uz.algorithmgateway.tezkorakfa.R
 import uz.algorithmgateway.tezkorakfa.base.MyApplication
 import uz.algorithmgateway.tezkorakfa.data.retrofit.models.sales_order_list.Result
 import uz.algorithmgateway.tezkorakfa.databinding.FragmentOrderListSupBinding
-import uz.algorithmgateway.tezkorakfa.presenter.measurer.resource.OrdersListResource
+import uz.algorithmgateway.tezkorakfa.presenter.supplier.resource.OrdersListResource
 import uz.algorithmgateway.tezkorakfa.presenter.supplier.SupplierActivity
 import uz.algorithmgateway.tezkorakfa.presenter.supplier.adapter.AdapterTableSpinner
 import uz.algorithmgateway.tezkorakfa.presenter.supplier.orderList.AdapterOrderList

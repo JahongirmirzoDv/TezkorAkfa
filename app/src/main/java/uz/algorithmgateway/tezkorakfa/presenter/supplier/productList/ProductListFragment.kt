@@ -12,22 +12,36 @@ import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import uz.algorithmgateway.core.util.toast
 import uz.algorithmgateway.tezkorakfa.data.models.Product
 import uz.algorithmgateway.supplier.productList.InterfaceProductClick
 import uz.algorithmgateway.tezkorakfa.R
+import uz.algorithmgateway.tezkorakfa.base.MyApplication
 import uz.algorithmgateway.tezkorakfa.databinding.CreateOrdersDialogViewBinding
 import uz.algorithmgateway.tezkorakfa.databinding.FragmentProductListBinding
 import uz.algorithmgateway.tezkorakfa.presenter.supplier.SupplierActivity
 import uz.algorithmgateway.tezkorakfa.presenter.supplier.adapter.AdapterTableSpinner
+import uz.algorithmgateway.tezkorakfa.presenter.supplier.resource.OrderDetailListResource
+import uz.algorithmgateway.tezkorakfa.presenter.supplier.resource.OrdersListResource
+import uz.algorithmgateway.tezkorakfa.presenter.supplier.viewmodel.NetworkViewModel
+import javax.inject.Inject
+import kotlin.coroutines.CoroutineContext
 
 
-class ProductListFragment : Fragment(), InterfaceProductClick {
+class ProductListFragment : Fragment(), CoroutineScope {
 
     lateinit var binding: FragmentProductListBinding
     private var productListAdapter: AdapterProductList? = null
     private var productList: List<Product>? = null
     private var productType: Int = 0
+
+    @Inject
+    lateinit var networkViewModel: NetworkViewModel
 
 
     override fun onCreateView(
@@ -40,6 +54,11 @@ class ProductListFragment : Fragment(), InterfaceProductClick {
 
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        MyApplication.appComponent.productListDetail(this)
+    }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -48,9 +67,30 @@ class ProductListFragment : Fragment(), InterfaceProductClick {
         mainActivity.bottomNavigationViewVisibilityGone()
 
         installTolbar()
-        loadProductList()
-        loadProductTypeSpinner()
+        loadProduct()
+//        loadProductList()
+//        loadProductTypeSpinner()
         loadSearchView()
+    }
+
+    private fun loadProduct() {
+        launch {
+            networkViewModel.getOrderDetialList("1").collect {
+                when (it) {
+                    is OrderDetailListResource.Error -> {
+                        toast(it.message)
+                    }
+                    OrderDetailListResource.Loading -> {
+                        toast("Loading...")
+                    }
+                    is OrderDetailListResource.SuccesList -> {
+                        loadProductList()
+                        productListAdapter?.updateList(it.list.products)
+                    }
+                }
+            }
+        }
+
     }
 
     private fun installTolbar() {
@@ -92,47 +132,46 @@ class ProductListFragment : Fragment(), InterfaceProductClick {
         }
     }
 
-    private fun loadProductTypeSpinner() {
-        val adapter = AdapterTableSpinner(requireContext(), productTypeList(), true)
-        binding.spinnerProductType.adapter = adapter
-        binding.spinnerProductType.onItemSelectedListener =
-            object : AdapterView.OnItemSelectedListener {
-                override fun onItemSelected(
-                    parent: AdapterView<*>?,
-                    view: View?,
-                    position: Int,
-                    id: Long,
-                ) {
-                    productType = position
-                    filterProductList(position)
-                }
+//    private fun loadProductTypeSpinner() {
+//        val adapter = AdapterTableSpinner(requireContext(), productTypeList(), true)
+//        binding.spinnerProductType.adapter = adapter
+//        binding.spinnerProductType.onItemSelectedListener =
+//            object : AdapterView.OnItemSelectedListener {
+//                override fun onItemSelected(
+//                    parent: AdapterView<*>?,
+//                    view: View?,
+//                    position: Int,
+//                    id: Long,
+//                ) {
+//                    productType = position
+//                    filterProductList(position)
+//                }
+//
+//                override fun onNothingSelected(parent: AdapterView<*>?) {
+//                }
+//            }
+//    }
 
-                override fun onNothingSelected(parent: AdapterView<*>?) {
-                }
-            }
-    }
-
-    private fun filterProductList(productType: Int) {
-
-        val filterList: List<Product> = if (productType == 0) {
-            productList!!
-        } else {
-            productList!!.filter { s -> s.type == productType }
-        }
-        filterList.let {
-            productListAdapter?.updateList(filterList)
-        }
-
-    }
+//    private fun filterProductList(productType: Int) {
+//
+//        val filterList: List<Product> = if (productType == 0) {
+//            productList!!
+//        } else {
+//            productList!!.filter { s -> s.type == productType }
+//        }
+//        filterList.let {
+//            productListAdapter?.updateList(filterList)
+//        }
+//
+//    }
 
     private fun loadProductList() {
-        val contractNumber = arguments?.getString("contract_nuber")
-        if (contractNumber.isNullOrEmpty()) {
-
-        }
+//        val contractNumber = arguments?.getString("contract_nuber")
+//        if (contractNumber.isNullOrEmpty()) {
+//
+//        }
 
         productListAdapter = AdapterProductList(requireContext()) {
-
             showDialogView()
             toast("show Alert dialog")
         }
@@ -192,9 +231,8 @@ class ProductListFragment : Fragment(), InterfaceProductClick {
         "Dillerdan",
     )
 
-    override fun onButtonClick(product: Product) {
-        Toast.makeText(requireContext(), "FoundButtonClicked", Toast.LENGTH_SHORT).show()
-    }
+    override val coroutineContext: CoroutineContext
+        get() = Dispatchers.Main + Job()
 
 
 }
