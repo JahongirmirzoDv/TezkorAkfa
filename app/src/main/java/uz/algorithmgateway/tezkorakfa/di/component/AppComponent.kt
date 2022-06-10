@@ -14,6 +14,7 @@ import uz.algorithmgateway.tezkorakfa.presenter.measurer.ui.select_count.ItemCou
 import uz.algorithmgateway.tezkorakfa.presenter.measurer.ui.select_type.OrderSelectTypeScreen
 import uz.algorithmgateway.tezkorakfa.presenter.measurer.ui.signature.SignatureFragment
 import uz.algorithmgateway.tezkorakfa.presenter.measurer.ui.slider_standart.SliderScreen
+import uz.algorithmgateway.tezkorakfa.presenter.supplier.foundList.FoundListFragment
 import uz.algorithmgateway.tezkorakfa.presenter.supplier.productList.ProductListFragment
 import uz.algorithmgateway.tezkorakfa.presenter.ui.login.LoginActivity
 import uz.algorithmgateway.tezkorakfa.supplier.orderList.OrderListFragmentSup
@@ -35,6 +36,8 @@ interface AppComponent {
     fun photo(customerTakePhotoFragment: CustomerTakePhotoFragment)
     fun measure(measurerActivity: uz.algorithmgateway.tezkorakfa.presenter.measurer.ui.MeasurerActivity)
     fun unconfirmed(unconfirmedFragment: UnconfirmedFragment)
+
     fun orderListSupplier(orderListFragmentSup: OrderListFragmentSup)
     fun productListDetail(productListFragment: ProductListFragment)
+    fun foundListFragment(foundListFragment: FoundListFragment)
 }

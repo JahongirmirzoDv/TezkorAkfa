@@ -70,6 +70,7 @@
                         android:textColor="@color/text_dark_color" />
 
                     <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/counts"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="@dimen/item_space_middle"
@@ -100,6 +101,7 @@
                         android:textColor="@color/text_dark_color" />
 
                     <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/price"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/item_space_middle"
@@ -107,7 +109,6 @@
                         android:gravity="center_vertical"
                         android:maxLines="1"
                         android:padding="@dimen/item_normal_padding"
-                        android:text="150 000"
                         android:textColor="@color/white"
                         android:textColorHint="@color/text_dark_color"
                         android:textSize="@dimen/text_size_sixteen" />

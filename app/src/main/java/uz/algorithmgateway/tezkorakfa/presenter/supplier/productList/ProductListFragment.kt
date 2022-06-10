@@ -3,11 +3,13 @@ package uz.algorithmgateway.tezkorakfa.presenter.supplier.productList
 import android.app.AlertDialog
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.Toast
+import androidx.core.view.get
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -22,6 +24,8 @@ import uz.algorithmgateway.tezkorakfa.data.models.Product
 import uz.algorithmgateway.supplier.productList.InterfaceProductClick
 import uz.algorithmgateway.tezkorakfa.R
 import uz.algorithmgateway.tezkorakfa.base.MyApplication
+import uz.algorithmgateway.tezkorakfa.data.retrofit.models.supplier_models.create_orders_detiel.CreateOrderDeteils
+import uz.algorithmgateway.tezkorakfa.data.retrofit.models.supplier_models.get_orders_id.Profil
 import uz.algorithmgateway.tezkorakfa.databinding.CreateOrdersDialogViewBinding
 import uz.algorithmgateway.tezkorakfa.databinding.FragmentProductListBinding
 import uz.algorithmgateway.tezkorakfa.presenter.supplier.SupplierActivity
@@ -39,6 +43,7 @@ class ProductListFragment : Fragment(), CoroutineScope {
     private var productListAdapter: AdapterProductList? = null
     private var productList: List<Product>? = null
     private var productType: Int = 0
+    private lateinit var alertDialog: AlertDialog
 
     @Inject
     lateinit var networkViewModel: NetworkViewModel
@@ -62,7 +67,7 @@ class ProductListFragment : Fragment(), CoroutineScope {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        productList = productList()
+//        productList = productList()
         val mainActivity = activity as SupplierActivity
         mainActivity.bottomNavigationViewVisibilityGone()
 
@@ -74,18 +79,23 @@ class ProductListFragment : Fragment(), CoroutineScope {
     }
 
     private fun loadProduct() {
-        launch {
-            networkViewModel.getOrderDetialList("1").collect {
-                when (it) {
-                    is OrderDetailListResource.Error -> {
-                        toast(it.message)
-                    }
-                    OrderDetailListResource.Loading -> {
-                        toast("Loading...")
-                    }
-                    is OrderDetailListResource.SuccesList -> {
-                        loadProductList()
-                        productListAdapter?.updateList(it.list.products)
+        val get = arguments?.getString("product_id")
+        if (!get.isNullOrEmpty()) {
+            launch {
+                networkViewModel.getOrderDetialList(get.toString()).collect {
+                    when (it) {
+                        is OrderDetailListResource.Error -> {
+                            toast(it.message)
+                        }
+                        OrderDetailListResource.Loading -> {
+                            toast("Loading...")
+                        }
+                        is OrderDetailListResource.SuccesListBYId -> {
+                            toast("Success")
+                            loadProductList(it.list.profil as ArrayList<Profil>)
+//                            Log.d("pro777", "${it.list}")
+//                        productListAdapter?.updateList(it.list.products)
+                        }
                     }
                 }
             }
@@ -165,59 +175,90 @@ class ProductListFragment : Fragment(), CoroutineScope {
 //
 //    }
 
-    private fun loadProductList() {
+    private fun loadProductList(product: ArrayList<Profil>) {
 //        val contractNumber = arguments?.getString("contract_nuber")
 //        if (contractNumber.isNullOrEmpty()) {
 //
 //        }
 
         productListAdapter = AdapterProductList(requireContext()) {
-            showDialogView()
+            showDialogView(it.id)
             toast("show Alert dialog")
         }
+        productListAdapter!!.updateList(product)
+
         binding.rvProductList.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         binding.rvProductList.adapter = productListAdapter
     }
 
-    private fun showDialogView() {
+    private fun showDialogView(profil_id: Int) {
         val builder = AlertDialog.Builder(requireContext())
         val dialogBinding = CreateOrdersDialogViewBinding.inflate(layoutInflater)
         builder.setView(dialogBinding.root)
-        val alertDialog: AlertDialog = builder.create()
+        alertDialog = builder.create()
         alertDialog.window?.setBackgroundDrawable(ColorDrawable(android.graphics.Color.TRANSPARENT))
 
         val adapter = AdapterTableSpinner(requireContext(), typeList(), true)
         dialogBinding.spinnertypeBuy.adapter = adapter
         dialogBinding.configOrderBtn.setOnClickListener {
-            alertDialog.dismiss()
+            val selectedItemPosition = dialogBinding.spinnertypeBuy.selectedItemPosition
+            sendDataProduct(
+                CreateOrderDeteils(
+                    profil_id,
+//                    "Ko'chadan",
+                    typeList().get(selectedItemPosition),
+                    dialogBinding.counts.text.toString().toInt(),
+                    dialogBinding.price.text.toString().toInt()
+                )
+            )
+//            alertDialog.dismiss()
         }
         alertDialog.show()
 
     }
 
-    private fun productList() = listOf<Product>(
-        Product(1, "Alyuminiy profil", 1, 3, 70000, 210000, false),
-        Product(2, "Plastik profil", 1, 2, 80000, 160000, false),
-        Product(3, "Yodoviy oyna", 2, 3, 70000, 210000, true),
-        Product(4, "Gulli oyna", 2, 3, 70000, 210000, false),
-        Product(5, "Tutqich(oddiy)", 3, 3, 70000, 210000, false),
-        Product(6, "Tutqich(oddiy)", 3, 3, 70000, 210000, true),
-        Product(7, "Tutqich(oddiy)", 3, 3, 70000, 210000, false),
-        Product(8, "Alyuminiy profil", 1, 3, 70000, 210000, true),
-        Product(9, "Alyuminiy profil", 1, 3, 70000, 210000, false),
-        Product(10, "Alyuminiy profil", 1, 3, 70000, 210000, false),
-        Product(11, "Alyuminiy profil", 1, 3, 70000, 210000, false),
-        Product(12, "Plastik profil", 1, 2, 80000, 160000, false),
-        Product(13, "Yodoviy oyna", 2, 3, 70000, 210000, true),
-        Product(14, "Gulli oyna", 2, 3, 70000, 210000, false),
-        Product(15, "Tutqich(oddiy)", 3, 3, 70000, 210000, false),
-        Product(16, "Tutqich(oddiy)", 3, 3, 70000, 210000, true),
-        Product(17, "Tutqich(oddiy)", 3, 3, 70000, 210000, false),
-        Product(18, "Alyuminiy profil", 1, 3, 70000, 210000, true),
-        Product(19, "Alyuminiy profil", 1, 3, 70000, 210000, false)
+    private fun sendDataProduct(createOrderDeteils: CreateOrderDeteils) {
+        launch {
+            networkViewModel.createOrdersDeteils(createOrderDeteils).collect() {
+                when (it) {
+                    is OrderDetailListResource.Error -> {
+                        toast(it.message)
+                    }
+                    OrderDetailListResource.Loading -> {
+                        toast("loading ... ")
+                    }
+                    is OrderDetailListResource.SuccesOrderDetils -> {
+                        toast("Success !")
+                        alertDialog.dismiss()
+                    }
+                }
+            }
+        }
+    }
 
-    )
+//    private fun productList() = listOf<Product>(
+//        Product(1, "Alyuminiy profil", 1, 3, 70000, 210000, false),
+//        Product(2, "Plastik profil", 1, 2, 80000, 160000, false),
+//        Product(3, "Yodoviy oyna", 2, 3, 70000, 210000, true),
+//        Product(4, "Gulli oyna", 2, 3, 70000, 210000, false),
+//        Product(5, "Tutqich(oddiy)", 3, 3, 70000, 210000, false),
+//        Product(6, "Tutqich(oddiy)", 3, 3, 70000, 210000, true),
+//        Product(7, "Tutqich(oddiy)", 3, 3, 70000, 210000, false),
+//        Product(8, "Alyuminiy profil", 1, 3, 70000, 210000, true),
+//        Product(9, "Alyuminiy profil", 1, 3, 70000, 210000, false),
+//        Product(10, "Alyuminiy profil", 1, 3, 70000, 210000, false),
+//        Product(11, "Alyuminiy profil", 1, 3, 70000, 210000, false),
+//        Product(12, "Plastik profil", 1, 2, 80000, 160000, false),
+//        Product(13, "Yodoviy oyna", 2, 3, 70000, 210000, true),
+//        Product(14, "Gulli oyna", 2, 3, 70000, 210000, false),
+//        Product(15, "Tutqich(oddiy)", 3, 3, 70000, 210000, false),
+//        Product(16, "Tutqich(oddiy)", 3, 3, 70000, 210000, true),
+//        Product(17, "Tutqich(oddiy)", 3, 3, 70000, 210000, false),
+//        Product(18, "Alyuminiy profil", 1, 3, 70000, 210000, true),
+//        Product(19, "Alyuminiy profil", 1, 3, 70000, 210000, false)
+//
+//    )
 
     private fun productTypeList() = listOf<String>(
         "Barchasi",

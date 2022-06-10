@@ -9,11 +9,22 @@ import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
+import uz.algorithmgateway.core.util.toast
+import uz.algorithmgateway.tezkorakfa.base.MyApplication
 import uz.algorithmgateway.tezkorakfa.data.models.FoundProduct
 import uz.algorithmgateway.tezkorakfa.databinding.FragmentFoundListBinding
 import uz.algorithmgateway.tezkorakfa.presenter.supplier.adapter.AdapterTableSpinner
+import uz.algorithmgateway.tezkorakfa.presenter.supplier.resource.ProductFoundResource
+import uz.algorithmgateway.tezkorakfa.presenter.supplier.viewmodel.NetworkViewModel
+import javax.inject.Inject
+import kotlin.coroutines.CoroutineContext
 
-class FoundListFragment : Fragment() {
+class FoundListFragment : Fragment(), CoroutineScope {
 
     lateinit var binding: FragmentFoundListBinding
 
@@ -22,6 +33,14 @@ class FoundListFragment : Fragment() {
     private val productList: List<FoundProduct> = createOrderList()
     private var foundListAdapter: AdapterFoundList? = null
 
+    @Inject
+    lateinit var networkViewModel: NetworkViewModel
+
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        MyApplication.appComponent.foundListFragment(this)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -33,17 +52,38 @@ class FoundListFragment : Fragment() {
         //insall toolbar
         installToolbar()
 
-        //load list
-        loadOrderList()
+        loadDataNetWork()
 
-        //load spinner
-        loadFoundByWhereSpinner()
-        loadProductTypeSpinner()
-
-        //load search view
-        loadSearchView()
+//        //load list
+//        loadOrderList()
+//
+//        //load spinner
+//        loadFoundByWhereSpinner()
+//        loadProductTypeSpinner()
+//
+//        //load search view
+//        loadSearchView()
 
         return binding.root
+    }
+
+    private fun loadDataNetWork() {
+        launch {
+            networkViewModel.getProductFoundData("23").collect {
+                when (it) {
+                    is ProductFoundResource.Error -> {
+                        toast(it.message)
+                    }
+                    ProductFoundResource.Loading -> {
+                        toast("Loading..")
+                    }
+                    is ProductFoundResource.SuccesList -> {
+                        toast(it.data.toString())
+                    }
+                }
+            }
+
+        }
     }
 
     private fun installToolbar() {
@@ -172,5 +212,8 @@ class FoundListFragment : Fragment() {
         FoundProduct(1, "Aldoks-kosa(Silver)", 2, 3, "70 000", 1, "210 000", 2, "150 000"),
         FoundProduct(1, "Aldoks-kosa(Silver)", 2, 3, "70 000", 2, "210 000", 1, "80 000")
     )
+
+    override val coroutineContext: CoroutineContext
+        get() = Dispatchers.Main + Job()
 
 }

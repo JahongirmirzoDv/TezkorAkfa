@@ -1,22 +1,14 @@
 package uz.algorithmgateway.tezkorakfa.presenter.supplier.orderList
 
-import android.annotation.SuppressLint
 import android.content.Context
-import android.os.Build
 import android.view.ViewGroup
-import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import uz.algorithmgateway.tezkorakfa.core.util.layoutInflater
-import uz.algorithmgateway.tezkorakfa.data.models.OrderSupplier
-import uz.algorithmgateway.supplier.orderList.InterfaceOrderClick
-import uz.algorithmgateway.tezkorakfa.R
-import uz.algorithmgateway.tezkorakfa.data.retrofit.models.sales_order_list.OrderList
-import uz.algorithmgateway.tezkorakfa.data.retrofit.models.sales_order_list.Result
-import uz.algorithmgateway.tezkorakfa.databinding.ItemOrderListBinding
+import uz.algorithmgateway.tezkorakfa.data.retrofit.models.supplier_models.get_orders.Result
 import uz.algorithmgateway.tezkorakfa.databinding.ItemOrderListSupplierBinding
 
 class AdapterOrderList(
-    private var myList: ArrayList<Result>,
+    private var myList: ArrayList<uz.algorithmgateway.tezkorakfa.data.retrofit.models.supplier_models.get_orders.Result>,
     var itemClickListener: (String) -> Unit
 ) : RecyclerView.Adapter<AdapterOrderList.VH>() {
 //    private var myList = mutableListOf<OrderSupplier>()
@@ -25,7 +17,7 @@ class AdapterOrderList(
     private var count: Int = 1
 
     //    @SuppressLint("NotifyDataSetChanged")
-    fun updateList(newList: List<Result>) {
+    fun updateList(newList: List<uz.algorithmgateway.tezkorakfa.data.retrofit.models.supplier_models.get_orders.Result>) {
         myList.clear()
 //        myList.addAll(newList)
         this.notifyDataSetChanged()

@@ -32,7 +32,7 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:gravity="center_vertical"
-        android:text="Aldoks-kosa(Silver)"
+        android:text="Aldoks-kosa(Silver) sdfhsdkjfhsdkjfhsdkjfsafsadfasdf"
         android:textAppearance="@style/Text12Light"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/view1"

@@ -19,7 +19,7 @@ import uz.algorithmgateway.core.util.toast
 import uz.algorithmgateway.tezkorakfa.data.models.OrderSupplier
 import uz.algorithmgateway.tezkorakfa.R
 import uz.algorithmgateway.tezkorakfa.base.MyApplication
-import uz.algorithmgateway.tezkorakfa.data.retrofit.models.sales_order_list.Result
+import uz.algorithmgateway.tezkorakfa.data.retrofit.models.supplier_models.get_orders.Result
 import uz.algorithmgateway.tezkorakfa.databinding.FragmentOrderListSupBinding
 import uz.algorithmgateway.tezkorakfa.presenter.supplier.resource.OrdersListResource
 import uz.algorithmgateway.tezkorakfa.presenter.supplier.SupplierActivity
@@ -28,14 +28,16 @@ import uz.algorithmgateway.tezkorakfa.presenter.supplier.orderList.AdapterOrderL
 import uz.algorithmgateway.tezkorakfa.presenter.supplier.viewmodel.NetworkViewModel
 import uz.algorithmgateway.tezkorakfa.presenter.ui.login.LoginActivity
 import uz.algorithmgateway.tezkorakfa.presenter.ui.utils.SharedPref
+import uz.algorithmgateway.tezkorakfa.utils.Anim
 import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
 
-class OrderListFragmentSup : Fragment(), CoroutineScope {
+class OrderListFragmentSup : Fragment(R.layout.fragment_order_list_sup), CoroutineScope {
 
     lateinit var binding: FragmentOrderListSupBinding
     private var orderStatus: Int = 0
-    private lateinit var orderList: ArrayList<Result>
+
+    //    private lateinit var orderList: ArrayList<Result>
     private val sharedPref by lazy { SharedPref(requireContext()) }
 
     //        private val orderList: List<OrderSupplier> = createOrderList()
@@ -67,8 +69,8 @@ class OrderListFragmentSup : Fragment(), CoroutineScope {
         installLogOut()
         loadNetworData()
 //        loadOrderList()
-        loadOrderStatusSpinner()
-        loadSearchView()
+//        loadOrderStatusSpinner()
+//        loadSearchView()
 //        loadOrderHistoryButton()
     }
 
@@ -93,9 +95,9 @@ class OrderListFragmentSup : Fragment(), CoroutineScope {
                         binding.progressView.visibility = View.VISIBLE
                     }
                     is OrdersListResource.SuccesList -> {
-                        loadOrderList(it.list.results)
-                        orderList = ArrayList()
-                        orderList.addAll(it.list.results)
+                        loadOrderList(it.list)
+//                        orderList = ArrayList()
+//                        orderList.addAll(it.list.results)
                         binding.progressView.visibility = View.GONE
                     }
                 }
@@ -106,53 +108,53 @@ class OrderListFragmentSup : Fragment(), CoroutineScope {
     }
 
 
-    private fun loadSearchView() {
-        binding.editTextSearch.doOnTextChanged { text, start, before, count ->
+    /*   private fun loadSearchView() {
+           binding.editTextSearch.doOnTextChanged { text, start, before, count ->
 
-            val filterList: List<Result> = if (orderStatus == 0) {
-                orderList
-            } else {
-                orderList.filter { s -> s.id == orderStatus }
-            }
-//            val filterList: List<OrderSupplier> = if (orderStatus == 0) {
-//                orderList
-//            } else {
-//                orderList.filter { s -> s.status == orderStatus }
-//        }
-//
-            val searchList = mutableListOf<Result>()
-            for (i in orderList) {
-                if (text.toString().toRegex().find(i.id.toString()) != null) {
-                    searchList.add(i)
-                }
-            }
-//
-            searchList.let {
-                orderListAdapter?.updateList(searchList)
-            }
-        }
+               val filterList: List<Result> = if (orderStatus == 0) {
+                   orderList
+               } else {
+                   orderList.filter { s -> s.id == orderStatus }
+               }
+   //            val filterList: List<OrderSupplier> = if (orderStatus == 0) {
+   //                orderList
+   //            } else {
+   //                orderList.filter { s -> s.status == orderStatus }
+   //        }
+   //
+               val searchList = mutableListOf<Result>()
+               for (i in orderList) {
+                   if (text.toString().toRegex().find(i.id.toString()) != null) {
+                       searchList.add(i)
+                   }
+               }
+   //
+               searchList.let {
+                   orderListAdapter?.updateList(searchList)
+               }
+           }
 
-    }
+       }*/
 
 
-    private fun loadOrderStatusSpinner() {
-        val adapter = AdapterTableSpinner(requireContext(), orderStatusList(), true)
-        binding.spinnerOrderStatus.adapter = adapter
-        binding.spinnerOrderStatus.onItemSelectedListener =
-            object : AdapterView.OnItemSelectedListener {
-                override fun onItemSelected(
-                    parent: AdapterView<*>?,
-                    view: View?,
-                    position: Int,
-                    id: Long,
-                ) {
-                    orderStatus = position
-                    filterOrderList(position)
-                }
+    /* private fun loadOrderStatusSpinner() {
+         val adapter = AdapterTableSpinner(requireContext(), orderStatusList(), true)
+         binding.spinnerOrderStatus.adapter = adapter
+         binding.spinnerOrderStatus.onItemSelectedListener =
+             object : AdapterView.OnItemSelectedListener {
+                 override fun onItemSelected(
+                     parent: AdapterView<*>?,
+                     view: View?,
+                     position: Int,
+                     id: Long,
+                 ) {
+                     orderStatus = position
+                     filterOrderList(position)
+                 }
 
-                override fun onNothingSelected(parent: AdapterView<*>?) {}
-            }
-    }
+                 override fun onNothingSelected(parent: AdapterView<*>?) {}
+             }
+     }*/
 
     private fun filterOrderList(position: Int) {
 //        val filterList: List<OrderSupplier> = if (position == 0) {
@@ -168,7 +170,9 @@ class OrderListFragmentSup : Fragment(), CoroutineScope {
     private fun loadOrderList(list: List<Result>) {
         orderListAdapter = AdapterOrderList(list as ArrayList<Result>) {
 //        orderListAdapter = AdapterOrderList() {
-            findNavController().navigate(R.id.productListFragment)
+            val bundle = Bundle()
+            bundle.putString("product_id", it)
+            findNavController().navigate(R.id.productListFragment, bundle, Anim.navOptions)
         }
         binding.rvOrderList.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
