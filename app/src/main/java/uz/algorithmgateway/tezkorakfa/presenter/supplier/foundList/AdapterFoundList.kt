@@ -28,7 +28,7 @@ class AdapterFoundList : RecyclerView.Adapter<AdapterFoundList.VH>() {
         )
     }
 
-    @RequiresApi(Build.VERSION_CODES.M)
+    //    @RequiresApi(Build.VERSION_CODES.M)
     override fun onBindViewHolder(holder: VH, position: Int) {
         holder.onBind(myList[position], position.plus(1).toString())
     }
@@ -38,7 +38,7 @@ class AdapterFoundList : RecyclerView.Adapter<AdapterFoundList.VH>() {
     inner class VH(private val binding: ItemFoundListBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        @RequiresApi(Build.VERSION_CODES.M)
+        //        @RequiresApi(Build.VERSION_CODES.M)
         fun onBind(item: GetFoundProductByIdItem, counter: String) {
             binding.apply {
                 tvNumber.text = counter
@@ -47,17 +47,20 @@ class AdapterFoundList : RecyclerView.Adapter<AdapterFoundList.VH>() {
                 tvPrice.text = item.price.toString()
 
                 val data = item.purchase.get(0)
-                when (data.place_of_origin) {
-                    "Ko'chadan" -> {
-                        tvOutsideNumber.text = data.count.toString()
-                        tvOutsidePrice.text = data.total_price.toString()
-                    }
-                    "Dillerdan" -> {
-                        tvDealerNumber.text = data.count.toString()
-                        tvDealerPrice.text = data.total_price.toString()
-                    }
+                if (data.place_of_origin.equals("Ko'chadan")) {
+                    tvOutsideNumber.text = data.count.toString()
+                    tvOutsidePrice.text = data.total_price.toString()
+                    tvDealerNumber.text = ""
+                    tvDealerPrice.text = ""
+                } else if (data.place_of_origin.equals("Dillerdan")) {
+                    tvOutsideNumber.text = ""
+                    tvOutsidePrice.text = ""
+                    tvDealerNumber.text = data.count.toString()
+                    tvDealerPrice.text = data.total_price.toString()
                 }
+
             }
+        }
 
 //            binding.tvNumber.text = item.id.toString()
 //            binding.tvName.text = item.name
@@ -79,6 +82,5 @@ class AdapterFoundList : RecyclerView.Adapter<AdapterFoundList.VH>() {
 //                binding.tvOutsideNumber.text = ""
 //                binding.tvOutsidePrice.text = ""
 //            }
-        }
     }
 }

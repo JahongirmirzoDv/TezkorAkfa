@@ -10,19 +10,39 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.tabs.TabLayout
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
+import uz.algorithmgateway.core.util.toast
 import uz.algorithmgateway.tezkorakfa.data.models.OrderSupplier
 import uz.algorithmgateway.supplier.orderList.InterfaceOrderClick
+import uz.algorithmgateway.tezkorakfa.base.MyApplication
+import uz.algorithmgateway.tezkorakfa.data.retrofit.models.supplier_models.get_history.GetHistoryRes
 import uz.algorithmgateway.tezkorakfa.databinding.FragmentOrderHistoryBinding
+import uz.algorithmgateway.tezkorakfa.presenter.supplier.resource.ProductFoundResource
+import uz.algorithmgateway.tezkorakfa.presenter.supplier.viewmodel.NetworkViewModel
 import java.text.SimpleDateFormat
 import java.util.*
+import javax.inject.Inject
+import kotlin.collections.ArrayList
+import kotlin.coroutines.CoroutineContext
 
-class OrderHistoryFragment : Fragment(), InterfaceOrderClick {
+class OrderHistoryFragment : Fragment(), CoroutineScope {
 
     lateinit var binding: FragmentOrderHistoryBinding
 
     private val orderList: List<OrderSupplier> = createOrderList()
     private var orderListAdapter: AdapterOrderHistory? = null
 
+    @Inject
+    lateinit var networkViewModel: NetworkViewModel
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        MyApplication.appComponent.orderhistory(this)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,19 +55,49 @@ class OrderHistoryFragment : Fragment(), InterfaceOrderClick {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        loadTabDate()
-        loadDateRangePicker()
-        loadBackButton()
-        loadOrderList()
+
+        loadHistoryData()
+
+//        loadTabDate()
+//        loadDateRangePicker()
+//        loadBackButton()
+//        loadOrderList()
+    }
+
+    private fun loadHistoryData() {
+        launch {
+            networkViewModel.getHistoryData().collect {
+                when (it) {
+                    is ProductFoundResource.Error -> {
+                        toast(it.message)
+                    }
+                    ProductFoundResource.Loading -> {
+                        toast("Loading..")
+                    }
+                    is ProductFoundResource.SuccesListHistory -> {
+                        laodRvData(it.data)
+//                        toast("${it.data}")
+                    }
+                }
+            }
+        }
+    }
+
+    private fun laodRvData(data:ArrayList<GetHistoryRes>) {
+        orderListAdapter = AdapterOrderHistory()
+        orderListAdapter!!.updateList(data)
+        binding.rvOrderList.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+        binding.rvOrderList.adapter = orderListAdapter
     }
 
     private fun loadOrderList() {
-        orderListAdapter = AdapterOrderHistory(this)
+//        orderListAdapter = AdapterOrderHistory(this)
         binding.rvOrderList.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         binding.rvOrderList.adapter = orderListAdapter
 
-        orderListAdapter!!.updateList(orderList)
+//        orderListAdapter!!.updateList(orderList)
     }
 
 
@@ -119,8 +169,11 @@ class OrderHistoryFragment : Fragment(), InterfaceOrderClick {
         OrderSupplier(1032, "3 500 000", "06.02.2022", 1)
     )
 
-    override fun onItemClick(order: OrderSupplier) {
-        Toast.makeText(requireContext(), order.id.toString(), Toast.LENGTH_SHORT).show()
-    }
+//    override fun onItemClick(order: OrderSupplier) {
+//        Toast.makeText(requireContext(), order.id.toString(), Toast.LENGTH_SHORT).show()
+//    }
+
+    override val coroutineContext: CoroutineContext
+        get() = Dispatchers.Main + Job()
 
 }

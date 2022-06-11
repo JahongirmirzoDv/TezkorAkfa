@@ -10,18 +10,40 @@ import android.view.ViewGroup
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
+import uz.algorithmgateway.core.util.toast
+import uz.algorithmgateway.tezkorakfa.base.MyApplication
 import uz.algorithmgateway.tezkorakfa.data.models.GivenMoney
+import uz.algorithmgateway.tezkorakfa.data.retrofit.models.supplier_models.create_money.Create_MoneyReq
+import uz.algorithmgateway.tezkorakfa.data.retrofit.models.supplier_models.get_money_list.GetMoneyListRes
 import uz.algorithmgateway.tezkorakfa.databinding.CreateOrdersDialogViewBinding
 import uz.algorithmgateway.tezkorakfa.databinding.FragmentGivenMoneyBinding
 import uz.algorithmgateway.tezkorakfa.databinding.GivenMoneyDialogBinding
 import uz.algorithmgateway.tezkorakfa.presenter.supplier.adapter.AdapterTableSpinner
+import uz.algorithmgateway.tezkorakfa.presenter.supplier.resource.ProductFoundResource
+import uz.algorithmgateway.tezkorakfa.presenter.supplier.viewmodel.NetworkViewModel
+import javax.inject.Inject
+import kotlin.coroutines.CoroutineContext
 
-class GivenMoneyFragment : Fragment() {
+class GivenMoneyFragment : Fragment(), CoroutineScope {
 
     lateinit var binding: FragmentGivenMoneyBinding
 
     private val givenMoneyList: List<GivenMoney> = createGivenMoneyList()
     private var givenMoneyListAdapter: AdapterGivenMoneyList? = null
+
+
+    @Inject
+    lateinit var networkViewModel: NetworkViewModel
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        MyApplication.appComponent.givenMoneyFragment(this)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -30,15 +52,35 @@ class GivenMoneyFragment : Fragment() {
     ): View {
         binding = FragmentGivenMoneyBinding.inflate(inflater, container, false)
 
+        loadRvData()
         loadBtn()
-
-        //load list
-        loadGivenMoneyList()
-
-        //load search view
-        loadSearchView()
+//
+//        //load list
+//        loadGivenMoneyList()
+//
+//        //load search view
+//        loadSearchView()
 
         return binding.root
+    }
+
+    private fun loadRvData() {
+        launch {
+            networkViewModel.getMoneyList().collect {
+                when (it) {
+                    is ProductFoundResource.Error -> {
+                        toast(it.message)
+                    }
+                    ProductFoundResource.Loading -> {
+                        toast("Loading...")
+                    }
+                    is ProductFoundResource.SuccesListMoney -> {
+                        loadGivenMoneyList(it.data)
+                    }
+                }
+            }
+        }
+
     }
 
     private fun loadBtn() {
@@ -59,10 +101,36 @@ class GivenMoneyFragment : Fragment() {
         dialogBinding.spinnerRoomOrDoor.adapter = adapter
 
         dialogBinding.saveMoney.setOnClickListener {
-            alertDialog.dismiss()
+            val selectedItemPosition = dialogBinding.spinnerRoomOrDoor.selectedItemPosition
+            sendMoney(
+//                productTypeList().get(selectedItemPosition),
+               "23",
+                dialogBinding.summa.text.toString()
+            )
+//            alertDialog.dismiss()
         }
 
         alertDialog.show()
+
+    }
+
+    private fun sendMoney(contractId: String, summa: String) {
+        launch {
+            networkViewModel.createMoney(Create_MoneyReq(contractId.toInt(), summa.toInt()))
+                .collect {
+                    when (it) {
+                        is ProductFoundResource.Error -> {
+                            toast(it.message)
+                        }
+                        ProductFoundResource.Loading -> {
+                            toast("Loading...")
+                        }
+                        is ProductFoundResource.Succes -> {
+                            toast("${it.success}")
+                        }
+                    }
+                }
+        }
 
     }
 
@@ -79,19 +147,19 @@ class GivenMoneyFragment : Fragment() {
             }
 
             searchList.let {
-                givenMoneyListAdapter?.updateList(searchList)
+//                givenMoneyListAdapter?.updateList(searchList)
             }
 
 
         }
     }
 
-    private fun loadGivenMoneyList() {
+    private fun loadGivenMoneyList(data: ArrayList<GetMoneyListRes>) {
         givenMoneyListAdapter = AdapterGivenMoneyList()
+        givenMoneyListAdapter!!.updateList(data)
         binding.rvOrderList.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         binding.rvOrderList.adapter = givenMoneyListAdapter
-        givenMoneyListAdapter!!.updateList(createGivenMoneyList())
     }
 
     private fun createGivenMoneyList(): List<GivenMoney> = listOf(
@@ -109,5 +177,8 @@ class GivenMoneyFragment : Fragment() {
         "4",
         "5",
     )
+
+    override val coroutineContext: CoroutineContext
+        get() = Dispatchers.Main + Job()
 
 }

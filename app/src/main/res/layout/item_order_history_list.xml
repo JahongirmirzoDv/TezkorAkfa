@@ -47,17 +47,25 @@
         app:layout_constraintStart_toEndOf="@id/tv_price"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.appcompat.widget.AppCompatTextView
+
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/tv_time"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:text="19.02.2021"
         android:textAppearance="@style/Text12Dark"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/view2"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/icon_degree"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="25dp" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

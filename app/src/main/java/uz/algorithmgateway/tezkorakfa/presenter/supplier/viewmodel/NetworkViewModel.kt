@@ -6,8 +6,11 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import uz.algorithmgateway.tezkorakfa.data.retrofit.models.supplier_models.create_money.Create_MoneyReq
 import uz.algorithmgateway.tezkorakfa.data.retrofit.models.supplier_models.create_orders_detiel.CreateOrderDeteils
 import uz.algorithmgateway.tezkorakfa.data.retrofit.models.supplier_models.get_found_product_by_id.GetFoundProductByIdItem
+import uz.algorithmgateway.tezkorakfa.data.retrofit.models.supplier_models.get_history.GetHistoryRes
+import uz.algorithmgateway.tezkorakfa.data.retrofit.models.supplier_models.get_money_list.GetMoneyListRes
 import uz.algorithmgateway.tezkorakfa.data.retrofit.models.supplier_models.get_orders.Result
 import uz.algorithmgateway.tezkorakfa.data.retrofit.models.supplier_models.get_orders_id.Profil
 import uz.algorithmgateway.tezkorakfa.data.retrofit.repository.SupplierRepository
@@ -68,13 +71,57 @@ class NetworkViewModel @Inject constructor(val supplierRepository: SupplierRepos
         viewModelScope.launch {
             supplierRepository.getFoundProductId(productId).collect {
                 if (it.isSuccess) {
-                    flow.emit(ProductFoundResource.SuccesList(it.getOrThrow()))
+                    flow.emit(ProductFoundResource.SuccesList(it.getOrNull() as ArrayList<GetFoundProductByIdItem>))
+                } else if (it.isFailure) {
+                    flow.emit(ProductFoundResource.Error(it.exceptionOrNull()?.message.toString()))
+                }
+            }
+        }
+        return flow
+    }
+
+    fun getHistoryData(): StateFlow<ProductFoundResource> {
+        val flow = MutableStateFlow<ProductFoundResource>(ProductFoundResource.Loading)
+
+        viewModelScope.launch {
+            supplierRepository.getHistoryOrders().collect {
+                if (it.isSuccess) {
+                    flow.emit(ProductFoundResource.SuccesListHistory(it.getOrNull() as ArrayList<GetHistoryRes>))
                 } else if (it.isFailure) {
                     flow.emit(ProductFoundResource.Error(it.exceptionOrNull()?.message.toString()))
                 }
             }
         }
 
+        return flow
+    }
+
+    fun getMoneyList(): StateFlow<ProductFoundResource> {
+        val flow = MutableStateFlow<ProductFoundResource>(ProductFoundResource.Loading)
+
+        viewModelScope.launch {
+            supplierRepository.getMoneyList().collect {
+                if (it.isSuccess) {
+                    flow.emit(ProductFoundResource.SuccesListMoney(it.getOrNull() as ArrayList<GetMoneyListRes>))
+                } else if (it.isFailure) {
+                    flow.emit(ProductFoundResource.Error(it.exceptionOrNull()?.message.toString()))
+                }
+            }
+        }
+        return flow
+    }
+
+    fun createMoney(createMoneyreq: Create_MoneyReq): StateFlow<ProductFoundResource> {
+        val flow = MutableStateFlow<ProductFoundResource>(ProductFoundResource.Loading)
+        viewModelScope.launch {
+            supplierRepository.createMoney(createMoneyreq).collect {
+                if (it.isSuccess) {
+                    flow.emit(ProductFoundResource.Succes(it.getOrNull().toString()))
+                } else if (it.isFailure) {
+                    flow.emit(ProductFoundResource.Error(it.exceptionOrNull()?.message.toString()))
+                }
+            }
+        }
         return flow
     }
 

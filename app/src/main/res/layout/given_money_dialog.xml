@@ -89,6 +89,7 @@
             app:layout_constraintWidth_percent="0.8">
 
             <EditText
+                android:id="@+id/summa"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="#1E2431"

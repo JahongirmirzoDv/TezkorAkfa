@@ -15,6 +15,8 @@ import uz.algorithmgateway.tezkorakfa.presenter.measurer.ui.select_type.OrderSel
 import uz.algorithmgateway.tezkorakfa.presenter.measurer.ui.signature.SignatureFragment
 import uz.algorithmgateway.tezkorakfa.presenter.measurer.ui.slider_standart.SliderScreen
 import uz.algorithmgateway.tezkorakfa.presenter.supplier.foundList.FoundListFragment
+import uz.algorithmgateway.tezkorakfa.presenter.supplier.givenMoney.GivenMoneyFragment
+import uz.algorithmgateway.tezkorakfa.presenter.supplier.orderHistory.OrderHistoryFragment
 import uz.algorithmgateway.tezkorakfa.presenter.supplier.productList.ProductListFragment
 import uz.algorithmgateway.tezkorakfa.presenter.ui.login.LoginActivity
 import uz.algorithmgateway.tezkorakfa.supplier.orderList.OrderListFragmentSup
@@ -40,4 +42,6 @@ interface AppComponent {
     fun orderListSupplier(orderListFragmentSup: OrderListFragmentSup)
     fun productListDetail(productListFragment: ProductListFragment)
     fun foundListFragment(foundListFragment: FoundListFragment)
+    fun orderhistory(orderHistoryFragment: OrderHistoryFragment)
+    fun givenMoneyFragment(givenMoneyFragment: GivenMoneyFragment)
 }

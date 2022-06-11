@@ -23,8 +23,8 @@ import uz.algorithmgateway.tezkorakfa.databinding.FragmentFoundListBinding
 import uz.algorithmgateway.tezkorakfa.presenter.supplier.adapter.AdapterTableSpinner
 import uz.algorithmgateway.tezkorakfa.presenter.supplier.resource.ProductFoundResource
 import uz.algorithmgateway.tezkorakfa.presenter.supplier.viewmodel.NetworkViewModel
-import java.util.ArrayList
 import javax.inject.Inject
+import kotlin.collections.ArrayList
 import kotlin.coroutines.CoroutineContext
 
 class FoundListFragment : Fragment(), CoroutineScope {
@@ -35,6 +35,7 @@ class FoundListFragment : Fragment(), CoroutineScope {
     private var byWhere: Int = 0
     private val productList: List<FoundProduct> = createOrderList()
     private var foundListAdapter: AdapterFoundList? = null
+    private lateinit var listData: ArrayList<GetFoundProductByIdItem>
 
     @Inject
     lateinit var networkViewModel: NetworkViewModel
@@ -56,6 +57,8 @@ class FoundListFragment : Fragment(), CoroutineScope {
         installToolbar()
 
         loadDataNetWork()
+        loadFoundByWhereSpinner()
+
 
 //        //load list
 //        loadOrderList()
@@ -71,6 +74,7 @@ class FoundListFragment : Fragment(), CoroutineScope {
     }
 
     private fun loadDataNetWork() {
+        listData = ArrayList()
         launch {
             networkViewModel.getProductFoundData("23").collect {
                 when (it) {
@@ -90,10 +94,6 @@ class FoundListFragment : Fragment(), CoroutineScope {
         }
     }
 
-    private fun loadRv(data: ArrayList<GetFoundProductByIdItem>) {
-        foundListAdapter?.updateList(data)
-
-    }
 
     private fun installToolbar() {
         binding.toolbar.apply {
@@ -147,8 +147,9 @@ class FoundListFragment : Fragment(), CoroutineScope {
                     position: Int,
                     id: Long,
                 ) {
-                    byWhere = position
-                    filterOrderList()
+//                    byWhere = position
+                    filterList(position)
+//                    filterOrderList()
                 }
 
                 override fun onNothingSelected(parent: AdapterView<*>?) {}
@@ -167,11 +168,25 @@ class FoundListFragment : Fragment(), CoroutineScope {
                     id: Long,
                 ) {
                     productType = position
-                    filterOrderList()
+                    filterList(position)
                 }
 
                 override fun onNothingSelected(parent: AdapterView<*>?) {}
             }
+    }
+
+    private fun filterList(position: Int) {
+//        listData = ArrayList()
+        val sortData: List<GetFoundProductByIdItem> = if (position == 0) {
+            listData
+        } else {
+            listData.filter { s -> s.purchase.get(0).place_of_origin.equals("Dillerdan") }
+        }
+
+        sortData.let {
+            foundListAdapter?.updateList(sortData)
+        }
+
     }
 
     private fun filterOrderList() {
@@ -190,11 +205,14 @@ class FoundListFragment : Fragment(), CoroutineScope {
     }
 
     private fun loadOrderList(data: ArrayList<GetFoundProductByIdItem>) {
+
+        listData.addAll(data)
         foundListAdapter = AdapterFoundList()
         foundListAdapter?.updateList(data)
         binding.rvProductList.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         binding.rvProductList.adapter = foundListAdapter
+
     }
 
     private fun foundByWhereList(): List<String> = listOf(
