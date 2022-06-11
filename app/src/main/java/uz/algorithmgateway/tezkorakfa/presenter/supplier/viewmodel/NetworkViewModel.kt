@@ -6,10 +6,10 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import uz.algorithmgateway.tezkorakfa.data.models.supplier.OrderDetailsModel
 import uz.algorithmgateway.tezkorakfa.data.retrofit.models.supplier_models.create_orders_detiel.CreateOrderDeteils
-import uz.algorithmgateway.tezkorakfa.data.retrofit.models.supplier_models.get_found_product_by_id.Profil
+import uz.algorithmgateway.tezkorakfa.data.retrofit.models.supplier_models.get_found_product_by_id.GetFoundProductByIdItem
 import uz.algorithmgateway.tezkorakfa.data.retrofit.models.supplier_models.get_orders.Result
+import uz.algorithmgateway.tezkorakfa.data.retrofit.models.supplier_models.get_orders_id.Profil
 import uz.algorithmgateway.tezkorakfa.data.retrofit.repository.SupplierRepository
 import uz.algorithmgateway.tezkorakfa.presenter.supplier.resource.OrderDetailListResource
 import uz.algorithmgateway.tezkorakfa.presenter.supplier.resource.OrdersListResource
@@ -68,7 +68,7 @@ class NetworkViewModel @Inject constructor(val supplierRepository: SupplierRepos
         viewModelScope.launch {
             supplierRepository.getFoundProductId(productId).collect {
                 if (it.isSuccess) {
-                    flow.emit(ProductFoundResource.SuccesList(it.getOrThrow().profil as ArrayList<Profil>))
+                    flow.emit(ProductFoundResource.SuccesList(it.getOrThrow()))
                 } else if (it.isFailure) {
                     flow.emit(ProductFoundResource.Error(it.exceptionOrNull()?.message.toString()))
                 }

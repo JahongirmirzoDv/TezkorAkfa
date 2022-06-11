@@ -17,10 +17,13 @@ import kotlinx.coroutines.launch
 import uz.algorithmgateway.core.util.toast
 import uz.algorithmgateway.tezkorakfa.base.MyApplication
 import uz.algorithmgateway.tezkorakfa.data.models.FoundProduct
+import uz.algorithmgateway.tezkorakfa.data.retrofit.models.supplier_models.get_found_product_by_id.GetFoundProductByIdItem
+import uz.algorithmgateway.tezkorakfa.data.retrofit.models.supplier_models.get_orders_id.Profil
 import uz.algorithmgateway.tezkorakfa.databinding.FragmentFoundListBinding
 import uz.algorithmgateway.tezkorakfa.presenter.supplier.adapter.AdapterTableSpinner
 import uz.algorithmgateway.tezkorakfa.presenter.supplier.resource.ProductFoundResource
 import uz.algorithmgateway.tezkorakfa.presenter.supplier.viewmodel.NetworkViewModel
+import java.util.ArrayList
 import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
 
@@ -78,12 +81,18 @@ class FoundListFragment : Fragment(), CoroutineScope {
                         toast("Loading..")
                     }
                     is ProductFoundResource.SuccesList -> {
-                        toast(it.data.toString())
+                        loadOrderList(it.data)
+//                        toast(it.data.toString())
                     }
                 }
             }
 
         }
+    }
+
+    private fun loadRv(data: ArrayList<GetFoundProductByIdItem>) {
+        foundListAdapter?.updateList(data)
+
     }
 
     private fun installToolbar() {
@@ -119,9 +128,9 @@ class FoundListFragment : Fragment(), CoroutineScope {
                 }
             }
 
-            searchList.let {
-                foundListAdapter?.updateList(searchList)
-            }
+//            searchList.let {
+//                foundListAdapter?.updateList(searchList)
+//            }
 
 
         }
@@ -175,13 +184,14 @@ class FoundListFragment : Fragment(), CoroutineScope {
         } else {
             productList.filter { s -> (s.type == productType) && (byWhere == 1 && s.countByDealer != 0 || byWhere == 2 && s.countByOutside != 0) }
         }
-        filterList.let {
-            foundListAdapter?.updateList(filterList)
-        }
+//        filterList.let {
+//            foundListAdapter?.updateList(filterList)
+//        }
     }
 
-    private fun loadOrderList() {
+    private fun loadOrderList(data: ArrayList<GetFoundProductByIdItem>) {
         foundListAdapter = AdapterFoundList()
+        foundListAdapter?.updateList(data)
         binding.rvProductList.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         binding.rvProductList.adapter = foundListAdapter

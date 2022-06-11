@@ -62,9 +62,9 @@ class SecondPageFragment :
                 }
             }
 
-            searchList.let {
-                foundListAdapter?.updateList(searchList)
-            }
+//            searchList.let {
+//                foundListAdapter?.updateList(searchList)
+//            }
 
 
         }
@@ -95,9 +95,9 @@ class SecondPageFragment :
         } else {
             productList.filter { s -> (s.type == productType) && (s.countByOutside != 0) }
         }
-        filterList.let {
-            foundListAdapter?.updateList(filterList)
-        }
+//        filterList.let {
+//            foundListAdapter?.updateList(filterList)
+//        }
     }
 
     private fun loadProductList() {
