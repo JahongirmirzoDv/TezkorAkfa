@@ -86,6 +86,7 @@
         <entry key="..\:/Android_studio/otherProject/tezkorAkfa/app/src/main/res/layout/fragment_order_history.xml" value="0.25" />
         <entry key="..\:/Android_studio/otherProject/tezkorAkfa/app/src/main/res/layout/fragment_order_info.xml" value="0.2359375" />
         <entry key="..\:/Android_studio/otherProject/tezkorAkfa/app/src/main/res/layout/fragment_order_list_sup.xml" value="0.25" />
+        <entry key="..\:/Android_studio/otherProject/tezkorAkfa/app/src/main/res/layout/fragment_orders.xml" value="0.25" />
         <entry key="..\:/Android_studio/otherProject/tezkorAkfa/app/src/main/res/layout/fragment_parametr.xml" value="0.25" />
         <entry key="..\:/Android_studio/otherProject/tezkorAkfa/app/src/main/res/layout/fragment_product_list.xml" value="0.24947916666666667" />
         <entry key="..\:/Android_studio/otherProject/tezkorAkfa/app/src/main/res/layout/fragment_purchase_first.xml" value="0.2" />
@@ -131,6 +132,7 @@
         <entry key="..\:/Android_studio/otherProject/tezkorAkfa/app/src/main/res/layout/toolbar_montage.xml" value="0.25" />
         <entry key="..\:/Android_studio/otherProject/tezkorAkfa/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.25" />
         <entry key="..\:/Android_studio/otherProject/tezkorAkfa/app/src/main/res/menu/montage.xml" value="0.25" />
+        <entry key="..\:/Android_studio/otherProject/tezkorAkfa/app/src/main/res/menu/montage_nav.xml" value="0.25" />
         <entry key="..\:/Users/jahon/Ishchi stol/TezkorAkfaNew/app/src/main/res/layout/activity_designer.xml" value="0.1" />
         <entry key="..\:/Users/jahon/Ishchi stol/TezkorAkfaNew/app/src/main/res/layout/activity_login.xml" value="0.22447916666666667" />
         <entry key="..\:/Users/jahon/Ishchi stol/TezkorAkfaNew/measurer/src/main/res/layout/activity_measurer.xml" value="0.22447916666666667" />

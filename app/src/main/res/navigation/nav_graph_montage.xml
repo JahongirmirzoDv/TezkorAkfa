@@ -41,9 +41,5 @@
         android:id="@+id/confirmedOrdersImageInfoFragment"
         android:name="uz.algorithmgateway.tezkorakfa.presenter.montage.ui.ConfirmedOrdersImageInfoFragment"
         android:label="fragment_confirmed_orders_image_info"
-        tools:layout="@layout/fragment_confirmed_orders_image_info" >
-        <action
-            android:id="@+id/action_confirmedOrdersImageInfoFragment_to_parametrFragment"
-            app:destination="@id/parametrFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_confirmed_orders_image_info" />
 </navigation>

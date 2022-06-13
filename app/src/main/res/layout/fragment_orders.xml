@@ -26,7 +26,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:fontFamily="@font/roboto_900"
-            android:text="@string/text_menu_given_money"
+            android:text="Buyurtmalar"
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="@dimen/toolbar_text_size" />
@@ -59,7 +59,7 @@
             android:layout_height="wrap_content"
             android:text="Hudud"
             android:textColor="@color/text"
-            android:textSize="20sp" />
+            android:textSize="18sp" />
 
         <androidx.appcompat.widget.AppCompatSpinner
             android:id="@+id/spinnerRoomOrDoor"
