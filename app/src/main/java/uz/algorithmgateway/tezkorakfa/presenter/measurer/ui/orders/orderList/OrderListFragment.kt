@@ -100,6 +100,8 @@ class OrderListFragment() : Fragment(), CoroutineScope {
                                             val uri = Uri.parse("tel: $number")
                                             val intent = Intent(Intent.ACTION_DIAL, uri)
                                             requireActivity().startActivity(intent)
+                                            var s = intArrayOf(0,1)
+                                            s[2] = 3
                                         }
 
                                         override fun onAcceptClick(item: Result) {

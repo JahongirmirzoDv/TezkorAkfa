@@ -55,7 +55,7 @@ class LoginActivity : AppCompatActivity(), CoroutineScope {
                         when (it) {
                             is UIState.Loading -> {
 
-                            }
+                        }
                             is UIState.Error -> {
                                 Toast.makeText(
                                     this@LoginActivity,
