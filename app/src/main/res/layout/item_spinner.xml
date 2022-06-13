@@ -13,7 +13,7 @@
         android:fontFamily="@font/roboto_500"
         android:padding="@dimen/item_space_min"
         android:textColor="@color/white"
-        android:textSize="@dimen/text_size_twenty"
+        android:textSize="@dimen/default_text_size"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

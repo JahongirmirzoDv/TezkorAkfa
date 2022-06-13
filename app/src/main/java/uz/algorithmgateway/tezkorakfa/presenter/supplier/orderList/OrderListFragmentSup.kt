@@ -1,7 +1,8 @@
-package uz.algorithmgateway.tezkorakfa.supplier.orderList
+package uz.algorithmgateway.tezkorakfa.presenter.supplier.orderList
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,15 +17,14 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import uz.algorithmgateway.core.util.toast
-import uz.algorithmgateway.tezkorakfa.data.models.OrderSupplier
 import uz.algorithmgateway.tezkorakfa.R
 import uz.algorithmgateway.tezkorakfa.base.MyApplication
-import uz.algorithmgateway.tezkorakfa.data.retrofit.models.supplier_models.get_orders.Result
+import uz.algorithmgateway.tezkorakfa.data.retrofit.models.supplier_models.SupplierOrderlist
+import uz.algorithmgateway.tezkorakfa.data.retrofit.models.supplier_models.SupplierOrderlistItem
 import uz.algorithmgateway.tezkorakfa.databinding.FragmentOrderListSupBinding
-import uz.algorithmgateway.tezkorakfa.presenter.supplier.resource.OrdersListResource
 import uz.algorithmgateway.tezkorakfa.presenter.supplier.SupplierActivity
 import uz.algorithmgateway.tezkorakfa.presenter.supplier.adapter.AdapterTableSpinner
-import uz.algorithmgateway.tezkorakfa.presenter.supplier.orderList.AdapterOrderList
+import uz.algorithmgateway.tezkorakfa.presenter.supplier.resource.OrdersListResource
 import uz.algorithmgateway.tezkorakfa.presenter.supplier.viewmodel.NetworkViewModel
 import uz.algorithmgateway.tezkorakfa.presenter.ui.login.LoginActivity
 import uz.algorithmgateway.tezkorakfa.presenter.ui.utils.SharedPref
@@ -37,7 +37,7 @@ class OrderListFragmentSup : Fragment(R.layout.fragment_order_list_sup), Corouti
     lateinit var binding: FragmentOrderListSupBinding
     private var orderStatus: Int = 0
 
-    //    private lateinit var orderList: ArrayList<Result>
+    private lateinit var orderList: ArrayList<SupplierOrderlistItem>
     private val sharedPref by lazy { SharedPref(requireContext()) }
 
     //        private val orderList: List<OrderSupplier> = createOrderList()
@@ -65,12 +65,13 @@ class OrderListFragmentSup : Fragment(R.layout.fragment_order_list_sup), Corouti
         super.onViewCreated(view, savedInstanceState)
         val mainActivity = activity as SupplierActivity
         mainActivity.bottomNavigationViewVisibility()
+        orderList = SupplierOrderlist()
 
         installLogOut()
         loadNetworData()
 //        loadOrderList()
-//        loadOrderStatusSpinner()
-//        loadSearchView()
+        loadOrderStatusSpinner()
+        loadSearchView()
 //        loadOrderHistoryButton()
     }
 
@@ -97,7 +98,7 @@ class OrderListFragmentSup : Fragment(R.layout.fragment_order_list_sup), Corouti
                     is OrdersListResource.SuccesList -> {
                         loadOrderList(it.list)
 //                        orderList = ArrayList()
-//                        orderList.addAll(it.list.results)
+                        orderList = it.list
                         binding.progressView.visibility = View.GONE
                     }
                 }
@@ -108,67 +109,69 @@ class OrderListFragmentSup : Fragment(R.layout.fragment_order_list_sup), Corouti
     }
 
 
-    /*   private fun loadSearchView() {
-           binding.editTextSearch.doOnTextChanged { text, start, before, count ->
-
-               val filterList: List<Result> = if (orderStatus == 0) {
-                   orderList
-               } else {
-                   orderList.filter { s -> s.id == orderStatus }
-               }
-   //            val filterList: List<OrderSupplier> = if (orderStatus == 0) {
-   //                orderList
-   //            } else {
-   //                orderList.filter { s -> s.status == orderStatus }
-   //        }
-   //
-               val searchList = mutableListOf<Result>()
-               for (i in orderList) {
-                   if (text.toString().toRegex().find(i.id.toString()) != null) {
-                       searchList.add(i)
-                   }
-               }
-   //
-               searchList.let {
-                   orderListAdapter?.updateList(searchList)
-               }
-           }
-
-       }*/
-
-
-    /* private fun loadOrderStatusSpinner() {
-         val adapter = AdapterTableSpinner(requireContext(), orderStatusList(), true)
-         binding.spinnerOrderStatus.adapter = adapter
-         binding.spinnerOrderStatus.onItemSelectedListener =
-             object : AdapterView.OnItemSelectedListener {
-                 override fun onItemSelected(
-                     parent: AdapterView<*>?,
-                     view: View?,
-                     position: Int,
-                     id: Long,
-                 ) {
-                     orderStatus = position
-                     filterOrderList(position)
-                 }
-
-                 override fun onNothingSelected(parent: AdapterView<*>?) {}
-             }
-     }*/
-
-    private fun filterOrderList(position: Int) {
-//        val filterList: List<OrderSupplier> = if (position == 0) {
-//            orderList
-//        } else {
-//            orderList.filter { s -> s.status == position }
-//        }
-//        filterList.let {
-//            orderListAdapter?.updateList(filterList)
-//        }
+    private fun loadSearchView() {
+        val list = ArrayList<SupplierOrderlistItem>()
+        binding.editTextSearch.doOnTextChanged { text, start, before, count ->
+            val text_ = text.toString()
+            if (text_ != "") {
+                for (i in orderList) {
+                    if (i.contract_number.toString().contains(text_.toRegex())) {
+                        list.add(i)
+                        loadOrderList(list)
+                    }
+                }
+            } else loadOrderList(orderList)
+        }
     }
 
-    private fun loadOrderList(list: List<Result>) {
-        orderListAdapter = AdapterOrderList(list as ArrayList<Result>) {
+
+    private fun loadOrderStatusSpinner() {
+        val adapter = AdapterTableSpinner(requireContext(), orderStatusList(), true)
+        binding.spinnerOrderStatus.adapter = adapter
+        binding.spinnerOrderStatus.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long,
+                ) {
+                    orderStatus = position
+                    val filterOrderList = filterOrderList(position)
+                    loadOrderList(filterOrderList)
+                    Log.e("TAG", "onItemSelected: $position")
+                }
+
+                override fun onNothingSelected(parent: AdapterView<*>?) {}
+            }
+    }
+
+    private fun filterOrderList(position: Int): ArrayList<SupplierOrderlistItem> {
+        val list = ArrayList<SupplierOrderlistItem>()
+        return when (position) {
+            0 -> {
+                orderList
+            }
+            1 -> {
+                for (i in orderList) {
+                    if (i.purchase_count == i.purchase_all_count) list.add(i)
+                }
+                return list
+            }
+            2 -> {
+                for (i in orderList) {
+                    if (i.purchase_count != i.purchase_all_count) list.add(i)
+                }
+                return list
+            }
+            else -> {
+                orderList
+            }
+        }
+    }
+
+    private fun loadOrderList(list: ArrayList<SupplierOrderlistItem>) {
+        orderListAdapter = AdapterOrderList(list) {
 //        orderListAdapter = AdapterOrderList() {
             val bundle = Bundle()
             bundle.putString("product_id", it)
@@ -187,18 +190,6 @@ class OrderListFragmentSup : Fragment(R.layout.fragment_order_list_sup), Corouti
         "Barchasi",
         "Topilganlar",
         "Topilmaganlar",
-        "Kechikkanlar"
-    )
-
-    private fun createOrderList(): List<OrderSupplier> = listOf(
-        OrderSupplier(1024, "3 500 000", "06.02.2022", 1),
-        OrderSupplier(1025, "3 500 000", "06.02.2022", 2),
-        OrderSupplier(1026, "5 500 000", "06.02.2022", 2),
-        OrderSupplier(1027, "6 500 000", "06.02.2022", 3),
-        OrderSupplier(1028, "7 800 000", "06.02.2022", 1),
-        OrderSupplier(1029, "3 500 000", "06.02.2022", 1),
-        OrderSupplier(1030, "3 500 000", "06.02.2022", 3),
-        OrderSupplier(1032, "3 500 000", "06.02.2022", 1)
     )
 
     override val coroutineContext: CoroutineContext

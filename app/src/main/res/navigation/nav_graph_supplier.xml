@@ -59,7 +59,8 @@
         tools:layout="@layout/fragment_purchase_second" />
     <fragment
         android:id="@+id/orderListFragment"
-        android:name="uz.algorithmgateway.tezkorakfa.supplier.orderList.OrderListFragmentSup"
+        tools:layout="@layout/fragment_order_list_sup"
+        android:name="uz.algorithmgateway.tezkorakfa.presenter.supplier.orderList.OrderListFragmentSup"
         android:label="OrderListFragmentSup" >
         <action
             android:id="@+id/action_orderListFragmentSup_to_productListFragment"

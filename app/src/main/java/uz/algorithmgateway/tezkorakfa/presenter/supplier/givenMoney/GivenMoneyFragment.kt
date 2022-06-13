@@ -17,10 +17,8 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import uz.algorithmgateway.core.util.toast
 import uz.algorithmgateway.tezkorakfa.base.MyApplication
-import uz.algorithmgateway.tezkorakfa.data.models.GivenMoney
 import uz.algorithmgateway.tezkorakfa.data.retrofit.models.supplier_models.create_money.Create_MoneyReq
 import uz.algorithmgateway.tezkorakfa.data.retrofit.models.supplier_models.get_money_list.GetMoneyListRes
-import uz.algorithmgateway.tezkorakfa.databinding.CreateOrdersDialogViewBinding
 import uz.algorithmgateway.tezkorakfa.databinding.FragmentGivenMoneyBinding
 import uz.algorithmgateway.tezkorakfa.databinding.GivenMoneyDialogBinding
 import uz.algorithmgateway.tezkorakfa.presenter.supplier.adapter.AdapterTableSpinner
@@ -33,7 +31,7 @@ class GivenMoneyFragment : Fragment(), CoroutineScope {
 
     lateinit var binding: FragmentGivenMoneyBinding
 
-    private val givenMoneyList: List<GivenMoney> = createGivenMoneyList()
+    private lateinit var givenMoneyList: ArrayList<GetMoneyListRes>
     private var givenMoneyListAdapter: AdapterGivenMoneyList? = null
 
 
@@ -51,7 +49,7 @@ class GivenMoneyFragment : Fragment(), CoroutineScope {
         savedInstanceState: Bundle?,
     ): View {
         binding = FragmentGivenMoneyBinding.inflate(inflater, container, false)
-
+        givenMoneyList = ArrayList()
         loadRvData()
         loadBtn()
 //
@@ -59,7 +57,7 @@ class GivenMoneyFragment : Fragment(), CoroutineScope {
 //        loadGivenMoneyList()
 //
 //        //load search view
-//        loadSearchView()
+        loadSearchView()
 
         return binding.root
     }
@@ -76,6 +74,7 @@ class GivenMoneyFragment : Fragment(), CoroutineScope {
                     }
                     is ProductFoundResource.SuccesListMoney -> {
                         loadGivenMoneyList(it.data)
+                        givenMoneyList = it.data
                     }
                 }
             }
@@ -136,21 +135,17 @@ class GivenMoneyFragment : Fragment(), CoroutineScope {
 
 
     private fun loadSearchView() {
+        val list = ArrayList<GetMoneyListRes>()
         binding.editTextSearch.doOnTextChanged { text, start, before, count ->
-
-
-            val searchList = mutableListOf<GivenMoney>()
-            for (i in givenMoneyList) {
-                if (text.toString().toRegex().find(i.orderId.toString()) != null) {
-                    searchList.add(i)
+            val text_ = text.toString()
+            if (text_ != "") {
+                for (i in givenMoneyList) {
+                    if (i.contract_number.contains(text_.toRegex())) {
+                        list.add(i)
+                        givenMoneyListAdapter?.updateList(list)
+                    }
                 }
-            }
-
-            searchList.let {
-//                givenMoneyListAdapter?.updateList(searchList)
-            }
-
-
+            } else givenMoneyListAdapter?.updateList(givenMoneyList)
         }
     }
 
@@ -161,15 +156,6 @@ class GivenMoneyFragment : Fragment(), CoroutineScope {
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         binding.rvOrderList.adapter = givenMoneyListAdapter
     }
-
-    private fun createGivenMoneyList(): List<GivenMoney> = listOf(
-        GivenMoney(1, "120 000", "110 000", "12.04.2022"),
-        GivenMoney(2, "120 000", "110 000", "12.04.2022"),
-        GivenMoney(3, "120 000", "110 000", "12.04.2022"),
-        GivenMoney(4, "120 000", "110 000", "12.04.2022"),
-        GivenMoney(5, "120 000", "110 000", "12.04.2022")
-    )
-
     private fun productTypeList(): List<String> = listOf(
         "1",
         "2",

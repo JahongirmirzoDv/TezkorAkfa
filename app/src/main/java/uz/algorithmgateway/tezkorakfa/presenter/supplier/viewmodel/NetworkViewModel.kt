@@ -11,8 +11,6 @@ import uz.algorithmgateway.tezkorakfa.data.retrofit.models.supplier_models.creat
 import uz.algorithmgateway.tezkorakfa.data.retrofit.models.supplier_models.get_found_product_by_id.GetFoundProductByIdItem
 import uz.algorithmgateway.tezkorakfa.data.retrofit.models.supplier_models.get_history.GetHistoryRes
 import uz.algorithmgateway.tezkorakfa.data.retrofit.models.supplier_models.get_money_list.GetMoneyListRes
-import uz.algorithmgateway.tezkorakfa.data.retrofit.models.supplier_models.get_orders.Result
-import uz.algorithmgateway.tezkorakfa.data.retrofit.models.supplier_models.get_orders_id.Profil
 import uz.algorithmgateway.tezkorakfa.data.retrofit.repository.SupplierRepository
 import uz.algorithmgateway.tezkorakfa.presenter.supplier.resource.OrderDetailListResource
 import uz.algorithmgateway.tezkorakfa.presenter.supplier.resource.OrdersListResource
@@ -24,11 +22,10 @@ class NetworkViewModel @Inject constructor(val supplierRepository: SupplierRepos
 
     fun getOrdersList(): StateFlow<OrdersListResource> {
         val flow = MutableStateFlow<OrdersListResource>(OrdersListResource.Loading)
-
         viewModelScope.launch {
             supplierRepository.getOrdersList().collect {
                 if (it.isSuccess) {
-                    flow.emit(OrdersListResource.SuccesList(it.getOrThrow().results as ArrayList<Result>))
+                    flow.emit(OrdersListResource.SuccesList(it.getOrThrow()))
                 } else if (it.isFailure) flow.emit(OrdersListResource.Error(it.exceptionOrNull()?.message.toString()))
             }
 

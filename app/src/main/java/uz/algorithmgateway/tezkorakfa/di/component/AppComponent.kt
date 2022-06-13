@@ -19,7 +19,7 @@ import uz.algorithmgateway.tezkorakfa.presenter.supplier.givenMoney.GivenMoneyFr
 import uz.algorithmgateway.tezkorakfa.presenter.supplier.orderHistory.OrderHistoryFragment
 import uz.algorithmgateway.tezkorakfa.presenter.supplier.productList.ProductListFragment
 import uz.algorithmgateway.tezkorakfa.presenter.ui.login.LoginActivity
-import uz.algorithmgateway.tezkorakfa.supplier.orderList.OrderListFragmentSup
+import uz.algorithmgateway.tezkorakfa.presenter.supplier.orderList.OrderListFragmentSup
 import javax.inject.Singleton
 
 @Singleton

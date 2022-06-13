@@ -12,9 +12,8 @@ import android.widget.Toast
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import uz.algorithmgateway.core.util.toast
-import uz.algorithmgateway.tezkorakfa.data.models.Product
 import uz.algorithmgateway.supplier.productList.InterfaceProductClick
+import uz.algorithmgateway.tezkorakfa.data.models.Product
 import uz.algorithmgateway.tezkorakfa.databinding.CreateOrdersDialogViewBinding
 import uz.algorithmgateway.tezkorakfa.databinding.FragmentPurchaseFirstBinding
 import uz.algorithmgateway.tezkorakfa.presenter.supplier.adapter.AdapterTableSpinner
@@ -47,24 +46,6 @@ class FirstPageFragment : Fragment(), InterfaceProductClick {
 
     private fun loadSearchView() {
         binding.serach.doOnTextChanged { text, start, before, count ->
-
-            val filterList: List<Product> = if (productType == 0) {
-                productList!!
-            } else {
-                productList!!.filter { s -> s.type == productType }
-            }
-
-            val searchList = mutableListOf<Product>()
-            for (i in filterList) {
-                if (text.toString().lowercase().toRegex().find(i.name.lowercase()) != null) {
-                    searchList.add(i)
-                }
-            }
-
-            searchList.let {
-//                productListAdapter?.updateList(searchList)
-            }
-
 
         }
     }

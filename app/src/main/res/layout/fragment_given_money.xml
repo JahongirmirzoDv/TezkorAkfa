@@ -78,6 +78,9 @@
                 android:background="@drawable/bg_small_view"
                 android:fontFamily="@font/roboto_500"
                 android:hint="@string/search"
+                android:inputType="text"
+                android:imeOptions="actionSearch"
+                android:maxLines="1"
                 android:padding="@dimen/item_small_padding"
                 android:textColor="@color/white"
                 android:textColorHint="@color/color_light_text"
@@ -85,7 +88,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@id/image_search_icon"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintWidth_percent="0.5" />
+                app:layout_constraintWidth_percent="0.7" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

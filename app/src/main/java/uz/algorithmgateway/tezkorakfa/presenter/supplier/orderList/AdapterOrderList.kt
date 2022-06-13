@@ -3,12 +3,13 @@ package uz.algorithmgateway.tezkorakfa.presenter.supplier.orderList
 import android.content.Context
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import uz.algorithmgateway.tezkorakfa.R
 import uz.algorithmgateway.tezkorakfa.core.util.layoutInflater
-import uz.algorithmgateway.tezkorakfa.data.retrofit.models.supplier_models.get_orders.Result
+import uz.algorithmgateway.tezkorakfa.data.retrofit.models.supplier_models.SupplierOrderlistItem
 import uz.algorithmgateway.tezkorakfa.databinding.ItemOrderListSupplierBinding
 
 class AdapterOrderList(
-    private var myList: ArrayList<uz.algorithmgateway.tezkorakfa.data.retrofit.models.supplier_models.get_orders.Result>,
+    private var myList: ArrayList<SupplierOrderlistItem>,
     var itemClickListener: (String) -> Unit
 ) : RecyclerView.Adapter<AdapterOrderList.VH>() {
 //    private var myList = mutableListOf<OrderSupplier>()
@@ -17,7 +18,7 @@ class AdapterOrderList(
     private var count: Int = 1
 
     //    @SuppressLint("NotifyDataSetChanged")
-    fun updateList(newList: List<uz.algorithmgateway.tezkorakfa.data.retrofit.models.supplier_models.get_orders.Result>) {
+    fun updateList(newList: ArrayList<SupplierOrderlistItem>) {
         myList.clear()
 //        myList.addAll(newList)
         this.notifyDataSetChanged()
@@ -39,11 +40,24 @@ class AdapterOrderList(
     inner class VH(private val binding: ItemOrderListSupplierBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun onBind(item: Result) {
+        fun onBind(item: SupplierOrderlistItem) {
             binding.apply {
-                tvNumber.text = item.contract_number.toString()
-//                tvPrice.text = item.total_price.toString()
-                tvTime.text = item.measurement_time.toString()
+                tvNumber.text = item.contract_number
+                when(item.degrees){
+                    "Hard"-> {
+                        iconDegree.setImageResource(R.drawable.ic_high)
+                        tvTime.text = "Juda baland"
+                    }
+                    "Slow"->{
+                        iconDegree.setImageResource(R.drawable.ic_low)
+                        tvTime.text = "Past"
+                    }
+                    "Medium"->{
+                        iconDegree.setImageResource(R.drawable.ic_medium)
+                        tvTime.text = "O'rtacha"
+                    }
+                }
+
                 number.setText(count.toString())
                 count++
             }

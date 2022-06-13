@@ -31,40 +31,6 @@
 <!--        app:layout_constraintStart_toStartOf="parent"-->
 <!--        app:layout_constraintTop_toTopOf="@id/tv_title_page" />-->
 
-    <LinearLayout
-        android:id="@+id/layout_date_filter"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/screen_padding_vertical"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_title_page">
-
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tabLayoutDate"
-            style="@style/TabLayout.Order.ConfirmScreen"
-            android:layout_width="0dp"
-            app:tabTextAppearance="@style/Text16Dark"
-            android:layout_height="@dimen/size_forty"
-            android:layout_marginEnd="20dp"
-            android:layout_weight="4"
-            android:background="@drawable/back_tablayout_confirm_screeen" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_date_range_picker"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/size_forty"
-            android:layout_weight="3"
-            android:background="@drawable/back_tablayout_confirm_screeen"
-            android:drawableEnd="@drawable/ic_cil_calendar"
-            android:drawablePadding="@dimen/item_normal_padding"
-            android:gravity="center"
-            android:paddingEnd="@dimen/item_normal_padding"
-            android:text="20 Sen -28 Apr 2022"
-            android:textAppearance="@style/Text16Dark" />
-
-    </LinearLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -73,7 +39,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/layout_date_filter">
+        app:layout_constraintTop_toBottomOf="@id/tv_title_page">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layout_filter"
@@ -103,6 +69,9 @@
                 android:background="@drawable/bg_small_view"
                 android:fontFamily="@font/roboto_500"
                 android:hint="@string/search"
+                android:inputType="text"
+                android:imeOptions="actionSearch"
+                android:maxLines="1"
                 android:padding="@dimen/item_small_padding"
                 android:textColor="@color/white"
                 android:textColorHint="@color/color_light_text"
@@ -110,7 +79,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@id/image_search_icon"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintWidth_percent="0.5" />
+                app:layout_constraintWidth_percent="0.7" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

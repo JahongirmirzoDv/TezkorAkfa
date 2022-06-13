@@ -74,10 +74,13 @@
                 android:id="@+id/editTextSearch"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/view_normal_height"
+                android:inputType="text"
                 android:layout_marginStart="@dimen/item_normal_padding"
                 android:background="@drawable/bg_small_view"
                 android:fontFamily="@font/roboto_500"
                 android:hint="@string/search"
+                android:imeOptions="actionSearch"
+                android:maxLines="1"
                 android:padding="@dimen/item_small_padding"
                 android:textColor="@color/white"
                 android:textColorHint="@color/color_light_text"
@@ -97,7 +100,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintWidth_percent="0.3" />
+                app:layout_constraintWidth_percent="0.38" />
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:layout_width="wrap_content"
@@ -194,7 +197,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:text="Muddati"
+                android:text="Darajasi"
                 android:textAppearance="@style/Text12Dark"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@id/view2"

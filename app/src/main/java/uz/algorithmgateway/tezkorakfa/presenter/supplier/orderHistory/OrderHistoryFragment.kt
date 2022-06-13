@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.datepicker.MaterialDatePicker
@@ -16,24 +16,21 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import uz.algorithmgateway.core.util.toast
-import uz.algorithmgateway.tezkorakfa.data.models.OrderSupplier
-import uz.algorithmgateway.supplier.orderList.InterfaceOrderClick
 import uz.algorithmgateway.tezkorakfa.base.MyApplication
+import uz.algorithmgateway.tezkorakfa.data.models.OrderSupplier
 import uz.algorithmgateway.tezkorakfa.data.retrofit.models.supplier_models.get_history.GetHistoryRes
 import uz.algorithmgateway.tezkorakfa.databinding.FragmentOrderHistoryBinding
 import uz.algorithmgateway.tezkorakfa.presenter.supplier.resource.ProductFoundResource
 import uz.algorithmgateway.tezkorakfa.presenter.supplier.viewmodel.NetworkViewModel
-import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
-import kotlin.collections.ArrayList
 import kotlin.coroutines.CoroutineContext
 
 class OrderHistoryFragment : Fragment(), CoroutineScope {
 
     lateinit var binding: FragmentOrderHistoryBinding
 
-    private val orderList: List<OrderSupplier> = createOrderList()
+    private lateinit var orderList: ArrayList<GetHistoryRes>
     private var orderListAdapter: AdapterOrderHistory? = null
 
     @Inject
@@ -55,13 +52,29 @@ class OrderHistoryFragment : Fragment(), CoroutineScope {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        orderList = ArrayList()
         loadHistoryData()
 
 //        loadTabDate()
 //        loadDateRangePicker()
 //        loadBackButton()
 //        loadOrderList()
+        loadSearch()
+    }
+
+    private fun loadSearch() {
+        val list = ArrayList<GetHistoryRes>()
+        binding.editTextSearch.doOnTextChanged { text, start, before, count ->
+            val text_ = text.toString()
+            if (text_ != "") {
+                for (i in orderList) {
+                    if (i.contract_number.contains(text_.toRegex())) {
+                        list.add(i)
+                        loadRvData(list)
+                    }
+                }
+            } else loadRvData(orderList)
+        }
     }
 
     private fun loadHistoryData() {
@@ -75,7 +88,8 @@ class OrderHistoryFragment : Fragment(), CoroutineScope {
                         toast("Loading..")
                     }
                     is ProductFoundResource.SuccesListHistory -> {
-                        laodRvData(it.data)
+                        loadRvData(it.data)
+                        orderList = it.data
 //                        toast("${it.data}")
                     }
                 }
@@ -83,7 +97,7 @@ class OrderHistoryFragment : Fragment(), CoroutineScope {
         }
     }
 
-    private fun laodRvData(data:ArrayList<GetHistoryRes>) {
+    private fun loadRvData(data: ArrayList<GetHistoryRes>) {
         orderListAdapter = AdapterOrderHistory()
         orderListAdapter!!.updateList(data)
         binding.rvOrderList.layoutManager =
@@ -120,38 +134,38 @@ class OrderHistoryFragment : Fragment(), CoroutineScope {
                     )
                 )
                 .build()
-        binding.tvDateRangePicker.setOnClickListener {
-            dateRangePicker.show(
-                activity?.supportFragmentManager!!, "dateRangePicker"
-            )
-        }
-        val dateFormat = SimpleDateFormat("dd MMM yyyy")
-        dateRangePicker.addOnNegativeButtonClickListener { dateRangePicker.dismiss() }
-        dateRangePicker.addOnPositiveButtonClickListener {
-            binding.tvDateRangePicker.text =
-                dateFormat.format(it.first) + " - " + dateFormat.format(it.first)
-        }
+//        binding.tvDateRangePicker.setOnClickListener {
+//            dateRangePicker.show(
+//                activity?.supportFragmentManager!!, "dateRangePicker"
+//            )
+//        }
+//        val dateFormat = SimpleDateFormat("dd MMM yyyy")
+//        dateRangePicker.addOnNegativeButtonClickListener { dateRangePicker.dismiss() }
+//        dateRangePicker.addOnPositiveButtonClickListener {
+//            binding.tvDateRangePicker.text =
+//                dateFormat.format(it.first) + " - " + dateFormat.format(it.first)
+//        }
     }
-
-    private fun loadTabDate() {
-        with(binding) {
-            tabLayoutDate.addTab(tabLayoutDate.newTab().setText("Bugun").setId(0))
-            tabLayoutDate.addTab(tabLayoutDate.newTab().setText("Hafta").setId(1))
-            tabLayoutDate.addTab(tabLayoutDate.newTab().setText("Oy").setId(2))
-            tabLayoutDate.addTab(tabLayoutDate.newTab().setText("Barchasi").setId(3))
-        }
-
-        binding.tabLayoutDate.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-            override fun onTabSelected(tab: TabLayout.Tab?) {
-                onDateTabSelected(tab)
-            }
-
-            override fun onTabUnselected(tab: TabLayout.Tab?) {}
-
-            override fun onTabReselected(tab: TabLayout.Tab?) {}
-
-        })
-    }
+//
+//    private fun loadTabDate() {
+//        with(binding) {
+//            tabLayoutDate.addTab(tabLayoutDate.newTab().setText("Bugun").setId(0))
+//            tabLayoutDate.addTab(tabLayoutDate.newTab().setText("Hafta").setId(1))
+//            tabLayoutDate.addTab(tabLayoutDate.newTab().setText("Oy").setId(2))
+//            tabLayoutDate.addTab(tabLayoutDate.newTab().setText("Barchasi").setId(3))
+//        }
+//
+//        binding.tabLayoutDate.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+//            override fun onTabSelected(tab: TabLayout.Tab?) {
+//                onDateTabSelected(tab)
+//            }
+//
+//            override fun onTabUnselected(tab: TabLayout.Tab?) {}
+//
+//            override fun onTabReselected(tab: TabLayout.Tab?) {}
+//
+//        })
+//    }
 
     private fun onDateTabSelected(tab: TabLayout.Tab?) {
         val now = Calendar.getInstance()

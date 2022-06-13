@@ -3,13 +3,10 @@ package uz.algorithmgateway.tezkorakfa.presenter.supplier.productList
 import android.app.AlertDialog
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
-import android.widget.Toast
-import androidx.core.view.get
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -20,10 +17,9 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import uz.algorithmgateway.core.util.toast
-import uz.algorithmgateway.tezkorakfa.data.models.Product
-import uz.algorithmgateway.supplier.productList.InterfaceProductClick
 import uz.algorithmgateway.tezkorakfa.R
 import uz.algorithmgateway.tezkorakfa.base.MyApplication
+import uz.algorithmgateway.tezkorakfa.data.models.Product
 import uz.algorithmgateway.tezkorakfa.data.retrofit.models.supplier_models.create_orders_detiel.CreateOrderDeteils
 import uz.algorithmgateway.tezkorakfa.data.retrofit.models.supplier_models.get_orders_id.Profil
 import uz.algorithmgateway.tezkorakfa.databinding.CreateOrdersDialogViewBinding
@@ -31,7 +27,6 @@ import uz.algorithmgateway.tezkorakfa.databinding.FragmentProductListBinding
 import uz.algorithmgateway.tezkorakfa.presenter.supplier.SupplierActivity
 import uz.algorithmgateway.tezkorakfa.presenter.supplier.adapter.AdapterTableSpinner
 import uz.algorithmgateway.tezkorakfa.presenter.supplier.resource.OrderDetailListResource
-import uz.algorithmgateway.tezkorakfa.presenter.supplier.resource.OrdersListResource
 import uz.algorithmgateway.tezkorakfa.presenter.supplier.viewmodel.NetworkViewModel
 import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
@@ -74,7 +69,7 @@ class ProductListFragment : Fragment(), CoroutineScope {
         installTolbar()
         loadProduct()
 //        loadProductList()
-//        loadProductTypeSpinner()
+        loadProductTypeSpinner()
         loadSearchView()
     }
 
@@ -142,38 +137,38 @@ class ProductListFragment : Fragment(), CoroutineScope {
         }
     }
 
-//    private fun loadProductTypeSpinner() {
-//        val adapter = AdapterTableSpinner(requireContext(), productTypeList(), true)
-//        binding.spinnerProductType.adapter = adapter
-//        binding.spinnerProductType.onItemSelectedListener =
-//            object : AdapterView.OnItemSelectedListener {
-//                override fun onItemSelected(
-//                    parent: AdapterView<*>?,
-//                    view: View?,
-//                    position: Int,
-//                    id: Long,
-//                ) {
-//                    productType = position
-//                    filterProductList(position)
-//                }
-//
-//                override fun onNothingSelected(parent: AdapterView<*>?) {
-//                }
-//            }
-//    }
+    private fun loadProductTypeSpinner() {
+        val adapter = AdapterTableSpinner(requireContext(), productTypeList(), true)
+        binding.spinnerProductType.adapter = adapter
+        binding.spinnerProductType.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long,
+                ) {
+                    productType = position
+                    filterProductList(position)
+                }
 
-//    private fun filterProductList(productType: Int) {
-//
+                override fun onNothingSelected(parent: AdapterView<*>?) {
+                }
+            }
+    }
+
+    private fun filterProductList(productType: Int) {
+
 //        val filterList: List<Product> = if (productType == 0) {
 //            productList!!
 //        } else {
 //            productList!!.filter { s -> s.type == productType }
 //        }
 //        filterList.let {
-//            productListAdapter?.updateList(filterList)
+////            productListAdapter?.updateList(filterList)
 //        }
-//
-//    }
+
+    }
 
     private fun loadProductList(product: ArrayList<Profil>) {
 //        val contractNumber = arguments?.getString("contract_nuber")
@@ -261,10 +256,11 @@ class ProductListFragment : Fragment(), CoroutineScope {
 //    )
 
     private fun productTypeList() = listOf<String>(
-        "Barchasi",
-        "Profil",
-        "Oyna",
-        "Padogonnik"
+        "Mahsulotlar umumiy ro`yhati",
+        "Buyurtmalar",
+        "Topilganlar",
+        "Topilmaganlar",
+        "Kassadan olingan pullar"
     )
 
     private fun typeList() = listOf<String>(

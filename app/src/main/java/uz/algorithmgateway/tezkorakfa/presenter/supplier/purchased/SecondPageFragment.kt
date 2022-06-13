@@ -8,7 +8,7 @@ import android.widget.AdapterView
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import uz.algorithmgateway.tezkorakfa.data.models.FoundProduct
+import uz.algorithmgateway.tezkorakfa.data.retrofit.models.supplier_models.get_found_product_by_id.GetFoundProductByIdItem
 import uz.algorithmgateway.tezkorakfa.databinding.FragmentPurchaseSecondBinding
 import uz.algorithmgateway.tezkorakfa.presenter.supplier.adapter.AdapterTableSpinner
 import uz.algorithmgateway.tezkorakfa.presenter.supplier.foundList.AdapterFoundList
@@ -21,7 +21,7 @@ class SecondPageFragment :
 
     private var productType: Int = 0
     private var byWhere: Int = 0
-    private val productList: List<FoundProduct> = createPurchasedProductList()
+    private lateinit var productList: List<GetFoundProductByIdItem>
     private var foundListAdapter: AdapterFoundList? = null
 
 
@@ -36,6 +36,7 @@ class SecondPageFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        productList = ArrayList()
         loadProductList()
         loadProductTypeSpinner()
         loadSearchView()
@@ -43,29 +44,6 @@ class SecondPageFragment :
 
     private fun loadSearchView() {
         binding.editTextSearch.doOnTextChanged { text, start, before, count ->
-
-            val filterList: List<FoundProduct> = if (productType == 0) {
-                productList
-            } else if (productType != 0) {
-                productList.filter { s -> (s.type == productType) }
-            } else if (byWhere != 0 && productType == 0) {
-                productList.filter { s -> (byWhere == 1 && s.countByDealer != 0 || byWhere == 2 && s.countByOutside != 0) }
-            } else {
-                productList.filter { s -> (s.type == productType) && (byWhere == 1 && s.countByDealer != 0 || byWhere == 2 && s.countByOutside != 0) }
-            }
-
-            val searchList = mutableListOf<FoundProduct>()
-            for (i in filterList) {
-                if (text.toString().toRegex().find(i.name) != null) {
-                    //TODO bug
-                    searchList.add(i)
-                }
-            }
-
-//            searchList.let {
-//                foundListAdapter?.updateList(searchList)
-//            }
-
 
         }
     }
@@ -90,14 +68,7 @@ class SecondPageFragment :
     }
 
     private fun filterProductList() {
-        val filterList: List<FoundProduct> = if (productType == 0) {
-            productList.filter { s -> (s.countByOutside != 0) }
-        } else {
-            productList.filter { s -> (s.type == productType) && (s.countByOutside != 0) }
-        }
-//        filterList.let {
-//            foundListAdapter?.updateList(filterList)
-//        }
+
     }
 
     private fun loadProductList() {
@@ -111,19 +82,5 @@ class SecondPageFragment :
         "Turi",
         "Profil",
         "Oyna"
-    )
-
-    private fun createPurchasedProductList(): List<FoundProduct> = listOf(
-        FoundProduct(1, "Aldoks-kosa(Silver)", 1, 3, "70 000", 3, "210 000", 0, "0"),
-        FoundProduct(1, "Aldoks-kosa(Silver)", 1, 3, "70 000", 3, "210 000", 0, "0"),
-        FoundProduct(1, "Aldoks-kosa(Silver)", 1, 3, "70 000", 0, "0", 3, "210 000"),
-        FoundProduct(1, "Aldoks-kosa(Silver)", 1, 3, "70 000", 0, "0", 3, "220 000"),
-        FoundProduct(1, "Aldoks-kosa(Silver)", 1, 3, "70 000", 1, "70 000", 2, "150 000"),
-        FoundProduct(1, "Aldoks-kosa(Silver)", 2, 3, "70 000", 3, "210 000", 0, "0"),
-        FoundProduct(1, "Aldoks-kosa(Silver)", 2, 3, "70 000", 3, "210 000", 0, "0"),
-        FoundProduct(1, "Aldoks-kosa(Silver)", 2, 3, "70 000", 3, "210 000", 0, "0"),
-        FoundProduct(1, "Aldoks-kosa(Silver)", 2, 3, "70 000", 0, "0", 3, "220 000"),
-        FoundProduct(1, "Aldoks-kosa(Silver)", 2, 3, "70 000", 1, "210 000", 2, "150 000"),
-        FoundProduct(1, "Aldoks-kosa(Silver)", 2, 3, "70 000", 2, "210 000", 1, "80 000")
     )
 }
