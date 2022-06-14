@@ -29,7 +29,7 @@ class SecondPageFragment :
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View? {
+    ): View {
         binding = FragmentPurchaseSecondBinding.inflate(inflater, container, false)
         return binding.root
     }
