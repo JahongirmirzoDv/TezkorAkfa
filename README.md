@@ -1,2 +1,2 @@
 Tzkor Akfa
-![alt text]([https://drive.google.com/file/d/1LqCCUOyxvWUjCUKB_JtKCYSqY2TTfS_-/view?usp=drive_link](https://drive.google.com/file/d/1LqCCUOyxvWUjCUKB_JtKCYSqY2TTfS_-/view?usp=sharing))
+![alt text](app/Screenshot 2024-08-27 at 4.27.00 AM.png)
